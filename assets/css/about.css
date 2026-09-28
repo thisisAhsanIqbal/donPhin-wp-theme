@@ -1,0 +1,629 @@
+/*
+Theme: Don Phin, Esq.
+Page: About (page-about.php)
+Description: The About page in navy, antique gold and warm cream: the portrait beside the
+headline and credentials, the arc with two pull quotes, the highlights on navy, a word
+from the room, and the closing invitation. Loaded only on that page, from functions.php.
+*/
+
+/* ==========================================================================
+   0. TOKENS AND SHARED PIECES
+   ========================================================================== */
+:root {
+  --dp-about-navy: #1B2738;       /* highlights, closing band, tags, headings */
+  --dp-about-gold: #A68252;       /* rules, the button */
+  --dp-about-gold-ink: #86673C;   /* small gold type on cream (AA contrast) */
+  --dp-about-gold-light: #D2B27F; /* gold type on navy */
+  --dp-about-cream: #FAF7F2;      /* page background */
+  --dp-about-text: #3E4652;       /* body copy on cream */
+}
+
+/* Small tracked label in gold */
+.dp-about-eyebrow {
+  font-family: var(--dp-font-family) !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-about-gold-ink);
+  margin: 0 0 16px 0;
+}
+
+/* ==========================================================================
+   1. HERO (the portrait flush to the left edge, the headline and credentials beside it)
+   ========================================================================== */
+.dp-about-hero {
+  background-color: var(--dp-about-cream);
+}
+
+.dp-about-hero-container {
+  display: grid;
+  grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.dp-about-portrait {
+  margin: 0;
+  align-self: stretch;
+  min-height: 560px;
+  background-color: #C9CCD0;
+}
+
+.dp-about-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.dp-about-hero-content {
+  box-sizing: border-box;
+  padding: clamp(56px, 6vw, 96px) var(--dp-header-gutter, 7vw) clamp(56px, 6vw, 96px) clamp(40px, 5vw, 88px);
+}
+
+.dp-about-hero .dp-about-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(34px, 3.2vw, 52px);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-about-navy);
+  max-width: 15em;
+  margin: 0 0 24px 0;
+}
+
+.dp-about-hero .dp-about-intro {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.75;
+  color: var(--dp-about-text);
+  max-width: 32em;
+  margin: 0 0 32px 0;
+}
+
+/* Credentials: small navy tags with gold type */
+.dp-about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 36em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-about-tags li {
+  font-family: var(--dp-font-family);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--dp-about-gold-light);
+  background-color: var(--dp-about-navy);
+  border-radius: 2px;
+  margin: 0;
+  padding: 8px 14px 7px;
+}
+
+@media (max-width: 991px) {
+  .dp-about-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-about-portrait {
+    min-height: 0;
+    aspect-ratio: 4 / 3.4;
+    max-height: 72vh;
+  }
+
+  .dp-about-hero-content {
+    padding: 48px var(--dp-header-gutter, 7vw) 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-about-portrait {
+    aspect-ratio: 1 / 1;
+  }
+
+  .dp-about-hero .dp-about-title {
+    font-size: 32px;
+  }
+
+  .dp-about-tags li {
+    font-size: 11px;
+    padding: 7px 12px 6px;
+  }
+}
+
+/* ==========================================================================
+   2. SECTION OPENING (shared by The Arc and Highlights: a large serif heading
+      that runs into a hairline, like the opening of a chapter)
+   ========================================================================== */
+.dp-about-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(20px, 2.4vw, 40px);
+  margin: 0 0 clamp(40px, 5vw, 80px) 0;
+}
+
+.dp-about-section-head .dp-about-section-title {
+  flex-shrink: 0;
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(44px, 5.6vw, 92px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--dp-about-navy);
+  margin: 0;
+}
+
+.dp-about-section-rule {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(166, 130, 82, 0.5);
+}
+
+/* ==========================================================================
+   3. THE ARC (an editorial spread on cream: the opening paragraphs, one line
+      pulled out large, then Don on stage beside what he does today)
+   ========================================================================== */
+.dp-about-arc {
+  background-color: var(--dp-about-cream);
+  border-top: 1px solid rgba(27, 39, 56, 0.08);
+}
+
+.dp-about-arc-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--dp-header-gutter, 7vw) clamp(80px, 10vw, 150px);
+}
+
+/* The opening: the lead in serif on the left, the turn in sans on the right */
+.dp-about-arc-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 96px);
+  align-items: start;
+}
+
+.dp-about-arc .dp-about-arc-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+  color: var(--dp-about-navy);
+  margin: 0;
+}
+
+/* The turn of the whole career, set in gold */
+.dp-about-arc-lead em {
+  font-style: italic;
+  color: var(--dp-about-gold-ink);
+}
+
+.dp-about-arc .dp-about-arc-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.15vw, 17.5px);
+  line-height: 1.8;
+  color: var(--dp-about-text);
+  margin: 0;
+}
+
+/* The right column starts a little lower, level with the lead's second line */
+.dp-about-arc-opening .dp-about-arc-text {
+  padding-top: 0.5em;
+}
+
+.dp-about-arc-text em {
+  font-style: italic;
+  color: var(--dp-about-navy);
+}
+
+/* The pulled line: large, set in from the left, with a hanging gold mark */
+.dp-about-arc .dp-about-arc-pull {
+  position: relative;
+  max-width: 21em;
+  margin: clamp(72px, 8vw, 128px) 0 clamp(72px, 8vw, 128px) clamp(0px, 8.5vw, 150px);
+  padding: 0;
+  border: 0;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(28px, 3.1vw, 50px);
+}
+
+.dp-about-arc-pull p {
+  font-size: inherit;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-about-navy);
+  margin: 0;
+}
+
+.dp-about-arc-pull p::before {
+  content: "\201C";
+  position: absolute;
+  top: -0.32em;
+  left: -0.62em;
+  font-size: 2.6em;
+  font-style: normal;
+  line-height: 1;
+  color: var(--dp-about-gold);
+}
+
+.dp-about-arc-pull p::after {
+  content: "\201D";
+}
+
+/* Today: the photograph and the text beside it */
+.dp-about-arc-today {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(32px, 5vw, 96px);
+  align-items: end;
+}
+
+.dp-about-arc-photo {
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.dp-about-arc-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 40%;
+}
+
+.dp-about-arc-today-body .dp-about-arc-text {
+  margin-bottom: clamp(28px, 3vw, 40px);
+}
+
+/* Don's own words close the spread, under a gold hairline */
+.dp-about-arc .dp-about-arc-aside {
+  margin: 0;
+  padding: clamp(24px, 2.4vw, 32px) 0 0 0;
+  border: 0;
+  border-top: 1px solid rgba(166, 130, 82, 0.5);
+}
+
+.dp-about-arc-aside p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.5vw, 22px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--dp-about-navy);
+  margin: 0;
+}
+
+/* The punchline, marked as if with a gold highlighter */
+.dp-about-arc-aside strong {
+  font-weight: 600;
+  background-image: linear-gradient(transparent 60%, rgba(166, 130, 82, 0.28) 60%, rgba(166, 130, 82, 0.28) 92%, transparent 92%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+@media (max-width: 991px) {
+  .dp-about-arc-opening,
+  .dp-about-arc-today {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .dp-about-arc-opening .dp-about-arc-text {
+    padding-top: 0;
+  }
+
+  .dp-about-arc .dp-about-arc-pull {
+    margin-left: 0.7em;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-about-arc-photo {
+    margin: 0 calc(-1 * var(--dp-header-gutter, 7vw));
+    aspect-ratio: 4 / 3;
+  }
+
+  .dp-about-arc .dp-about-arc-pull {
+    margin-top: 64px;
+    margin-bottom: 64px;
+    font-size: 27px;
+  }
+}
+
+/* ==========================================================================
+   4. HIGHLIGHTS (on navy, as a fact sheet: three across, each figure large
+      in gold over what it stands for, divided by fine rules)
+   ========================================================================== */
+.dp-about-highlights {
+  background-color: var(--dp-about-navy);
+  color: #FFFFFF;
+}
+
+.dp-about-highlights-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-about-highlights .dp-about-section-head .dp-about-section-title {
+  color: #FFFFFF;
+}
+
+.dp-about-highlights .dp-about-section-rule {
+  background-color: rgba(210, 178, 127, 0.4);
+}
+
+.dp-about-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+}
+
+.dp-about-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(32px, 3.4vw, 52px) clamp(24px, 2.8vw, 48px) clamp(36px, 3.8vw, 56px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* The first column sits flush with the heading */
+.dp-about-fact:nth-child(3n + 1) {
+  padding-left: 0;
+  border-left: 0;
+}
+
+/* The last row closes without a rule */
+.dp-about-fact:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+
+.dp-about-facts .dp-about-fact-figure {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(48px, 4.8vw, 80px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--dp-about-gold-light);
+  margin: 0;
+}
+
+/* Words rather than numbers ("Founder", "Today") are set in italic */
+.dp-about-facts .dp-about-fact-figure--word {
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.dp-about-fact-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.dp-about-fact-title {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: #FFFFFF;
+}
+
+.dp-about-fact-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(15px, 1.05vw, 16px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.66);
+  max-width: 24em;
+}
+
+/* Tablets: two across */
+@media (max-width: 991px) {
+  .dp-about-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dp-about-fact:nth-child(3n + 1) {
+    padding-left: clamp(24px, 2.8vw, 48px);
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .dp-about-fact:nth-child(2n + 1) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .dp-about-fact:nth-last-child(-n + 3) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .dp-about-fact:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+/* Phones: one per row, the figure over its text */
+@media (max-width: 600px) {
+  .dp-about-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-about-fact,
+  .dp-about-fact:nth-child(3n + 1),
+  .dp-about-fact:nth-child(2n + 1) {
+    gap: 12px;
+    padding: 28px 0;
+    border-left: 0;
+  }
+
+  .dp-about-fact:nth-last-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .dp-about-fact:last-child {
+    border-bottom: 0;
+  }
+
+  .dp-about-facts .dp-about-fact-figure {
+    font-size: 44px;
+  }
+}
+
+/* ==========================================================================
+   5. A WORD FROM THE ROOM (one testimonial, centred on cream)
+   ========================================================================== */
+.dp-about-words {
+  background-color: var(--dp-about-cream);
+}
+
+.dp-about-words-container {
+  box-sizing: border-box;
+  max-width: calc(760px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw);
+  text-align: center;
+}
+
+.dp-about-words .dp-about-words-eyebrow {
+  margin-bottom: 20px;
+}
+
+.dp-about-words-figure {
+  margin: 0;
+}
+
+.dp-about-words-quote {
+  margin: 0 0 22px 0;
+  padding: 0;
+  border: 0;
+}
+
+.dp-about-words-quote p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(21px, 1.9vw, 27px);
+  font-style: italic;
+  line-height: 1.55;
+  text-wrap: balance;
+  color: var(--dp-about-navy);
+  margin: 0;
+}
+
+.dp-about-words-by {
+  font-family: var(--dp-font-family);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--dp-about-gold-ink);
+}
+
+/* ==========================================================================
+   6. CLOSING (the invitation on navy, answered by the gold button)
+   ========================================================================== */
+.dp-about-cta {
+  background-color: var(--dp-about-navy);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dp-about-cta-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 7vw, 104px) var(--dp-header-gutter, 7vw);
+  text-align: center;
+}
+
+.dp-about-cta .dp-about-cta-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 400;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+a.dp-about-cta-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 54px;
+  padding: 0 32px;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-about-navy);
+  background-color: var(--dp-about-gold);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-about-cta-button:hover,
+a.dp-about-cta-button:focus-visible {
+  color: var(--dp-about-navy);
+  background-color: var(--dp-about-gold-light);
+}
+
+a.dp-about-cta-button:focus-visible {
+  outline: 2px solid var(--dp-about-gold-light);
+  outline-offset: 4px;
+}
+
+a.dp-about-cta-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-about-cta-button:hover svg,
+a.dp-about-cta-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 400px) {
+  a.dp-about-cta-button {
+    padding: 0 22px;
+    font-size: 12.5px;
+  }
+}
+
+/* ==========================================================================
+   7. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  a.dp-about-cta-button,
+  a.dp-about-cta-button svg {
+    transition: none;
+  }
+}

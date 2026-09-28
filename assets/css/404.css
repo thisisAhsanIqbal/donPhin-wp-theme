@@ -1,0 +1,129 @@
+/*
+Theme: Don Phin, Esq.
+Page: 404 (404.php)
+Description: The page-not-found screen: Don on stage, full height, with its own accent colour.
+Loaded only on 404s, from functions.php.
+*/
+
+.dp-404 {
+  /* Accent for this page only: the eyebrow and the italic line */
+  --dp-404-accent: #EFF1AC;
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--dp-ink, #2A2029);
+  color: var(--dp-white, #FFFFFF);
+  overflow: hidden;
+}
+
+/* The photo only loads on this page, since nothing else matches the selector */
+.dp-404::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url("../images/asASpeak.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* Keeps Don and the podium in frame when the tall photo is cropped wide */
+  background-position: 68% 45%;
+}
+
+/* Ink wash, heavier on the left where the words sit */
+.dp-404::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(42, 32, 41, 0.94) 0%, rgba(42, 32, 41, 0.86) 45%, rgba(42, 32, 41, 0.6) 100%);
+}
+
+.dp-404-container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.dp-404 .dp-404-eyebrow {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-404-accent);
+  margin: 0 0 28px 0;
+}
+
+.dp-404 .dp-404-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(38px, 5vw, 84px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 28px 0;
+}
+
+.dp-404-line {
+  display: block;
+}
+
+.dp-404-accent {
+  font-style: italic;
+  color: var(--dp-404-accent);
+}
+
+.dp-404 .dp-404-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 34em;
+  margin: 0 0 40px 0;
+}
+
+.dp-404-actions {
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  /* Phones and small tablets get the photo framed for them, rather than a wide crop */
+  .dp-404::before {
+    background-image: url("../images/asASpeakerMobile.webp");
+    background-position: center center;
+  }
+
+  /* Lighter than the desktop wash, so the photo still reads behind the words */
+  .dp-404::after {
+    background: linear-gradient(180deg, rgba(42, 32, 41, 0.72) 0%, rgba(42, 32, 41, 0.8) 60%, rgba(42, 32, 41, 0.88) 100%);
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-404-container {
+    padding-top: 64px;
+    padding-bottom: 72px;
+  }
+
+  .dp-404 .dp-404-title {
+    font-size: 36px;
+  }
+
+  .dp-404 .dp-light-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}

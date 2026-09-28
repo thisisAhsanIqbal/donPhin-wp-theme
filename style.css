@@ -1,0 +1,1022 @@
+/*
+Theme Name: Don Phin, Esq.
+Theme URI: https://www.donphin.com/
+Description: Custom professional Kadence child theme for Don Phin, Esq. featuring a site header with For You / Private counsel / Speaking section tabs and unified typography.
+Author: Kadence WP / Custom
+Author URI: https://www.donphin.com/
+Template: kadence
+Version: 1.0.0
+Text Domain: don-phin-esq
+*/
+
+/* ==========================================================================
+   1. GLOBAL TOKENS
+   ========================================================================== */
+:root {
+  /* Font families (--dp-font-family, --dp-font-serif) live in assets/css/fonts.css */
+
+  /* Common Transition */
+  --dp-transition: all 0.25s ease-in-out;
+
+  /* ================= COLORS: BRAND (HEADER + HOME) ================= */
+  --dp-ink: #2A2029;              /* Top bar, buttons, headlines */
+  --dp-accent: #1F6BE0;           /* Logo "Don Phin,", italic accents, hover states */
+  --dp-accent-light: #8DB6F5;     /* Accent on ink backgrounds */
+  --dp-text: #4A4A4A;             /* Menu links, body copy */
+  --dp-paper: #F6F4F1;            /* Home hero background */
+  --dp-rule: rgba(42, 32, 41, 0.14); /* Hairlines, link underlines */
+  --dp-white: #FFFFFF;
+
+  /* ================= SITE HEADER SIZING ================= */
+  --dp-topbar-height: 30px;
+  --dp-mainbar-height: 68px;
+  --dp-header-height: calc(var(--dp-topbar-height) + var(--dp-mainbar-height));
+  --dp-header-gutter: clamp(16px, 7vw, 120px);
+
+  /* ================= COLORS: PRIVATE COUNSEL ================= */
+  --dp-midnight: #1B2738;         /* Deep slate */
+  --dp-gold: #B08048;             /* Caramel Bronze Gold */
+  --dp-gold-hover: #996E3D;
+  --dp-counsel-bg: #FAF8F5;       /* Warm Linen / Cream Background */
+  --dp-counsel-navy: #162E48;     /* Deep Executive Navy */
+  --dp-counsel-gold: #A68252;     /* Tan Gold CTA & Accents */
+  --dp-counsel-border: #EBE5DC;   /* Subtle divider */
+}
+
+/* ==========================================================================
+   2. SITE HEADER BASE
+   ========================================================================== */
+/* The header stays at the top of the screen. It is fixed rather than sticky because
+   Kadence clips #wrapper and hides the body's sideways overflow, either of which
+   stops position: sticky working; #inner-wrap below carries its height instead. */
+.dp-header {
+  font-family: var(--dp-font-family) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+/* Once the page has scrolled, the header lifts off it a little (see assets/js/header.js) */
+.dp-header.is-stuck {
+  box-shadow: 0 2px 14px rgba(42, 32, 41, 0.16);
+}
+
+#inner-wrap {
+  padding-top: var(--dp-header-height);
+}
+
+/* Links to an id land below the header instead of behind it */
+html {
+  scroll-padding-top: calc(var(--dp-header-height) + 16px);
+}
+
+/* WordPress's own toolbar sits above it when someone is logged in */
+.admin-bar .dp-header {
+  top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+  .admin-bar .dp-header {
+    top: 0;
+  }
+}
+
+.dp-header .dp-header-inner {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--dp-header-gutter);
+  display: flex;
+  align-items: center;
+}
+
+.dp-header .dp-tab-list,
+.dp-header .dp-social-list,
+.dp-header .dp-nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-header a {
+  text-decoration: none;
+}
+
+.dp-header a:focus-visible,
+.dp-header button:focus-visible {
+  outline: 2px solid var(--dp-accent);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   3. TOP BAR (SECTION TABS + SOCIAL LINKS)
+   ========================================================================== */
+.dp-topbar {
+  background-color: var(--dp-ink);
+}
+
+.dp-topbar .dp-header-inner {
+  height: var(--dp-topbar-height);
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Tabs scroll sideways instead of wrapping on very narrow phones */
+.dp-header .dp-topbar-tabs {
+  align-self: stretch;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.dp-header .dp-topbar-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.dp-header .dp-tab-list {
+  height: 100%;
+  gap: 8px;
+}
+
+.dp-header .dp-tab-list li {
+  height: 100%;
+}
+
+.dp-header .dp-tab {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 19px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-white);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dp-header .dp-tab:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  color: var(--dp-white);
+}
+
+.dp-header .dp-tab.is-active {
+  background-color: var(--dp-white);
+  color: var(--dp-ink);
+}
+
+.dp-header .dp-topbar a:focus-visible {
+  outline-color: var(--dp-white);
+  outline-offset: -4px;
+}
+
+.dp-header .dp-topbar .dp-tab.is-active:focus-visible {
+  outline-color: var(--dp-ink);
+}
+
+.dp-header .dp-social-list {
+  flex-shrink: 0;
+  gap: 16px;
+}
+
+.dp-header .dp-social-link {
+  display: flex;
+  align-items: center;
+  color: var(--dp-white);
+  transition: opacity 0.2s ease;
+}
+
+.dp-header .dp-social-link:hover {
+  color: var(--dp-white);
+  opacity: 0.75;
+}
+
+.dp-header .dp-social-link svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+/* The YouTube glyph is wider than tall; this keeps it visually level with LinkedIn */
+.dp-header .dp-social-link--youtube svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ==========================================================================
+   4. MAIN BAR (LOGO, MENU, CTA)
+   ========================================================================== */
+.dp-mainbar {
+  position: relative;
+  background-color: var(--dp-white);
+}
+
+.dp-mainbar .dp-header-inner {
+  height: var(--dp-mainbar-height);
+  gap: 32px;
+}
+
+.dp-header .dp-logo {
+  flex-shrink: 0;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-ink);
+}
+
+.dp-header .dp-logo:hover {
+  color: var(--dp-ink);
+}
+
+.dp-header .dp-logo-accent {
+  color: var(--dp-accent);
+}
+
+.dp-header .dp-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(32px, 8vw, 112px);
+  margin-left: auto;
+}
+
+.dp-header .dp-nav-list {
+  gap: 34px;
+}
+
+.dp-header .dp-nav-link {
+  font-size: 15px;
+  font-weight: 400;
+  /* The design's menu is tracked out */
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  white-space: nowrap;
+  color: var(--dp-text);
+  transition: color 0.2s ease;
+}
+
+.dp-header .dp-nav-link:hover,
+.dp-header .dp-nav-link:focus-visible {
+  color: var(--dp-accent);
+}
+
+.dp-header .dp-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 36px;
+  padding: 0 33px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-white);
+  background-color: var(--dp-ink);
+  border: 0;
+  border-radius: 0;
+  transition: background-color 0.2s ease;
+}
+
+.dp-header .dp-cta-btn:hover,
+.dp-header .dp-cta-btn:focus-visible {
+  color: var(--dp-white);
+  background-color: var(--dp-accent);
+}
+
+/* Small desktops: tighten so the longest menu + CTA (Private counsel) still fits on one row */
+@media (max-width: 1199px) {
+  .dp-header .dp-nav {
+    gap: 40px;
+  }
+
+  .dp-header .dp-nav-list {
+    gap: 24px;
+  }
+
+  .dp-header .dp-cta-btn {
+    padding: 0 22px;
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   5. MOBILE MENU (TOGGLE + DRAWER)
+   ========================================================================== */
+/* Ensure the Don Phin header shows on ALL screen sizes (overriding Kadence parent) */
+.dp-header,
+#dp-site-header {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+}
+
+/* Hide default Kadence parent mobile header bar */
+#mobile-header {
+  display: none !important;
+}
+
+/* Hamburger toggle (menuIcon.svg shape, no background or border) */
+.dp-header .dp-mobile-toggle {
+  display: none;
+  margin-left: auto;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 6px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: var(--dp-ink) !important;
+  line-height: 1;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.dp-header .dp-mobile-toggle:hover {
+  color: var(--dp-accent) !important;
+}
+
+.dp-mobile-toggle .dp-icon-hamburger {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.dp-mobile-toggle .dp-icon-close {
+  display: none;
+  width: 26px;
+  height: 26px;
+}
+
+.dp-mobile-toggle.is-active .dp-icon-hamburger {
+  display: none;
+}
+
+.dp-mobile-toggle.is-active .dp-icon-close {
+  display: block;
+  animation: dpRotateIn 0.2s ease forwards;
+}
+
+@keyframes dpRotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-45deg) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes dpNavFadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 991px) {
+  :root {
+    --dp-mainbar-height: 64px;
+  }
+
+  .dp-header .dp-logo {
+    font-size: 19px;
+  }
+
+  .dp-header .dp-mobile-toggle {
+    display: flex;
+  }
+
+  /* The menu + CTA drop down under the main bar. The header is fixed, so a long
+     menu scrolls inside the drawer rather than moving the page. */
+  .dp-header .dp-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - var(--dp-header-height));
+    max-height: calc(100svh - var(--dp-header-height));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 4px var(--dp-header-gutter) 28px;
+    background-color: var(--dp-white);
+    border-top: 1px solid rgba(42, 32, 41, 0.08);
+    box-shadow: 0 16px 36px rgba(42, 32, 41, 0.14);
+  }
+
+  .dp-header .dp-nav.is-open {
+    display: flex;
+    animation: dpNavFadeDown 0.25s ease forwards;
+  }
+
+  .dp-header .dp-nav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .dp-header .dp-nav-list li {
+    border-bottom: 1px solid rgba(42, 32, 41, 0.08);
+  }
+
+  .dp-header .dp-nav-link {
+    display: block;
+    padding: 15px 0;
+    font-size: 16px;
+  }
+
+  .dp-header .dp-cta-btn {
+    margin-top: 22px;
+    height: 50px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dp-header .dp-topbar .dp-header-inner {
+    padding-left: 0;
+    gap: 12px;
+  }
+
+  .dp-header .dp-tab-list {
+    gap: 0;
+  }
+
+  .dp-header .dp-tab {
+    padding: 0 12px;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .dp-header .dp-tab-list li:first-child .dp-tab {
+    padding-left: 16px;
+  }
+
+  .dp-header .dp-social-list {
+    gap: 14px;
+  }
+
+  .dp-header .dp-logo {
+    font-size: 18px;
+  }
+}
+
+/* Very narrow phones: the three tabs need the whole top bar */
+@media (max-width: 359px) {
+  .dp-header .dp-social-list {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-header .dp-nav.is-open,
+  .dp-mobile-toggle.is-active .dp-icon-close {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   6. SCROLL REVEAL
+   ========================================================================== */
+/* assets/js/reveal.js adds .dp-reveal to content elements below the first screen,
+   then .is-visible as each one scrolls in. Everything uses this one slow fade. */
+.dp-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.dp-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* The script skips reveals entirely when motion is reduced; this is a safety net */
+@media (prefers-reduced-motion: reduce) {
+  .dp-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   7. SITE FOOTER (simple minimalist centered footer)
+   ========================================================================== */
+.dp-footer {
+  position: relative;
+  font-family: var(--dp-font-family) !important;
+  background-color: #1a2638;
+  color: #FFFFFF;
+  padding: clamp(44px, 5.4vw, 64px) 20px clamp(28px, 3vw, 36px);
+  text-align: center;
+}
+
+/* A thin accent line along the top edge, brightest in the middle */
+.dp-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(141, 182, 245, 0) 0%, rgba(141, 182, 245, 0.55) 50%, rgba(141, 182, 245, 0) 100%);
+}
+
+.dp-footer-simple {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dp-footer-title {
+  font-family: var(--dp-font-serif, "Fraunces", Georgia, serif) !important;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e6edf5;
+  line-height: 1.3;
+}
+
+/* Short accent rule under the name */
+.dp-footer-rule {
+  display: block;
+  width: 40px;
+  height: 1px;
+  margin: 4px 0 10px;
+  background-color: var(--dp-accent-light, #8DB6F5);
+}
+
+/* The four details: one centred row on desktop and tablet */
+.dp-footer-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 12px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Each detail: a small icon, then the text */
+.dp-footer-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dp-footer-icon {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  color: var(--dp-accent-light, #8DB6F5);
+  opacity: 0.85;
+}
+
+.dp-footer-details a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.dp-footer-details a:hover,
+.dp-footer-details a:focus-visible {
+  color: #FFFFFF;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+.dp-footer-details a:hover .dp-footer-icon,
+.dp-footer-details a:focus-visible .dp-footer-icon {
+  opacity: 1;
+}
+
+.dp-footer-details a:focus-visible {
+  outline: 2px solid var(--dp-accent-light, #8DB6F5);
+  outline-offset: 3px;
+}
+
+.dp-footer-sep {
+  color: rgba(255, 255, 255, 0.35);
+  user-select: none;
+}
+
+.dp-footer-copyright {
+  width: 100%;
+  max-width: 560px;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 18px 0 0 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Phones: two columns, two rows. Each column is centred as a pair but left-aligned
+   inside, so the icons line up down both columns */
+@media (max-width: 600px) {
+  .dp-footer {
+    padding: 40px 20px 28px;
+  }
+
+  .dp-footer-title {
+    font-size: 17px;
+  }
+
+  .dp-footer-details {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    justify-items: start;
+    gap: 4px 28px;
+    font-size: 14.5px;
+  }
+
+  .dp-footer-sep {
+    display: none;
+  }
+
+  .dp-footer-item {
+    gap: 10px;
+    min-height: 36px;
+  }
+
+  .dp-footer-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .dp-footer-copyright {
+    font-size: 12.5px;
+    margin-top: 14px;
+  }
+}
+
+/* The narrowest phones: not enough room for two columns */
+@media (max-width: 359px) {
+  .dp-footer-details {
+    grid-template-columns: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-footer a {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   8. SHARED: UNDERLINED ARROW LINK AND BUTTONS (used on every page)
+   ========================================================================== */
+a.dp-arrow-link {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 17px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-ink, #2A2029);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--dp-rule, rgba(42, 32, 41, 0.14));
+  text-underline-offset: 7px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a.dp-arrow-link:hover,
+a.dp-arrow-link:focus-visible {
+  color: var(--dp-accent, #1F6BE0);
+  text-decoration-color: currentColor;
+}
+
+a.dp-arrow-link:focus-visible {
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 4px;
+}
+
+a.dp-arrow-link svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-arrow-link:hover svg,
+a.dp-arrow-link:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* Square ink button for light backgrounds ("Talk to Don", "Send the toolkit", "Book a conversation"),
+   same as "Book Don" in the header; turns brand blue on hover. Works on links and form buttons. */
+a.dp-dark-button,
+button.dp-dark-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 54px;
+  margin: 0;
+  padding: 0 30px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-white, #FFFFFF) !important;
+  background-color: var(--dp-ink, #2A2029);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+a.dp-dark-button:hover,
+a.dp-dark-button:focus-visible,
+button.dp-dark-button:hover,
+button.dp-dark-button:focus-visible {
+  background-color: var(--dp-accent, #1F6BE0);
+  box-shadow: none;
+}
+
+a.dp-dark-button:focus-visible,
+button.dp-dark-button:focus-visible {
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 4px;
+}
+
+.dp-dark-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.dp-dark-button:hover svg,
+.dp-dark-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* Large square white button for ink backgrounds ("Check available dates"); turns brand blue on hover */
+a.dp-light-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  box-sizing: border-box;
+  height: 62px;
+  padding: 0 36px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-white, #FFFFFF);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-light-button:hover,
+a.dp-light-button:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-accent, #1F6BE0);
+}
+
+a.dp-light-button:focus-visible {
+  outline: 2px solid var(--dp-accent-light, #8DB6F5);
+  outline-offset: 4px;
+}
+
+a.dp-light-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-light-button:hover svg,
+a.dp-light-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  a.dp-light-button {
+    height: 56px;
+    font-size: 18px;
+  }
+}
+
+/* ==========================================================================
+   9. SHARED: VIDEO FACADE (a still image until it is clicked; see assets/js/video.js)
+   ========================================================================== */
+.dp-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background-color: var(--dp-ink, #2A2029);
+  overflow: hidden;
+}
+
+.dp-video-play {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dp-video-play img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Play badge, in Don's blue rather than YouTube red */
+.dp-video-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  padding-left: 4px;
+  color: var(--dp-white, #FFFFFF);
+  background-color: rgba(31, 107, 224, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 4px 18px rgba(42, 32, 41, 0.35);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dp-video-play:hover .dp-video-icon,
+.dp-video-play:focus-visible .dp-video-icon {
+  background-color: var(--dp-ink, #2A2029);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.dp-video-play:focus-visible {
+  outline: 3px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 3px;
+}
+
+.dp-video-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .dp-video-icon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-video-icon {
+    transition: none;
+  }
+
+  .dp-video-play:hover .dp-video-icon,
+  .dp-video-play:focus-visible .dp-video-icon {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* ==========================================================================
+   10. SHARED: LOGO MARQUEE (the client logos drifting from right to left in one
+       unbroken row, fading in and out at the edges; template-parts/logo-marquee.php).
+       Used in the home hero and on the Speaking page.
+   ========================================================================== */
+.dp-logo-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+.dp-logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: dpLogoDrift 32s linear infinite;
+}
+
+/* A hand on it holds it still */
+.dp-logo-marquee:hover .dp-logo-marquee-track {
+  animation-play-state: paused;
+}
+
+/* Slides left by one list's width, where the copy has taken the first list's place */
+@keyframes dpLogoDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.dp-logo-list {
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Space after every logo, not between them, so both copies are exactly the same width */
+.dp-logo-list li {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  padding-right: clamp(32px, 3.4vw, 56px);
+}
+
+/* Every logo in the same grey, whatever its own colours */
+.dp-logo {
+  display: block;
+  width: auto;
+  height: 20px;
+  filter: brightness(0);
+  opacity: 0.48;
+  transition: opacity 0.2s ease;
+}
+
+.dp-logo:hover {
+  opacity: 0.8;
+}
+
+/* SHRM's mark is white letters cut out of coloured blocks, which would fill in solid;
+   in grey it stays a readable badge */
+.dp-logo--shrm {
+  filter: grayscale(1) contrast(1.3);
+  opacity: 0.55;
+}
+
+/* Heights balanced by eye, as the marks are very different shapes */
+.dp-logo--vistage { height: 16px; }
+.dp-logo--shrm    { height: 28px; }
+.dp-logo--adp     { height: 20px; }
+.dp-logo--basf    { height: 16px; }
+.dp-logo--emc     { height: 18px; }
+.dp-logo--avetta  { height: 14px; }
+
+@media (max-width: 640px) {
+  .dp-logo-list li {
+    padding-right: 32px;
+  }
+
+  .dp-logo-marquee-track {
+    animation-duration: 24s;
+  }
+}
+
+/* Reduced motion: the row holds still, drops the copy, and can be swiped instead */
+@media (prefers-reduced-motion: reduce) {
+  .dp-logo-marquee {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .dp-logo-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dp-logo-marquee-track {
+    animation: none;
+  }
+
+  .dp-logo-list[aria-hidden="true"] {
+    display: none;
+  }
+
+  .dp-logo {
+    transition: none;
+  }
+}

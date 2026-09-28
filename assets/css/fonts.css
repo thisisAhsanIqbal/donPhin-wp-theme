@@ -1,0 +1,23 @@
+/*
+Theme: Don Phin, Esq.
+File: Fonts (single source of truth for typography)
+Description: Font family tokens for the whole theme. The font files come from
+Google Fonts, enqueued as this stylesheet's dependency in functions.php.
+
+Both are variable fonts, loaded over this range only. To use a weight or
+style outside it, widen the Google Fonts URL in functions.php first, or the
+browser will clamp to the nearest loaded weight or synthesize a fake bold/italic:
+
+  "Zalando Sans" (sans)   400-700
+  "Fraunces" (serif)      400-700, 400-700 italic (optical sizes 9-144)
+*/
+
+:root {
+  --dp-font-family: "Zalando Sans", sans-serif;
+  --dp-font-serif: "Fraunces", serif;
+
+  /* Point Kadence's global typography at the same two families */
+  --global-body-font-family: var(--dp-font-family);
+  --global-primary-nav-font-family: var(--dp-font-family);
+  --global-heading-font-family: var(--dp-font-serif);
+}

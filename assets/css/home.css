@@ -1,0 +1,1651 @@
+/*
+Theme: Don Phin, Esq.
+Page: Home (front-page.php)
+Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Counsel, Credibility, Keynotes, photo slider, Free Tools, Testimonials and closing call to action.
+*/
+
+/* ==========================================================================
+   1. HOME HERO (editorial split: headline on paper, portrait on a blue panel)
+   ========================================================================== */
+.dp-home-hero {
+  /* The first screen under the header, capped on very tall screens.
+     The panel and the portrait are sized from it. */
+  --dp-hero-height: min(880px, calc(100vh - var(--dp-header-height, 98px)));
+  /* Space between the text and the blue panel */
+  --dp-hero-gap: clamp(32px, 3.5vw, 64px);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "content media"
+    "proof   media";
+  min-height: var(--dp-hero-height);
+  /* The text starts on the header's rail, so the headline lines up with the logo.
+     There is no right padding: the blue panel runs to the edge of the screen. */
+  padding-left: calc(var(--dp-header-gutter, 7vw) + max(0px, (100% - 1600px) / 2));
+  background-color: var(--dp-paper, #F6F4F1);
+  color: var(--dp-ink, #2A2029);
+  overflow: hidden;
+}
+
+@supports (height: 100svh) {
+  .dp-home-hero {
+    --dp-hero-height: min(880px, calc(100svh - var(--dp-header-height, 98px)));
+  }
+}
+
+/* Left: headline, idea and calls to action */
+.dp-home-hero-content {
+  grid-area: content;
+  align-self: center;
+  padding: clamp(40px, 7vh, 88px) var(--dp-hero-gap) clamp(28px, 4vh, 44px) 0;
+}
+
+/* Eyebrow, led by a short blue rule */
+.dp-home-hero .dp-home-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0 0 26px 0;
+}
+
+.dp-home-hero-eyebrow::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 36px;
+  height: 1px;
+  margin-right: 16px;
+  background-color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-home-hero-eyebrow span {
+  margin: 0 0.6em;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+/* Sized with the column, so each sentence keeps to its own two lines */
+.dp-home-hero .dp-home-hero-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(36px, 3.7vw, 60px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 26px 0;
+}
+
+.dp-home-hero-line {
+  display: block;
+}
+
+.dp-home-hero-accent {
+  font-style: italic;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-home-hero .dp-home-hero-description {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 29em;
+  margin: 0 0 34px 0;
+}
+
+.dp-home-hero-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+}
+
+/* Left foot: the organisations that have booked Don, under a hairline.
+   Every logo is set in the same grey, whatever its own colours. */
+.dp-home-hero-proof {
+  grid-area: proof;
+  /* The logo track is wider than the column; it must not stretch it */
+  min-width: 0;
+  margin-right: var(--dp-hero-gap);
+  padding: 22px 0 clamp(28px, 4.5vh, 48px);
+  border-top: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+}
+
+.dp-home-hero .dp-home-hero-proof-label {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0 0 18px 0;
+}
+
+/* Right: the blue panel, full height, with the light gathered behind Don's head */
+.dp-home-hero-media {
+  grid-area: media;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--dp-accent, #1F6BE0);
+  background-image: radial-gradient(90% 70% at 60% 32%, #3D86F2 0%, rgba(31, 107, 224, 0) 62%);
+}
+
+/* Standing on the foot of the panel, as large as its width and height allow */
+.dp-home-hero-portrait {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 90%;
+  transform: translateX(-50%);
+}
+
+/* Tablets and phones: text, then the logos, then the panel at full width */
+@media (max-width: 991px) {
+  .dp-home-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "content"
+      "proof"
+      "media";
+    min-height: 0;
+    padding-left: 0;
+  }
+
+  .dp-home-hero-content {
+    padding: 56px var(--dp-header-gutter, 7vw) 36px;
+  }
+
+  .dp-home-hero .dp-home-hero-title {
+    font-size: clamp(38px, 7vw, 60px);
+  }
+
+  .dp-home-hero-proof {
+    margin: 0 var(--dp-header-gutter, 7vw);
+    padding-bottom: 40px;
+  }
+
+  .dp-home-hero-media {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-home-hero-content {
+    padding-top: 40px;
+    padding-bottom: 32px;
+  }
+
+  .dp-home-hero .dp-home-hero-eyebrow {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    margin-bottom: 20px;
+  }
+
+  .dp-home-hero-eyebrow::before {
+    width: 24px;
+    margin-right: 12px;
+  }
+
+  .dp-home-hero .dp-home-hero-title {
+    font-size: 38px;
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+
+  .dp-home-hero .dp-home-hero-description {
+    font-size: 16px;
+    margin-bottom: 28px;
+  }
+
+  .dp-home-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .dp-home-hero .dp-dark-button {
+    justify-content: center;
+  }
+
+  .dp-home-hero .dp-arrow-link {
+    align-self: center;
+  }
+
+  /* Square on phones, so the portrait keeps its size */
+  .dp-home-hero-media {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ==========================================================================
+   2. THE PROBLEM (portrait that stays in view beside Don's account, on paper)
+   ========================================================================== */
+.dp-problem {
+  background-color: var(--dp-paper, #F6F4F1);
+  color: var(--dp-ink, #2A2029);
+}
+
+/* Desktop: portrait on the left spans both rows; heading then text on the right.
+   Phones reorder to heading, portrait, text. */
+.dp-problem-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "media header"
+    "media body";
+  column-gap: clamp(40px, 6vw, 112px);
+}
+
+.dp-problem-header {
+  grid-area: header;
+  margin-bottom: clamp(32px, 3.5vw, 48px);
+}
+
+.dp-problem .dp-problem-label {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-accent, #1F6BE0);
+  margin: 0 0 24px 0;
+}
+
+.dp-problem .dp-problem-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(34px, 3.4vw, 56px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--dp-ink, #2A2029);
+  max-width: 17em;
+  margin: 0;
+}
+
+.dp-problem-accent {
+  font-style: italic;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+/* Portrait stays in view while the longer text scrolls past it */
+.dp-problem-media {
+  grid-area: media;
+  align-self: start;
+  position: sticky;
+  top: 32px;
+}
+
+.dp-problem-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1878 / 2272;
+  object-fit: cover;
+}
+
+.dp-problem-body {
+  grid-area: body;
+  max-width: 38em;
+}
+
+.dp-problem-body p {
+  font-family: var(--dp-font-family);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0 0 1.2em 0;
+}
+
+.dp-problem .dp-problem-body .dp-problem-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 1.8vw, 27px);
+  line-height: 1.45;
+  color: var(--dp-ink, #2A2029);
+  margin-bottom: 1.1em;
+}
+
+.dp-problem .dp-problem-body .dp-problem-offer {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 1.8vw, 27px);
+  line-height: 1.4;
+  color: var(--dp-ink, #2A2029);
+  margin: 40px 0 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+}
+
+@media (max-width: 991px) {
+  .dp-problem-container {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "header"
+      "media"
+      "body";
+  }
+
+  .dp-problem-media {
+    position: static;
+    max-width: 520px;
+    margin-bottom: 40px;
+  }
+
+  .dp-problem-media img {
+    aspect-ratio: 4 / 3;
+    object-position: 50% 22%;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-problem-container {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .dp-problem .dp-problem-title {
+    font-size: 32px;
+    line-height: 1.12;
+  }
+
+  .dp-problem-media {
+    margin-bottom: 32px;
+  }
+
+  .dp-problem-body p {
+    font-size: 17px;
+  }
+
+  .dp-problem .dp-problem-body .dp-problem-lead,
+  .dp-problem .dp-problem-body .dp-problem-offer {
+    font-size: 22px;
+  }
+
+  .dp-problem .dp-problem-body .dp-problem-offer {
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+}
+
+/* ==========================================================================
+   3. SPEAK / COUNSEL (photo cards, each fading into the section colour)
+   ========================================================================== */
+.dp-pillars {
+  /* Section colour, which the card photos fade into. Change it here and the fade follows. */
+  --dp-pillars-bg: var(--dp-ink, #2A2029);
+
+  background-color: var(--dp-pillars-bg);
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-pillars-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px clamp(20px, 2.4vw, 40px);
+}
+
+.dp-pillar {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Photo that fades into the section colour at the bottom, with the verb on the fade.
+   Two cards across are wide, so a landscape crop keeps the section from getting too tall. */
+.dp-pillar-media {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.dp-pillar-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-pillar-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--dp-pillars-bg) 0%, transparent) 50%,
+    color-mix(in srgb, var(--dp-pillars-bg) 55%, transparent) 72%,
+    color-mix(in srgb, var(--dp-pillars-bg) 95%, transparent) 100%
+  );
+  pointer-events: none;
+}
+
+.dp-pillar:hover .dp-pillar-media img {
+  transform: scale(1.04);
+}
+
+.dp-pillars .dp-pillar-verb {
+  position: absolute;
+  left: clamp(20px, 2vw, 32px);
+  bottom: clamp(14px, 1.4vw, 24px);
+  z-index: 1;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(44px, 4vw, 68px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: #F7FFFC;
+  margin: 0;
+}
+
+.dp-pillar-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 28px clamp(0px, 0.8vw, 12px) 0;
+}
+
+.dp-pillars .dp-pillar-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(24px, 1.9vw, 30px);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 14px 0;
+}
+
+.dp-pillars .dp-pillar-text {
+  font-family: var(--dp-font-family);
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 26px 0;
+}
+
+/* Links line up along the bottom of the cards */
+.dp-pillar .dp-arrow-link {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Arrow link recoloured for the ink background; on hover it takes the Credibility section's pale yellow */
+.dp-pillars a.dp-arrow-link {
+  color: var(--dp-white, #FFFFFF);
+  text-decoration-color: rgba(255, 255, 255, 0.45);
+}
+
+.dp-pillars a.dp-arrow-link:hover,
+.dp-pillars a.dp-arrow-link:focus-visible {
+  color: #EFF1AC;
+  text-decoration-color: currentColor;
+}
+
+.dp-pillars a.dp-arrow-link:focus-visible {
+  outline-color: #EFF1AC;
+}
+
+/* Tablets: one card per row, photo beside the text */
+@media (max-width: 991px) {
+  .dp-pillars-container {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 48px;
+  }
+
+  .dp-pillar {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    column-gap: 36px;
+    align-items: center;
+  }
+
+  /* Tall again beside the text */
+  .dp-pillar-media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .dp-pillar-body {
+    padding: 0;
+  }
+
+  .dp-pillar .dp-arrow-link {
+    margin-top: 0;
+  }
+}
+
+/* Phones: photo on top in a shorter crop, text below */
+@media (max-width: 640px) {
+  .dp-pillars-container {
+    row-gap: 56px;
+  }
+
+  .dp-pillar {
+    display: flex;
+    /* Undo the tablet centring, which would shrink the photo box to zero width */
+    align-items: stretch;
+  }
+
+  .dp-pillar-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .dp-pillar-body {
+    padding-top: 22px;
+  }
+
+  .dp-pillars .dp-pillar-verb {
+    font-size: 44px;
+  }
+
+  .dp-pillars .dp-pillar-title {
+    font-size: 25px;
+  }
+
+  .dp-pillars .dp-pillar-text {
+    margin-bottom: 22px;
+  }
+}
+
+/* ==========================================================================
+   4. CREDIBILITY (four big blue numbers across the pale yellow band)
+   ========================================================================== */
+.dp-cred {
+  background-color: #EFF1AC;
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-cred-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw);
+}
+
+/* Heading set as an eyebrow, led by a short blue rule like the hero's */
+.dp-cred .dp-cred-label {
+  display: flex;
+  align-items: center;
+  font-family: var(--dp-font-family) !important;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 clamp(32px, 3.6vw, 52px) 0;
+}
+
+.dp-cred-label::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 36px;
+  height: 1px;
+  margin-right: 16px;
+  background-color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-cred-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(36px, 4vw, 56px) clamp(24px, 3vw, 56px);
+}
+
+/* Each figure hangs from a hairline */
+.dp-cred .dp-cred-item {
+  margin: 0;
+  padding-top: clamp(22px, 2.2vw, 32px);
+  border-top: 1px solid rgba(42, 32, 41, 0.22);
+}
+
+/* Even-width digits, so a number doesn't jitter as it counts */
+.dp-cred-number {
+  display: block;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(64px, 7vw, 116px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--dp-accent, #1F6BE0);
+  margin: 0 0 clamp(14px, 1.4vw, 20px) 0;
+}
+
+.dp-cred-caption {
+  display: block;
+  font-family: var(--dp-font-family);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.5;
+  color: var(--dp-ink, #2A2029);
+  max-width: 17em;
+}
+
+/* Tablets: two by two */
+@media (max-width: 991px) {
+  .dp-cred-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dp-cred-number {
+    font-size: clamp(60px, 11vw, 96px);
+  }
+}
+
+/* Phones: still two by two, with the numbers scaled to the half width */
+@media (max-width: 640px) {
+  .dp-cred-container {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .dp-cred-list {
+    column-gap: 20px;
+    row-gap: 36px;
+  }
+
+  .dp-cred-number {
+    font-size: clamp(44px, 13vw, 60px);
+  }
+
+  .dp-cred-caption {
+    font-size: 14.5px;
+  }
+}
+
+/* ==========================================================================
+   5. KEYNOTES (on ink: heading + custom-talk box beside a numbered list of talks)
+   ========================================================================== */
+.dp-talks {
+  position: relative;
+  isolation: isolate;
+  /* Clips the oversized photo without making a scroll container, so the custom-talk box can still stick */
+  clip-path: inset(0);
+  background-color: var(--dp-ink, #2A2029);
+  color: var(--dp-white, #FFFFFF);
+}
+
+/* Background photo, oversized so its soft blurred edges stay clipped */
+.dp-talks::before {
+  content: "";
+  position: absolute;
+  inset: -4%;
+  background: url("../images/Bg.webp") center / cover no-repeat;
+  z-index: -2;
+}
+
+/* Ink wash keeps the text readable over the photo's bright spots */
+.dp-talks::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(42, 32, 41, 0.8) 0%, rgba(42, 32, 41, 0.66) 50%, rgba(42, 32, 41, 0.86) 100%);
+  z-index: -1;
+}
+
+/* Desktop: heading and the custom-talk box on the left, talks on the right.
+   Phones: heading, talks, then the custom-talk box. */
+.dp-talks-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header list"
+    "custom list";
+  column-gap: clamp(40px, 6vw, 112px);
+}
+
+.dp-talks .dp-talks-title {
+  grid-area: header;
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(36px, 3.6vw, 60px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--dp-white, #FFFFFF);
+  max-width: 9em;
+  margin: 0;
+}
+
+.dp-talks-accent {
+  font-style: italic;
+  color: #EFF1AC;
+}
+
+/* Talks: numbered by a CSS counter, so the numbers are decoration only */
+.dp-talks-list {
+  grid-area: list;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: talk;
+}
+
+.dp-talk {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 16px;
+  margin: 0;
+  padding: 36px 0 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  counter-increment: talk;
+}
+
+.dp-talk:first-child {
+  padding-top: 8px;
+  border-top: 0;
+}
+
+.dp-talk:last-child {
+  padding-bottom: 0;
+}
+
+.dp-talk::before {
+  content: counter(talk, decimal-leading-zero);
+  font-family: var(--dp-font-serif);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  color: #EFF1AC;
+}
+
+.dp-talks .dp-talk-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 14px 0;
+}
+
+.dp-talks .dp-talk-text {
+  font-family: var(--dp-font-family);
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 38em;
+  margin: 0 0 18px 0;
+}
+
+.dp-talks .dp-talk-best {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0;
+}
+
+.dp-talk-best-label {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #EFF1AC;
+  margin-right: 8px;
+}
+
+/* Custom-talk box: stays in view beside the list on desktop */
+.dp-talks-custom {
+  grid-area: custom;
+  align-self: start;
+  position: sticky;
+  top: 32px;
+  margin-top: clamp(40px, 4vw, 64px);
+  padding: clamp(28px, 3vw, 44px);
+  background-color: rgba(42, 32, 41, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.dp-talks .dp-talks-custom-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #EFF1AC;
+  margin: 0 0 14px 0;
+}
+
+.dp-talks .dp-talks-custom-text {
+  font-family: var(--dp-font-family);
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 28px 0;
+}
+
+@media (max-width: 991px) {
+  .dp-talks-container {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas:
+      "header"
+      "list"
+      "custom";
+  }
+
+  .dp-talks .dp-talks-title {
+    max-width: 14em;
+    margin-bottom: 40px;
+  }
+
+  .dp-talks-custom {
+    position: static;
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-talks-container {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .dp-talks .dp-talks-title {
+    font-size: 36px;
+    margin-bottom: 28px;
+  }
+
+  .dp-talk {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 6px;
+    padding: 28px 0 32px;
+  }
+
+  .dp-talk:first-child {
+    padding-top: 4px;
+  }
+
+  .dp-talks .dp-talk-title,
+  .dp-talks .dp-talks-custom-title {
+    font-size: 25px;
+  }
+
+  .dp-talks .dp-talk-text,
+  .dp-talks .dp-talks-custom-text {
+    font-size: 16px;
+  }
+
+  .dp-talks-custom {
+    margin-top: 40px;
+  }
+
+  .dp-talks .dp-light-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   6. PHOTO SLIDER (full width, three photos across, one on phones, no gaps)
+   ========================================================================== */
+.dp-slider {
+  position: relative;
+  /* Shows while the photos load, and behind them if one fails */
+  background-color: var(--dp-ink, #2A2029);
+}
+
+.dp-slider-track {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dp-slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.dp-slide {
+  flex: 0 0 33.3333%;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.dp-slide img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Fixed shape for mixed portrait and landscape photos; also stops the page jumping */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Controls */
+.dp-slider-controls[hidden] {
+  display: none;
+}
+
+.dp-slider .dp-slider-button {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0;
+  padding: 0;
+  color: var(--dp-ink, #2A2029);
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(42, 32, 41, 0.22);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+
+/* Hover and keyboard focus both turn the button brand blue */
+.dp-slider .dp-slider-button:hover,
+.dp-slider .dp-slider-button:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-accent, #1F6BE0);
+  box-shadow: 0 2px 14px rgba(42, 32, 41, 0.3);
+}
+
+/* Outlined in white as well, so focus reads against any photo */
+.dp-slider .dp-slider-button:focus-visible {
+  outline: 3px solid var(--dp-white, #FFFFFF);
+  outline-offset: 3px;
+}
+
+/* Pressed */
+.dp-slider .dp-slider-button:active {
+  transform: scale(0.94);
+  box-shadow: 0 1px 6px rgba(42, 32, 41, 0.25);
+}
+
+.dp-slider .dp-slider-prev:active,
+.dp-slider .dp-slider-next:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+/* Not available (the strip loops, so this is a safeguard) */
+.dp-slider .dp-slider-button:disabled {
+  opacity: 0.45;
+  color: var(--dp-text, #4A4A4A);
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: none;
+  cursor: default;
+  transform: none;
+}
+
+.dp-slider .dp-slider-prev,
+.dp-slider .dp-slider-next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dp-slider .dp-slider-prev {
+  left: clamp(12px, 2vw, 32px);
+}
+
+.dp-slider .dp-slider-next {
+  right: clamp(12px, 2vw, 32px);
+}
+
+/* Pause sits in the corner, out of the way of the arrows */
+.dp-slider .dp-slider-pause {
+  right: clamp(12px, 2vw, 32px);
+  bottom: clamp(12px, 2vw, 28px);
+  width: 42px;
+  height: 42px;
+}
+
+.dp-slider-pause .dp-slider-icon-play {
+  display: none;
+}
+
+/* Paused: the button offers play instead */
+.dp-slider .dp-slider-pause[aria-pressed="true"] .dp-slider-icon-pause {
+  display: none;
+}
+
+.dp-slider .dp-slider-pause[aria-pressed="true"] .dp-slider-icon-play {
+  display: block;
+}
+
+/* Keyboard focus on the strip itself, which can be scrolled with the arrow keys */
+.dp-slider .dp-slider-track:focus-visible {
+  outline: 3px solid var(--dp-accent, #1F6BE0);
+  outline-offset: -3px;
+}
+
+/* Tablets: two across, as three would be too narrow */
+@media (max-width: 1023px) {
+  .dp-slide {
+    flex-basis: 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .dp-slide {
+    flex-basis: 100%;
+  }
+
+  .dp-slider .dp-slider-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dp-slider .dp-slider-pause {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-slider-track {
+    scroll-behavior: auto;
+  }
+
+  .dp-slider .dp-slider-button {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   7. FREE TOOLS (lead capture: pitch beside an email card, on white)
+   ========================================================================== */
+.dp-tools {
+  background-color: var(--dp-white, #FFFFFF);
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-tools-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(40px, 6vw, 112px);
+  align-items: center;
+}
+
+.dp-tools .dp-tools-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(40px, 4.4vw, 76px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 clamp(24px, 2.5vw, 36px) 0;
+}
+
+.dp-tools-accent {
+  font-style: italic;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-tools .dp-tools-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.65;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 34em;
+  margin: 0;
+}
+
+/* Email card */
+.dp-tools-card {
+  background-color: var(--dp-paper, #F6F4F1);
+  border-top: 3px solid var(--dp-accent, #1F6BE0);
+  padding: clamp(28px, 3.2vw, 48px);
+}
+
+.dp-tools-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.dp-tools .dp-tools-label {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 10px 0;
+}
+
+.dp-tools .dp-tools-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 58px;
+  margin: 0 0 16px 0;
+  padding: 0 18px;
+  font-family: var(--dp-font-family);
+  font-size: 18px;
+  color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-white, #FFFFFF);
+  border: 1px solid rgba(42, 32, 41, 0.28);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+}
+
+.dp-tools .dp-tools-input:hover {
+  border-color: rgba(42, 32, 41, 0.5);
+}
+
+.dp-tools .dp-tools-input:focus {
+  border-color: var(--dp-ink, #2A2029);
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.dp-tools .dp-tools-input[aria-invalid="true"] {
+  border-color: #B42318;
+}
+
+.dp-tools button.dp-tools-button {
+  justify-content: center;
+  width: 100%;
+  height: 58px;
+}
+
+/* Bot trap: off-screen, never seen or focused by people */
+.dp-tools-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.dp-tools .dp-tools-status {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 16px 0 0 0;
+}
+
+.dp-tools .dp-tools-status.is-sent {
+  color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-tools .dp-tools-status.is-invalid {
+  color: #B42318;
+}
+
+.dp-tools .dp-tools-micro {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dp-text, #4A4A4A);
+  margin: 16px 0 0 0;
+}
+
+@media (max-width: 991px) {
+  .dp-tools-container {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  .dp-tools-card {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-tools-container {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .dp-tools .dp-tools-title {
+    font-size: 40px;
+    line-height: 1.06;
+  }
+
+  .dp-tools .dp-tools-text {
+    font-size: 16px;
+  }
+
+  .dp-tools-card {
+    padding: 24px 20px 28px;
+  }
+}
+
+/* ==========================================================================
+   8. TESTIMONIALS (quote cards that scroll sideways on blue: two per view, one on phones)
+   ========================================================================== */
+.dp-testimonials {
+  background-color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-testimonials-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 128px) var(--dp-header-gutter, 7vw);
+}
+
+/* Label and controls share one row above the quotes */
+.dp-testimonials-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px 32px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.dp-testimonials .dp-testimonials-label {
+  font-family: var(--dp-font-family) !important;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0;
+}
+
+.dp-testimonials-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dp-testimonials-controls[hidden] {
+  display: none;
+}
+
+.dp-testimonials-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+}
+
+.dp-testimonials .dp-testimonials-dot {
+  width: 9px;
+  height: 9px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.dp-testimonials .dp-testimonials-dot:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.dp-testimonials .dp-testimonials-dot.is-active {
+  background-color: #EFF1AC;
+  transform: scale(1.25);
+}
+
+.dp-testimonials .dp-testimonials-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  color: var(--dp-white, #FFFFFF);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.dp-testimonials .dp-testimonials-arrow:hover:not(:disabled),
+.dp-testimonials .dp-testimonials-arrow:focus-visible:not(:disabled) {
+  color: var(--dp-accent, #1F6BE0);
+  background-color: var(--dp-white, #FFFFFF);
+  border-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-testimonials .dp-testimonials-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.dp-testimonials :focus-visible {
+  outline: 2px solid var(--dp-white, #FFFFFF);
+  outline-offset: 3px;
+}
+
+/* The row itself: two cards per view, snapping as it scrolls */
+.dp-testimonials-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - clamp(32px, 4vw, 72px)) / 2);
+  gap: clamp(32px, 4vw, 72px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dp-testimonials-track::-webkit-scrollbar {
+  display: none;
+}
+
+.dp-testimonial {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+/* The curly quote sits at the top of its line box, so the box is cropped tight to it */
+.dp-testimonial-mark {
+  display: block;
+  overflow: hidden;
+  height: 0.34em;
+  font-family: var(--dp-font-serif);
+  font-size: 92px;
+  line-height: 0.74;
+  color: #EFF1AC;
+  margin-bottom: 26px;
+}
+
+.dp-testimonials .dp-testimonial-quote {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  quotes: none;
+  font-style: normal;
+}
+
+.dp-testimonials .dp-testimonial-quote p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(18px, 1.4vw, 22px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 0.9em 0;
+}
+
+.dp-testimonials .dp-testimonial-quote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Name sits under a rule at the foot of every card, so they line up */
+.dp-testimonial-cite {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.dp-testimonials .dp-testimonial-name {
+  font-family: var(--dp-font-family);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-testimonials .dp-testimonial-role {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Phones: one card per view */
+@media (max-width: 767px) {
+  .dp-testimonials-track {
+    grid-auto-columns: 100%;
+    gap: 24px;
+  }
+
+  .dp-testimonial-mark {
+    font-size: 72px;
+    margin-bottom: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-testimonials-container {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .dp-testimonials-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dp-testimonials .dp-testimonial-quote p {
+    font-size: 18px;
+  }
+}
+
+/* ==========================================================================
+   9. CLOSING CALL TO ACTION (centred close on paper with a quarter-hour ring)
+   ========================================================================== */
+.dp-home-cta {
+  background-color: var(--dp-paper, #F6F4F1);
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-home-cta-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(88px, 11vw, 160px) var(--dp-header-gutter, 7vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dp-home-cta-ring {
+  display: block;
+  width: clamp(72px, 6vw, 96px);
+  height: auto;
+  color: var(--dp-ink, #2A2029);
+  margin-bottom: clamp(28px, 3vw, 40px);
+}
+
+.dp-home-cta-ring-accent {
+  stroke: var(--dp-accent, #1F6BE0);
+}
+
+.dp-home-cta .dp-home-cta-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(44px, 6vw, 104px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 clamp(28px, 3vw, 40px) 0;
+}
+
+.dp-home-cta-line {
+  display: block;
+}
+
+.dp-home-cta-accent {
+  font-style: italic;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+.dp-home-cta .dp-home-cta-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.65;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 36em;
+  margin: 0 0 40px 0;
+}
+
+.dp-home-cta a.dp-home-cta-button {
+  height: 62px;
+  padding: 0 38px;
+  font-size: 20px;
+}
+
+/* Direct contact line under the button */
+.dp-home-cta .dp-home-cta-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 14px;
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--dp-text, #4A4A4A);
+  margin: 32px 0 0 0;
+}
+
+.dp-home-cta .dp-home-cta-contact a {
+  color: var(--dp-ink, #2A2029);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--dp-rule, rgba(42, 32, 41, 0.14));
+  text-underline-offset: 5px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.dp-home-cta .dp-home-cta-contact a:hover,
+.dp-home-cta .dp-home-cta-contact a:focus-visible {
+  color: var(--dp-accent, #1F6BE0);
+  text-decoration-color: currentColor;
+}
+
+/* Phone and email stay together on one line at every width */
+.dp-home-cta-pair {
+  display: flex;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+/* Neither may break mid-number or mid-address */
+.dp-home-cta-pair a {
+  white-space: nowrap;
+}
+
+.dp-home-cta-sep {
+  color: var(--dp-accent, #1F6BE0);
+}
+
+@media (max-width: 640px) {
+  .dp-home-cta-container {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .dp-home-cta .dp-home-cta-title {
+    font-size: 40px;
+    line-height: 1.06;
+  }
+
+  .dp-home-cta .dp-home-cta-text {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .dp-home-cta a.dp-home-cta-button {
+    width: 100%;
+    justify-content: center;
+    height: 56px;
+    font-size: 18px;
+  }
+
+  /* Phone and email share a row; the location drops underneath */
+  .dp-home-cta .dp-home-cta-contact {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .dp-home-cta-sep--place {
+    display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .dp-home-cta .dp-home-cta-title {
+    font-size: 36px;
+  }
+
+  /* Smallest phones: shrink the contact line so the row still fits */
+  .dp-home-cta .dp-home-cta-contact {
+    font-size: 14px;
+  }
+
+  .dp-home-cta-pair {
+    gap: 6px 10px;
+  }
+}
+
+/* ==========================================================================
+   10. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  a.dp-arrow-link,
+  a.dp-arrow-link svg,
+  .dp-dark-button,
+  .dp-dark-button svg,
+  a.dp-light-button,
+  a.dp-light-button svg,
+  .dp-pillar-media img,
+  .dp-tools .dp-tools-input,
+  .dp-slider .dp-slider-button,
+  .dp-testimonials .dp-testimonials-dot,
+  .dp-testimonials .dp-testimonials-arrow,
+  .dp-home-cta .dp-home-cta-contact a {
+    transition: none;
+  }
+
+  .dp-pillar:hover .dp-pillar-media img {
+    transform: none;
+  }
+}
+

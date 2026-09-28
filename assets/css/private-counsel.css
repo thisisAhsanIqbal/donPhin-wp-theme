@@ -1,0 +1,1139 @@
+/*
+Theme: Don Phin, Esq.
+Page: Private Counsel (page-private-counsel.php)
+Description: Private Counsel page, in deep navy and antique gold — the arched-portrait hero,
+the five dimensions as five simple cards, the one room where nothing is performed,
+and the enquiry beside The Inner Climb. Loaded only on that page, from functions.php.
+*/
+
+/* ==========================================================================
+   0. TOKENS AND SHARED PIECES
+   ========================================================================== */
+:root {
+  /* Deep, rich blues and gold: Don's direction for this page. Most sections sit on
+     navy; The Setting is the one pause, on ivory. */
+  --dp-pc-abyss: #0A1628;       /* deepest navy: the five chapters, the gift panel */
+  --dp-pc-navy: #10284A;        /* rich sapphire navy: hero, enquiries, navy type on ivory */
+  --dp-pc-sapphire: #1A3D6E;    /* lighter navy, for gradients and the doors */
+  --dp-pc-gold: #C9A15B;        /* antique gold: rules, fills, the button */
+  --dp-pc-gold-light: #E4C47F;  /* gold type on navy */
+  --dp-pc-gold-deep: #9A7130;   /* large gold type on ivory */
+  --dp-pc-gold-ink: #7E5A26;    /* small gold type on ivory (AA contrast) */
+  --dp-pc-cream: #F3EAD8;       /* type on navy, warmer than white */
+  --dp-pc-ivory: #F4ECDD;       /* The Setting's background */
+}
+
+/* Small label with a gold rule before it */
+.dp-pc-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-pc-gold-light);
+  margin: 0 0 22px 0;
+}
+
+.dp-pc-eyebrow::before {
+  content: "";
+  flex-shrink: 0;
+  width: 28px;
+  height: 1px;
+  background-color: var(--dp-pc-gold);
+}
+
+.dp-pc-gold-accent {
+  font-style: italic;
+  color: var(--dp-pc-gold-light);
+}
+
+/* Read by screen readers only */
+.dp-pc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Square gold button for the navy sections; brightens on hover */
+a.dp-pc-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 58px;
+  padding: 0 32px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-pc-abyss) !important;
+  background-color: var(--dp-pc-gold);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+a.dp-pc-button:hover,
+a.dp-pc-button:focus-visible {
+  background-color: var(--dp-pc-gold-light);
+}
+
+a.dp-pc-button:focus-visible {
+  outline: 2px solid var(--dp-pc-gold-light);
+  outline-offset: 4px;
+}
+
+a.dp-pc-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-pc-button:hover svg,
+a.dp-pc-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   HEADER TOP BAR (the site header's dark strip, in this page's navy — a clear
+   blue, since the site's near-black reads the same as this page's deepest navy)
+   ========================================================================== */
+.dp-header .dp-topbar {
+  background-color: var(--dp-pc-navy);
+}
+
+.dp-header .dp-tab:hover {
+  color: var(--dp-pc-gold-light);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* The active tab stays white so it joins the main bar, with a gold edge on top */
+.dp-header .dp-tab.is-active {
+  color: var(--dp-pc-navy);
+  background-color: var(--dp-white, #FFFFFF);
+  box-shadow: inset 0 2px 0 var(--dp-pc-gold);
+}
+
+.dp-header .dp-topbar .dp-tab.is-active:focus-visible {
+  outline-color: var(--dp-pc-navy);
+}
+
+/* ==========================================================================
+   1. HERO (the headline, the creed and the invitation beside an arched
+      portrait, on deep navy — lit from behind the arch and footed by the
+      three terms of the work)
+   ========================================================================== */
+.dp-pc-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--dp-pc-navy);
+  color: var(--dp-pc-cream);
+}
+
+/* Depth, drawn rather than photographed: a light behind the portrait, the navy
+   deepening at the edges and into the chapters below. Decorative only. */
+.dp-pc-hero-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(56% 50% at 74% 26%, rgba(43, 96, 163, 0.18) 0%, rgba(26, 61, 110, 0.06) 46%, rgba(16, 40, 74, 0) 73%),
+    radial-gradient(78% 62% at 6% 94%, rgba(10, 22, 40, 0.72) 0%, rgba(10, 22, 40, 0) 62%),
+    linear-gradient(180deg, rgba(10, 22, 40, 0.42) 0%, rgba(10, 22, 40, 0) 24%, rgba(10, 22, 40, 0) 68%, rgba(10, 22, 40, 0.70) 100%);
+}
+
+/* The faintest grain, so the flat navy reads as a surface */
+.dp-pc-hero-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-size: 200px 200px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23g)'/></svg>");
+}
+
+.dp-pc-hero-container {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  /* Same gutter as the header, so the headline lines up with the logo.
+     The terms rail carries the bottom padding. */
+  /* The portrait bleeds back out over both of these */
+  --dp-pc-pad-top: clamp(44px, 5vw, 88px);
+  --dp-pc-bleed: calc(var(--dp-header-gutter, 7vw) + max(0px, (100vw - 1600px) / 2));
+  padding: var(--dp-pc-pad-top) var(--dp-header-gutter, 7vw) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 6.6fr) minmax(0, 5fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  column-gap: clamp(36px, 4.5vw, 88px);
+  row-gap: 0;
+  align-items: center;
+  /* Fills the first screen under the header, capped on very tall screens */
+  min-height: min(880px, calc(100vh - var(--dp-header-height, 98px)));
+  min-height: min(880px, calc(100svh - var(--dp-header-height, 98px)));
+}
+
+.dp-pc-hero .dp-pc-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(38px, 3.9vw, 64px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+  color: var(--dp-pc-cream);
+  max-width: 14em;
+  margin: 0 0 26px 0;
+}
+
+.dp-pc-hero .dp-pc-hero-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.5;
+  color: rgba(243, 234, 216, 0.88);
+  margin: 0 0 28px 0;
+}
+
+/* The creed, set apart on a gold rule with the light of the page washing off it */
+.dp-pc-hero .dp-pc-hero-creed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 34em;
+  margin: 0 0 34px 0;
+  padding: 20px 28px 22px 26px;
+  border-left: 2px solid var(--dp-pc-gold);
+  background-image: linear-gradient(90deg, rgba(201, 161, 91, 0.12) 0%, rgba(201, 161, 91, 0) 78%);
+}
+
+.dp-pc-creed-not {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: rgba(243, 234, 216, 0.58);
+}
+
+.dp-pc-creed-is {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 1.9vw, 28px);
+  line-height: 1.25;
+  color: var(--dp-pc-cream);
+}
+
+.dp-pc-hero-content {
+  padding-bottom: clamp(30px, 4vw, 60px);
+}
+
+.dp-pc-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+}
+
+.dp-pc-hero-note {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: rgba(243, 234, 216, 0.55);
+}
+
+/* --- The portrait, a full-height panel flush with the top, right and bottom
+       of the hero. It is pulled back out over the container's padding and over
+       whatever the 1600px cap leaves beside it. ------------------------------ */
+.dp-pc-portrait {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  box-sizing: border-box;
+  width: calc(100% + var(--dp-pc-bleed));
+  margin: calc(-1 * var(--dp-pc-pad-top)) calc(-1 * var(--dp-pc-bleed)) 0 0;
+  min-height: 520px;
+}
+
+.dp-pc-arch {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.dp-pc-arch img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 12%;
+}
+
+/* Multiplied over the photograph: a gentle, even blue tint that takes the studio
+   grey toward the room's navy, darkening only a little at the very edges */
+.dp-pc-arch-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  background-image: radial-gradient(90% 75% at 55% 30%, #E8EDF4 0%, #DCE3EE 55%, #B9C7DB 85%, #95AAC8 100%);
+}
+
+/* No seam anywhere: the panel dissolves into the navy on the left and at the
+   foot, and darkens under the caption */
+.dp-pc-arch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, var(--dp-pc-navy) 0%, rgba(16, 40, 74, 0.84) 11%, rgba(16, 40, 74, 0.30) 28%, rgba(16, 40, 74, 0) 50%),
+    linear-gradient(180deg, rgba(16, 40, 74, 0.45) 0%, rgba(16, 40, 74, 0) 20%),
+    linear-gradient(0deg, rgba(10, 22, 40, 0.92) 0%, rgba(10, 22, 40, 0.62) 8%, rgba(16, 40, 74, 0.26) 20%, rgba(16, 40, 74, 0) 34%);
+}
+
+.dp-pc-portrait-caption {
+  position: absolute;
+  z-index: 5;
+  left: clamp(20px, 3vw, 56px);
+  right: clamp(20px, 3vw, 56px);
+  bottom: clamp(30px, 4vw, 62px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.dp-pc-portrait-caption::before {
+  content: "";
+  width: 44px;
+  height: 1px;
+  margin-bottom: 8px;
+  background-image: linear-gradient(90deg, rgba(201, 161, 91, 0) 0%, var(--dp-pc-gold) 50%, rgba(201, 161, 91, 0) 100%);
+}
+
+.dp-pc-portrait-name {
+  font-family: var(--dp-font-serif);
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--dp-pc-cream);
+}
+
+.dp-pc-portrait-roles {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-pc-gold-light);
+}
+
+/* Small gold lozenge between words */
+.dp-pc-diamond {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 0.85em 0 0.95em;
+  vertical-align: 0.18em;
+  background-color: var(--dp-pc-gold);
+  transform: rotate(45deg);
+}
+
+/* --- The three terms, carrying the foot of the hero ----------------------- */
+.dp-pc-hero-terms {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid rgba(201, 161, 91, 0.28);
+}
+
+.dp-pc-hero-terms li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(22px, 2.2vw, 32px) clamp(20px, 2.4vw, 44px) clamp(28px, 3vw, 44px);
+  border-left: 1px solid rgba(201, 161, 91, 0.16);
+}
+
+.dp-pc-hero-terms li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.dp-pc-term-name {
+  font-family: var(--dp-font-serif);
+  font-style: italic;
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.2;
+  color: var(--dp-pc-gold-light);
+}
+
+.dp-pc-term-note {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(243, 234, 216, 0.66);
+}
+
+/* The hero settles in once, on load; nothing moves after that */
+@media (prefers-reduced-motion: no-preference) {
+  .dp-pc-hero-content > *,
+  .dp-pc-portrait,
+  .dp-pc-hero-terms {
+    animation: dp-pc-hero-settle 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .dp-pc-hero-content > *:nth-child(2) { animation-delay: 0.07s; }
+  .dp-pc-hero-content > *:nth-child(3) { animation-delay: 0.14s; }
+  .dp-pc-hero-content > *:nth-child(4) { animation-delay: 0.21s; }
+  .dp-pc-hero-content > *:nth-child(5) { animation-delay: 0.28s; }
+  .dp-pc-portrait { animation-delay: 0.12s; }
+  .dp-pc-hero-terms { animation-delay: 0.34s; }
+}
+
+@keyframes dp-pc-hero-settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1199px) {
+  .dp-pc-hero-container {
+    min-height: min(760px, calc(100vh - var(--dp-header-height, 98px)));
+    min-height: min(760px, calc(100svh - var(--dp-header-height, 98px)));
+  }
+
+  .dp-pc-hero .dp-pc-title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .dp-pc-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    min-height: 0;
+    row-gap: clamp(40px, 6vw, 64px);
+  }
+
+  .dp-pc-hero-content {
+    padding-bottom: 0;
+  }
+
+  .dp-pc-portrait {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: center;
+    width: min(100%, 460px);
+    margin: 0;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+
+  /* Nothing to dissolve into on the sides once it is stacked: only shade at the
+     head and under the caption */
+  .dp-pc-arch::after {
+    background-image:
+      linear-gradient(180deg, rgba(16, 40, 74, 0.34) 0%, rgba(16, 40, 74, 0) 18%),
+      linear-gradient(0deg, rgba(10, 22, 40, 0.90) 0%, rgba(10, 22, 40, 0.52) 13%, rgba(16, 40, 74, 0) 34%);
+  }
+
+  .dp-pc-arch-veil {
+    background-image: radial-gradient(100% 80% at 50% 30%, #E8EDF4 0%, #DCE3EE 55%, #BFCCDE 85%, #A2B4CE 100%);
+  }
+
+  /* Back to source order: the writing, the photograph, then the terms */
+  .dp-pc-hero-terms {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .dp-pc-hero-terms li {
+    padding-left: clamp(16px, 3vw, 28px);
+    padding-right: clamp(16px, 3vw, 28px);
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-pc-hero-container {
+    padding-top: 40px;
+    row-gap: 44px;
+  }
+
+  .dp-pc-hero .dp-pc-title {
+    font-size: 34px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  /* Phones let the stanza flow */
+  .dp-pc-break {
+    display: none;
+  }
+
+  .dp-pc-hero .dp-pc-hero-lead {
+    font-size: 19px;
+    margin-bottom: 28px;
+  }
+
+  .dp-pc-hero .dp-pc-hero-creed {
+    margin-bottom: 32px;
+    padding: 18px 20px 20px 22px;
+  }
+
+  .dp-pc-creed-is {
+    font-size: 22px;
+  }
+
+  .dp-pc-hero-actions {
+    gap: 14px 20px;
+  }
+
+  .dp-pc-portrait {
+    width: calc(100% + 2 * var(--dp-header-gutter, 7vw));
+    max-width: none;
+    margin: 0 calc(-1 * var(--dp-header-gutter, 7vw));
+    aspect-ratio: 1 / 1.12;
+    max-height: 64vh;
+  }
+
+  .dp-pc-arch-veil {
+    background-image: radial-gradient(110% 82% at 50% 32%, #EEF1F6 0%, #E3E9F1 55%, #CDD7E5 85%, #B4C3D8 100%);
+  }
+
+  /* Stacked, the terms read as a short list rather than three columns */
+  .dp-pc-hero-terms {
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: 8px;
+  }
+
+  .dp-pc-hero-terms li {
+    gap: 4px;
+    padding: 22px 0;
+    border-left: 0;
+    border-top: 1px solid rgba(201, 161, 91, 0.16);
+  }
+
+  .dp-pc-hero-terms li:first-child {
+    border-top: 0;
+    padding-top: 24px;
+  }
+
+  .dp-pc-hero-terms li:last-child {
+    padding-bottom: 46px;
+  }
+}
+
+/* ==========================================================================
+   2. FIVE CHAPTERS (the five dimensions of a life, on the deepest navy: the
+      question centred above, then five gold rings joined by one line, each
+      an icon over the dimension's name; on phones the line runs down the left)
+   ========================================================================== */
+.dp-pc-chapters {
+  --dp-pc-ring: clamp(76px, 6.4vw, 104px);
+
+  background-color: var(--dp-pc-abyss);
+  color: var(--dp-pc-cream);
+}
+
+.dp-pc-chapters-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 150px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-pc-chapters-head {
+  max-width: 50em;
+  margin: 0 auto clamp(56px, 6.4vw, 96px);
+  text-align: center;
+}
+
+/* The lead-in, set between two short gold rules */
+.dp-pc-chapters .dp-pc-chapters-lead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-family: var(--dp-font-family);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.6;
+  color: rgba(243, 234, 216, 0.78);
+  margin: 0 0 clamp(18px, 1.8vw, 26px) 0;
+}
+
+.dp-pc-chapters .dp-pc-chapters-lead::before,
+.dp-pc-chapters .dp-pc-chapters-lead::after {
+  content: "";
+  flex-shrink: 0;
+  width: 32px;
+  height: 1px;
+  background-color: var(--dp-pc-gold);
+}
+
+/* The question is the statement */
+.dp-pc-chapters .dp-pc-chapters-question {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(30px, 3.3vw, 54px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--dp-pc-gold-light);
+  margin: 0;
+}
+
+/* The five rings, evenly spaced, with one line running through their centres */
+.dp-pc-chapter-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1180px;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.dp-pc-chapter-list::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--dp-pc-ring) / 2);
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 161, 91, 0.15), rgba(201, 161, 91, 0.6) 20%, rgba(201, 161, 91, 0.6) 80%, rgba(201, 161, 91, 0.15));
+}
+
+.dp-pc-chapter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* The ring is filled with the background, so the line stops at its edge */
+.dp-pc-chapter-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--dp-pc-ring);
+  height: var(--dp-pc-ring);
+  color: var(--dp-pc-gold-light);
+  background-color: var(--dp-pc-abyss);
+  border: 1px solid rgba(201, 161, 91, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px var(--dp-pc-abyss);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.dp-pc-chapter:hover .dp-pc-chapter-mark {
+  color: var(--dp-pc-abyss);
+  background-color: var(--dp-pc-gold);
+  border-color: var(--dp-pc-gold);
+}
+
+.dp-pc-chapter-icon {
+  display: block;
+  width: 38%;
+  height: 38%;
+}
+
+.dp-pc-chapters .dp-pc-chapter-name {
+  font-family: var(--dp-font-family) !important;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--dp-pc-cream);
+  margin: 0;
+}
+
+@media (max-width: 1100px) {
+  .dp-pc-chapters .dp-pc-chapter-name {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Phones and small tablets: the rings stack, the line runs down their centres,
+   and each name sits beside its ring */
+@media (max-width: 767px) {
+  .dp-pc-chapters {
+    --dp-pc-ring: 64px;
+  }
+
+  .dp-pc-chapter-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    max-width: 22em;
+  }
+
+  .dp-pc-chapter-list::before {
+    top: calc(var(--dp-pc-ring) / 2);
+    bottom: calc(var(--dp-pc-ring) / 2);
+    left: calc(var(--dp-pc-ring) / 2);
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: rgba(201, 161, 91, 0.5);
+  }
+
+  .dp-pc-chapter {
+    flex-direction: row;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .dp-pc-chapter-mark {
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--dp-pc-abyss);
+  }
+
+  .dp-pc-chapters .dp-pc-chapter-name {
+    font-size: 14px;
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (max-width: 480px) {
+  .dp-pc-chapters .dp-pc-chapters-lead::before,
+  .dp-pc-chapters .dp-pc-chapters-lead::after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-pc-chapter-mark {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   3. THE SETTING (the one room where nothing is performed: the photograph
+      beside the statement, on ivory)
+   ========================================================================== */
+.dp-pc-setting {
+  background-color: var(--dp-pc-ivory);
+  color: var(--dp-pc-navy);
+}
+
+/* The one light section: gold goes deeper here so it reads on ivory */
+.dp-pc-setting .dp-pc-gold-accent {
+  color: var(--dp-pc-gold-deep);
+}
+
+.dp-pc-setting-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 150px) var(--dp-header-gutter, 7vw) clamp(56px, 6vw, 96px);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(40px, 6vw, 112px);
+  align-items: center;
+}
+
+/* The photograph, plain: no frame or border */
+.dp-pc-room {
+  margin: 0;
+  aspect-ratio: 7 / 5;
+  overflow: hidden;
+}
+
+.dp-pc-room img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 40%;
+}
+
+.dp-pc-setting .dp-pc-setting-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(34px, 3.6vw, 58px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-pc-navy);
+  margin: 0 0 26px 0;
+}
+
+.dp-pc-setting .dp-pc-setting-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.7;
+  color: #3A4658;
+  max-width: 30em;
+  margin: 0;
+}
+
+/* The closing line, in gold italic behind a short gold rule */
+.dp-pc-setting .dp-pc-setting-note {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-style: italic;
+  line-height: 1.35;
+  text-wrap: pretty;
+  color: var(--dp-pc-gold-ink);
+  max-width: 22em;
+  margin: clamp(28px, 2.6vw, 40px) 0 0 0;
+  padding-left: 22px;
+  border-left: 2px solid var(--dp-pc-gold);
+}
+
+@media (max-width: 991px) {
+  .dp-pc-setting-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-pc-setting-container {
+    padding-top: 64px;
+    padding-bottom: 48px;
+    gap: 36px;
+  }
+
+  .dp-pc-setting .dp-pc-setting-title {
+    font-size: 32px;
+  }
+
+  .dp-pc-setting .dp-pc-setting-text {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   3b. THE FIRST STEP (continues the setting on the same ivory and the same
+       7 / 5 grid: the heading under the photograph, the detail under the
+       setting's text, set off by one gold hairline)
+   ========================================================================== */
+.dp-pc-firststep {
+  background-color: var(--dp-pc-ivory);
+  color: var(--dp-pc-navy);
+}
+
+.dp-pc-firststep .dp-pc-eyebrow {
+  color: var(--dp-pc-gold-ink);
+}
+
+.dp-pc-firststep .dp-pc-gold-accent {
+  color: var(--dp-pc-gold-deep);
+}
+
+.dp-pc-firststep-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 var(--dp-header-gutter, 7vw) clamp(80px, 10vw, 150px);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  /* Rows: hairline to content. Columns: the same gap as the setting above */
+  gap: clamp(56px, 6vw, 96px) clamp(40px, 6vw, 112px);
+  align-items: end;
+}
+
+/* The hairline spans both columns, like the one grid above it */
+.dp-pc-firststep-container::before {
+  content: "";
+  grid-column: 1 / -1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(154, 113, 48, 0.55), rgba(154, 113, 48, 0.12));
+}
+
+.dp-pc-firststep .dp-pc-firststep-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(30px, 3vw, 48px);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-pc-navy);
+  max-width: 17em;
+  margin: 0;
+}
+
+.dp-pc-firststep-body p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.7;
+  color: #3A4658;
+  max-width: 30em;
+  margin: 0 0 18px 0;
+}
+
+.dp-pc-firststep-body p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  .dp-pc-firststep-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .dp-pc-firststep-container::before {
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-pc-firststep-container {
+    padding-bottom: 64px;
+  }
+
+  .dp-pc-firststep .dp-pc-firststep-title {
+    font-size: 28px;
+  }
+
+  .dp-pc-firststep-body p {
+    font-size: 16px;
+  }
+}
+
+/* ==========================================================================
+   4. ENQUIRIES WITH THE INNER CLIMB (the invitation beside a deeper gift panel, on navy)
+   ========================================================================== */
+.dp-pc-enquire {
+  background-color: var(--dp-pc-navy);
+  color: var(--dp-pc-cream);
+}
+
+.dp-pc-enquire-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(88px, 10vw, 150px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(48px, 6vw, 112px);
+  align-items: center;
+}
+
+.dp-pc-enquire .dp-pc-enquire-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(40px, 4.6vw, 76px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  color: var(--dp-pc-cream);
+  max-width: 11em;
+  margin: 0 0 28px 0;
+}
+
+.dp-pc-enquire .dp-pc-enquire-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.65;
+  color: rgba(243, 234, 216, 0.8);
+  max-width: 30em;
+  margin: 0 0 40px 0;
+}
+
+/* The side panel */
+.dp-pc-gift {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(24px, 2.6vw, 40px);
+  align-items: center;
+  padding: clamp(32px, 3.2vw, 48px);
+  background-color: var(--dp-pc-abyss);
+  border: 1px solid rgba(201, 161, 91, 0.35);
+  border-top: 2px solid var(--dp-pc-gold);
+  color: var(--dp-pc-cream);
+}
+
+/* The book: a cream cover turned slightly away, with page edges on the right */
+.dp-pc-book {
+  width: clamp(118px, 10.5vw, 156px);
+  perspective: 900px;
+}
+
+.dp-pc-book-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  aspect-ratio: 2 / 3;
+  padding: 16% 12% 14%;
+  background: linear-gradient(90deg, #D6CCB9 0%, #EEE6D6 5%, #F6F0E4 11%, #F3ECDF 100%);
+  border-radius: 2px 4px 4px 2px;
+  transform: rotateY(-18deg);
+  transform-origin: left center;
+  box-shadow:
+    1px 0 0 #E6DDCC,
+    2px 0 0 #FFFFFF,
+    3px 0 0 #E6DDCC,
+    4px 0 0 #FFFFFF,
+    5px 0 0 #E6DDCC,
+    12px 14px 26px rgba(0, 0, 0, 0.4);
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-pc-gift:hover .dp-pc-book-cover {
+  transform: rotateY(-6deg);
+}
+
+/* Gold frame on the cover */
+.dp-pc-book-cover::before {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 1px solid rgba(154, 113, 48, 0.6);
+  pointer-events: none;
+}
+
+.dp-pc-book-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.dp-pc-book-range {
+  stroke: var(--dp-pc-navy);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+/* The climb: a dotted gold path up to the summit */
+.dp-pc-book-path {
+  stroke: var(--dp-pc-gold);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: 0.001 0.045;
+}
+
+.dp-pc-book-summit {
+  fill: var(--dp-pc-gold);
+}
+
+.dp-pc-book-title {
+  position: relative;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(13px, 1.05vw, 16px);
+  font-style: italic;
+  line-height: 1.15;
+  text-align: center;
+  color: var(--dp-pc-navy);
+}
+
+.dp-pc-gift .dp-pc-gift-eyebrow {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-pc-gold-light);
+  margin: 0 0 12px 0;
+}
+
+.dp-pc-gift .dp-pc-gift-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--dp-pc-cream);
+  margin: 0 0 12px 0;
+}
+
+.dp-pc-gift .dp-pc-gift-text {
+  font-family: var(--dp-font-family);
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(243, 234, 216, 0.78);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .dp-pc-enquire-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-pc-gift {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-pc-enquire-container {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .dp-pc-enquire .dp-pc-enquire-title {
+    font-size: 38px;
+    line-height: 1.08;
+  }
+
+  .dp-pc-enquire .dp-pc-enquire-text {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  a.dp-pc-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 56px;
+  }
+}
+
+/* Small phones: the book sits above the words */
+@media (max-width: 440px) {
+  .dp-pc-gift {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   5. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  a.dp-pc-button,
+  a.dp-pc-button svg,
+  .dp-pc-book-cover {
+    transition: none;
+  }
+}

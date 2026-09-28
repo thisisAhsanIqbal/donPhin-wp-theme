@@ -1,0 +1,905 @@
+/*
+Theme: Don Phin, Esq.
+Page: The 40|40 Solution (page-purchase-the-40-40-solution.php)
+Description: Book offer page — hero with the cover, the video, Don's letter, who it is for, and the order band.
+Loaded only on that page, from functions.php.
+*/
+
+/* ==========================================================================
+   1. HERO (book on a yellow block taken from the cover, bleeding off the right)
+   ========================================================================== */
+.dp-book-hero {
+  /* The yellow from the cover */
+  --dp-book-yellow: #F6E01B;
+
+  position: relative;
+  background-color: var(--dp-white, #FFFFFF);
+  color: var(--dp-ink, #2A2029);
+  overflow: hidden;
+}
+
+.dp-book-hero-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 72px) var(--dp-header-gutter, 7vw) clamp(48px, 6vw, 88px);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  column-gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+
+.dp-book-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: clamp(16px, 3vw, 40px) 0;
+}
+
+.dp-book-hero .dp-book-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(36px, 4.4vw, 72px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--dp-ink, #2A2029);
+  max-width: 11em;
+  margin: 0 0 24px 0;
+}
+
+.dp-book-hero .dp-book-subtitle {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.3vw, 20px);
+  font-style: normal;
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 34em;
+  margin: 0 0 26px 0;
+}
+
+/* Title and authors of the book itself, kept quiet under the pitch */
+.dp-book-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 30em;
+  padding-top: 22px;
+  border-top: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+  margin: 0 0 30px 0;
+}
+
+.dp-book-credit-title {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-book-credit-authors {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dp-text, #4A4A4A);
+}
+
+/* Amazon button in the cover yellow; the shared button sets its colour with !important,
+   so these do too */
+.dp-book-hero .dp-dark-button {
+  color: var(--dp-ink, #2A2029) !important;
+  background-color: var(--dp-book-yellow);
+}
+
+.dp-book-hero .dp-dark-button:hover,
+.dp-book-hero .dp-dark-button:focus-visible {
+  color: var(--dp-white, #FFFFFF) !important;
+  background-color: #2A2029;
+}
+
+.dp-book-hero .dp-dark-button:focus-visible {
+  outline-color: #2A2029;
+}
+
+.dp-book-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-bottom: 22px;
+}
+
+.dp-book-trust {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 30em;
+  margin: 0;
+}
+
+/* Amazon's own button artwork, so it keeps its shape and just scales */
+.dp-book-buy {
+  display: inline-block;
+  line-height: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dp-book-buy img {
+  display: block;
+  width: 260px;
+  height: auto;
+  /* The artwork has a white background; multiply drops it into the page colour */
+  mix-blend-mode: multiply;
+}
+
+.dp-book-buy:hover,
+.dp-book-buy:focus-visible {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.dp-book-buy:focus-visible {
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 4px;
+}
+
+/* Cover on the yellow block */
+.dp-book-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-height: clamp(360px, 40vw, 560px);
+  padding: clamp(28px, 4vw, 56px) 0;
+}
+
+/* The block runs off the right edge of the screen */
+.dp-book-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: -50vw;
+  background-color: var(--dp-book-yellow);
+}
+
+.dp-book-cover img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: clamp(250px, 27vw, 400px);
+  height: auto;
+  /* Cut out already, so it sits straight on the yellow with its own shadow */
+  filter: drop-shadow(0 26px 40px rgba(42, 32, 41, 0.35));
+}
+
+/* ==========================================================================
+   2. VIDEO (still image until it is clicked)
+   ========================================================================== */
+/* Sits directly under the hero, so it carries the same white */
+.dp-book-video-section {
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-book-video-container {
+  box-sizing: border-box;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 88px) var(--dp-header-gutter, 7vw) clamp(56px, 7vw, 104px);
+}
+
+/* ==========================================================================
+   3. DON'S LETTER
+   ========================================================================== */
+.dp-book-letter {
+  background-color: var(--dp-paper, #F6F4F1);
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-book-letter-container {
+  box-sizing: border-box;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-book-letter .dp-book-letter-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(28px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--dp-ink, #2A2029);
+  margin: 0 0 32px 0;
+}
+
+.dp-book-letter p {
+  font-family: var(--dp-font-family);
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0 0 1.4em 0;
+}
+
+.dp-book-letter .dp-book-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(21px, 1.8vw, 26px);
+  line-height: 1.45;
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-book-letter p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   4. WHO IT IS FOR
+   ========================================================================== */
+.dp-book-fit {
+  background-color: var(--dp-white, #FFFFFF);
+  color: var(--dp-ink, #2A2029);
+}
+
+.dp-book-fit-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-book-fit .dp-book-fit-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(28px, 2.8vw, 44px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--dp-ink, #2A2029);
+  max-width: 18em;
+  margin: 0 0 clamp(32px, 4vw, 48px) 0;
+}
+
+.dp-book-fit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(32px, 4vw, 72px);
+}
+
+.dp-book-fit-list li {
+  position: relative;
+  font-family: var(--dp-font-family);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0;
+  padding: 18px 0 18px 34px;
+  border-top: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+}
+
+/* Small blue mark instead of a bullet */
+.dp-book-fit-list li::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 2px;
+  width: 9px;
+  height: 9px;
+  background-color: var(--dp-accent, #1F6BE0);
+  transform: rotate(45deg);
+}
+
+/* ==========================================================================
+   5. TESTIMONIALS (spotlight slider; the wall of quotes is the no-JS fallback)
+   ========================================================================== */
+.dp-book-praise {
+  /* The five colours this section is allowed: the yellow from the cover, its
+     soft partner for hover, the ink, the paper and the card. They are set here
+     rather than taken from the page so nothing from outside can colour it. */
+  --dp-book-yellow: #F6E01B;
+  --dp-book-yellow-soft: #EFF1AC;
+  --dp-book-ink: #2A1E2A;
+  --dp-book-paper: #F6F4F1;
+  --dp-book-card: #FFFFFF;
+  /* How long a quote holds before the next one comes round */
+  --dp-praise-delay: 7s;
+
+  background-color: var(--dp-book-paper);
+  color: var(--dp-book-ink);
+}
+
+.dp-book-praise-container {
+  box-sizing: border-box;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(56px, 7vw, 104px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-book-praise-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: clamp(32px, 4vw, 54px);
+}
+
+.dp-book-praise .dp-book-praise-label {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--dp-book-ink);
+  margin: 0;
+}
+
+/* Counter and arrows; book.js drops the hidden attribute once it is running */
+.dp-book-praise-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dp-book-praise-nav[hidden] {
+  display: none;
+}
+
+.dp-book-praise-count {
+  font-family: var(--dp-font-serif);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--dp-book-ink);
+  margin: 0 8px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.dp-book-praise-total {
+  color: rgba(42, 30, 42, 0.72);
+  opacity: 0.6;
+}
+
+/* These are ordinary buttons, so the site-wide button colours reach them.
+   Every state is spelled out here, and each selector carries the section, so
+   the section keeps its own colours whatever else the page puts on a button. */
+.dp-book-praise .dp-book-praise-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid rgba(42, 30, 42, 0.18);
+  border-radius: 50%;
+  background-color: transparent;
+  background-image: none;
+  color: var(--dp-book-ink);
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.dp-book-praise .dp-book-praise-button:hover,
+.dp-book-praise .dp-book-praise-button:focus,
+.dp-book-praise .dp-book-praise-button:focus-visible {
+  background-color: var(--dp-book-yellow-soft) !important;
+  background-image: none !important;
+  border-color: var(--dp-book-ink) !important;
+  color: var(--dp-book-ink) !important;
+  box-shadow: none;
+}
+
+.dp-book-praise .dp-book-praise-button:focus-visible {
+  outline: 2px solid var(--dp-book-ink);
+  outline-offset: 3px;
+}
+
+/* The full yellow is the press, so it stays the colour of the quote you are on */
+.dp-book-praise .dp-book-praise-button:active {
+  background-color: var(--dp-book-yellow) !important;
+  border-color: var(--dp-book-yellow) !important;
+  color: var(--dp-book-ink) !important;
+  transform: scale(0.94);
+}
+
+/* The stage: a big yellow quote mark with the card sitting over its corner */
+.dp-book-praise-stage {
+  position: relative;
+}
+
+.dp-book-praise-mark {
+  display: none;
+  position: absolute;
+  /* Straddles the left edge of the card, and stays clear of the heading */
+  top: -0.2em;
+  left: -0.32em;
+  z-index: 0;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(130px, 15vw, 240px);
+  line-height: 1;
+  color: var(--dp-book-yellow);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Fallback: columns, not a grid, because the quotes run from a sentence to a dozen lines */
+.dp-book-praise-wall {
+  columns: 3;
+  column-gap: clamp(20px, 2.4vw, 34px);
+}
+
+.dp-book-quote {
+  break-inside: avoid;
+  /* Safari still reads the old name */
+  -webkit-column-break-inside: avoid;
+  box-sizing: border-box;
+  background-color: var(--dp-book-card);
+  padding: clamp(24px, 2.4vw, 34px);
+  margin: 0 0 clamp(20px, 2.4vw, 34px) 0;
+}
+
+.dp-book-quote-text {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dp-book-quote-text p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(15px, 1.05vw, 16px);
+  line-height: 1.68;
+  color: rgba(42, 30, 42, 0.72);
+  margin: 0 0 14px 0;
+}
+
+.dp-book-quote-text p:last-child {
+  margin-bottom: 0;
+}
+
+.dp-book-quote-by {
+  display: block;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(42, 30, 42, 0.14);
+}
+
+.dp-book-quote-name {
+  display: block;
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--dp-book-ink);
+}
+
+.dp-book-quote-role {
+  display: block;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(42, 30, 42, 0.72);
+  margin-top: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   5b. The slider itself: everything below only applies once book.js is in
+   -------------------------------------------------------------------------- */
+.dp-book-praise.is-slider .dp-book-praise-mark {
+  display: block;
+}
+
+/* One quote at a time, the rest stacked underneath and out of the way.
+   book.js sets the height to the quote on show, so the card grows and shrinks
+   with it instead of every quote sitting in the tallest one box. */
+.dp-book-praise.is-slider .dp-book-praise-wall {
+  position: relative;
+  z-index: 1;
+  columns: auto;
+  overflow: hidden;
+  transition: height 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.dp-book-praise.is-slider .dp-book-quote {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: clamp(32px, 3.6vw, 56px) clamp(26px, 3.4vw, 60px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(var(--dp-praise-shift, 48px), 0, 0);
+  box-shadow: 0 24px 60px rgba(42, 30, 42, 0.10);
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s linear 0.55s;
+}
+
+/* Going backwards, the quotes come in from the other side */
+.dp-book-praise.is-slider[data-direction="prev"] .dp-book-quote {
+  --dp-praise-shift: -48px;
+}
+
+.dp-book-praise.is-slider .dp-book-quote.is-active {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s, 0s, 0s;
+}
+
+/* The one being replaced leaves the way the new one arrives. The quote on show
+   is exempt, so quick presses can never fade out the one being read. */
+.dp-book-praise.is-slider .dp-book-quote.is-leaving:not(.is-active) {
+  visibility: visible;
+  opacity: 0;
+  transform: translate3d(calc(var(--dp-praise-shift, 48px) * -1), 0, 0);
+  transition-delay: 0s, 0s, 0s;
+}
+
+/* The card runs the width of the page, the words do not: long lines are hard
+   to read, and the space left over balances the quote mark */
+.dp-book-praise.is-slider .dp-book-quote-text {
+  max-width: 60em;
+}
+
+/* The quote on show gets room to breathe: bigger, in the book serif */
+.dp-book-praise.is-slider .dp-book-quote-text p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(18px, 1.55vw, 24px);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  color: var(--dp-book-ink);
+  margin-bottom: 18px;
+}
+
+.dp-book-praise.is-slider .dp-book-quote-by {
+  margin-top: 26px;
+  padding-top: 20px;
+}
+
+.dp-book-praise.is-slider .dp-book-quote-name {
+  font-size: 16px;
+}
+
+/* The rail: the thin yellow timer, then the names as the way through */
+.dp-book-praise-rail {
+  margin-top: clamp(26px, 3vw, 40px);
+}
+
+.dp-book-praise-rail[hidden] {
+  display: none;
+}
+
+.dp-book-praise-progress {
+  height: 2px;
+  background-color: rgba(42, 30, 42, 0.14);
+  overflow: hidden;
+}
+
+.dp-book-praise-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dp-book-yellow);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+/* Restarted by book.js each time a quote comes up, paused while people read */
+.dp-book-praise.is-running .dp-book-praise-progress span {
+  animation: dp-praise-fill var(--dp-praise-delay) linear forwards;
+}
+
+.dp-book-praise.is-held .dp-book-praise-progress span {
+  animation-play-state: paused;
+}
+
+@keyframes dp-praise-fill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.dp-book-praise-names {
+  display: flex;
+  gap: clamp(6px, 1vw, 14px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 18px 0 2px;
+  scroll-padding-inline: 24px;
+}
+
+.dp-book-praise-names::-webkit-scrollbar {
+  display: none;
+}
+
+.dp-book-praise .dp-book-praise-name {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  background-image: none;
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.3;
+  white-space: nowrap;
+  color: rgba(42, 30, 42, 0.72);
+  box-shadow: none;
+  opacity: 0.62;
+  cursor: pointer;
+  transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+/* The soft yellow on the way past, the full yellow for the one you are on */
+.dp-book-praise .dp-book-praise-name:hover,
+.dp-book-praise .dp-book-praise-name:focus,
+.dp-book-praise .dp-book-praise-name:focus-visible {
+  background-color: var(--dp-book-yellow-soft) !important;
+  background-image: none !important;
+  color: var(--dp-book-ink) !important;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.dp-book-praise .dp-book-praise-name:focus-visible {
+  outline: 2px solid var(--dp-book-ink);
+  outline-offset: 2px;
+}
+
+.dp-book-praise .dp-book-praise-name[aria-selected="true"],
+.dp-book-praise .dp-book-praise-name[aria-selected="true"]:hover,
+.dp-book-praise .dp-book-praise-name[aria-selected="true"]:focus {
+  background-color: var(--dp-book-yellow) !important;
+  background-image: none !important;
+  color: var(--dp-book-ink) !important;
+  font-weight: 600;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   6. ORDER BAND (the hero's yellow block, mirrored: it bleeds off the left)
+   ========================================================================== */
+.dp-book-order {
+  /* The yellow from the cover, as in the hero */
+  --dp-book-yellow: #F6E01B;
+
+  position: relative;
+  background-color: var(--dp-white, #FFFFFF);
+  color: var(--dp-ink, #2A2029);
+  overflow: hidden;
+}
+
+.dp-book-order-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 72px) var(--dp-header-gutter, 7vw);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  column-gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+
+.dp-book-order-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  min-height: clamp(300px, 32vw, 460px);
+  padding: clamp(28px, 4vw, 56px) 0;
+}
+
+/* The block runs off the left edge of the screen */
+.dp-book-order-cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: -50vw;
+  background-color: var(--dp-book-yellow);
+}
+
+.dp-book-order-cover img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: clamp(190px, 21vw, 300px);
+  height: auto;
+  filter: drop-shadow(0 22px 36px rgba(42, 32, 41, 0.32));
+}
+
+.dp-book-order .dp-book-order-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--dp-ink, #2A2029);
+  max-width: 13em;
+  text-wrap: balance;
+  margin: 0 0 clamp(24px, 3vw, 34px) 0;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 991px) {
+  .dp-book-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  /* The block reaches both edges of the screen, past the page gutter */
+  .dp-book-cover::before {
+    left: -50vw;
+    right: -50vw;
+  }
+
+  .dp-book-cover img {
+    max-width: 280px;
+    margin: 0;
+  }
+
+  .dp-book-fit-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-book-praise-wall {
+    columns: 2;
+  }
+
+  .dp-book-order-container {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+
+  .dp-book-order-cover {
+    min-height: 0;
+  }
+
+  .dp-book-order-cover::before {
+    left: -50vw;
+    right: -50vw;
+  }
+
+  .dp-book-order-cover img {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-book-hero-container {
+    padding-top: 48px;
+    padding-bottom: 40px;
+  }
+
+  .dp-book-hero .dp-book-title {
+    font-size: 34px;
+  }
+
+  .dp-book-letter p {
+    font-size: 17px;
+  }
+
+  .dp-book-praise-wall {
+    columns: 1;
+  }
+
+  .dp-book-order-action {
+    text-align: center;
+  }
+
+  .dp-book-order .dp-book-order-title {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-book-buy {
+    transition: none;
+  }
+
+  .dp-book-buy:hover,
+  .dp-book-buy:focus-visible {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   8. TESTIMONIAL SLIDER AT SMALL SIZES
+   ========================================================================== */
+@media (max-width: 991px) {
+  .dp-book-praise-head {
+    align-items: center;
+  }
+
+  .dp-book-praise.is-slider .dp-book-quote-text p {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 640px) {
+  /* The counter and arrows stay on the heading line, over on the right; the
+     pieces shrink rather than dropping to a row of their own */
+  .dp-book-praise-head {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Gives way to the arrows on the narrowest phones rather than pushing them off */
+  .dp-book-praise .dp-book-praise-label {
+    font-size: clamp(22px, 6.2vw, 26px);
+    min-width: 0;
+  }
+
+  .dp-book-praise-nav {
+    flex: 0 0 auto;
+    gap: 8px;
+  }
+
+  .dp-book-praise-count {
+    font-size: 15px;
+    margin-right: 2px;
+  }
+
+  .dp-book-praise .dp-book-praise-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .dp-book-praise .dp-book-praise-button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .dp-book-praise-mark {
+    font-size: 150px;
+    top: -0.3em;
+  }
+
+  .dp-book-praise.is-slider .dp-book-quote {
+    padding: 28px 22px;
+  }
+
+  .dp-book-praise.is-slider .dp-book-quote-text p {
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  /* The names run to both edges of the screen so the row reads as scrollable */
+  .dp-book-praise-names {
+    margin: 0 calc(var(--dp-header-gutter, 7vw) * -1);
+    padding-left: var(--dp-header-gutter, 7vw);
+    padding-right: var(--dp-header-gutter, 7vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-book-praise.is-slider .dp-book-praise-wall,
+  .dp-book-praise.is-slider .dp-book-quote,
+  .dp-book-praise-button,
+  .dp-book-praise-name {
+    transition: none;
+  }
+
+  /* No sliding, no timer bar: book.js also stops the quotes advancing on their own */
+  .dp-book-praise.is-slider .dp-book-quote {
+    transform: none;
+  }
+
+  .dp-book-praise.is-slider .dp-book-quote.is-leaving:not(.is-active) {
+    transform: none;
+  }
+
+  .dp-book-praise .dp-book-praise-progress {
+    display: none;
+  }
+}
