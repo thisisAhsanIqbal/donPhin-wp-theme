@@ -5,7 +5,7 @@ Description: Custom professional Kadence child theme for Don Phin, Esq. featurin
 Author: Kadence WP / Custom
 Author URI: https://www.donphin.com/
 Template: kadence
-Version: 1.3.4
+Version: 1.4.0
 Text Domain: don-phin-esq
 */
 
@@ -28,9 +28,8 @@ Text Domain: don-phin-esq
   --dp-white: #FFFFFF;
 
   /* ================= SITE HEADER SIZING ================= */
-  --dp-topbar-height: 30px;
   --dp-mainbar-height: 68px;
-  --dp-header-height: calc(var(--dp-topbar-height) + var(--dp-mainbar-height));
+  --dp-header-height: var(--dp-mainbar-height);
   --dp-header-gutter: clamp(16px, 7vw, 120px);
 
   /* ================= COLORS: PRIVATE COUNSEL ================= */
@@ -96,8 +95,6 @@ html {
   align-items: center;
 }
 
-.dp-header .dp-tab-list,
-.dp-header .dp-social-list,
 .dp-header .dp-nav-list {
   display: flex;
   align-items: center;
@@ -114,102 +111,6 @@ html {
 .dp-header button:focus-visible {
   outline: 2px solid var(--dp-header-accent);
   outline-offset: 3px;
-}
-
-/* ==========================================================================
-   3. TOP BAR (SECTION TABS + SOCIAL LINKS)
-   ========================================================================== */
-.dp-topbar {
-  background-color: var(--dp-ink);
-}
-
-.dp-topbar .dp-header-inner {
-  height: var(--dp-topbar-height);
-  justify-content: space-between;
-  gap: 16px;
-}
-
-/* Tabs scroll sideways instead of wrapping on very narrow phones */
-.dp-header .dp-topbar-tabs {
-  align-self: stretch;
-  min-width: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.dp-header .dp-topbar-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.dp-header .dp-tab-list {
-  height: 100%;
-  gap: 8px;
-}
-
-.dp-header .dp-tab-list li {
-  height: 100%;
-}
-
-.dp-header .dp-tab {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 19px;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  white-space: nowrap;
-  color: var(--dp-white);
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.dp-header .dp-tab:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-  color: var(--dp-white);
-}
-
-.dp-header .dp-tab.is-active {
-  background-color: var(--dp-white);
-  color: var(--dp-ink);
-}
-
-.dp-header .dp-topbar a:focus-visible {
-  outline-color: var(--dp-white);
-  outline-offset: -4px;
-}
-
-.dp-header .dp-topbar .dp-tab.is-active:focus-visible {
-  outline-color: var(--dp-ink);
-}
-
-.dp-header .dp-social-list {
-  flex-shrink: 0;
-  gap: 16px;
-}
-
-.dp-header .dp-social-link {
-  display: flex;
-  align-items: center;
-  color: var(--dp-white);
-  transition: opacity 0.2s ease;
-}
-
-.dp-header .dp-social-link:hover {
-  color: var(--dp-white);
-  opacity: 0.75;
-}
-
-.dp-header .dp-social-link svg {
-  display: block;
-  width: 16px;
-  height: 16px;
-}
-
-/* The YouTube glyph is wider than tall; this keeps it visually level with LinkedIn */
-.dp-header .dp-social-link--youtube svg {
-  width: 21px;
-  height: 21px;
 }
 
 /* ==========================================================================
@@ -541,38 +442,8 @@ html {
 }
 
 @media (max-width: 480px) {
-  .dp-header .dp-topbar .dp-header-inner {
-    padding-left: 0;
-    gap: 12px;
-  }
-
-  .dp-header .dp-tab-list {
-    gap: 0;
-  }
-
-  .dp-header .dp-tab {
-    padding: 0 12px;
-    font-size: 12px;
-    letter-spacing: 0.02em;
-  }
-
-  .dp-header .dp-tab-list li:first-child .dp-tab {
-    padding-left: 16px;
-  }
-
-  .dp-header .dp-social-list {
-    gap: 14px;
-  }
-
   .dp-header .dp-logo {
     font-size: 18px;
-  }
-}
-
-/* Very narrow phones: the three tabs need the whole top bar */
-@media (max-width: 359px) {
-  .dp-header .dp-social-list {
-    display: none;
   }
 }
 

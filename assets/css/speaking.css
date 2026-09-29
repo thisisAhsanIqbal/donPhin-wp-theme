@@ -43,29 +43,6 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   HEADER TOP BAR (the site header's dark strip, in cobalt to match the hero)
-   ========================================================================== */
-.dp-header .dp-topbar {
-  background-color: var(--dp-speaking-navy);
-}
-
-.dp-header .dp-tab:hover {
-  color: var(--dp-speaking-orange);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* The active tab stays white so it joins the main bar, with a yellow edge on top */
-.dp-header .dp-tab.is-active {
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-white, #FFFFFF);
-  box-shadow: inset 0 3px 0 var(--dp-speaking-gold);
-}
-
-.dp-header .dp-topbar .dp-tab.is-active:focus-visible {
-  outline-color: var(--dp-speaking-navy);
-}
-
-/* ==========================================================================
    1. HERO (on cobalt: headline, the intro in two columns, then the reel overlapping the section below)
    ========================================================================== */
 .dp-speak-hero {

@@ -9,6 +9,17 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.4.0 (2026-09-29)
+
+### Each side keeps to itself
+- The header's top bar is gone: no For You / Private counsel / Speaking tabs and no
+  social icons. Once a visitor goes through the gateway, everything they see is about
+  that side only. The header is now one white bar (logo, menu, button), 68px tall.
+- The logo leads to the section's own home (`/speaking/` or `/private-counsel/`) instead
+  of the gateway, so it never takes a visitor to the other side.
+- The top bar's styles are removed from `style.css`, `speaking.css` and
+  `private-counsel.css`.
+
 ## 1.3.4 (2026-09-29)
 
 ### Design

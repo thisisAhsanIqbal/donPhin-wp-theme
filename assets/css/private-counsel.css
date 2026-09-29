@@ -107,30 +107,6 @@ a.dp-pc-button:focus-visible svg {
 }
 
 /* ==========================================================================
-   HEADER TOP BAR (the site header's dark strip, in this page's navy — a clear
-   blue, since the site's near-black reads the same as this page's deepest navy)
-   ========================================================================== */
-.dp-header .dp-topbar {
-  background-color: var(--dp-private-counsel-navy);
-}
-
-.dp-header .dp-tab:hover {
-  color: var(--dp-private-counsel-bronze-light);
-  background-color: color-mix(in srgb, var(--dp-private-counsel-cream) 8%, transparent);
-}
-
-/* The active tab stays white so it joins the main bar, with a gold edge on top */
-.dp-header .dp-tab.is-active {
-  color: var(--dp-private-counsel-navy);
-  background-color: var(--dp-private-counsel-cream);
-  box-shadow: inset 0 2px 0 var(--dp-private-counsel-bronze);
-}
-
-.dp-header .dp-topbar .dp-tab.is-active:focus-visible {
-  outline-color: var(--dp-private-counsel-navy);
-}
-
-/* ==========================================================================
    1. HERO (the headline, the creed and the invitation beside an arched
       portrait, on deep navy — lit from behind the arch and footed by the
       three terms of the work)

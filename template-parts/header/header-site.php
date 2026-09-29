@@ -2,11 +2,11 @@
 /**
  * Template part: Site Header
  *
- * A dark top bar (section tabs + social links) over a white main bar (logo, menu, CTA).
+ * One white bar: logo, menu and button. Each side of the site keeps to itself: there
+ * are no tabs to the other side, and the logo leads to this section's own home.
  * $args['section'] (a key of donphin_sections(): 'foryou', 'counsel' or 'speaking') picks
- * the active tab, the menu and the button. The tabs come from the section registry
- * (inc/sections.php); the menu and button from the menu assigned to the section in
- * Appearance > Menus, or the registry until one is.
+ * the menu, the button and the logo's link; the menu and button come from the menu
+ * assigned to the section in Appearance > Menus, or the registry (inc/sections.php).
  *
  * @package DonPhinEsq
  */
@@ -18,39 +18,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 $sections = donphin_sections();
 $section  = isset( $args['section'], $sections[ $args['section'] ] ) ? $args['section'] : 'foryou';
 $menu     = donphin_section_menu( $section );
-$socials  = donphin_social_links();
 ?>
 <header id="dp-site-header" class="dp-header dp-header--<?php echo esc_attr( $section ); ?>" role="banner">
-
-	<!-- Top bar: section tabs + social links -->
-	<div class="dp-topbar">
-		<div class="dp-header-inner">
-			<nav class="dp-topbar-tabs" aria-label="<?php esc_attr_e( 'Site sections', 'don-phin-esq' ); ?>">
-				<ul class="dp-tab-list">
-					<?php foreach ( $sections as $key => $tab ) : ?>
-						<li>
-							<a href="<?php echo esc_url( home_url( $tab['home'] ) ); ?>" class="dp-tab<?php echo $key === $section ? ' is-active' : ''; ?>"<?php echo $key === $section ? ' aria-current="true"' : ''; ?>><?php echo esc_html( $tab['label'] ); ?></a>
-						</li>
-					<?php endforeach; ?>
-				</ul>
-			</nav>
-
-			<ul class="dp-social-list">
-				<?php foreach ( $socials as $key => $social ) : ?>
-					<li>
-						<a href="<?php echo esc_url( $social['url'] ); ?>" class="dp-social-link dp-social-link--<?php echo esc_attr( $key ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( sprintf( 'Don Phin on %s (opens in a new tab)', $social['label'] ) ); ?>">
-							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="<?php echo esc_attr( $social['path'] ); ?>"/></svg>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	</div>
 
 	<!-- Main bar: logo, menu + CTA (the menu becomes the mobile drawer) -->
 	<div class="dp-mainbar">
 		<div class="dp-header-inner">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dp-logo">
+			<a href="<?php echo esc_url( home_url( $sections[ $section ]['home'] ) ); ?>" class="dp-logo">
 				<span class="dp-logo-accent">Don Phin,</span> Esq.
 			</a>
 
