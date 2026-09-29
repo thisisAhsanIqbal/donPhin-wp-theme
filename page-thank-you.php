@@ -59,8 +59,12 @@ get_header();
 		</p>
 
 		<div class="dp-thanks-actions">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="dp-dark-button">
-				Back to the home page
+			<?php
+			// Back to the side they wrote from (the form sends them here with ?header=...), never the gateway
+			$section = donphin_sections()[ donphin_get_header_section() ];
+			?>
+			<a href="<?php echo esc_url( home_url( $section['home'] ) ); ?>" class="dp-dark-button">
+				<?php echo esc_html( '/' === $section['home'] ? 'Back to the home page' : sprintf( 'Back to %s', ucwords( $section['label'] ) ) ); ?>
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
 

@@ -9,6 +9,21 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.4.2 (2026-09-29)
+
+### Design
+- Gateway on phones fits one screen with no scrolling: exactly the screen's height
+  (`100svh`, so nothing hides behind the browser's bars), Don's name on top and the two
+  doors splitting the rest evenly, with tighter type. Phones turned sideways (too short
+  for both doors) scroll instead, with the doors side by side.
+
+## 1.4.1 (2026-09-29)
+
+### Fixes
+- Thank-you page: "Back to the home page" sent visitors to the gateway after a contact
+  form. It now returns them to their own side ("Back to Speaking" or "Back to Private
+  Counsel").
+
 ## 1.4.0 (2026-09-29)
 
 ### Each side keeps to itself
