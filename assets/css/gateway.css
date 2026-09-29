@@ -1,0 +1,234 @@
+/*
+Theme: Don Phin, Esq.
+Page: The gateway (front-page.php)
+Description: The home page as a door into the two sides of Don's work: his name on deep
+navy over two full-height photo cards, Private Counsel (The Inner Climb) and Speaking,
+each with its name, one line and an Explore button in its own section's gold. No site
+header or footer. Loaded only on the front page (inc/enqueue.php).
+*/
+
+.dp-gateway-page {
+  --dp-gw-navy: #0F1E38;                                  /* Private Counsel's deep navy */
+  --dp-gw-cream: #FCFAF6;
+  --dp-gw-counsel: var(--dp-private-counsel-bronze, #A67C4E);
+  --dp-gw-speaking: var(--dp-speaking-gold, #F2B035);
+
+  margin: 0;
+  background-color: var(--dp-gw-navy);
+}
+
+.dp-gateway {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--dp-gw-navy);
+  color: var(--dp-gw-cream);
+}
+
+/* Logged in: the page starts under WordPress's toolbar */
+.admin-bar .dp-gateway {
+  min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+  min-height: calc(100svh - var(--wp-admin--admin-bar--height, 32px));
+}
+
+/* ==========================================================================
+   DON'S NAME
+   ========================================================================== */
+.dp-gateway-head {
+  flex-shrink: 0;
+  padding: clamp(24px, 3.4vh, 40px) 20px clamp(20px, 3vh, 32px);
+  text-align: center;
+}
+
+.dp-gateway .dp-gateway-name {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--dp-gw-cream);
+  margin: 0 0 8px 0;
+}
+
+.dp-gateway-name-accent {
+  color: var(--dp-gw-counsel);
+}
+
+.dp-gateway .dp-gateway-intro {
+  font-family: var(--dp-font-serif);
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--dp-gw-cream) 66%, transparent);
+  margin: 0;
+}
+
+/* ==========================================================================
+   THE TWO DOORS (side by side, filling the rest of the screen)
+   ========================================================================== */
+.dp-gateway-doors {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  min-height: 460px;
+  background-color: color-mix(in srgb, var(--dp-gw-cream) 14%, transparent);
+}
+
+.dp-gateway-door {
+  --dp-door-accent: var(--dp-gw-counsel);
+
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--dp-gw-cream);
+  text-decoration: none;
+  background-color: var(--dp-gw-navy);
+}
+
+.dp-gateway-door--speaking {
+  --dp-door-accent: var(--dp-gw-speaking);
+}
+
+.dp-gateway-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+
+/* Navy rising from the foot, so the words read over any photo */
+.dp-gateway-door::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg,
+    color-mix(in srgb, var(--dp-gw-navy) 94%, transparent) 0%,
+    color-mix(in srgb, var(--dp-gw-navy) 72%, transparent) 26%,
+    color-mix(in srgb, var(--dp-gw-navy) 18%, transparent) 55%,
+    color-mix(in srgb, var(--dp-gw-navy) 0%, transparent) 75%);
+  transition: opacity 0.6s ease;
+}
+
+.dp-gateway-door-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 30em;
+  padding: 0 24px clamp(36px, 7vh, 72px);
+  text-align: center;
+}
+
+.dp-gateway-rule {
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin-bottom: 22px;
+  background-color: var(--dp-door-accent);
+  transition: width 0.4s ease;
+}
+
+.dp-gateway-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(36px, 3.6vw, 58px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--dp-gw-cream);
+  margin-bottom: 12px;
+}
+
+.dp-gateway-line {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(16px, 1.2vw, 19px);
+  font-style: italic;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--dp-gw-cream) 84%, transparent);
+  margin-bottom: 28px;
+}
+
+/* Outlined in the section's gold; filled with it on hover */
+.dp-gateway-button {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 44px;
+  padding: 0 28px;
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--dp-door-accent);
+  border: 1px solid var(--dp-door-accent);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* The door you're on draws you in: the photo moves closer, the rule widens, the button fills */
+.dp-gateway-door:hover .dp-gateway-photo,
+.dp-gateway-door:focus-visible .dp-gateway-photo {
+  transform: scale(1.05);
+}
+
+.dp-gateway-door:hover .dp-gateway-rule,
+.dp-gateway-door:focus-visible .dp-gateway-rule {
+  width: 64px;
+}
+
+.dp-gateway-door:hover .dp-gateway-button,
+.dp-gateway-door:focus-visible .dp-gateway-button {
+  color: var(--dp-gw-navy);
+  background-color: var(--dp-door-accent);
+}
+
+/* ...and the other door steps back */
+@media (hover: hover) {
+  .dp-gateway-doors:hover .dp-gateway-door:not(:hover) .dp-gateway-photo {
+    filter: brightness(0.62) saturate(0.8);
+  }
+}
+
+.dp-gateway-door:focus-visible {
+  outline: 2px solid var(--dp-door-accent);
+  outline-offset: -6px;
+}
+
+/* ==========================================================================
+   PHONES: one door above the other
+   ========================================================================== */
+@media (max-width: 767px) {
+  .dp-gateway-doors {
+    grid-template-columns: minmax(0, 1fr);
+    grid-auto-rows: minmax(62svh, auto);
+  }
+
+  .dp-gateway-door-body {
+    padding-bottom: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-gateway-photo,
+  .dp-gateway-rule,
+  .dp-gateway-button,
+  .dp-gateway-door::after {
+    transition: none;
+  }
+
+  .dp-gateway-door:hover .dp-gateway-photo,
+  .dp-gateway-door:focus-visible .dp-gateway-photo {
+    transform: none;
+  }
+}

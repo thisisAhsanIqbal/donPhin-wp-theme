@@ -80,7 +80,7 @@ function donphin_sections() {
 			'slug'       => 'speaking',
 			'aliases'    => array(),
 			'pages'      => array(),
-			'templates'  => array( 'page-speaking.php', 'page-speaking-about.php', 'page-speaking-contact.php', 'page-purchase-the-40-40-solution.php' ),
+			'templates'  => array( 'page-speaking.php', 'page-speaking-about.php', 'page-speaking-contact.php', 'page-speaking-resources.php', 'page-purchase-the-40-40-solution.php' ),
 			'stylesheet' => 'speaking',
 			'menu'       => array(
 				array( 'Home', '/speaking/', 'Speaking home' ),

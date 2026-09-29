@@ -25,6 +25,7 @@ function donphin_template_assets() {
 		'page-speaking.php'                    => array( 'js' => array( 'video' ) ),
 		'page-speaking-about.php'              => array( 'css' => array( 'about' ) ),
 		'page-speaking-contact.php'            => array( 'css' => array( 'contact' ) ),
+		'page-speaking-resources.php'          => array( 'css' => array( 'speaking-resources' ) ),
 		'page-the-journey.php'                 => array( 'css' => array( 'journey' ) ),
 		'page-counsel-about.php'               => array( 'css' => array( 'counsel-about' ) ),
 		'page-counsel-contact.php'             => array( 'css' => array( 'contact' ) ),
@@ -86,9 +87,12 @@ function donphin_enqueue_scripts() {
 		donphin_asset_version( '/style.css' )
 	);
 
-	// The header (sticky shadow, mobile menu) and the scroll fade, on every page
-	donphin_enqueue_asset( 'js', 'header' );
-	donphin_enqueue_asset( 'js', 'reveal' );
+	// The header (sticky shadow, mobile menu) and the scroll fade, on every page but the
+	// gateway, which has no header and fits on one screen
+	if ( ! is_front_page() ) {
+		donphin_enqueue_asset( 'js', 'header' );
+		donphin_enqueue_asset( 'js', 'reveal' );
+	}
 
 	// A soft fade as each page arrives (see inc/page-transitions.php)
 	donphin_enqueue_asset( 'js', 'page-transitions' );
@@ -117,8 +121,7 @@ function donphin_enqueue_scripts() {
 
 	// The home page and the 404 page aren't page templates
 	if ( is_front_page() ) {
-		donphin_enqueue_asset( 'css', 'home', array( 'donphin-child-style' ) );
-		donphin_enqueue_asset( 'js', 'home' );
+		donphin_enqueue_asset( 'css', 'gateway', array( 'donphin-child-style' ) );
 	}
 	if ( is_404() ) {
 		donphin_enqueue_asset( 'css', '404', array( 'donphin-child-style' ) );

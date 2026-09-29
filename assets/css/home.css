@@ -16,10 +16,7 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-rows: minmax(0, 1fr) auto;
-  grid-template-areas:
-    "content media"
-    "proof   media";
+  grid-template-areas: "content media";
   min-height: var(--dp-hero-height);
   /* The text starts on the header's rail, so the headline lines up with the logo.
      There is no right padding: the blue panel runs to the edge of the screen. */
@@ -42,7 +39,7 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
   padding: clamp(40px, 7vh, 88px) var(--dp-hero-gap) clamp(28px, 4vh, 44px) 0;
 }
 
-/* Eyebrow, led by a short blue rule */
+/* Eyebrow: Speaker · Author · Counsel, the dots in blue */
 .dp-home-hero .dp-home-hero-eyebrow {
   display: flex;
   align-items: center;
@@ -54,15 +51,6 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
   line-height: 1;
   color: var(--dp-text, #4A4A4A);
   margin: 0 0 26px 0;
-}
-
-.dp-home-hero-eyebrow::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 36px;
-  height: 1px;
-  margin-right: 16px;
-  background-color: var(--dp-accent, #1F6BE0);
 }
 
 .dp-home-hero-eyebrow span {
@@ -91,41 +79,103 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
   color: var(--dp-accent, #1F6BE0);
 }
 
+/* The two doors under the headline: each a name with an arrow over one short line,
+   edged in its section's colour (Speaking blue, Private Counsel gold) */
+.dp-home-hero-doors {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px clamp(20px, 2.4vw, 36px);
+  max-width: 36em;
+  list-style: none;
+  margin: 0 0 30px 0;
+  padding: 0;
+}
+
+.dp-home-hero-doors li {
+  margin: 0;
+}
+
+.dp-home-hero-door {
+  --dp-door-accent: var(--dp-accent, #1F6BE0);
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px 0 4px 16px;
+  border-left: 2px solid var(--dp-door-accent);
+  text-decoration: none;
+}
+
+.dp-home-hero-door--speaking {
+  --dp-door-accent: var(--dp-speaking-blue, #1E5AA8);
+}
+
+.dp-home-hero-door--counsel {
+  --dp-door-accent: var(--dp-private-counsel-gold, #8A5A2B);
+}
+
+.dp-home-hero-door-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.15vw, 18px);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--dp-ink, #2A2029);
+  transition: color 0.2s ease;
+}
+
+.dp-home-hero-door-name svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+.dp-home-hero-door-line {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--dp-text, #4A4A4A);
+}
+
+.dp-home-hero-door:hover .dp-home-hero-door-name,
+.dp-home-hero-door:focus-visible .dp-home-hero-door-name {
+  color: var(--dp-door-accent);
+}
+
+.dp-home-hero-door:hover .dp-home-hero-door-name svg,
+.dp-home-hero-door:focus-visible .dp-home-hero-door-name svg {
+  transform: translateX(4px);
+}
+
+.dp-home-hero-door:focus-visible {
+  outline: 2px solid var(--dp-door-accent);
+  outline-offset: 4px;
+}
+
+/* Narrow phones: one door above the other */
+@media (max-width: 480px) {
+  .dp-home-hero-doors {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-home-hero-door-name,
+  .dp-home-hero-door-name svg {
+    transition: none;
+  }
+}
+
 .dp-home-hero .dp-home-hero-description {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.25vw, 19px);
   line-height: 1.6;
   color: var(--dp-text, #4A4A4A);
   max-width: 29em;
-  margin: 0 0 34px 0;
-}
-
-.dp-home-hero-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px 32px;
-}
-
-/* Left foot: the organisations that have booked Don, under a hairline.
-   Every logo is set in the same grey, whatever its own colours. */
-.dp-home-hero-proof {
-  grid-area: proof;
-  /* The logo track is wider than the column; it must not stretch it */
-  min-width: 0;
-  margin-right: var(--dp-hero-gap);
-  padding: 22px 0 clamp(28px, 4.5vh, 48px);
-  border-top: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
-}
-
-.dp-home-hero .dp-home-hero-proof-label {
-  font-family: var(--dp-font-family);
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--dp-text, #4A4A4A);
-  margin: 0 0 18px 0;
+  margin: 0;
 }
 
 /* Right: the blue panel, full height, with the light gathered behind Don's head */
@@ -151,14 +201,13 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
   object-position: 50% 30%;
 }
 
-/* Tablets and phones: text, then the logos, then the panel at full width */
+/* Tablets and phones: the text, then the panel at full width */
 @media (max-width: 991px) {
   .dp-home-hero {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     grid-template-areas:
       "content"
-      "proof"
       "media";
     min-height: 0;
     padding-left: 0;
@@ -170,11 +219,6 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
 
   .dp-home-hero .dp-home-hero-title {
     font-size: clamp(38px, 7vw, 60px);
-  }
-
-  .dp-home-hero-proof {
-    margin: 0 var(--dp-header-gutter, 7vw);
-    padding-bottom: 40px;
   }
 
   .dp-home-hero-media {
@@ -194,11 +238,6 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
     margin-bottom: 20px;
   }
 
-  .dp-home-hero-eyebrow::before {
-    width: 24px;
-    margin-right: 12px;
-  }
-
   .dp-home-hero .dp-home-hero-title {
     font-size: 38px;
     line-height: 1.08;
@@ -207,21 +246,6 @@ Description: Dedicated styles for the Home Page: Hero, The Problem, Speak / Coun
 
   .dp-home-hero .dp-home-hero-description {
     font-size: 16px;
-    margin-bottom: 28px;
-  }
-
-  .dp-home-hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .dp-home-hero .dp-dark-button {
-    justify-content: center;
-  }
-
-  .dp-home-hero .dp-arrow-link {
-    align-self: center;
   }
 
   /* Square on phones, so the portrait keeps its size */

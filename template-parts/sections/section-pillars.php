@@ -18,7 +18,7 @@ $pillars = array(
 	array(
 		'label' => 'Speak',
 		'title' => 'Keynotes that make the meeting.',
-		'text'  => 'More than 700 presentations, including 600 to Vistage CEO groups, on the emotions of leadership, hiring and retaining good people, the stories that run our lives, and what AI is really doing to work. No warmed-over slides. Stories, psychology, and forty years in the trenches.',
+		'text'  => 'More than 700 presentations, including 600 to Vistage CEO groups, on the emotions of leadership, hiring and retaining good people, and the stories that run our lives. No warmed-over slides. Stories, psychology, and forty years in the trenches.',
 		'link'  => 'See the keynotes',
 		'url'   => home_url( '/speaking/' ),
 		'image' => 'asASpeak.webp',
