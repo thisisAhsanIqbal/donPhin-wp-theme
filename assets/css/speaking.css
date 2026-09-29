@@ -1375,6 +1375,22 @@ Loaded only on that page, from functions.php.
   display: block;
 }
 
+/* The three formats, as on the one-sheet: Keynote | Breakout | Executive Session */
+.dp-speak-cta .dp-speak-cta-formats {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--dp-speaking-navy);
+  margin: 0 0 18px 0;
+}
+
+.dp-speak-cta-formats span {
+  color: var(--dp-speaking-blue);
+}
+
 .dp-speak-cta .dp-speak-cta-text {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.35vw, 20px);

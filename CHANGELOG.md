@@ -9,6 +9,35 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.5.0 (2026-09-29)
+
+### Speaking side matches Don's one-sheet (`reference/DonPhinSalesOnStage.docx`)
+- The signature keynote is **Sales on Stage: How Our Stories and Roles Direct the Sale**.
+  The Emotional Edge stays the book (Speaking Resources, About credentials).
+- Speaking hero: "Sales on Stage. How our stories and roles direct the sale." with the
+  one-sheet's pitch ("Buyer and seller walk onto the sales stage…"), replacing the
+  AI-based lines.
+- What Changes After Don Speaks: the one-sheet's six points (including the Coax,
+  Encourage, and Inspire formula), introduced with "Remember… facts tell, and stories sell!"
+- Numbers: 800+ presentations to executives, 16 LinkedIn Learning courses, 40+ years
+  studying human potential, 1M+ professionals reached (was 700+, 40+ years, 1 company
+  built & sold, 1M+).
+- Close: "Book Don for Your Next Sales Meeting", with Keynote | Breakout | Executive Session.
+- Trusted by: the one-sheet's twelve logos (`assets/images/icons/client-*.png`, cut from
+  its logo sheet), shown in soft grey and in full colour on hover.
+- Gateway: the Keynote Speaking card's line is now "Sales on Stage: How Our Stories and
+  Roles Direct the Sale".
+- Speaking About: 800+ presentations, 16 LinkedIn Learning courses, and Sales on Stage as
+  today's signature keynote.
+
+## 1.4.3 (2026-09-29)
+
+### Pages
+- The Journey: the "Between conversations" experiences section ("Conversation.
+  Experience. Reflection. Integration.", its paragraph and the hiking and meditation
+  photos) is removed for now, with its styles, while Don reworks the page. It is in git
+  history, and the photos stay in `assets/images/Journey/`.
+
 ## 1.4.2 (2026-09-29)
 
 ### Design

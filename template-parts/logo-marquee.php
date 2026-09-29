@@ -29,7 +29,7 @@ $icons      = get_stylesheet_directory_uri() . '/assets/images/icons/';
 						<img
 							src="<?php echo esc_url( $icons . $client[1] ); ?>"
 							alt="<?php echo $is_copy ? '' : esc_attr( $client[0] ); ?>"
-							class="dp-logo-mark dp-logo-mark--<?php echo esc_attr( strtolower( $client[0] ) ); ?>"
+							class="dp-logo-mark dp-logo-mark--<?php echo esc_attr( isset( $client[4] ) ? $client[4] : sanitize_title( $client[0] ) ); ?>"
 							width="<?php echo esc_attr( $client[2] ); ?>"
 							height="<?php echo esc_attr( $client[3] ); ?>"
 							decoding="async"

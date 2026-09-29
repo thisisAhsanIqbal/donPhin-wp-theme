@@ -30,7 +30,7 @@ $book_url = home_url( '/speaking/contact/' );
 $credentials = array(
 	'Trial litigator',
 	'Founder, HRThatWorks',
-	'700+ presentations',
+	'800+ presentations',
 	'Author, The Emotional Edge',
 	'Author, The 40//40 Solution',
 );
@@ -39,9 +39,9 @@ $credentials = array(
 $highlights = array(
 	array( '17 yrs', 'Trial Litigator', 'Whistleblower & glass-ceiling employment cases, arguing to juries statewide.' ),
 	array( 'Founder', 'HRThatWorks', 'Built and sold to ThinkHR; served 3,500+ companies.' ),
-	array( '700+', 'Presentations', 'Including 500+ to Vistage CEO groups nationwide.' ),
-	array( '15+', 'LinkedIn Learning Courses', 'Reaching over one million professionals.' ),
-	array( 'Today', 'The Emotional Edge', 'Program and manuscript built around the Victim / Villain / Hero framework.' ),
+	array( '800+', 'Presentations', 'To executives, including 500+ to Vistage CEO groups nationwide.' ),
+	array( '16', 'LinkedIn Learning Courses', 'Reaching over one million professionals.' ),
+	array( 'Today', 'Sales on Stage', 'Signature keynote built around the Victim / Villain / Hero framework.' ),
 	array( 'Author', 'The 40//40 Solution', 'Managing the Emotional Energy of Leadership and Sales.' ),
 );
 ?>
@@ -115,7 +115,7 @@ $highlights = array(
 			</figure>
 
 			<div class="dp-about-arc-today-body">
-				<p class="dp-about-arc-text">Today Don delivers his signature program, <em>The Emotional Edge</em>, to industry groups and company sales teams across the country — still doing what he’s always done: helping people see what’s really driving the room, so they can sell, lead and decide better.</p>
+				<p class="dp-about-arc-text">Today Don delivers his signature keynote, <em>Sales on Stage</em>, to industry groups and company sales teams across the country — still doing what he’s always done: helping people see what’s really driving the room, so they can sell, lead and decide better.</p>
 
 				<blockquote class="dp-about-arc-aside">
 					<p>“Have you ever lost a sale where all the logic was there for it to happen? The reality is, you didn’t lose it logically, you lost it emotionally. As I like to remind folks, <strong>if it doesn’t make sense, don’t try to make sense out of it!</strong>”</p>

@@ -7,8 +7,9 @@
  * then its own (assets/css/journey.css) for the layout.
  *
  * What the year looks like after the Whole Life Assessment: the year built around
- * you, its three parts, the conversations, what happens between them, Don's gift
- * of The Inner Climb, and one line of his to close.
+ * you, its three parts, the conversations, Don's gift of The Inner Climb, and one line
+ * of his to close. (The "Between conversations" experiences section is out while the
+ * page is being reworked; it is in git history.)
  *
  * @package DonPhinEsq
  */
@@ -111,38 +112,6 @@ $topics = array(
 		</ul>
 	</div>
 
-</section>
-
-<section class="dp-jr-between" aria-labelledby="dp-jr-between-title">
-	<div class="dp-jr-between-container">
-		<p class="dp-jr-eyebrow dp-jr-eyebrow--center">Between conversations</p>
-		<h2 id="dp-jr-between-title" class="dp-jr-between-title">Conversation. Experience. Reflection. <em class="dp-jr-accent">Integration.</em></h2>
-		<p class="dp-jr-between-text">Between conversations, I may curate an experience specifically for you — something designed to provoke reflection, discovery or change. Purpose, relationships, health and spirit aren’t four retreat topics. They weave through everything we do together.</p>
-	</div>
-
-	<!-- Two of the experiences: out on the trail, and in stillness -->
-	<div class="dp-jr-between-photos">
-		<?php
-		$experiences = array(
-			array( 'phin-hiking', 'Don Phin hiking a mountain trail with a small group, smiling' ),
-			array( 'phin-meditating', 'Don Phin meditating cross-legged on a wooden deck above a misty valley' ),
-		);
-		foreach ( $experiences as $experience ) :
-			?>
-			<figure class="dp-jr-between-photo">
-				<img
-					src="<?php echo esc_url( $images . $experience[0] . '-800.webp' ); ?>"
-					srcset="<?php echo esc_attr( $images . $experience[0] . '-800.webp 800w, ' . $images . $experience[0] . '.webp 1376w' ); ?>"
-					sizes="(max-width: 640px) 100vw, 480px"
-					alt="<?php echo esc_attr( $experience[1] ); ?>"
-					width="1376"
-					height="768"
-					loading="lazy"
-					decoding="async"
-				/>
-			</figure>
-		<?php endforeach; ?>
-	</div>
 </section>
 
 <section class="dp-jr-gift" aria-labelledby="dp-jr-gift-title">

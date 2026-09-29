@@ -56,22 +56,24 @@ $stories = array(
 	),
 );
 
+// What changes after Don speaks, as on his Sales on Stage one-sheet
 $changes = array(
-	'Build trust faster and listen in ways buyers recognize',
-	'Replace pressure and defensiveness with curiosity',
-	'Recognize the hidden Victim / Villain / Hero story shaping the sale',
-	'Handle resistance calmly and compete on relationships, not price',
-	'Use technology without surrendering the human advantage',
+	'Awareness of the deep emotional dynamics beneath the sale',
+	'Recognize the stories and roles shaping the sale — how Victim, Villain, and Hero stories affect how both buyer and seller show up',
+	'Build trust faster through curiosity and deeper listening',
+	'Know how you can both be heroes in the sales story',
+	'Have a plan for how you’re going to show up emotionally',
+	'Use the Coax, Encourage, and Inspire formula to help everyone move forward with greater confidence and ownership',
 );
 
 // Each program is a format, a title, the promise under the title, then the description
 $programs = array(
 	array(
 		'format'   => 'Signature keynote',
-		'title'    => 'The Emotional Edge',
-		'subtitle' => 'Why Relationships Have Become the Last Competitive Advantage',
+		'title'    => 'Sales on Stage',
+		'subtitle' => 'How Our Stories and Roles Direct the Sale',
 		'text'     => array(
-			'A highly interactive keynote revealing the emotional conversation behind every sale — and how trust, curiosity and human connection create commitment.',
+			'A highly interactive keynote revealing the hidden roles and stories behind every sale — and how we can both be heroes in the sales process.',
 			'Don shows the room exactly which Victim, Villain, or Hero story is running underneath their own deals — and how to shift it.',
 		),
 	),
@@ -98,19 +100,19 @@ $programs = array(
 // 'value' is set large, 'suffix' in blue beside it
 $stats = array(
 	array(
-		'value'  => '700',
+		'value'  => '800',
 		'suffix' => '+',
-		'label'  => 'Presentations delivered',
+		'label'  => 'Presentations to executives',
+	),
+	array(
+		'value'  => '16',
+		'suffix' => '',
+		'label'  => 'LinkedIn Learning courses',
 	),
 	array(
 		'value'  => '40',
 		'suffix' => '+',
-		'label'  => 'Years on the human side of business',
-	),
-	array(
-		'value'  => '1',
-		'suffix' => '',
-		'label'  => 'Company built & sold',
+		'label'  => 'Years studying human potential',
 	),
 	array(
 		'value'  => '1M',
@@ -150,14 +152,14 @@ $testimonials = array(
 		<p class="dp-speak-eyebrow">For meeting planners, sales leaders &amp; industry sales groups</p>
 
 		<h1 id="dp-speak-title" class="dp-speak-title">
-			Relationships are <em class="dp-speak-title-accent">the last competitive advantage.</em>
+			Sales on Stage. <em class="dp-speak-title-accent">How our stories and roles direct the sale.</em>
 		</h1>
 
 		<div class="dp-speak-hero-intro">
-			<p class="dp-speak-hero-lead">AI can explain your product. It can’t create trust.</p>
+			<p class="dp-speak-hero-lead">Buyer and seller walk onto the sales stage with stories already playing in their heads.</p>
 
 			<p class="dp-speak-hero-body">
-				Today’s buyers arrive informed, researched, compared and AI-briefed. They don’t need another presentation. They need confidence that your salesperson understands them, their business and what’s really at stake.
+				Those stories shape the roles they play, the emotions they bring, and what happens next. Change the story, and you can change the sale.
 			</p>
 		</div>
 
@@ -263,7 +265,7 @@ $testimonials = array(
 		<header class="dp-speak-changes-head">
 			<h2 id="dp-speak-changes-title" class="dp-speak-changes-title">What Changes After Don Speaks</h2>
 			<p class="dp-speak-changes-intro">
-				Today’s buyer has already done the research. What they haven’t done is <em class="dp-speak-accent">decide whether to trust you.</em>
+				Remember… <em class="dp-speak-accent">facts tell, and stories sell!</em>
 			</p>
 		</header>
 
@@ -385,9 +387,11 @@ $testimonials = array(
 		<span class="dp-speak-cta-rule" aria-hidden="true"></span>
 
 		<h2 id="dp-speak-cta-title" class="dp-speak-cta-title">
-			<span class="dp-speak-cta-line">Bring Don</span>
-			<em class="dp-speak-cta-line dp-speak-accent">to Your Stage</em>
+			<span class="dp-speak-cta-line">Book Don for Your</span>
+			<em class="dp-speak-cta-line dp-speak-accent">Next Sales Meeting</em>
 		</h2>
+
+		<p class="dp-speak-cta-formats">Keynote<span aria-hidden="true"> | </span>Breakout<span aria-hidden="true"> | </span>Executive Session</p>
 
 		<p class="dp-speak-cta-text">
 			Tell me about your meeting, your audience, and what you want the room to walk away believing.

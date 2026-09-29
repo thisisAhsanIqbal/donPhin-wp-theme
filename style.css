@@ -5,7 +5,7 @@ Description: Custom professional Kadence child theme for Don Phin, Esq. featurin
 Author: Kadence WP / Custom
 Author URI: https://www.donphin.com/
 Template: kadence
-Version: 1.4.2
+Version: 1.5.0
 Text Domain: don-phin-esq
 */
 
@@ -922,34 +922,36 @@ a.dp-light-button:focus-visible svg {
   padding-right: clamp(32px, 3.4vw, 56px);
 }
 
-/* Every logo in the same grey, whatever its own colours */
+/* Every logo in soft grey so the row reads as one, coming to full colour on hover
+   (grey rather than a silhouette: several marks are colour badges with cut-out letters) */
 .dp-logo-mark {
   display: block;
   width: auto;
-  height: 20px;
-  filter: brightness(0);
-  opacity: 0.48;
-  transition: opacity 0.2s ease;
+  height: 40px;
+  filter: grayscale(1) contrast(1.05);
+  opacity: 0.62;
+  transition: opacity 0.25s ease, filter 0.25s ease;
 }
 
 .dp-logo-mark:hover {
-  opacity: 0.8;
+  filter: none;
+  opacity: 1;
 }
 
-/* SHRM's mark is white letters cut out of coloured blocks, which would fill in solid;
-   in grey it stays a readable badge */
-.dp-logo-mark--shrm {
-  filter: grayscale(1) contrast(1.3);
-  opacity: 0.55;
-}
-
-/* Heights balanced by eye, as the marks are very different shapes */
-.dp-logo-mark--vistage { height: 16px; }
-.dp-logo-mark--shrm    { height: 28px; }
-.dp-logo-mark--adp     { height: 20px; }
-.dp-logo-mark--basf    { height: 16px; }
-.dp-logo-mark--emc     { height: 18px; }
-.dp-logo-mark--avetta  { height: 14px; }
+/* Heights balanced by eye, as the marks are very different shapes: wide wordmarks
+   lower, tall badges higher */
+.dp-logo-mark--vistage,
+.dp-logo-mark--resourcepro { height: 24px; }
+.dp-logo-mark--american-academy,
+.dp-logo-mark--awi,
+.dp-logo-mark--aamga       { height: 34px; }
+.dp-logo-mark--adp         { height: 32px; }
+.dp-logo-mark--pihra,
+.dp-logo-mark--hhrabc,
+.dp-logo-mark--embassy-suites,
+.dp-logo-mark--shrm,
+.dp-logo-mark--avetta,
+.dp-logo-mark--arcsi       { height: 44px; }
 
 @media (max-width: 640px) {
   .dp-logo-list li {

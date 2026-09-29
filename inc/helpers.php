@@ -47,17 +47,25 @@ function donphin_social_links() {
 
 /**
  * The organisations that have booked Don: name, file in assets/images/icons/, and the
- * file's own width and height (so the row doesn't shift as the logos load).
+ * file's own width and height (so the row doesn't shift as the logos load), and the
+ * key its size in the marquee is balanced by (style.css, .dp-logo-mark--{key}).
+ * The twelve from Don's Sales on Stage one-sheet, in its order.
  * Shown in the logo marquee (template-parts/logo-marquee.php).
  */
 function donphin_client_logos() {
 	return array(
-		array( 'Vistage', 'vistage-logo.svg', 603, 116 ),
-		array( 'SHRM', 'SHRM-logo.svg', 605, 346 ),
-		array( 'ADP', 'adp-logo.svg', 2500, 1140 ),
-		array( 'BASF', 'basf-logo.svg', 138, 29 ),
-		array( 'EMC', 'emc-logo.svg', 219, 77 ),
-		array( 'Avetta', 'avetta-logo.svg', 196, 30 ),
+		array( 'American Academy of Estate Planning Attorneys', 'client-american-academy.png', 189, 60, 'american-academy' ),
+		array( 'ADP', 'client-adp.png', 190, 67, 'adp' ),
+		array( 'Avetta', 'client-avetta.png', 198, 105, 'avetta' ),
+		array( 'PIHRA, Professionals in Human Resources Association', 'client-pihra.png', 147, 101, 'pihra' ),
+		array( 'Vistage', 'client-vistage.png', 190, 37, 'vistage' ),
+		array( 'Association of Workplace Investigators', 'client-awi.png', 184, 51, 'awi' ),
+		array( 'HHRABC', 'client-hhrabc.png', 128, 105, 'hhrabc' ),
+		array( 'Embassy Suites by Hilton', 'client-embassy-suites.png', 128, 101, 'embassy-suites' ),
+		array( 'ARCSI, a division of ISSA', 'client-arcsi.png', 192, 90, 'arcsi' ),
+		array( 'AAMGA, American Association of Managing General Agents', 'client-aamga.png', 144, 58, 'aamga' ),
+		array( 'ReSource Pro', 'client-resourcepro.png', 198, 40, 'resourcepro' ),
+		array( 'SHRM', 'client-shrm.png', 166, 96, 'shrm' ),
 	);
 }
 

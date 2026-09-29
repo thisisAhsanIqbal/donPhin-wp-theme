@@ -38,7 +38,7 @@ $doors = array(
 	array(
 		'section' => 'speaking',
 		'title'   => 'Keynote Speaking',
-		'line'    => 'Mastering the Emotional Edge',
+		'line'    => 'Sales on Stage: How Our Stories and Roles Direct the Sale',
 		'image'   => 'speaking',
 		'full'    => 1400,
 		'alt'     => 'Don Phin on stage at a podium, hand raised to the audience',
