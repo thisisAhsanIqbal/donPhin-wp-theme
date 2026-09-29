@@ -1115,3 +1115,22 @@ a.dp-light-button:focus-visible svg {
     transition: none;
   }
 }
+
+/* ==========================================================================
+   11. PAGE TRANSITIONS (a soft fade on arrival: links work as normal, so the old
+       page stays up until the new one is ready and the screen is never blank; the
+       new page's content arrives slightly faded and settles in. The header stays
+       solid throughout. inc/page-transitions.php and assets/js/page-transitions.js)
+   ========================================================================== */
+/* Only once the head script has added .dp-fade, so without JavaScript the content
+   simply shows. It never starts invisible: 60% is enough to read as a settle, not a flash. */
+html.dp-fade #inner-wrap,
+html.dp-fade .dp-footer {
+  opacity: 0.6;
+  transition: opacity 0.35s ease-out;
+}
+
+html.dp-fade.dp-fade-in #inner-wrap,
+html.dp-fade.dp-fade-in .dp-footer {
+  opacity: 1;
+}

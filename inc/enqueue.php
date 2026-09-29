@@ -90,6 +90,9 @@ function donphin_enqueue_scripts() {
 	donphin_enqueue_asset( 'js', 'header' );
 	donphin_enqueue_asset( 'js', 'reveal' );
 
+	// A soft fade as each page arrives (see inc/page-transitions.php)
+	donphin_enqueue_asset( 'js', 'page-transitions' );
+
 	// The section's palette and header colours, on every page of the section
 	$sections   = donphin_sections();
 	$stylesheet = $sections[ donphin_get_header_section() ]['stylesheet'];
