@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Every section, in the order of the header tabs.
  *
  * label      The tab's name.
+ * tagline    One short line about the section, for places that offer a choice of
+ *            sections (the For You 404 page).
  * home       The section's home page.
  * slug       The home page's slug. Pages filed under it belong to the section.
  * aliases    Other names the section answers to (?header=..., older settings).
@@ -39,6 +41,7 @@ function donphin_sections() {
 	return array(
 		'foryou'   => array(
 			'label'      => 'For You',
+			'tagline'    => '',
 			'home'       => '/',
 			'slug'       => '',
 			'aliases'    => array( 'for-you' ),
@@ -47,7 +50,6 @@ function donphin_sections() {
 			'stylesheet' => '',
 			'menu'       => array(
 				array( 'About', '/speaking/about/' ),
-				array( "40|\u{2009}|40", '/purchase-the-40-40-solution/', 'The 40|40 Solution' ), // a thin space between the bars
 				array( 'Tools', '/free-tools/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
@@ -55,6 +57,7 @@ function donphin_sections() {
 		),
 		'counsel'  => array(
 			'label'      => 'Private counsel',
+			'tagline'    => 'A year built around you, a few men at a time.',
 			'home'       => '/private-counsel/',
 			'slug'       => 'private-counsel',
 			'aliases'    => array( 'private', 'counsel' ),
@@ -72,17 +75,18 @@ function donphin_sections() {
 		),
 		'speaking' => array(
 			'label'      => 'Speaking',
+			'tagline'    => 'Keynotes and workshops for your sales team or event.',
 			'home'       => '/speaking/',
 			'slug'       => 'speaking',
 			'aliases'    => array(),
 			'pages'      => array(),
-			'templates'  => array( 'page-speaking.php', 'page-speaking-about.php', 'page-speaking-contact.php' ),
+			'templates'  => array( 'page-speaking.php', 'page-speaking-about.php', 'page-speaking-contact.php', 'page-purchase-the-40-40-solution.php' ),
 			'stylesheet' => 'speaking',
 			'menu'       => array(
 				array( 'Home', '/speaking/', 'Speaking home' ),
 				array( 'About', '/speaking/about/' ),
 				array( 'Resources', '/speaking/resources/' ),
-				array( 'The 40//40 Solution', '/purchase-the-40-40-solution/' ),
+				array( 'The 40//40 Solution', '/speaking/purchase-the-40-40-solution/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
 			'cta'        => array( 'Book Don', '/speaking/contact/', 'calendar' ),

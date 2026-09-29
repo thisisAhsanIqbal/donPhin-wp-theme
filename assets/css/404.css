@@ -16,8 +16,8 @@ colour of the section the visitor was in, with that section's accent. Loaded onl
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 85vh;
+  min-height: 85svh;
   background-color: var(--dp-404-wash);
   color: var(--dp-white, #FFFFFF);
   overflow: hidden;
@@ -39,20 +39,22 @@ colour of the section the visitor was in, with that section's accent. Loaded onl
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url("../images/asASpeak.webp");
+  /* Don on stage, thinking, on the right; the open curtain on the left takes the words */
+  background-image: url("../images/404.webp");
   background-repeat: no-repeat;
   background-size: cover;
-  /* Keeps Don and the podium in frame when the tall photo is cropped wide */
-  background-position: 68% 45%;
+  /* Keeps Don's head in frame when the photo is cropped to the screen */
+  background-position: 80% 25%;
 }
 
-/* Ink wash, heavier on the left where the words sit */
+/* The section's colour washed over the photo: deep on the left where the words sit,
+   thinning out on the right so Don shows clearly */
 .dp-404::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-404-wash) 94%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 86%, transparent) 45%, color-mix(in srgb, var(--dp-404-wash) 60%, transparent) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-404-wash) 92%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 78%, transparent) 42%, color-mix(in srgb, var(--dp-404-wash) 22%, transparent) 72%, color-mix(in srgb, var(--dp-404-wash) 10%, transparent) 100%);
 }
 
 .dp-404-container {
@@ -81,11 +83,15 @@ colour of the section the visitor was in, with that section's accent. Loaded onl
 
 .dp-404 .dp-404-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(38px, 5vw, 84px);
+  font-size: clamp(36px, 3.6vw, 66px);
   font-weight: 600;
   line-height: 1.04;
   letter-spacing: -0.025em;
+  text-wrap: balance;
   color: var(--dp-white, #FFFFFF);
+  /* Kept to the left half, clear of Don on the right of the photo: each sentence on
+     one line on large screens, wrapping neatly before him on smaller ones */
+  max-width: min(16.5em, 60vw);
   margin: 0 0 28px 0;
 }
 
@@ -112,15 +118,15 @@ colour of the section the visitor was in, with that section's accent. Loaded onl
 }
 
 @media (max-width: 767px) {
-  /* Phones and small tablets get the photo framed for them, rather than a wide crop */
+  /* Phones and small tablets: the same photo, held on Don */
   .dp-404::before {
-    background-image: url("../images/asASpeakerMobile.webp");
-    background-position: center center;
+    background-position: 84% 20%;
   }
 
-  /* Lighter than the desktop wash, so the photo still reads behind the words */
+  /* The words cover most of a narrow screen, so the wash is even from top to bottom,
+     a little lighter at the top where Don's face shows */
   .dp-404::after {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--dp-404-wash) 72%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 80%, transparent) 60%, color-mix(in srgb, var(--dp-404-wash) 88%, transparent) 100%);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--dp-404-wash) 70%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 84%, transparent) 45%, color-mix(in srgb, var(--dp-404-wash) 90%, transparent) 100%);
   }
 }
 
@@ -146,4 +152,123 @@ colour of the section the visitor was in, with that section's accent. Loaded onl
 .dp-404 a.dp-light-button:focus-visible {
   color: var(--dp-404-wash);
   background-color: var(--dp-404-accent);
+}
+
+/* ==========================================================================
+   THE TWO PATHS (For You only: someone who arrived from nowhere in particular
+   picks the side of the site they came for; each card edged in its section's colour)
+   ========================================================================== */
+.dp-404-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 760px;
+  list-style: none;
+  margin: 0 0 32px 0;
+  padding: 0;
+}
+
+.dp-404-paths li {
+  margin: 0;
+}
+
+.dp-404-path {
+  --dp-404-path-accent: var(--dp-404-accent);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 22px 24px 24px;
+  color: var(--dp-white, #FFFFFF);
+  text-decoration: none;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-top: 2px solid var(--dp-404-path-accent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+/* Each section's own colour, the same as its header button and accents */
+.dp-404-path--speaking {
+  --dp-404-path-accent: var(--dp-speaking-gold, #F2B035);
+}
+
+.dp-404-path--counsel {
+  --dp-404-path-accent: var(--dp-private-counsel-bronze-light, #CDB595);
+}
+
+.dp-404-path:hover,
+.dp-404-path:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  background-color: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: var(--dp-404-path-accent);
+  transform: translateY(-2px);
+}
+
+.dp-404-path:focus-visible {
+  outline: 2px solid var(--dp-404-path-accent);
+  outline-offset: 3px;
+}
+
+.dp-404-path-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 1.8vw, 26px);
+  line-height: 1.15;
+  color: var(--dp-404-path-accent);
+}
+
+.dp-404-path-name svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.dp-404-path:hover .dp-404-path-name svg,
+.dp-404-path:focus-visible .dp-404-path-name svg {
+  transform: translateX(4px);
+}
+
+.dp-404-path-line {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* The quieter way home, under the two paths */
+.dp-404 a.dp-404-home {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.dp-404 a.dp-404-home:hover,
+.dp-404 a.dp-404-home:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 640px) {
+  .dp-404-paths {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-404-path,
+  .dp-404-path-name svg {
+    transition: none;
+  }
+
+  .dp-404-path:hover,
+  .dp-404-path:focus-visible {
+    transform: none;
+  }
 }

@@ -2,7 +2,8 @@
 /**
  * Template Name: The 40|40 Solution Page
  *
- * Used automatically by the page with the slug "purchase-the-40-40-solution".
+ * Used automatically by the page with the slug "purchase-the-40-40-solution", filed
+ * under Speaking (/speaking/purchase-the-40-40-solution/). Part of the Speaking section.
  *
  * The video shows a still image until it is clicked, so YouTube is only contacted
  * for people who actually watch (see assets/js/book.js). Without JavaScript the

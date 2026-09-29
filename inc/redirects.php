@@ -24,6 +24,9 @@ function donphin_redirects() {
 		'about-don-phin' => '/speaking/about/',
 		'contact'        => '/speaking/contact/',
 
+		// The 40|40 Solution moved into the Speaking section
+		'purchase-the-40-40-solution' => '/speaking/purchase-the-40-40-solution/',
+
 		// The Journey moved into the Private Counsel section
 		'the-journey'    => '/private-counsel/the-journey/',
 		'journey'        => '/private-counsel/the-journey/',

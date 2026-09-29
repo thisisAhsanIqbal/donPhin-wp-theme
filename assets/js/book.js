@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const SLIDE = 600; // a shade longer than the CSS transition
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // The strip of names that scrolls sideways on narrow screens
+    const strip = names[0].parentElement;
     let index = 0;
     let timer = null;
     let startedAt = 0;
@@ -26,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let held = false;
     let hovering = false;
     let focused = false;
+    // Only turns while the quotes are on screen (see checkView below)
+    let inView = false;
     let settle = null;
 
     // Kept in the stylesheet so the bar and the wait are the same length
@@ -61,11 +65,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (now) now.textContent = ('0' + (index + 1)).slice(-2);
 
-      names[index].scrollIntoView({
-        behavior: calm.matches ? 'auto' : 'smooth',
-        inline: 'center',
-        block: 'nearest',
-      });
+      centreName();
+    }
+
+    // Bring the current name to the middle of its strip by scrolling the strip
+    // sideways, never the page: scrollIntoView would also pull the whole page to
+    // the testimonials each time a quote turned over
+    function centreName() {
+      if (strip.scrollWidth <= strip.clientWidth) return;
+      const name = names[index].getBoundingClientRect();
+      const box = strip.getBoundingClientRect();
+      const offset = (name.left - box.left) - (box.width - name.width) / 2;
+      strip.scrollBy({ left: offset, behavior: calm.matches ? 'auto' : 'smooth' });
     }
 
     // Wind the bar back to nothing and let it fill again from the start
@@ -129,15 +140,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Paused while the pointer is on it or a button in it has the focus, so
-    // clicking an arrow does not set it running again the moment you move away
+    // clicking an arrow does not set it running again the moment you move away;
+    // and while it is off screen, so nothing changes (or changes height) out of sight
     function hold() {
-      const state = hovering || focused;
+      const state = hovering || focused || !inView;
       if (held === state) return;
       held = state;
       section.classList.toggle('is-held', state);
       if (state) {
         stopTimer();
       } else {
+        // The first time it comes into view, the bar starts filling from empty
+        if (!section.classList.contains('is-running')) restartBar();
         startTimer();
       }
     }
@@ -161,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
       e.preventDefault();
       go(index + (e.key === 'ArrowRight' ? 1 : -1));
-      names[index].focus();
+      names[index].focus({ preventScroll: true });
     });
 
     // A swipe across the quote itself, for phones
@@ -258,7 +272,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nav.hidden = false;
     rail.hidden = false;
-    restartBar();
-    startTimer(delay());
+
+    // It waits, still, until the quotes are at least partly on screen, then turns
+    // over on its own; scrolled away, it waits again where it left off
+    remaining = delay();
+    hold();
+    if (!held) {
+      restartBar();
+      startTimer(delay());
+    }
+
+    // On screen means at least 40% of it showing, or 40% of the screen filled by it
+    // for a section taller than the screen. Checked on scroll rather than with an
+    // IntersectionObserver, which (as reveal.js found) can miss the change here.
+    let checking = false;
+    function checkView() {
+      checking = false;
+      const box = section.getBoundingClientRect();
+      const screen = window.innerHeight || document.documentElement.clientHeight;
+      const showing = Math.min(box.bottom, screen) - Math.max(box.top, 0);
+      const now = showing > 0 && showing >= 0.4 * Math.min(box.height, screen);
+      if (now !== inView) {
+        inView = now;
+        hold();
+      }
+    }
+
+    function queueCheck() {
+      if (checking) return;
+      checking = true;
+      window.requestAnimationFrame(checkView);
+    }
+
+    window.addEventListener('scroll', queueCheck, { passive: true });
+    window.addEventListener('resize', queueCheck);
+    checkView();
   });
 });
