@@ -394,7 +394,7 @@ $testimonials = array(
 		</p>
 
 		<div class="dp-speak-cta-actions">
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-dark-button dp-speak-cta-button">
+			<a href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>" class="dp-dark-button dp-speak-cta-button">
 				Start a conversation
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>

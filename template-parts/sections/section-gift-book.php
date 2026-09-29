@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</p>
 
 				<div class="dp-giftbook-action-wrap">
-					<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-giftbook-cta-btn">
+					<a href="<?php echo esc_url( home_url( '/private-counsel/contact/' ) ); ?>" class="dp-giftbook-cta-btn">
 						REQUEST YOUR COPY
 					</a>
 					<span class="dp-giftbook-delivery-tag">

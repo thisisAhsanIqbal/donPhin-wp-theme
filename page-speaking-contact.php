@@ -1,9 +1,11 @@
 <?php
 /**
- * Template Name: Contact Page
+ * Template Name: Speaking — Contact
  *
- * Used automatically by the page with the slug "contact".
- * Details on the left, the form on the right. Messages are handled in inc/contact-form.php.
+ * The booking page for the Speaking section (/speaking/contact/), for event planners
+ * and sales leaders. Assign it to the "Contact" page filed under Speaking.
+ * The pitch and direct details on the left, the booking form on the right: the event,
+ * its date, audience size and location. Messages are handled in inc/contact-form.php.
  *
  * @package DonPhinEsq
  */
@@ -14,85 +16,98 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$socials = donphin_social_links();
-$topics  = donphin_contact_topics();
-
-// Result of a submitted message, set by the redirect in inc/contact-form.php
+// Result of a submitted form, set by the redirect in inc/contact-form.php
 $contact_status = isset( $_GET['contact'] ) ? sanitize_key( wp_unslash( $_GET['contact'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
-// Links can open the form on a topic, e.g. /contact/?topic=counsel from the Private Counsel page
-$chosen_topic = isset( $_GET['topic'] ) ? sanitize_key( wp_unslash( $_GET['topic'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+// Rough audience sizes, enough to plan the room, as value => label (the values stay
+// plain text so they reach the inbox unchanged whatever the visitor's browser sends)
+$audience_sizes = array(
+	'Under 50'  => 'Under 50',
+	'50-150'    => '50–150',
+	'150-500'   => '150–500',
+	'500-1,000' => '500–1,000',
+	'1,000+'    => '1,000+',
+);
 ?>
 
-<section class="dp-contact" aria-labelledby="dp-contact-title">
+<section class="dp-contact dp-contact--speaking" aria-labelledby="dp-contact-title">
 	<div class="dp-contact-container">
 
 		<div class="dp-contact-intro">
+			<p class="dp-contact-eyebrow">Book Don</p>
+
 			<h1 id="dp-contact-title" class="dp-contact-title">
-				<span class="dp-contact-line">Tell me what’s going on.</span>
-				<em class="dp-contact-line dp-contact-accent">You’ll know fast if I can help.</em>
+				<span class="dp-contact-line">Bring Don</span>
+				<em class="dp-contact-line dp-contact-accent">to your stage.</em>
 			</h1>
 
 			<p class="dp-contact-text">
-				Booking a keynote or considering private counsel — it all starts the same way. If I’m not the right person, I probably know who is.
+				Tell me about your meeting, your audience, and what you want the room to walk away believing.
 			</p>
 
-			<p class="dp-contact-book">
-				<a href="https://scheduler.zoom.us/don-phin/30-mins-w-don" class="dp-arrow-link" target="_blank" rel="noopener" aria-label="<?php esc_attr_e( 'Book a Zoom with Don (opens in a new tab)', 'don-phin-esq' ); ?>">
-					Book a Zoom
-					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
-				</a>
-			</p>
-
-			<address class="dp-contact-details">
-				<a href="tel:+16198524580">(619) 852-4580</a>
-				<span class="dp-contact-sep" aria-hidden="true">·</span>
-				<a href="mailto:don@donphin.com">don@donphin.com</a>
-			</address>
-
-			<ul class="dp-contact-social">
-				<?php foreach ( $socials as $key => $social ) : ?>
-					<li>
-						<a href="<?php echo esc_url( $social['url'] ); ?>" class="dp-contact-social-link dp-contact-social-link--<?php echo esc_attr( $key ); ?>" target="_blank" rel="me noopener" aria-label="<?php echo esc_attr( sprintf( 'Don Phin on %s (opens in a new tab)', $social['label'] ) ); ?>">
-							<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="<?php echo esc_attr( $social['path'] ); ?>"/></svg>
-						</a>
-					</li>
-				<?php endforeach; ?>
-			</ul>
+			<?php get_template_part( 'template-parts/contact-details' ); ?>
 		</div>
 
 		<div class="dp-contact-card" id="contact-form">
 			<form class="dp-contact-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
 				<input type="hidden" name="action" value="donphin_contact">
+				<input type="hidden" name="form" value="speaking">
 
 				<?php if ( 'sent' === $contact_status ) : ?>
-					<p class="dp-contact-status is-sent" role="status">Thanks — your message is on its way to Don.</p>
+					<p class="dp-contact-status is-sent" role="status">Thanks — the details are on their way to Don.</p>
 				<?php elseif ( 'invalid' === $contact_status ) : ?>
-					<p class="dp-contact-status is-invalid" role="alert">Something was missing. Please check your name, email and message, then try again.</p>
+					<p class="dp-contact-status is-invalid" role="alert">Something was missing. Please check your name, email and the event name, then try again.</p>
 				<?php endif; ?>
 
+				<div class="dp-contact-row">
+					<p class="dp-contact-field">
+						<label for="dp-contact-name">Your name</label>
+						<input type="text" id="dp-contact-name" name="name" autocomplete="name" required>
+					</p>
+
+					<p class="dp-contact-field">
+						<label for="dp-contact-email">Email address</label>
+						<input type="email" id="dp-contact-email" name="email" autocomplete="email" required>
+					</p>
+				</div>
+
+				<div class="dp-contact-row">
+					<p class="dp-contact-field">
+						<label for="dp-contact-organization">Organization <span class="dp-contact-optional">(optional)</span></label>
+						<input type="text" id="dp-contact-organization" name="organization" autocomplete="organization">
+					</p>
+
+					<p class="dp-contact-field">
+						<label for="dp-contact-event">Event name</label>
+						<input type="text" id="dp-contact-event" name="event_name" required>
+					</p>
+				</div>
+
+				<div class="dp-contact-row">
+					<p class="dp-contact-field">
+						<label for="dp-contact-date">Event date</label>
+						<input type="text" id="dp-contact-date" name="event_date" placeholder="e.g. March 12, 2027, or spring 2027">
+					</p>
+
+					<p class="dp-contact-field">
+						<label for="dp-contact-audience">Audience size</label>
+						<select id="dp-contact-audience" name="audience_size">
+							<option value="">Choose one</option>
+							<?php foreach ( $audience_sizes as $value => $label ) : ?>
+								<option value="<?php echo esc_attr( $value ); ?>"><?php echo esc_html( $label ); ?></option>
+							<?php endforeach; ?>
+						</select>
+					</p>
+				</div>
+
 				<p class="dp-contact-field">
-					<label for="dp-contact-name">Your name</label>
-					<input type="text" id="dp-contact-name" name="name" autocomplete="name" required>
+					<label for="dp-contact-location">Location</label>
+					<input type="text" id="dp-contact-location" name="location" placeholder="City, or virtual">
 				</p>
 
 				<p class="dp-contact-field">
-					<label for="dp-contact-email">Email address</label>
-					<input type="email" id="dp-contact-email" name="email" autocomplete="email" required>
-				</p>
-
-				<p class="dp-contact-field">
-					<label for="dp-contact-topic">What is this about?</label>
-					<select id="dp-contact-topic" name="topic">
-						<?php foreach ( $topics as $value => $label ) : ?>
-							<option value="<?php echo esc_attr( $value ); ?>"<?php selected( $chosen_topic, $value ); ?>><?php echo esc_html( $label ); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</p>
-
-				<p class="dp-contact-field">
-					<label for="dp-contact-message">What’s going on?</label>
-					<textarea id="dp-contact-message" name="message" rows="6" required></textarea>
+					<label for="dp-contact-message">Anything else Don should know? <span class="dp-contact-optional">(optional)</span></label>
+					<textarea id="dp-contact-message" name="message" rows="5"></textarea>
 				</p>
 
 				<!-- Hidden from people; bots that fill it in are ignored -->
@@ -102,7 +117,7 @@ $chosen_topic = isset( $_GET['topic'] ) ? sanitize_key( wp_unslash( $_GET['topic
 				</div>
 
 				<button type="submit" class="dp-dark-button dp-contact-button">
-					Send it to Don
+					Send the details
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</button>
 			</form>

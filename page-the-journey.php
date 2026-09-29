@@ -21,8 +21,8 @@ get_header();
 
 $images = get_stylesheet_directory_uri() . '/assets/images/Journey/';
 
-// The book request opens the contact form with "Private counsel" already chosen
-$request_url = add_query_arg( 'topic', 'counsel', home_url( '/contact/' ) );
+// The book request goes to Private Counsel's own contact page
+$request_url = home_url( '/private-counsel/contact/' );
 
 // The three parts of the year
 $parts = array(

@@ -35,7 +35,7 @@ $youtube = donphin_social_links()['youtube'];
 		</p>
 
 		<div class="dp-home-hero-actions">
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-dark-button">
+			<a href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>" class="dp-dark-button">
 				Talk to Don
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>

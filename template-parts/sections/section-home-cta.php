@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			Booking a speaker or considering private counsel — it all starts the same way. Tell me what’s going on. If I’m the right person, you’ll know fast. If I’m not, I probably know who is.
 		</p>
 
-		<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-dark-button dp-home-cta-button">
+		<a href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>" class="dp-dark-button dp-home-cta-button">
 			Book a conversation
 			<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 		</a>

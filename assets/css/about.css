@@ -1,21 +1,25 @@
 /*
 Theme: Don Phin, Esq.
-Page: About (page-about.php)
-Description: The About page in navy, antique gold and warm cream: the portrait beside the
+Page: Speaking — About (page-speaking-about.php, at /speaking/about/)
+Description: The About page for event planners and sales leaders: the portrait beside the
 headline and credentials, the arc with two pull quotes, the highlights on navy, a word
-from the room, and the closing invitation. Loaded only on that page, from functions.php.
+from the room, and the closing invitation. Loads after speaking.css (functions.php), and
+takes its colours from the Speaking palette there.
 */
 
 /* ==========================================================================
    0. TOKENS AND SHARED PIECES
    ========================================================================== */
 :root {
-  --dp-about-navy: #1B2738;       /* highlights, closing band, tags, headings */
-  --dp-about-gold: #A68252;       /* rules, the button */
-  --dp-about-gold-ink: #86673C;   /* small gold type on cream (AA contrast) */
-  --dp-about-gold-light: #D2B27F; /* gold type on navy */
-  --dp-about-cream: #FAF7F2;      /* page background */
-  --dp-about-text: #3E4652;       /* body copy on cream */
+  /* The page's roles, filled from the Speaking palette (the values after the commas
+     are the same colours, should speaking.css ever be missing) */
+  --dp-about-navy: var(--dp-speaking-navy, #12284A);        /* highlights, closing band, tags, headings */
+  --dp-about-gold: var(--dp-speaking-gold, #F2B035);        /* rules, the button */
+  --dp-about-gold-ink: var(--dp-speaking-blue, #1E5AA8);    /* small accent type on paper (gold is too light there) */
+  --dp-about-gold-light: var(--dp-speaking-gold, #F2B035);  /* gold type on navy */
+  --dp-about-hover: var(--dp-speaking-orange, #E8952C);     /* hover on anything gold */
+  --dp-about-cream: var(--dp-speaking-paper, #F8F6F1);      /* page background */
+  --dp-about-text: #3E4652;                                 /* body copy on paper */
 }
 
 /* Small tracked label in gold */
@@ -167,7 +171,7 @@ from the room, and the closing invitation. Loaded only on that page, from functi
 .dp-about-section-rule {
   flex: 1;
   height: 1px;
-  background-color: rgba(166, 130, 82, 0.5);
+  background-color: color-mix(in srgb, var(--dp-about-gold) 50%, transparent);
 }
 
 /* ==========================================================================
@@ -176,7 +180,7 @@ from the room, and the closing invitation. Loaded only on that page, from functi
    ========================================================================== */
 .dp-about-arc {
   background-color: var(--dp-about-cream);
-  border-top: 1px solid rgba(27, 39, 56, 0.08);
+  border-top: 1px solid color-mix(in srgb, var(--dp-about-navy) 8%, transparent);
 }
 
 .dp-about-arc-container {
@@ -297,7 +301,7 @@ from the room, and the closing invitation. Loaded only on that page, from functi
   margin: 0;
   padding: clamp(24px, 2.4vw, 32px) 0 0 0;
   border: 0;
-  border-top: 1px solid rgba(166, 130, 82, 0.5);
+  border-top: 1px solid color-mix(in srgb, var(--dp-about-gold) 50%, transparent);
 }
 
 .dp-about-arc-aside p {
@@ -312,7 +316,7 @@ from the room, and the closing invitation. Loaded only on that page, from functi
 /* The punchline, marked as if with a gold highlighter */
 .dp-about-arc-aside strong {
   font-weight: 600;
-  background-image: linear-gradient(transparent 60%, rgba(166, 130, 82, 0.28) 60%, rgba(166, 130, 82, 0.28) 92%, transparent 92%);
+  background-image: linear-gradient(transparent 60%, color-mix(in srgb, var(--dp-about-gold) 28%, transparent) 60%, color-mix(in srgb, var(--dp-about-gold) 28%, transparent) 92%, transparent 92%);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -367,7 +371,7 @@ from the room, and the closing invitation. Loaded only on that page, from functi
 }
 
 .dp-about-highlights .dp-about-section-rule {
-  background-color: rgba(210, 178, 127, 0.4);
+  background-color: color-mix(in srgb, var(--dp-about-gold-light) 40%, transparent);
 }
 
 .dp-about-facts {
@@ -593,7 +597,7 @@ a.dp-about-cta-button {
 a.dp-about-cta-button:hover,
 a.dp-about-cta-button:focus-visible {
   color: var(--dp-about-navy);
-  background-color: var(--dp-about-gold-light);
+  background-color: var(--dp-about-hover);
 }
 
 a.dp-about-cta-button:focus-visible {

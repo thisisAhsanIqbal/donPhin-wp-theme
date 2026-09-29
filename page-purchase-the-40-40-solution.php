@@ -121,7 +121,7 @@ $testimonials = array(
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>
 
-				<a class="dp-arrow-link" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">
+				<a class="dp-arrow-link" href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>">
 					Order copies for your team
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>

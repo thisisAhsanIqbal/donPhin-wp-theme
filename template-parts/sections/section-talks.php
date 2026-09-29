@@ -57,7 +57,7 @@ $talks = array(
 			<p class="dp-talks-custom-text">
 				Give me your agenda and your pain and I’ll build the talk around it. Most of my repeat bookings started as a custom request.
 			</p>
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-light-button">
+			<a href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>" class="dp-light-button">
 				Check available dates
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>

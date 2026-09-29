@@ -1,0 +1,452 @@
+/*
+Theme: Don Phin, Esq.
+Page: Private Counsel — About (page-counsel-about.php)
+Description: Don's story for the men considering counsel: the portrait beside his
+headline on navy, the story on cream, forty years one line a year on the secondary
+band, why he's the right person (with DC Cordova's word) on navy, and the invitation.
+Loads after private-counsel.css (functions.php), whose palette, eyebrow and button it uses.
+*/
+
+/* ==========================================================================
+   0. SHARED PIECES
+   ========================================================================== */
+/* Tracked label in deep gold, for the light sections (the navy ones use .dp-pc-eyebrow) */
+.dp-ca-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--dp-font-family) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-private-counsel-gold);
+  margin: 0 0 18px 0;
+}
+
+.dp-ca-eyebrow::before {
+  content: "";
+  flex-shrink: 0;
+  width: 28px;
+  height: 1px;
+  background-color: var(--dp-private-counsel-bronze);
+}
+
+.dp-ca-accent {
+  font-style: italic;
+  color: var(--dp-private-counsel-gold);
+}
+
+.dp-ca-head {
+  margin: 0 0 clamp(32px, 4vw, 56px) 0;
+}
+
+.dp-ca-head .dp-ca-heading {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(32px, 3.4vw, 54px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-navy);
+  max-width: 16em;
+  margin: 0;
+}
+
+.dp-ca-head .dp-ca-heading--light {
+  color: var(--dp-private-counsel-cream);
+}
+
+/* ==========================================================================
+   1. HERO (on navy: the headline and his role today, the portrait to the edge)
+   ========================================================================== */
+.dp-ca-hero {
+  background-color: var(--dp-private-counsel-navy);
+  color: var(--dp-private-counsel-cream);
+}
+
+.dp-ca-hero-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.dp-ca-hero-content {
+  box-sizing: border-box;
+  padding: clamp(64px, 8vw, 128px) clamp(40px, 5vw, 88px) clamp(64px, 8vw, 128px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-ca-hero .dp-ca-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(38px, 4vw, 64px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.021em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-cream);
+  max-width: 13em;
+  margin: 0 0 26px 0;
+}
+
+.dp-ca-hero .dp-ca-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 86%, transparent);
+  max-width: 27em;
+  margin: 0 0 36px 0;
+}
+
+.dp-ca-portrait {
+  margin: 0;
+  align-self: stretch;
+  min-height: 520px;
+}
+
+.dp-ca-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+}
+
+@media (max-width: 991px) {
+  .dp-ca-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-ca-hero-content {
+    padding: 56px var(--dp-header-gutter, 7vw) 48px;
+  }
+
+  .dp-ca-portrait {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    max-height: 72vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-ca-hero .dp-ca-title {
+    font-size: 34px;
+  }
+}
+
+/* ==========================================================================
+   2. MY STORY (on cream: the heading on the left, the story in one reading
+      column on the right, with its turning point pulled out)
+   ========================================================================== */
+.dp-ca-story {
+  background-color: var(--dp-private-counsel-cream);
+  color: var(--dp-private-counsel-text);
+}
+
+.dp-ca-story-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(32px, 5vw, 96px);
+  align-items: start;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--dp-header-gutter, 7vw);
+}
+
+/* The heading stays in view while the story passes beside it */
+.dp-ca-story .dp-ca-head {
+  position: sticky;
+  top: calc(var(--dp-header-height, 98px) + 40px);
+}
+
+.dp-ca-story-body p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.8;
+  color: var(--dp-private-counsel-text);
+  max-width: 36em;
+  margin: 0 0 22px 0;
+}
+
+.dp-ca-story-body > p:first-child {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(20px, 1.6vw, 24px);
+  line-height: 1.55;
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-ca-story .dp-ca-pull {
+  margin: clamp(36px, 4vw, 56px) 0;
+  padding: 4px 0 4px clamp(22px, 2.4vw, 32px);
+  border: 0;
+  border-left: 2px solid var(--dp-private-counsel-bronze);
+}
+
+.dp-ca-story .dp-ca-pull p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--dp-private-counsel-gold);
+  max-width: 18em;
+  margin: 0;
+}
+
+.dp-ca-story-body > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  .dp-ca-story-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .dp-ca-story .dp-ca-head {
+    position: static;
+  }
+}
+
+/* ==========================================================================
+   3. THE EXPERIENCE (on the secondary band: forty years, one line a year,
+      as a ruled ledger in two columns)
+   ========================================================================== */
+.dp-ca-years {
+  background-color: var(--dp-private-counsel-band);
+  color: var(--dp-private-counsel-text);
+}
+
+.dp-ca-years-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 8vw, 128px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-ca-timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(32px, 5vw, 96px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-ca-year {
+  display: grid;
+  grid-template-columns: clamp(64px, 6vw, 96px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  margin: 0;
+  padding: 20px 0;
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 14%, transparent);
+}
+
+.dp-ca-year-num {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 1.9vw, 28px);
+  font-style: italic;
+  line-height: 1;
+  color: var(--dp-private-counsel-gold);
+}
+
+.dp-ca-year-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(15.5px, 1.1vw, 17px);
+  line-height: 1.6;
+  color: var(--dp-private-counsel-text);
+}
+
+@media (max-width: 767px) {
+  .dp-ca-timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   4. WHY ME (on navy: the heading, his reasons, and DC Cordova's word)
+   ========================================================================== */
+.dp-ca-why {
+  background-color: var(--dp-private-counsel-navy);
+  color: var(--dp-private-counsel-cream);
+}
+
+.dp-ca-why-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(40px, 5vw, 96px);
+  align-items: start;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 140px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-ca-why .dp-ca-head {
+  grid-column: 1 / -1;
+}
+
+.dp-ca-why-body p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.8;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 84%, transparent);
+  max-width: 36em;
+  margin: 0 0 22px 0;
+}
+
+.dp-ca-why-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* DC Cordova's word, on a panel set apart by a bronze rule */
+.dp-ca-foreword {
+  margin: 0;
+  padding: clamp(28px, 3vw, 44px);
+  background-color: color-mix(in srgb, var(--dp-private-counsel-cream) 5%, transparent);
+  border-top: 2px solid var(--dp-private-counsel-bronze);
+}
+
+.dp-ca-foreword-text {
+  margin: 0 0 24px 0;
+  padding: 0;
+  border: 0;
+}
+
+.dp-ca-foreword-text p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(17px, 1.3vw, 20px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--dp-private-counsel-cream);
+  margin: 0 0 16px 0;
+}
+
+.dp-ca-foreword-text p:last-child {
+  margin-bottom: 0;
+}
+
+.dp-ca-foreword-by {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-cream) 16%, transparent);
+}
+
+.dp-ca-foreword-name {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-private-counsel-bronze-light);
+}
+
+.dp-ca-foreword-role {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 78%, transparent);
+}
+
+@media (max-width: 991px) {
+  .dp-ca-why-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   5. CLOSE (his invitation, centred on cream, answered by the button)
+   ========================================================================== */
+.dp-ca-close {
+  background-color: var(--dp-private-counsel-cream);
+}
+
+.dp-ca-close-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(72px, 8vw, 128px) var(--dp-header-gutter, 7vw);
+  text-align: center;
+}
+
+.dp-ca-close .dp-ca-close-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 16px 0;
+}
+
+.dp-ca-close .dp-ca-close-text {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(18px, 1.4vw, 21px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--dp-private-counsel-gold);
+  margin: 0 0 32px 0;
+}
+
+/* Outlined navy button for the light sections; fills navy on hover */
+a.dp-ca-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 54px;
+  padding: 0 30px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-private-counsel-navy);
+  background-color: transparent;
+  border: 1px solid var(--dp-private-counsel-navy);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-ca-button:hover,
+a.dp-ca-button:focus-visible {
+  color: var(--dp-private-counsel-cream);
+  background-color: var(--dp-private-counsel-navy);
+}
+
+a.dp-ca-button:focus-visible {
+  outline: 2px solid var(--dp-private-counsel-bronze);
+  outline-offset: 4px;
+}
+
+a.dp-ca-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-ca-button:hover svg,
+a.dp-ca-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   6. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  a.dp-ca-button,
+  a.dp-ca-button svg {
+    transition: none;
+  }
+}

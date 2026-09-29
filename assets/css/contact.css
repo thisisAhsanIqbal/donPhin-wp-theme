@@ -1,13 +1,45 @@
 /*
 Theme: Don Phin, Esq.
-Page: Contact (page-contact.php)
-Description: Details on the left, message form on the right.
-Loaded only on the contact page, from functions.php.
+Pages: Speaking — Contact (page-speaking-contact.php), Private Counsel — Contact
+(page-counsel-contact.php) and Thank You (page-thank-you.php)
+Description: Details on the left, the form on the right. The colours are a handful of
+local tokens that each section sets from its own palette (by body class), so the same
+layout reads as Speaking or as Private Counsel. Loaded from functions.php.
 */
 
+/* ==========================================================================
+   0. COLOURS (the site defaults, then each section's)
+   ========================================================================== */
+.dp-contact,
+.dp-thanks {
+  --dp-contact-bg: var(--dp-paper, #F6F4F1);
+  --dp-contact-card: var(--dp-white, #FFFFFF);
+  --dp-contact-ink: var(--dp-ink, #2A2029);
+  --dp-contact-text: var(--dp-text, #4A4A4A);
+  --dp-contact-accent: var(--dp-accent, #1F6BE0);
+  --dp-contact-rule: var(--dp-accent, #1F6BE0);
+}
+
+.speaking-header .dp-contact,
+.speaking-header .dp-thanks {
+  --dp-contact-bg: var(--dp-speaking-paper, #F8F6F1);
+  --dp-contact-ink: var(--dp-speaking-navy, #12284A);
+  --dp-contact-accent: var(--dp-speaking-blue, #1E5AA8);
+  --dp-contact-rule: var(--dp-speaking-gold, #F2B035);
+}
+
+.counsel-header .dp-contact,
+.counsel-header .dp-thanks {
+  --dp-contact-bg: var(--dp-private-counsel-cream, #FCFAF6);
+  --dp-contact-ink: var(--dp-private-counsel-navy, #0F1E38);
+  --dp-contact-text: var(--dp-private-counsel-text, #1A2436);
+  --dp-contact-accent: var(--dp-private-counsel-gold, #8A5A2B);
+  --dp-contact-rule: var(--dp-private-counsel-bronze, #A67C4E);
+}
+
 .dp-contact {
-  background-color: var(--dp-paper, #F6F4F1);
-  color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-contact-bg);
+  color: var(--dp-contact-ink);
 }
 
 .dp-contact-container {
@@ -28,7 +60,7 @@ Loaded only on the contact page, from functions.php.
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.025em;
-  color: var(--dp-ink, #2A2029);
+  color: var(--dp-contact-ink);
   margin: 0 0 28px 0;
 }
 
@@ -38,16 +70,72 @@ Loaded only on the contact page, from functions.php.
 
 .dp-contact-accent {
   font-style: italic;
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
 }
 
 .dp-contact .dp-contact-text {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.3vw, 19px);
   line-height: 1.65;
-  color: var(--dp-text, #4A4A4A);
+  color: var(--dp-contact-text);
   max-width: 32em;
   margin: 0 0 36px 0;
+}
+
+/* Small tracked label above the headline */
+.dp-contact .dp-contact-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--dp-font-family);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-contact-accent);
+  margin: 0 0 22px 0;
+}
+
+.dp-contact-eyebrow::before {
+  content: "";
+  flex-shrink: 0;
+  width: 28px;
+  height: 1px;
+  background-color: var(--dp-contact-rule);
+}
+
+/* Private counsel's three terms, set between small diamonds */
+.dp-contact-terms {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 0;
+  list-style: none;
+  margin: 0 0 36px 0;
+  padding: 0;
+}
+
+.dp-contact-terms li {
+  display: flex;
+  align-items: center;
+  font-family: var(--dp-font-family);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--dp-contact-ink);
+  margin: 0;
+}
+
+.dp-contact-terms li + li::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin: 0 14px;
+  background-color: var(--dp-contact-rule);
+  transform: rotate(45deg);
 }
 
 /* Straight to Don's scheduler, for people who would rather book than write */
@@ -65,27 +153,27 @@ Loaded only on the contact page, from functions.php.
   font-family: var(--dp-font-family);
   font-size: 17px;
   line-height: 1.5;
-  color: var(--dp-text, #4A4A4A);
+  color: var(--dp-contact-text);
   margin: 0 0 28px 0;
 }
 
 .dp-contact .dp-contact-details a {
-  color: var(--dp-ink, #2A2029);
+  color: var(--dp-contact-ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: var(--dp-rule, rgba(42, 32, 41, 0.14));
+  text-decoration-color: color-mix(in srgb, var(--dp-contact-ink) 14%, transparent);
   text-underline-offset: 6px;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .dp-contact .dp-contact-details a:hover,
 .dp-contact .dp-contact-details a:focus-visible {
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
   text-decoration-color: currentColor;
 }
 
 .dp-contact-sep {
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
 }
 
 .dp-contact-social {
@@ -100,13 +188,13 @@ Loaded only on the contact page, from functions.php.
 .dp-contact .dp-contact-social-link {
   display: flex;
   align-items: center;
-  color: var(--dp-ink, #2A2029);
+  color: var(--dp-contact-ink);
   transition: color 0.2s ease;
 }
 
 .dp-contact .dp-contact-social-link:hover,
 .dp-contact .dp-contact-social-link:focus-visible {
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
 }
 
 .dp-contact .dp-contact-social-link svg {
@@ -122,8 +210,8 @@ Loaded only on the contact page, from functions.php.
 
 /* Right: the form */
 .dp-contact-card {
-  background-color: var(--dp-white, #FFFFFF);
-  border-top: 3px solid var(--dp-accent, #1F6BE0);
+  background-color: var(--dp-contact-card);
+  border-top: 3px solid var(--dp-contact-rule);
   padding: clamp(28px, 3.2vw, 48px);
 }
 
@@ -141,7 +229,7 @@ Loaded only on the contact page, from functions.php.
   font-family: var(--dp-font-family);
   font-size: 15px;
   line-height: 1.4;
-  color: var(--dp-ink, #2A2029);
+  color: var(--dp-contact-ink);
   margin-bottom: 10px;
 }
 
@@ -155,12 +243,28 @@ Loaded only on the contact page, from functions.php.
   font-family: var(--dp-font-family);
   font-size: 17px;
   line-height: 1.4;
-  color: var(--dp-ink, #2A2029);
-  background-color: var(--dp-white, #FFFFFF);
-  border: 1px solid rgba(42, 32, 41, 0.28);
+  color: var(--dp-contact-ink);
+  background-color: var(--dp-contact-card);
+  border: 1px solid color-mix(in srgb, var(--dp-contact-ink) 28%, transparent);
   border-radius: 0;
   box-shadow: none;
   transition: border-color 0.2s ease;
+}
+
+/* Two fields side by side */
+.dp-contact-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 18px;
+}
+
+.dp-contact-optional {
+  color: var(--dp-contact-text);
+  opacity: 0.8;
+}
+
+.dp-contact .dp-contact-field input::placeholder {
+  color: color-mix(in srgb, var(--dp-contact-ink) 42%, transparent);
 }
 
 .dp-contact .dp-contact-field textarea {
@@ -171,14 +275,14 @@ Loaded only on the contact page, from functions.php.
 .dp-contact .dp-contact-field input:hover,
 .dp-contact .dp-contact-field select:hover,
 .dp-contact .dp-contact-field textarea:hover {
-  border-color: rgba(42, 32, 41, 0.5);
+  border-color: color-mix(in srgb, var(--dp-contact-ink) 50%, transparent);
 }
 
 .dp-contact .dp-contact-field input:focus,
 .dp-contact .dp-contact-field select:focus,
 .dp-contact .dp-contact-field textarea:focus {
-  border-color: var(--dp-ink, #2A2029);
-  outline: 2px solid var(--dp-accent, #1F6BE0);
+  border-color: var(--dp-contact-ink);
+  outline: 2px solid var(--dp-contact-accent);
   outline-offset: 2px;
   box-shadow: none;
 }
@@ -187,6 +291,15 @@ Loaded only on the contact page, from functions.php.
   justify-content: center;
   width: 100%;
   height: 58px;
+}
+
+.dp-contact button.dp-contact-button {
+  background-color: var(--dp-contact-ink);
+}
+
+.dp-contact button.dp-contact-button:hover,
+.dp-contact button.dp-contact-button:focus-visible {
+  background-color: var(--dp-contact-accent);
 }
 
 /* Bot trap: off-screen, never seen or focused by people */
@@ -207,8 +320,8 @@ Loaded only on the contact page, from functions.php.
 }
 
 .dp-contact .dp-contact-status.is-sent {
-  color: var(--dp-accent, #1F6BE0);
-  background-color: rgba(31, 107, 224, 0.08);
+  color: var(--dp-contact-accent);
+  background-color: color-mix(in srgb, var(--dp-contact-accent) 8%, transparent);
 }
 
 .dp-contact .dp-contact-status.is-invalid {
@@ -240,14 +353,18 @@ Loaded only on the contact page, from functions.php.
   .dp-contact-card {
     padding: 24px 20px 28px;
   }
+
+  .dp-contact-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* ==========================================================================
    THANK YOU PAGE (page-thank-you.php)
    ========================================================================== */
 .dp-thanks {
-  background-color: var(--dp-paper, #F6F4F1);
-  color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-contact-bg);
+  color: var(--dp-contact-ink);
 }
 
 .dp-thanks-container {
@@ -269,7 +386,7 @@ Loaded only on the contact page, from functions.php.
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1;
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
   margin: 0 0 28px 0;
 }
 
@@ -279,7 +396,7 @@ Loaded only on the contact page, from functions.php.
   font-weight: 400;
   line-height: 1.04;
   letter-spacing: -0.025em;
-  color: var(--dp-ink, #2A2029);
+  color: var(--dp-contact-ink);
   margin: 0 0 28px 0;
 }
 
@@ -289,14 +406,14 @@ Loaded only on the contact page, from functions.php.
 
 .dp-thanks-accent {
   font-style: italic;
-  color: var(--dp-accent, #1F6BE0);
+  color: var(--dp-contact-accent);
 }
 
 .dp-thanks .dp-thanks-text {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.3vw, 20px);
   line-height: 1.65;
-  color: var(--dp-text, #4A4A4A);
+  color: var(--dp-contact-text);
   max-width: 34em;
   margin: 0 0 40px 0;
 }
@@ -333,4 +450,13 @@ Loaded only on the contact page, from functions.php.
   .dp-thanks .dp-arrow-link {
     align-self: center;
   }
+}
+
+.dp-thanks .dp-dark-button {
+  background-color: var(--dp-contact-ink);
+}
+
+.dp-thanks .dp-dark-button:hover,
+.dp-thanks .dp-dark-button:focus-visible {
+  background-color: var(--dp-contact-accent);
 }

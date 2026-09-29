@@ -3,7 +3,10 @@
  * Template part: Site Header
  *
  * A dark top bar (section tabs + social links) over a white main bar (logo, menu, CTA).
- * $args['section'] ('foryou', 'counsel' or 'speaking') picks the active tab, the menu and the CTA.
+ * $args['section'] (a key of donphin_sections(): 'foryou', 'counsel' or 'speaking') picks
+ * the active tab, the menu and the button. The tabs come from the section registry
+ * (inc/sections.php); the menu and button from the menu assigned to the section in
+ * Appearance > Menus, or the registry until one is.
  *
  * @package DonPhinEsq
  */
@@ -12,48 +15,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$section = isset( $args['section'] ) ? $args['section'] : 'foryou';
-
-$tabs = array(
-	'foryou'   => array( 'For You', '/' ),
-	'counsel'  => array( 'Private counsel', '/private-counsel/' ),
-	'speaking' => array( 'Speaking', '/speaking/' ),
-);
-
-// Menu links are array( label, path, optional screen reader label )
-$menus = array(
-	'foryou'   => array(
-		'links' => array(
-			array( 'About', '/about/' ),
-			array( "40| |40", '/purchase-the-40-40-solution/', 'The 40|40 Solution' ),
-			array( 'Tools', '/free-tools/' ),
-			array( 'Contact', '/contact/' ),
-		),
-		'cta'   => array( 'Book Don', '/contact/' ),
-	),
-	'counsel'  => array(
-		'links' => array(
-			array( 'The Journey', '/the-journey/' ),
-			array( 'About', '/about/' ),
-			array( 'Resources', '/resources/' ),
-			array( 'Contact', '/contact/?topic=counsel' ),
-		),
-		'cta'   => array( 'Request A Conversation', '/contact/?topic=counsel' ),
-	),
-	'speaking' => array(
-		'links' => array(
-			array( 'Speaking', '/speaking/' ),
-			array( 'About', '/about/' ),
-			array( 'Resources', '/resources/' ),
-			array( 'Contact', '/contact/' ),
-		),
-		'cta'   => array( 'Book Don', '/contact/' ),
-	),
-);
-
-$socials = donphin_social_links();
-
-$menu = isset( $menus[ $section ] ) ? $menus[ $section ] : $menus['foryou'];
+$sections = donphin_sections();
+$section  = isset( $args['section'], $sections[ $args['section'] ] ) ? $args['section'] : 'foryou';
+$menu     = donphin_section_menu( $section );
+$socials  = donphin_social_links();
 ?>
 <header id="dp-site-header" class="dp-header dp-header--<?php echo esc_attr( $section ); ?>" role="banner">
 
@@ -62,9 +27,9 @@ $menu = isset( $menus[ $section ] ) ? $menus[ $section ] : $menus['foryou'];
 		<div class="dp-header-inner">
 			<nav class="dp-topbar-tabs" aria-label="<?php esc_attr_e( 'Site sections', 'don-phin-esq' ); ?>">
 				<ul class="dp-tab-list">
-					<?php foreach ( $tabs as $key => $tab ) : ?>
+					<?php foreach ( $sections as $key => $tab ) : ?>
 						<li>
-							<a href="<?php echo esc_url( home_url( $tab[1] ) ); ?>" class="dp-tab<?php echo $key === $section ? ' is-active' : ''; ?>"<?php echo $key === $section ? ' aria-current="true"' : ''; ?>><?php echo esc_html( $tab[0] ); ?></a>
+							<a href="<?php echo esc_url( home_url( $tab['home'] ) ); ?>" class="dp-tab<?php echo $key === $section ? ' is-active' : ''; ?>"<?php echo $key === $section ? ' aria-current="true"' : ''; ?>><?php echo esc_html( $tab['label'] ); ?></a>
 						</li>
 					<?php endforeach; ?>
 				</ul>
@@ -93,11 +58,11 @@ $menu = isset( $menus[ $section ] ) ? $menus[ $section ] : $menus['foryou'];
 				<ul class="dp-nav-list">
 					<?php foreach ( $menu['links'] as $link ) : ?>
 						<li>
-							<a href="<?php echo esc_url( home_url( $link[1] ) ); ?>" class="dp-nav-link"<?php echo isset( $link[2] ) ? ' aria-label="' . esc_attr( $link[2] ) . '"' : ''; ?>><?php echo esc_html( $link[0] ); ?></a>
+							<a href="<?php echo esc_url( $link[1] ); ?>" class="dp-nav-link"<?php echo '' !== $link[2] ? ' aria-label="' . esc_attr( $link[2] ) . '"' : ''; ?>><?php echo esc_html( $link[0] ); ?></a>
 						</li>
 					<?php endforeach; ?>
 				</ul>
-				<a href="<?php echo esc_url( home_url( $menu['cta'][1] ) ); ?>" class="dp-cta-btn"><?php echo esc_html( $menu['cta'][0] ); ?></a>
+				<a href="<?php echo esc_url( $menu['cta'][1] ); ?>" class="dp-cta-btn"><?php echo esc_html( $menu['cta'][0] ); ?></a>
 			</nav>
 
 			<button class="dp-mobile-toggle" type="button" aria-label="<?php esc_attr_e( 'Toggle navigation', 'don-phin-esq' ); ?>" aria-controls="dp-site-nav" aria-expanded="false">

@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Call To Action Button -->
 		<div class="dp-enquiries-btn-wrap">
-			<a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="dp-enquiries-cta-btn">
+			<a href="<?php echo esc_url( home_url( '/private-counsel/contact/' ) ); ?>" class="dp-enquiries-cta-btn">
 				REQUEST A CONVERSATION
 			</a>
 		</div>

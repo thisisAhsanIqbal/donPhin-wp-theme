@@ -1,8 +1,10 @@
 <?php
 /**
- * Template Name: About Page
+ * Template Name: Speaking — About
  *
- * Used automatically by the page with the slug "about".
+ * The About page for the Speaking section (/speaking/about/), written for event
+ * planners and sales leaders. Assign it to the "About" page filed under Speaking.
+ * It sits on the Speaking palette (speaking.css), with its layout in about.css.
  *
  * Don's portrait beside the headline and his credentials, the arc of his career
  * as an editorial spread (a pulled line, then Don on stage beside today's work),
@@ -21,8 +23,8 @@ get_header();
 $portrait = get_stylesheet_directory_uri() . '/assets/images/counsel/';
 $stage    = get_stylesheet_directory_uri() . '/assets/images/speaking/';
 
-// The contact form opens with "Speaking" already chosen
-$book_url = add_query_arg( 'topic', 'speaking', home_url( '/contact/' ) );
+// The Speaking booking form
+$book_url = home_url( '/speaking/contact/' );
 
 // Credentials under the headline
 $credentials = array(

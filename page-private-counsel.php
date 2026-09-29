@@ -21,8 +21,8 @@ get_header();
 
 $images = get_stylesheet_directory_uri() . '/assets/images/counsel/';
 
-// The contact form opens with "Private counsel" already chosen
-$enquire_url = add_query_arg( 'topic', 'counsel', home_url( '/contact/' ) );
+// Private Counsel's own contact page
+$enquire_url = home_url( '/private-counsel/contact/' );
 
 // The five chapters of a life, each a card with its name and a line icon (24x24 SVG insides)
 $chapters = array(
