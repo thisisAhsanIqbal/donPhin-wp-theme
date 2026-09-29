@@ -149,7 +149,7 @@ $photos = array(
 		<div class="dp-res-cards">
 			<article class="dp-res-card">
 				<p class="dp-res-card-eyebrow">The book</p>
-				<h3 class="dp-res-card-title">The 40||40 Solution</h3>
+				<h3 class="dp-res-card-title">The 40//40 Solution</h3>
 				<p class="dp-res-card-sub">Mastering the Emotional Energy of Leadership and Sales</p>
 				<p class="dp-res-card-text">Logic didn’t create the drama in your boardroom, your sales calls, or your own head — so logic isn’t going to end it. This book is about what to do with the energy instead.</p>
 				<a class="dp-res-button" href="<?php echo esc_url( home_url( '/speaking/purchase-the-40-40-solution/' ) ); ?>">

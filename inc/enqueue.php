@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function donphin_template_assets() {
 	return array(
-		'page-speaking.php'                    => array( 'js' => array( 'video' ) ),
+		'page-speaking.php'                    => array( 'js' => array( 'video', 'count-up' ) ),
 		'page-speaking-about.php'              => array( 'css' => array( 'about' ) ),
 		'page-speaking-contact.php'            => array( 'css' => array( 'contact' ) ),
 		'page-speaking-resources.php'          => array( 'css' => array( 'speaking-resources' ) ),

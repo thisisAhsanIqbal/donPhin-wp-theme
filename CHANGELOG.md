@@ -9,6 +9,20 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.5.1 (2026-09-29)
+
+### Speaking
+- The numbers (800+, 16, 40+, 1M+) count up from zero, once, as the row comes near the
+  screen (`assets/js/count-up.js`). Without JavaScript, or with reduced motion, they
+  simply show.
+- The twelve-logo row moves slower: 50s a loop (40s on phones), was 32s (24s).
+
+### Copy
+- The book's name is written "The 40//40 Solution" everywhere, as Don writes it. It had
+  five spellings (40||40, 40 || 40, 40/ /40, 40| |40, 40|40): 24 in the theme, on the book
+  page, its testimonials, Speaking Resources, Private Counsel About and the gift-book alt
+  text. The local page title is now "The 40//40 Solution" too (its address is unchanged).
+
 ## 1.5.0 (2026-09-29)
 
 ### Speaking side matches Don's one-sheet (`reference/DonPhinSalesOnStage.docx`)

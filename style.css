@@ -5,7 +5,7 @@ Description: Custom professional Kadence child theme for Don Phin, Esq. featurin
 Author: Kadence WP / Custom
 Author URI: https://www.donphin.com/
 Template: kadence
-Version: 1.5.0
+Version: 1.5.1
 Text Domain: don-phin-esq
 */
 
@@ -886,7 +886,7 @@ a.dp-light-button:focus-visible svg {
 .dp-logo-marquee-track {
   display: flex;
   width: max-content;
-  animation: dpLogoDrift 32s linear infinite;
+  animation: dpLogoDrift 50s linear infinite;
 }
 
 /* A hand on it holds it still */
@@ -959,7 +959,7 @@ a.dp-light-button:focus-visible svg {
   }
 
   .dp-logo-marquee-track {
-    animation-duration: 24s;
+    animation-duration: 40s;
   }
 }
 

@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="dp-giftbook-visual-inner">
 					<img 
 						src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/40-40book.png' ); ?>" 
-						alt="The 40|40 Solution by Don Phin, Esq." 
+						alt="The 40//40 Solution by Don Phin, Esq." 
 						class="dp-giftbook-img"
 						loading="lazy"
 					/>

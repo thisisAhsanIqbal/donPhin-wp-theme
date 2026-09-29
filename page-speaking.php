@@ -322,8 +322,14 @@ $testimonials = array(
 	<div class="dp-speak-stats-container">
 		<ul class="dp-speak-stats-list">
 			<?php foreach ( $stats as $stat ) : ?>
+				<?php
+				// The digits count up as the numbers come into view (assets/js/count-up.js); any
+				// letters after them ("M" in 1M) stay put. The final figure is already here for
+				// anyone without JavaScript.
+				preg_match( '/^(\d+)(.*)$/', $stat['value'], $parts );
+				?>
 				<li class="dp-speak-stat">
-					<span class="dp-speak-stat-number"><?php echo esc_html( $stat['value'] ); ?><?php if ( $stat['suffix'] ) : ?><span class="dp-speak-stat-suffix"><?php echo esc_html( $stat['suffix'] ); ?></span><?php endif; ?></span>
+					<span class="dp-speak-stat-number"><span class="dp-count" data-count="<?php echo esc_attr( $parts[1] ); ?>"><?php echo esc_html( $parts[1] ); ?></span><?php echo esc_html( $parts[2] ); ?><?php if ( $stat['suffix'] ) : ?><span class="dp-speak-stat-suffix"><?php echo esc_html( $stat['suffix'] ); ?></span><?php endif; ?></span>
 					<span class="dp-speak-stat-label"><?php echo esc_html( $stat['label'] ); ?></span>
 				</li>
 			<?php endforeach; ?>

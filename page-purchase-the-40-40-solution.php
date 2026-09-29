@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: The 40|40 Solution Page
+ * Template Name: The 40//40 Solution Page
  *
  * Used automatically by the page with the slug "purchase-the-40-40-solution", filed
  * under Speaking (/speaking/purchase-the-40-40-solution/). Part of the Speaking section.
@@ -54,45 +54,45 @@ $testimonials = array(
 		'role'  => 'Director of Sales, Paylocity',
 	),
 	array(
-		'quote' => array( 'I have been a voracious reader most of my life, particularly in the areas of leadership, management, and organizational transformation. Not much surprises me anymore. But reading The 40||40 Solution by Don Phin was an exception for me. The book provided new and powerful insights into the emotional dynamics of good leadership. In the end, leadership is about connecting and aligning with people. We can make the case that life itself is about this connection. This little book delivers the goods. Buy it. Read it. And we’ll meet you on the 40-yard lines.' ),
+		'quote' => array( 'I have been a voracious reader most of my life, particularly in the areas of leadership, management, and organizational transformation. Not much surprises me anymore. But reading The 40//40 Solution by Don Phin was an exception for me. The book provided new and powerful insights into the emotional dynamics of good leadership. In the end, leadership is about connecting and aligning with people. We can make the case that life itself is about this connection. This little book delivers the goods. Buy it. Read it. And we’ll meet you on the 40-yard lines.' ),
 		'name'  => 'David Dibble',
 		'role'  => 'The New Agreements For Leaders',
 	),
 	array(
 		'quote' => array(
-			'Don Phin has worked with our company for over a decade. The reason we keep coming back is his work continues to evolve, as he never stops learning. The 40||40 Solution is a perfect example. Don has a way of breaking down the complex emotional energy in relationships to basic, common sense, matter of fact thinking. It’s like reading a guidebook on how to takes the noise out of how we communicate.',
-			'The best takeaway from the 40/ /40 is the space it allows for co-creation. My team has heard me say a thousand times that no one of us is smarter than any two of us. When living in the 40||40 teamwork is fostered.',
+			'Don Phin has worked with our company for over a decade. The reason we keep coming back is his work continues to evolve, as he never stops learning. The 40//40 Solution is a perfect example. Don has a way of breaking down the complex emotional energy in relationships to basic, common sense, matter of fact thinking. It’s like reading a guidebook on how to takes the noise out of how we communicate.',
+			'The best takeaway from the 40//40 is the space it allows for co-creation. My team has heard me say a thousand times that no one of us is smarter than any two of us. When living in the 40//40 teamwork is fostered.',
 		),
 		'name'  => 'Don Mader',
 		'role'  => 'CEO, Southeastern Printing',
 	),
 	array(
-		'quote' => array( 'The 40/ /40 Solution refocuses leaders from working in your business to working on relationships in your business and encouraging others to become their own hero. It also reframes our job to make people feel good about themselves every day. As a leader and 80%er, I did not realize the effect I can have on people who feel judged. Thank you for pointing this out Don. I know there are many others like me who could benefit from The 40||40 Solution.' ),
+		'quote' => array( 'The 40//40 Solution refocuses leaders from working in your business to working on relationships in your business and encouraging others to become their own hero. It also reframes our job to make people feel good about themselves every day. As a leader and 80%er, I did not realize the effect I can have on people who feel judged. Thank you for pointing this out Don. I know there are many others like me who could benefit from The 40//40 Solution.' ),
 		'name'  => 'Alan Sorkin',
 		'role'  => 'Master Chair Vistage International, Inc.',
 	),
 	array(
 		'quote' => array(
-			'In The 40 || 40 Solution Don Phin shows you how to apply emotional energy (yours and others) to work for you instead of against you.',
+			'In The 40//40 Solution Don Phin shows you how to apply emotional energy (yours and others) to work for you instead of against you.',
 			'To be candid, I was hesitant to read this book when I received an advance review copy. As an INTJ (Myers–Briggs), the focus on emotions seemed too “touchy feely” for me.',
-			'Yet the practicality of The 40 || 40 Solution and the common-sense psychology behind it surprised me.',
+			'Yet the practicality of The 40//40 Solution and the common-sense psychology behind it surprised me.',
 			'I highly recommend this book!',
 		),
 		'name'  => 'Mike Young',
 		'role'  => 'Esq., Mike Young Law',
 	),
 	array(
-		'quote' => array( 'Don Phin presented The 40||40 Solution to our broker clients. He’s been wowing our clients in-person and via Webinars for 17 years. Grab his new book. Catch his in-person performance. And, it’s not just for salespeople. It’s for life.' ),
+		'quote' => array( 'Don Phin presented The 40//40 Solution to our broker clients. He’s been wowing our clients in-person and via Webinars for 17 years. Grab his new book. Catch his in-person performance. And, it’s not just for salespeople. It’s for life.' ),
 		'name'  => 'Preston Diamond',
 		'role'  => 'Managing Director Institute of WorkComp Professionals',
 	),
 	array(
-		'quote' => array( 'As an engineer, I am obsessed with efficiency. Unfortunately, I’ve learned that you can’t be efficient with humans, because of these things called ’emotions.’ The 40//40 Solution takes a practical (and engaging) approach towards understanding how to manage emotional energy for better relationships with yourself and others. Using an easy-to-understand metaphor of roles (Victim, Villain, and Hero) and percentages (the 40 || 40), the authors frame the managing of emotions in a way that even an engineer like me can understand and use.' ),
+		'quote' => array( 'As an engineer, I am obsessed with efficiency. Unfortunately, I’ve learned that you can’t be efficient with humans, because of these things called ’emotions.’ The 40//40 Solution takes a practical (and engaging) approach towards understanding how to manage emotional energy for better relationships with yourself and others. Using an easy-to-understand metaphor of roles (Victim, Villain, and Hero) and percentages (the 40//40), the authors frame the managing of emotions in a way that even an engineer like me can understand and use.' ),
 		'name'  => 'Andrew Tarvin',
 		'role'  => 'Founder',
 	),
 	array(
-		'quote' => array( 'Mr. Phin’s 40| |40 Solution harnesses the power of emotional energy to inspire and motivate. I highly recommend his book and associated workshops to business leaders looking for new and creative ways to engage their professional team.' ),
+		'quote' => array( 'Mr. Phin’s 40//40 Solution harnesses the power of emotional energy to inspire and motivate. I highly recommend his book and associated workshops to business leaders looking for new and creative ways to engage their professional team.' ),
 		'name'  => 'Sharon R. Bock',
 		'role'  => 'Esq., Clerk & Comptroller, Palm Beach County',
 	),
@@ -112,7 +112,7 @@ $testimonials = array(
 			</p>
 
 			<p class="dp-book-credit">
-				<span class="dp-book-credit-title">The 40||40 Solution — Mastering the Emotional Energy of Leadership and Sales</span>
+				<span class="dp-book-credit-title">The 40//40 Solution — Mastering the Emotional Energy of Leadership and Sales</span>
 				<span class="dp-book-credit-authors">Don Phin, Esq. and Loy Young</span>
 			</p>
 
@@ -134,7 +134,7 @@ $testimonials = array(
 		<div class="dp-book-cover">
 			<img
 				src="<?php echo esc_url( $book . 'book-3d 1.webp' ); ?>"
-				alt="The 40|40 Solution: Mastering Emotional Energy in Leadership and Sales, by Don Phin, Esq. and Loy Young"
+				alt="The 40//40 Solution: Mastering Emotional Energy in Leadership and Sales, by Don Phin, Esq. and Loy Young"
 				width="1066"
 				height="1606"
 				loading="eager"
@@ -148,13 +148,13 @@ $testimonials = array(
 
 <section class="dp-book-video-section" aria-label="<?php esc_attr_e( 'Video about the book', 'don-phin-esq' ); ?>">
 	<div class="dp-book-video-container">
-		<div class="dp-video" data-video="q-FdUTykDuA" data-title="The 40|40 Solution">
+		<div class="dp-video" data-video="q-FdUTykDuA" data-title="The 40//40 Solution">
 			<a
 				class="dp-video-play"
 				href="https://youtu.be/q-FdUTykDuA?si=g_ptfIu7l4NNoAzx"
 				target="_blank"
 				rel="noopener"
-				aria-label="<?php esc_attr_e( 'Play the video about The 40|40 Solution (opens on YouTube if the player cannot load)', 'don-phin-esq' ); ?>"
+				aria-label="<?php esc_attr_e( 'Play the video about The 40//40 Solution (opens on YouTube if the player cannot load)', 'don-phin-esq' ); ?>"
 			>
 				<img
 					src="<?php echo esc_url( $images . '40-40-video-cover.webp' ); ?>"
@@ -184,11 +184,11 @@ $testimonials = array(
 		</p>
 
 		<p>
-			The 40||40 Solution is your unique guide to Mastering Emotional Energy! It is the solution to ending painful and destructive dramas, whether in the boardroom, sales meeting, at home, or in conversations with yourself. Unlike most emotional intelligence books that focus on thinking your way through emotional problems, this book helps you learn how to feel your way through them. So that you can feel good about yourself afterward.
+			The 40//40 Solution is your unique guide to Mastering Emotional Energy! It is the solution to ending painful and destructive dramas, whether in the boardroom, sales meeting, at home, or in conversations with yourself. Unlike most emotional intelligence books that focus on thinking your way through emotional problems, this book helps you learn how to feel your way through them. So that you can feel good about yourself afterward.
 		</p>
 
 		<p>
-			When you learn The 40||40 Solution, you will be able to slay dragons, conquer fears, be a leader, sell more, share success and be happy, all without having to self-sacrifice, exhaust yourself or be out of balance. It’s your guide and path to becoming a true hero!
+			When you learn The 40//40 Solution, you will be able to slay dragons, conquer fears, be a leader, sell more, share success and be happy, all without having to self-sacrifice, exhaust yourself or be out of balance. It’s your guide and path to becoming a true hero!
 		</p>
 
 	</div>
@@ -198,7 +198,7 @@ $testimonials = array(
 	<div class="dp-book-fit-container">
 
 		<h2 id="dp-book-fit-title" class="dp-book-fit-title">
-			The 40||40 Solution is the right book for you if…
+			The 40//40 Solution is the right book for you if…
 		</h2>
 
 		<ul class="dp-book-fit-list">
@@ -309,7 +309,7 @@ $praise_total = count( $testimonials );
 			<a class="dp-book-buy" href="<?php echo esc_url( $buy_url ); ?>" target="_blank" rel="noopener">
 				<img
 					src="<?php echo esc_url( $book . 'buy-amazon.webp' ); ?>"
-					alt="Buy The 40|40 Solution now on Amazon"
+					alt="Buy The 40//40 Solution now on Amazon"
 					width="600"
 					height="414"
 					loading="lazy"

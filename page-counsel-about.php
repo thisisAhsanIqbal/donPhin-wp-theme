@@ -40,7 +40,7 @@ $years = array(
 	array( '2002', 'Founds HR That Works. Becomes the Institute of WorkComp Professionals’ HR advisor.' ),
 	array( '2014', 'Sells HR That Works to ThinkHR. Stays on two years as VP.' ),
 	array( '2016', 'Begins teaching for LinkedIn Learning.' ),
-	array( '2022', 'Publishes The 40||40 Solution.' ),
+	array( '2022', 'Publishes The 40//40 Solution.' ),
 	array( '2026', 'Launches private counsel.' ),
 );
 
