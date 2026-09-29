@@ -198,3 +198,11 @@ function donphin_redirect_old_pages() {
 	exit;
 }
 add_action( 'template_redirect', 'donphin_redirect_old_pages', 1 );
+
+/**
+ * Stop WordPress guessing where a missing address was meant to go. It matches by page
+ * name alone, so /private-counsel/resources/ would land on /speaking/resources/ (the other
+ * side of the site), and it caused a redirect loop before. Moved pages are handled above;
+ * anything else shows its own side's 404 page.
+ */
+add_filter( 'do_redirect_guess_404_permalink', '__return_false' );

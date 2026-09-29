@@ -2,14 +2,16 @@
 /**
  * Template Name: The Journey Page
  *
- * Used automatically by the page with the slug "the-journey". Part of Private Counsel:
- * it loads that page's stylesheet for the palette, the header colours and the book,
- * then its own (assets/css/journey.css) for the layout.
+ * The Next Journey (/private-counsel/the-journey/): Don's private counsel offer, from
+ * the offer architecture (reference/Part1_Offer_Architecture_The_Next_Journey.docx) and
+ * the client experience (reference/A_Year_in_the_Life.pdf). Part of Private Counsel: it
+ * loads that page's stylesheet for the palette, the header colours and the book, then its
+ * own (assets/css/journey.css) for the layout.
  *
- * What the year looks like after the Whole Life Assessment: the year built around
- * you, its three parts, the conversations, Don's gift of The Inner Climb, and one line
- * of his to close. (The "Between conversations" experiences section is out while the
- * page is being reworked; it is in git history.)
+ * The journey in brief; the transformation it is for; how it unfolds (Day of Discovery,
+ * Assessment, Personal Blueprint, the Journey); the three immersions; the counsel between
+ * them; what is constant and what is shaped around him; access (three men, by
+ * introduction); Don's gift of The Inner Climb, and one line of his to close.
  *
  * @package DonPhinEsq
  */
@@ -20,24 +22,68 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$images = get_stylesheet_directory_uri() . '/assets/images/Journey/';
-
-// The book request goes to Private Counsel's own contact page
+$images      = get_stylesheet_directory_uri() . '/assets/images/';
+$journey     = $images . 'Journey/';
 $request_url = home_url( '/private-counsel/contact/' );
 
-// The three parts of the year
-$parts = array(
-	array( 'Private Counsel', 'Regular, candid conversations with the time and depth necessary to go where we need to go.' ),
-	array( 'Three Immersive Experiences', 'Private retreats and experiences created around where you are in your journey — not a predetermined curriculum.' ),
-	array( 'When Life Happens', 'Access to me when the decision is live, not simply when our next meeting happens to be scheduled.' ),
+// How it unfolds, in order
+$steps = array(
+	array( 'Day of Discovery', 'A full day, one-on-one. We talk, we walk, we share a meal. I ask the questions you’ve probably never been asked.' ),
+	array( 'The Assessment', 'The Everything But Your Money™ Whole-Life Assessment, over a month: health and personality assessments, and confidential conversations with the friends, family and colleagues you give me permission to speak with.' ),
+	array( 'Your Personal Blueprint', 'What I see, laid out plainly: where you are across purpose, health, relationships and spirit, and what the year could be.' ),
+	array( 'The Journey', 'One year. Three private immersions, and counsel on call — designed around you, not a curriculum.' ),
 );
 
-// What the conversations are for
-$topics = array(
-	'Where you are and where you’re headed',
-	'The opportunities and challenges in front of you',
-	'Relationships, purpose, and personal growth',
-	'When you need to make a decision quickly',
+// The three immersions: numeral, name, the line from the offer, what it is, and its photo
+$immersions = array(
+	array(
+		'num'   => 'I',
+		'name'  => 'Ground',
+		'line'  => 'The trail.',
+		'text'  => 'Two men getting to know each other at walking pace. Mostly walking, mostly talking — shared effort rather than a conference table.',
+		'image' => $journey . 'phin-hiking-800.webp',
+		'alt'   => 'Don Phin hiking a mountain trail, smiling',
+		'focus' => '52% 40%',
+	),
+	array(
+		'num'   => 'II',
+		'name'  => 'Deep Immersion',
+		'line'  => 'The long evenings.',
+		'text'  => 'Somewhere built for long, unhurried conversation, where fear, judgment and regret are finally spoken. Whatever is actually there.',
+		'image' => $images . 'counsel/room-900.webp',
+		'alt'   => 'Don Phin in a long, unhurried conversation in a book-lined study',
+		'focus' => '62% 40%',
+	),
+	array(
+		'num'   => 'III',
+		'name'  => 'Integration',
+		'line'  => 'Stillness.',
+		'text'  => 'A quieter setting, built for stillness. We look back at the year and design the life you live next.',
+		'image' => $journey . 'phin-meditating-800.webp',
+		'alt'   => 'Don Phin meditating on a wooden deck above a misty valley',
+		'focus' => '50% 45%',
+	),
+);
+
+// Between the immersions
+$between = array(
+	array( 'Counsel Days', 'About once a month, a whole day together, in person or online. No rushing, no watching the clock.' ),
+	array( 'The Counsel Line', 'For the decisions that can’t be answered on a spreadsheet. The phone rings: “Don, I need another perspective.”' ),
+	array( 'Invitations', 'Never homework. A letter you’ll never send, a conversation you’ve postponed, an afternoon without your phone.' ),
+);
+
+// What is the same for every man, and what is shaped around him
+$constant = array(
+	'The four dimensions beyond wealth: purpose, health, relationships and spirit',
+	'The sequence: Day of Discovery, Assessment, Blueprint, Journey',
+	'Three immersions, and counsel between them',
+	'No judgment, and expectations drafted into agreements',
+);
+$bespoke = array(
+	'Where the immersions happen, and what we do there',
+	'Which dimension leads',
+	'Who from your world joins: a son on the trail, a partner at dinner',
+	'The pace between',
 );
 ?>
 
@@ -45,16 +91,16 @@ $topics = array(
 	<div class="dp-jr-hero-container">
 
 		<div class="dp-jr-hero-content">
-			<p class="dp-jr-eyebrow">The journey</p>
-			<h1 id="dp-jr-title" class="dp-jr-title">A Year, Built <em class="dp-jr-accent">Around You.</em></h1>
-			<p class="dp-jr-lead">This is what the year looks like once we’ve done the Whole Life Assessment together — a personally curated year, not a program.</p>
-			<p class="dp-jr-text">I don’t have a program to put you through. I have a year to design around you.</p>
+			<p class="dp-jr-eyebrow">The Next Journey</p>
+			<h1 id="dp-jr-title" class="dp-jr-title">One man. One year. <em class="dp-jr-accent">Built around you.</em></h1>
+			<p class="dp-jr-lead">A personal transformation journey: one year, three private immersions, and counsel on call.</p>
+			<p class="dp-jr-text">This isn’t coaching, consulting or therapy. I don’t have a program to put you through. I have a year to design around you.</p>
 		</div>
 
 		<figure class="dp-jr-hero-photo">
 			<img
-				src="<?php echo esc_url( $images . 'journey-m-1376.webp' ); ?>"
-				srcset="<?php echo esc_attr( $images . 'journey-m-800.webp 800w, ' . $images . 'journey-m-1376.webp 1376w' ); ?>"
+				src="<?php echo esc_url( $journey . 'journey-m-1376.webp' ); ?>"
+				srcset="<?php echo esc_attr( $journey . 'journey-m-800.webp 800w, ' . $journey . 'journey-m-1376.webp 1376w' ); ?>"
 				sizes="(max-width: 991px) 100vw, 52vw"
 				alt="Don Phin in conversation with a client across a table in a book-lined office"
 				width="1376"
@@ -68,17 +114,73 @@ $topics = array(
 	</div>
 </section>
 
+<section class="dp-jr-story" aria-labelledby="dp-jr-story-title">
+	<div class="dp-jr-story-container">
+
+		<header class="dp-jr-story-head">
+			<p class="dp-pc-eyebrow">The transformation</p>
+			<h2 id="dp-jr-story-title" class="dp-jr-story-title">Nobody has been assigned <em class="dp-pc-gold-accent">to the man.</em></h2>
+		</header>
+
+		<div class="dp-jr-story-body">
+			<p>Around every man who has mastered wealth stands a team built to protect his fortune. On the Tuesday morning after the sale, the succession, or the last day in the corner office, he has the boat, the watch, and the question he has never said out loud: <em>what was it for?</em></p>
+			<p class="dp-jr-story-after">Twelve months later he has set down the guilt of what the building cost. His son calls him first. His body carries him up the trail he once watched from the car. His calendar holds only what he chose. He is happy, visibly so, and fully inside the life he paid for.</p>
+		</div>
+
+		<blockquote class="dp-jr-story-pull">
+			<p>The moment on the trail when he says the thing he has never said to anyone, and hears, perhaps for the first time in years, that he is a good man with permission to stop punishing himself.</p>
+		</blockquote>
+
+	</div>
+</section>
+
 <section class="dp-jr-year" aria-labelledby="dp-jr-year-title">
 	<div class="dp-jr-year-container">
 
-		<h2 id="dp-jr-year-title" class="dp-jr-eyebrow dp-jr-eyebrow--center">A year designed around you</h2>
+		<h2 id="dp-jr-year-title" class="dp-jr-eyebrow dp-jr-eyebrow--center">How it unfolds</h2>
+		<p class="dp-jr-year-lead">Every engagement begins with the Assessment. I choose the man as carefully as the man chooses me.</p>
 
-		<ol class="dp-jr-parts">
-			<?php foreach ( $parts as $index => $part ) : ?>
+		<ol class="dp-jr-parts dp-jr-parts--four">
+			<?php foreach ( $steps as $index => $step ) : ?>
 				<li class="dp-jr-part">
 					<span class="dp-jr-part-num" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
-					<h3 class="dp-jr-part-title"><?php echo esc_html( $part[0] ); ?></h3>
-					<p class="dp-jr-part-text"><?php echo esc_html( $part[1] ); ?></p>
+					<h3 class="dp-jr-part-title"><?php echo esc_html( $step[0] ); ?></h3>
+					<p class="dp-jr-part-text"><?php echo esc_html( $step[1] ); ?></p>
+				</li>
+			<?php endforeach; ?>
+		</ol>
+
+	</div>
+</section>
+
+<section class="dp-jr-immersions" aria-labelledby="dp-jr-immersions-title">
+	<div class="dp-jr-immersions-container">
+
+		<header class="dp-jr-immersions-head">
+			<p class="dp-jr-eyebrow dp-jr-eyebrow--center">The year</p>
+			<h2 id="dp-jr-immersions-title" class="dp-jr-immersions-title">Three private <em class="dp-jr-accent">immersions.</em></h2>
+			<p class="dp-jr-immersions-lead">We leave normal life behind for a few days — not to escape it, but to see it more clearly.</p>
+		</header>
+
+		<ol class="dp-jr-immersion-list">
+			<?php foreach ( $immersions as $item ) : ?>
+				<li class="dp-jr-immersion">
+					<figure class="dp-jr-immersion-photo">
+						<img
+							src="<?php echo esc_url( $item['image'] ); ?>"
+							alt="<?php echo esc_attr( $item['alt'] ); ?>"
+							style="object-position: <?php echo esc_attr( $item['focus'] ); ?>;"
+							loading="lazy"
+							decoding="async"
+						/>
+						<span class="dp-jr-immersion-num" aria-hidden="true"><?php echo esc_html( $item['num'] ); ?></span>
+					</figure>
+					<div class="dp-jr-immersion-body">
+						<p class="dp-jr-immersion-kicker">Immersion <?php echo esc_html( $item['num'] ); ?></p>
+						<h3 class="dp-jr-immersion-name"><?php echo esc_html( $item['name'] ); ?></h3>
+						<p class="dp-jr-immersion-line"><?php echo esc_html( $item['line'] ); ?></p>
+						<p class="dp-jr-immersion-text"><?php echo esc_html( $item['text'] ); ?></p>
+					</div>
 				</li>
 			<?php endforeach; ?>
 		</ol>
@@ -90,8 +192,8 @@ $topics = array(
 
 	<figure class="dp-jr-talks-photo">
 		<img
-			src="<?php echo esc_url( $images . 'journey-f-1376.webp' ); ?>"
-			srcset="<?php echo esc_attr( $images . 'journey-f-800.webp 800w, ' . $images . 'journey-f-1376.webp 1376w' ); ?>"
+			src="<?php echo esc_url( $journey . 'journey-f-1376.webp' ); ?>"
+			srcset="<?php echo esc_attr( $journey . 'journey-f-800.webp 800w, ' . $journey . 'journey-f-1376.webp 1376w' ); ?>"
 			sizes="(max-width: 991px) 100vw, 50vw"
 			alt="Don Phin listening closely to a client in his office"
 			width="1376"
@@ -102,16 +204,60 @@ $topics = array(
 	</figure>
 
 	<div class="dp-jr-talks-content">
-		<h2 id="dp-jr-talks-title" class="dp-jr-talks-title">The Conversations</h2>
-		<p class="dp-jr-talks-when">As often as the moment requires — in person, by phone, or by Zoom.</p>
-		<p class="dp-jr-talks-lead">These are deep-dive conversations and decision sessions for:</p>
-		<ul class="dp-jr-talks-list">
-			<?php foreach ( $topics as $topic ) : ?>
-				<li><?php echo esc_html( $topic ); ?></li>
+		<h2 id="dp-jr-talks-title" class="dp-jr-talks-title">Between immersions</h2>
+		<p class="dp-jr-talks-when">Counsel on call. No one should make life’s biggest decisions alone.</p>
+		<ul class="dp-jr-talks-list dp-jr-talks-list--named">
+			<?php foreach ( $between as $item ) : ?>
+				<li>
+					<span class="dp-jr-talks-name"><?php echo esc_html( $item[0] ); ?></span>
+					<span class="dp-jr-talks-text"><?php echo esc_html( $item[1] ); ?></span>
+				</li>
 			<?php endforeach; ?>
 		</ul>
 	</div>
 
+</section>
+
+<section class="dp-jr-shape" aria-labelledby="dp-jr-shape-title">
+	<div class="dp-jr-shape-container">
+
+		<header class="dp-jr-shape-head">
+			<p class="dp-jr-eyebrow dp-jr-eyebrow--center">A framework, not a formula</p>
+			<h2 id="dp-jr-shape-title" class="dp-jr-shape-title">The same care for every man. <em class="dp-jr-accent">A year that’s only yours.</em></h2>
+		</header>
+
+		<div class="dp-jr-shape-columns">
+			<div class="dp-jr-shape-col">
+				<h3 class="dp-jr-shape-col-title">Always</h3>
+				<ul>
+					<?php foreach ( $constant as $line ) : ?>
+						<li><?php echo esc_html( $line ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+			<div class="dp-jr-shape-col dp-jr-shape-col--bespoke">
+				<h3 class="dp-jr-shape-col-title">Shaped around you</h3>
+				<ul>
+					<?php foreach ( $bespoke as $line ) : ?>
+						<li><?php echo esc_html( $line ); ?></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</section>
+
+<section class="dp-jr-access" aria-labelledby="dp-jr-access-title">
+	<div class="dp-jr-access-container">
+		<p class="dp-pc-eyebrow">Access</p>
+		<h2 id="dp-jr-access-title" class="dp-jr-access-title">Three men at any one time. <em class="dp-pc-gold-accent">Mathematics, not marketing.</em></h2>
+		<p class="dp-jr-access-text">By introduction only: from wealth advisors, estate attorneys, family offices, and men who have made the journey. When the three seats are filled, there is a quiet waitlist.</p>
+		<a href="<?php echo esc_url( $request_url ); ?>" class="dp-pc-button">
+			Request an introduction
+			<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
+		</a>
+	</div>
 </section>
 
 <section class="dp-jr-gift" aria-labelledby="dp-jr-gift-title">
@@ -151,7 +297,7 @@ $topics = array(
 <section class="dp-jr-close" aria-label="<?php esc_attr_e( 'A word from Don', 'don-phin-esq' ); ?>">
 	<figure class="dp-jr-close-figure">
 		<blockquote class="dp-jr-close-quote">
-			<p>“The best leaders I know keep climbing — not for more, but for meaning.”</p>
+			<p>“If our year together helps you live that life more intentionally, then it will have been one of the best investments either of us ever made.”</p>
 		</blockquote>
 		<figcaption class="dp-jr-close-by">— Don Phin, Esq.</figcaption>
 	</figure>

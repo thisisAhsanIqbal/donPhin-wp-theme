@@ -2,8 +2,7 @@
 Theme: Don Phin, Esq.
 Page: Private Counsel — About (page-counsel-about.php)
 Description: Don's story for the men considering counsel: the portrait beside his
-headline on navy, the story on cream, forty years one line a year on the secondary
-band, why he's the right person (with DC Cordova's word) on navy, and the invitation.
+headline on navy, the story on cream, why he's the right person (with DC Cordova's word) on navy, and the invitation.
 Loads after private-counsel.css (functions.php), whose palette, eyebrow and button it uses.
 */
 
@@ -208,62 +207,6 @@ Loads after private-counsel.css (functions.php), whose palette, eyebrow and butt
 
   .dp-ca-story .dp-ca-head {
     position: static;
-  }
-}
-
-/* ==========================================================================
-   3. THE EXPERIENCE (on the secondary band: forty years, one line a year,
-      as a ruled ledger in two columns)
-   ========================================================================== */
-.dp-ca-years {
-  background-color: var(--dp-private-counsel-band);
-  color: var(--dp-private-counsel-text);
-}
-
-.dp-ca-years-container {
-  box-sizing: border-box;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: clamp(72px, 8vw, 128px) var(--dp-header-gutter, 7vw);
-}
-
-.dp-ca-timeline {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(32px, 5vw, 96px);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.dp-ca-year {
-  display: grid;
-  grid-template-columns: clamp(64px, 6vw, 96px) minmax(0, 1fr);
-  gap: 20px;
-  align-items: baseline;
-  margin: 0;
-  padding: 20px 0;
-  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 14%, transparent);
-}
-
-.dp-ca-year-num {
-  font-family: var(--dp-font-serif);
-  font-size: clamp(22px, 1.9vw, 28px);
-  font-style: italic;
-  line-height: 1;
-  color: var(--dp-private-counsel-gold);
-}
-
-.dp-ca-year-text {
-  font-family: var(--dp-font-family);
-  font-size: clamp(15.5px, 1.1vw, 17px);
-  line-height: 1.6;
-  color: var(--dp-private-counsel-text);
-}
-
-@media (max-width: 767px) {
-  .dp-ca-timeline {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 

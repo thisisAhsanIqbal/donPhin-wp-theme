@@ -49,7 +49,7 @@ $chapters = array(
 			</h1>
 
 			<p class="dp-pc-hero-lead">
-				I work with a few good men at a time <br class="dp-pc-break">for one year to help them transform their lives.
+				I am private counsel to men who have mastered wealth, <br class="dp-pc-break">so they can fully live the life they’ve afforded themselves.
 			</p>
 
 			<blockquote class="dp-pc-hero-creed">
@@ -59,10 +59,10 @@ $chapters = array(
 
 			<div class="dp-pc-hero-actions">
 				<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-pc-button">
-					Request a conversation
+					Request an introduction
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>
-				<span class="dp-pc-hero-note">A few seats &middot; By enquiry</span>
+				<span class="dp-pc-hero-note">Three men at a time &middot; By introduction</span>
 			</div>
 		</div>
 
@@ -92,7 +92,7 @@ $chapters = array(
 		<ul class="dp-pc-hero-terms">
 			<li>
 				<span class="dp-pc-term-name">Personal</span>
-				<span class="dp-pc-term-note">A few men at a time. Never more.</span>
+				<span class="dp-pc-term-note">Three men at any one time. Never more.</span>
 			</li>
 			<li>
 				<span class="dp-pc-term-name">Confidential</span>
@@ -173,8 +173,12 @@ $chapters = array(
 		</div>
 
 		<div class="dp-pc-firststep-body">
-			<p>The Whole Life Assessment is a separate, in-depth engagement exploring where you are today across Purpose, Relationships, Health and Spirit.</p>
-			<p>At its conclusion, I’ll tell you what I see and, if we both believe a year together makes sense, I’ll design that year specifically around you.</p>
+			<p>Every engagement begins with <strong>The Everything But Your Money™ Whole-Life Assessment</strong>. Over a month, it opens with a Day of Discovery, a full day one-on-one, followed by health and personality assessments and confidential conversations with the friends, family and colleagues you give me permission to speak with.</p>
+			<p>The result is your Personal Blueprint. I’ll tell you what I see and, if we both believe a year together makes sense, I’ll design The Next Journey specifically around you.</p>
+			<a class="dp-pc-firststep-link" href="<?php echo esc_url( home_url( '/private-counsel/the-journey/' ) ); ?>">
+				See how the year unfolds
+				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
+			</a>
 		</div>
 
 	</div>
@@ -184,15 +188,15 @@ $chapters = array(
 	<div class="dp-pc-enquire-container">
 
 		<div class="dp-pc-enquire-main">
-			<p class="dp-pc-eyebrow">Enquiries</p>
+			<p class="dp-pc-eyebrow">By introduction</p>
 			<h2 id="dp-pc-enquire-title" class="dp-pc-enquire-title">
 				One conversation is usually <em class="dp-pc-gold-accent">enough to know.</em>
 			</h2>
 			<p class="dp-pc-enquire-text">
-				If someone referred you here, I would be pleased to learn more about your situation and determine whether we are the right fit.
+				I work with three men at any one time, by introduction only: from wealth advisors, estate attorneys, family offices, and men who have made the journey. If someone referred you here, I would be pleased to learn more. When the three seats are filled, there is a quiet waitlist.
 			</p>
 			<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-pc-button">
-				Request a conversation
+				Request an introduction
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
 		</div>

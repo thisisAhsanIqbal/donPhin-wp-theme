@@ -35,10 +35,11 @@ function donphin_contact_forms() {
 		'counsel'  => array(
 			'topic'    => 'Private counsel',
 			'page'     => '/private-counsel/contact/',
-			'required' => array( 'name', 'email', 'message' ),
+			'required' => array( 'name', 'email', 'introduced_by', 'message' ),
 			'fields'   => array(
-				'phone' => 'Phone',
-				'reach' => 'Best way to reach them',
+				'introduced_by' => 'Introduced by',
+				'phone'         => 'Phone',
+				'reach'         => 'Best way to reach them',
 			),
 		),
 	);

@@ -57,7 +57,7 @@ function donphin_sections() {
 		),
 		'counsel'  => array(
 			'label'      => 'Private counsel',
-			'tagline'    => 'A year built around you, a few men at a time.',
+			'tagline'    => 'The Next Journey: three men at a time, by introduction.',
 			'home'       => '/private-counsel/',
 			'slug'       => 'private-counsel',
 			'aliases'    => array( 'private', 'counsel' ),
@@ -66,7 +66,7 @@ function donphin_sections() {
 			'stylesheet' => 'private-counsel',
 			'menu'       => array(
 				array( 'Home', '/private-counsel/', 'Private Counsel home' ),
-				array( 'The Journey', '/private-counsel/the-journey/' ),
+				array( 'The Next Journey', '/private-counsel/the-journey/' ),
 				array( 'About', '/private-counsel/about/' ),
 				array( 'Resources', '/private-counsel/resources/' ),
 				array( 'Contact', '/private-counsel/contact/' ),

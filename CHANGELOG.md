@@ -9,6 +9,45 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.6.2 (2026-09-29)
+
+### Fixes
+- WordPress no longer guesses where a missing address was meant to go. It matched by
+  page name alone, so the Private Counsel menu's Resources link (no page yet) landed on
+  Speaking's Resources page, across to the other side. Missing pages now show their own
+  side's 404; moved pages are still redirected by the theme.
+
+## 1.6.1 (2026-09-29)
+
+### Pages
+- Private Counsel About: "The experience" section ("Forty years, one line a year", the
+  year-by-year timeline) removed at Don's request, with its styles. The page now reads:
+  hero, My story, Why me, and the close.
+
+## 1.6.0 (2026-09-29)
+
+### Private Counsel side matches the offer: The Next Journey
+From `reference/Part1_Offer_Architecture_The_Next_Journey.docx` and
+`reference/A_Year_in_the_Life.pdf`. Prices are deliberately not published.
+
+- **The Next Journey page** (`/private-counsel/the-journey/`, rebuilt): the journey in
+  brief ("One man. One year. Built around you."); the transformation ("Nobody has been
+  assigned to the man", the Tuesday morning after the sale, twelve months later, and the
+  moment on the trail); how it unfolds (Day of Discovery, the Everything But Your Money™
+  Whole-Life Assessment, the Personal Blueprint, the Journey); the three immersions
+  (I Ground, II Deep Immersion, III Integration, with photos); between immersions
+  (Counsel Days, the Counsel Line, Invitations); always vs. shaped around you; access
+  (three men at any one time, by introduction, a quiet waitlist); the gift; Don's close.
+  Menu label and page title: "The Next Journey".
+- **Private Counsel home**: the offer's positioning line in the hero; "Three men at a time ·
+  By introduction"; "Three men at any one time. Never more."; the first step names the
+  assessment, the Day of Discovery and the Personal Blueprint, and links to The Next
+  Journey; "Enquiries" is now "By introduction", with who introduces and the waitlist.
+- **Contact**: "Request an introduction", with a required "Who introduced you?" field,
+  saved and emailed as "Introduced by". Buttons across the side read "Request an
+  introduction".
+- **About**: "three men at a time"; 2026 is "Launches The Next Journey".
+
 ## 1.5.1 (2026-09-29)
 
 ### Speaking

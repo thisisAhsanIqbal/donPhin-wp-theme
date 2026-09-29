@@ -3,9 +3,8 @@
  * Template Name: Private Counsel — About
  *
  * The About page for the Private Counsel section (/private-counsel/about/), written
- * for the men considering counsel: Don's life story, his experience, and why he's the
- * right person to walk alongside them. Assign it to the "About" page filed under
- * Private Counsel. It sits on the Private Counsel palette (private-counsel.css), with
+ * for the men considering counsel: Don's life story and why he's the right person to
+ * walk alongside them. Assign it to the "About" page filed under Private Counsel. It sits on the Private Counsel palette (private-counsel.css), with
  * its layout in counsel-about.css.
  *
  * @package DonPhinEsq
@@ -32,18 +31,6 @@ $story_after = array(
 	'I’d love to tell you I arrived at the story insight as a clean piece of professional analysis. I didn’t. I was divorced, burned out and broke when I started applying it to my own life. It worked on me before it ever worked on a client.',
 );
 
-// The career, one line a year
-$years = array(
-	array( '1983', 'Admitted to the California Bar. Begins seventeen years of employment litigation.' ),
-	array( '1997', 'Becomes editor of IRMI’s Employment Practices Liability Consultant.' ),
-	array( '2001', 'First Vistage presentation. Roughly 600 more will follow.' ),
-	array( '2002', 'Founds HR That Works. Becomes the Institute of WorkComp Professionals’ HR advisor.' ),
-	array( '2014', 'Sells HR That Works to ThinkHR. Stays on two years as VP.' ),
-	array( '2016', 'Begins teaching for LinkedIn Learning.' ),
-	array( '2022', 'Publishes The 40//40 Solution.' ),
-	array( '2026', 'Launches private counsel.' ),
-);
-
 // Why he's the right person to walk alongside you, in his words
 $why = array(
 	'I have worked with over 6000 CEOs, and many of their teams, to develop better stories so they produce better results. These stories affect our culture, engagement, brand, ability to sell, and career opportunities. When people have the right stories, like the ones that work with reality, life is good. When they have the wrong stories, they fight reality and get frustrated, anxious, and angry.',
@@ -63,9 +50,9 @@ $foreword = array(
 		<div class="dp-ca-hero-content">
 			<p class="dp-pc-eyebrow">About Don</p>
 			<h1 id="dp-ca-title" class="dp-ca-title">It worked on me before it ever worked <em class="dp-pc-gold-accent">on a client.</em></h1>
-			<p class="dp-ca-lead">Today I keynote, and I serve as private counsel to a few men at a time, for one year, on the life their wealth was supposed to make possible.</p>
+			<p class="dp-ca-lead">Today I keynote, and I serve as private counsel to three men at a time, for one year, on the life their wealth was supposed to make possible.</p>
 			<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-pc-button">
-				Request a conversation
+				Request an introduction
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
 		</div>
@@ -110,26 +97,6 @@ $foreword = array(
 	</div>
 </section>
 
-<section class="dp-ca-years" aria-labelledby="dp-ca-years-title">
-	<div class="dp-ca-years-container">
-
-		<header class="dp-ca-head">
-			<p class="dp-ca-eyebrow">The experience</p>
-			<h2 id="dp-ca-years-title" class="dp-ca-heading">Forty years, <em class="dp-ca-accent">one line a year.</em></h2>
-		</header>
-
-		<ol class="dp-ca-timeline">
-			<?php foreach ( $years as $year ) : ?>
-				<li class="dp-ca-year">
-					<span class="dp-ca-year-num"><?php echo esc_html( $year[0] ); ?></span>
-					<span class="dp-ca-year-text"><?php echo esc_html( $year[1] ); ?></span>
-				</li>
-			<?php endforeach; ?>
-		</ol>
-
-	</div>
-</section>
-
 <section class="dp-ca-why" aria-labelledby="dp-ca-why-title">
 	<div class="dp-ca-why-container">
 
@@ -164,7 +131,7 @@ $foreword = array(
 		<h2 id="dp-ca-close-title" class="dp-ca-close-title">The bottom line is I love my work, and so do my clients, because we produce results.</h2>
 		<p class="dp-ca-close-text">How would you like to get together and learn how I can help you?</p>
 		<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-ca-button">
-			Request a conversation
+			Request an introduction
 			<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 		</a>
 	</div>
