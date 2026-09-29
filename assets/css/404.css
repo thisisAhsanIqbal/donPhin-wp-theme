@@ -1,12 +1,15 @@
 /*
 Theme: Don Phin, Esq.
 Page: 404 (404.php)
-Description: The page-not-found screen: Don on stage, full height, with its own accent colour.
-Loaded only on 404s, from functions.php.
+Description: The page-not-found screen: Don on stage, full height, under a wash in the
+colour of the section the visitor was in, with that section's accent. Loaded only on 404s
+(inc/enqueue.php), after the section's own stylesheet.
 */
 
 .dp-404 {
-  /* Accent for this page only: the eyebrow and the italic line */
+  /* The wash over the photo and the accent (eyebrow, italic line): For You by default,
+     then each section's own below */
+  --dp-404-wash: var(--dp-ink, #2A2029);
   --dp-404-accent: #EFF1AC;
 
   position: relative;
@@ -15,9 +18,19 @@ Loaded only on 404s, from functions.php.
   align-items: center;
   min-height: 100vh;
   min-height: 100svh;
-  background-color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-404-wash);
   color: var(--dp-white, #FFFFFF);
   overflow: hidden;
+}
+
+.speaking-header .dp-404 {
+  --dp-404-wash: var(--dp-speaking-navy, #12284A);
+  --dp-404-accent: var(--dp-speaking-gold, #F2B035);
+}
+
+.counsel-header .dp-404 {
+  --dp-404-wash: var(--dp-private-counsel-navy, #0F1E38);
+  --dp-404-accent: var(--dp-private-counsel-bronze-light, #CDB595);
 }
 
 /* The photo only loads on this page, since nothing else matches the selector */
@@ -39,7 +52,7 @@ Loaded only on 404s, from functions.php.
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(42, 32, 41, 0.94) 0%, rgba(42, 32, 41, 0.86) 45%, rgba(42, 32, 41, 0.6) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-404-wash) 94%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 86%, transparent) 45%, color-mix(in srgb, var(--dp-404-wash) 60%, transparent) 100%);
 }
 
 .dp-404-container {
@@ -107,7 +120,7 @@ Loaded only on 404s, from functions.php.
 
   /* Lighter than the desktop wash, so the photo still reads behind the words */
   .dp-404::after {
-    background: linear-gradient(180deg, rgba(42, 32, 41, 0.72) 0%, rgba(42, 32, 41, 0.8) 60%, rgba(42, 32, 41, 0.88) 100%);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--dp-404-wash) 72%, transparent) 0%, color-mix(in srgb, var(--dp-404-wash) 80%, transparent) 60%, color-mix(in srgb, var(--dp-404-wash) 88%, transparent) 100%);
   }
 }
 
@@ -126,4 +139,11 @@ Loaded only on 404s, from functions.php.
     justify-content: center;
     width: 100%;
   }
+}
+
+/* The way back takes the section's accent on hover */
+.dp-404 a.dp-light-button:hover,
+.dp-404 a.dp-light-button:focus-visible {
+  color: var(--dp-404-wash);
+  background-color: var(--dp-404-accent);
 }

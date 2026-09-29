@@ -47,11 +47,7 @@ function donphin_redirect_prefixes() {
  */
 function donphin_redirect_old_pages() {
 	// The requested path, without the site's own folder (e.g. /donphin/ on this machine)
-	$path = trim( (string) wp_parse_url( add_query_arg( array() ), PHP_URL_PATH ), '/' );
-	$base = trim( (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH ), '/' );
-	if ( '' !== $base && 0 === strpos( $path, $base ) ) {
-		$path = trim( substr( $path, strlen( $base ) ), '/' );
-	}
+	$path = donphin_site_path( add_query_arg( array() ) );
 
 	$target    = '';
 	$redirects = donphin_redirects();

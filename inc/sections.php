@@ -106,58 +106,129 @@ function donphin_section_key( $name ) {
 }
 
 /**
+ * A site path without the site's own folder (e.g. /donphin/ on this machine) and
+ * without slashes at either end: 'speaking/contact' for /donphin/speaking/contact/
+ *
+ * @param string $url A full URL or a path.
+ * @return string
+ */
+function donphin_site_path( $url ) {
+	$path = trim( (string) wp_parse_url( $url, PHP_URL_PATH ), '/' );
+	$base = trim( (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH ), '/' );
+	if ( '' !== $base && ( $path === $base || 0 === strpos( $path, $base . '/' ) ) ) {
+		$path = trim( substr( $path, strlen( $base ) ), '/' );
+	}
+	return $path;
+}
+
+/**
+ * Which section an address belongs to, by its first part: /speaking/... is Speaking,
+ * /private-counsel/... and /private/... are Private Counsel
+ *
+ * @param string $url A full URL or a path.
+ * @return string A section key, or '' if the address doesn't start with one.
+ */
+function donphin_section_from_url( $url ) {
+	$first = strtok( donphin_site_path( $url ), '/' );
+	return ( false === $first ) ? '' : donphin_section_key( sanitize_title( $first ) );
+}
+
+/**
+ * Which section a post or page belongs to
+ *
+ * @param int $post_id The post or page.
+ * @return string A section key, or '' if it belongs to none in particular.
+ */
+function donphin_section_for_post( $post_id ) {
+	if ( ! $post_id ) {
+		return '';
+	}
+
+	// 1. Chosen by hand in the "Header Section" box
+	$key = donphin_section_key( (string) get_post_meta( $post_id, '_donphin_header_section', true ) );
+	if ( $key ) {
+		return $key;
+	}
+
+	// The old two-header box: only 'counsel' was a real choice
+	$legacy = get_post_meta( $post_id, '_donphin_header_type', true );
+	if ( empty( $legacy ) ) {
+		$legacy = get_post_meta( $post_id, 'header_type', true );
+	}
+	if ( in_array( $legacy, array( 'counsel', 'private-counsel' ), true ) ) {
+		return 'counsel';
+	}
+
+	if ( 'page' !== get_post_type( $post_id ) ) {
+		return '';
+	}
+
+	// 2. The section's own templates, home page and extra pages
+	$template = get_page_template_slug( $post_id );
+	$slug     = get_post_field( 'post_name', $post_id );
+	foreach ( donphin_sections() as $key => $section ) {
+		if ( ( $template && in_array( $template, $section['templates'], true ) ) || ( '' !== $slug && ( $slug === $section['slug'] || in_array( $slug, $section['pages'], true ) ) ) ) {
+			return $key;
+		}
+	}
+
+	// 3. Filed under a section's home page, e.g. /speaking/about/
+	foreach ( get_post_ancestors( $post_id ) as $ancestor ) {
+		$key = donphin_section_key( get_post_field( 'post_name', $ancestor ) );
+		if ( $key ) {
+			return $key;
+		}
+	}
+
+	return '';
+}
+
+/**
  * Which section the current request belongs to. Picks the active header tab, the
- * header menu and button, the body class and the section stylesheet.
+ * header menu and button, the body class, the section stylesheet and the 404 page's
+ * way back.
  *
  * @return string A key of donphin_sections().
  */
 function donphin_get_header_section() {
-	$sections = donphin_sections();
+	// Worked out once per request, once WordPress knows what was asked for
+	static $cached = null;
+	if ( null !== $cached ) {
+		return $cached;
+	}
+
+	$key = '';
 
 	// 1. URL override, for previewing and for the thank-you page (e.g. ?header=counsel)
 	if ( isset( $_GET['header'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$key = donphin_section_key( sanitize_key( wp_unslash( $_GET['header'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( $key ) {
-			return $key;
-		}
 	}
 
-	if ( is_singular() ) {
-		// 2. Per-page choice from the "Header Section" box
-		$key = donphin_section_key( (string) get_post_meta( get_the_ID(), '_donphin_header_section', true ) );
-		if ( $key ) {
-			return $key;
-		}
-
-		// The old two-header box: only 'counsel' was a real choice
-		$legacy = get_post_meta( get_the_ID(), '_donphin_header_type', true );
-		if ( empty( $legacy ) ) {
-			$legacy = get_post_meta( get_the_ID(), 'header_type', true );
-		}
-		if ( in_array( $legacy, array( 'counsel', 'private-counsel' ), true ) ) {
-			return 'counsel';
-		}
+	// 2. A post or page: its own section
+	if ( ! $key && is_singular() ) {
+		$key = donphin_section_for_post( get_queried_object_id() );
 	}
 
-	if ( is_page() ) {
-		// 3. The section's own templates, home page and extra pages
-		foreach ( $sections as $key => $section ) {
-			$slugs = array_filter( array_merge( array( $section['slug'] ), $section['pages'] ) );
-			if ( ( $section['templates'] && is_page_template( $section['templates'] ) ) || ( $slugs && is_page( $slugs ) ) ) {
-				return $key;
-			}
-		}
+	// 3. A page that doesn't exist: the section of the address asked for, or else of
+	//    the page on this site the visitor came from, so the 404 keeps them where they were
+	if ( ! $key && is_404() ) {
+		$key = donphin_section_from_url( add_query_arg( array() ) );
 
-		// 4. Pages filed under a section's home page, e.g. /speaking/about/
-		foreach ( get_post_ancestors( get_queried_object_id() ) as $ancestor ) {
-			$key = donphin_section_key( get_post_field( 'post_name', $ancestor ) );
-			if ( $key ) {
-				return $key;
+		$referer = wp_get_raw_referer();
+		if ( ! $key && $referer && wp_validate_redirect( $referer, false ) ) {
+			$key = donphin_section_from_url( $referer );
+			if ( ! $key ) {
+				$key = donphin_section_for_post( url_to_postid( $referer ) );
 			}
 		}
 	}
 
-	return 'foryou';
+	$key = $key ? $key : 'foryou';
+
+	if ( did_action( 'wp' ) ) {
+		$cached = $key;
+	}
+	return $key;
 }
 
 /**
