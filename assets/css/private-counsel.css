@@ -143,15 +143,14 @@ a.dp-pc-button:focus-visible svg {
   color: var(--dp-private-counsel-cream);
 }
 
-/* Depth, drawn rather than photographed: a light behind the portrait, the navy
-   deepening at the edges and into the chapters below. Decorative only. */
+/* Depth, drawn rather than photographed: the navy deepening at the edges and
+   into the chapters below. No light behind the portrait. Decorative only. */
 .dp-pc-hero-scene {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(56% 50% at 74% 26%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 18%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 6%, transparent) 46%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 73%),
     radial-gradient(78% 62% at 6% 94%, color-mix(in srgb, var(--dp-private-counsel-navy) 72%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 62%),
     linear-gradient(180deg, color-mix(in srgb, var(--dp-private-counsel-navy) 42%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 24%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 68%, color-mix(in srgb, var(--dp-private-counsel-navy) 70%, transparent) 100%);
 }
@@ -286,17 +285,6 @@ a.dp-pc-button:focus-visible svg {
   height: 100%;
   object-fit: cover;
   object-position: 50% 12%;
-}
-
-/* Multiplied over the photograph: a gentle, even blue tint that takes the studio
-   grey toward the room's navy, darkening only a little at the very edges */
-.dp-pc-arch-veil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  background-image: radial-gradient(90% 75% at 55% 30%, color-mix(in srgb, var(--dp-private-counsel-navy) 8%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 12%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 24%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 36%, white) 100%);
 }
 
 /* No seam anywhere: the panel dissolves into the navy on the left and at the
@@ -469,10 +457,6 @@ a.dp-pc-button:focus-visible svg {
       linear-gradient(0deg, color-mix(in srgb, var(--dp-private-counsel-navy) 90%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 52%, transparent) 13%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 34%);
   }
 
-  .dp-pc-arch-veil {
-    background-image: radial-gradient(100% 80% at 50% 30%, color-mix(in srgb, var(--dp-private-counsel-navy) 8%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 12%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 22%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 32%, white) 100%);
-  }
-
   /* Back to source order: the writing, the photograph, then the terms */
   .dp-pc-hero-terms {
     grid-column: 1;
@@ -526,10 +510,6 @@ a.dp-pc-button:focus-visible svg {
     margin: 0 calc(-1 * var(--dp-header-gutter, 7vw));
     aspect-ratio: 1 / 1.12;
     max-height: 64vh;
-  }
-
-  .dp-pc-arch-veil {
-    background-image: radial-gradient(110% 82% at 50% 32%, color-mix(in srgb, var(--dp-private-counsel-navy) 6%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 10%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 18%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 26%, white) 100%);
   }
 
   /* Stacked, the terms read as a short list rather than three columns */

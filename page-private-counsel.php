@@ -79,8 +79,6 @@ $chapters = array(
 					decoding="async"
 					fetchpriority="high"
 				/>
-				<!-- The studio grey takes the room's navy; the face keeps its own light -->
-				<span class="dp-pc-arch-veil" aria-hidden="true"></span>
 			</div>
 			<figcaption class="dp-pc-portrait-caption">
 				<span class="dp-pc-portrait-name">Don Phin, Esq.</span>
