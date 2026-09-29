@@ -62,6 +62,30 @@ function donphin_client_logos() {
 }
 
 /**
+ * One of the theme's icons (assets/images/icons/{name}.svg), printed inline so it takes
+ * the colour of the text around it. The files draw in currentColor for that reason.
+ *
+ * @param string $name  File name without .svg, e.g. 'calendar'.
+ * @param string $class Class for the svg element.
+ * @return string The svg, or '' if there is no such icon.
+ */
+function donphin_icon( $name, $class = 'dp-icon' ) {
+	static $cache = array();
+
+	$name = sanitize_file_name( $name );
+	if ( ! isset( $cache[ $name ] ) ) {
+		$file           = get_stylesheet_directory() . '/assets/images/icons/' . $name . '.svg';
+		$cache[ $name ] = ( '' !== $name && is_readable( $file ) ) ? (string) file_get_contents( $file ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- a theme file
+	}
+	if ( '' === $cache[ $name ] ) {
+		return '';
+	}
+
+	// Decorative: the button's own words say what it does
+	return preg_replace( '/<svg\b/', '<svg class="' . esc_attr( $class ) . '" aria-hidden="true" focusable="false"', $cache[ $name ], 1 );
+}
+
+/**
  * Right arrow used after link text on the home page (hero links, Speak / Counsel)
  */
 function donphin_arrow_icon() {

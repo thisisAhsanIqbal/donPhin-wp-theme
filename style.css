@@ -112,7 +112,7 @@ html {
 
 .dp-header a:focus-visible,
 .dp-header button:focus-visible {
-  outline: 2px solid var(--dp-accent);
+  outline: 2px solid var(--dp-header-accent);
   outline-offset: 3px;
 }
 
@@ -225,44 +225,50 @@ html {
   gap: 32px;
 }
 
+/* The header's colours, as tokens each section sets from its own palette (the body class
+   comes from donphin_get_header_section()). The values after the commas are the same
+   colours, for the section's pages where its own stylesheet isn't loaded. */
+.dp-header {
+  --dp-header-ink: var(--dp-ink);             /* logo, menu toggle */
+  --dp-header-accent: var(--dp-accent);       /* logo accent, link hover */
+  --dp-header-cta-bg: var(--dp-ink);          /* the button */
+  --dp-header-cta-text: var(--dp-white);
+  --dp-header-cta-hover-bg: var(--dp-accent);
+  --dp-header-cta-hover-text: var(--dp-white);
+}
+
+.speaking-header .dp-header {
+  --dp-header-ink: var(--dp-speaking-navy, #12284A);
+  --dp-header-accent: var(--dp-speaking-blue, #1E5AA8);
+  --dp-header-cta-bg: var(--dp-speaking-blue, #1E5AA8);
+  --dp-header-cta-hover-bg: var(--dp-speaking-navy, #12284A);
+}
+
+/* Deep gold rather than bronze: small type and cream on bronze are too light to read */
+.counsel-header .dp-header {
+  --dp-header-ink: var(--dp-private-counsel-navy, #0F1E38);
+  --dp-header-accent: var(--dp-private-counsel-gold, #8A5A2B);
+  --dp-header-cta-bg: var(--dp-private-counsel-gold, #8A5A2B);
+  --dp-header-cta-text: var(--dp-private-counsel-cream, #FCFAF6);
+  --dp-header-cta-hover-bg: var(--dp-private-counsel-navy, #0F1E38);
+  --dp-header-cta-hover-text: var(--dp-private-counsel-cream, #FCFAF6);
+}
+
 .dp-header .dp-logo {
   flex-shrink: 0;
   font-size: 21px;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
-  color: var(--dp-ink);
+  color: var(--dp-header-ink);
 }
 
 .dp-header .dp-logo:hover {
-  color: var(--dp-ink);
+  color: var(--dp-header-ink);
 }
 
 .dp-header .dp-logo-accent {
-  color: var(--dp-accent);
-}
-
-/* The logo takes the colours of the section it sits in (the body class comes from
-   donphin_get_header_section()). Each section's palette lives in its page stylesheet;
-   the values after the commas are the same colours, for the section's other pages,
-   where that stylesheet isn't loaded. */
-.speaking-header .dp-header .dp-logo,
-.speaking-header .dp-header .dp-logo:hover {
-  color: var(--dp-speaking-navy, #12284A);
-}
-
-.speaking-header .dp-header .dp-logo-accent {
-  color: var(--dp-speaking-blue, #1E5AA8);
-}
-
-.counsel-header .dp-header .dp-logo,
-.counsel-header .dp-header .dp-logo:hover {
-  color: var(--dp-private-counsel-navy, #0F1E38);
-}
-
-/* Deep gold rather than bronze: the logo is small, and bronze is too light on white */
-.counsel-header .dp-header .dp-logo-accent {
-  color: var(--dp-private-counsel-gold, #8A5A2B);
+  color: var(--dp-header-accent);
 }
 
 .dp-header .dp-nav {
@@ -289,7 +295,7 @@ html {
 
 .dp-header .dp-nav-link:hover,
 .dp-header .dp-nav-link:focus-visible {
-  color: var(--dp-accent);
+  color: var(--dp-header-accent);
 }
 
 .dp-header .dp-cta-btn {
@@ -303,17 +309,26 @@ html {
   font-weight: 400;
   line-height: 1;
   white-space: nowrap;
-  color: var(--dp-white);
-  background-color: var(--dp-ink);
+  color: var(--dp-header-cta-text);
+  background-color: var(--dp-header-cta-bg);
   border: 0;
   border-radius: 0;
-  transition: background-color 0.2s ease;
+  gap: 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* The button's icon (from the section registry), in the button's own text colour */
+.dp-header .dp-cta-icon {
+  display: block;
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
 }
 
 .dp-header .dp-cta-btn:hover,
 .dp-header .dp-cta-btn:focus-visible {
-  color: var(--dp-white);
-  background-color: var(--dp-accent);
+  color: var(--dp-header-cta-hover-text);
+  background-color: var(--dp-header-cta-hover-bg);
 }
 
 /* Small desktops: tighten so the longest menu + CTA (Private counsel) still fits on one row */
@@ -349,67 +364,62 @@ html {
   display: none !important;
 }
 
-/* Hamburger toggle (menuIcon.svg shape, no background or border) */
+/* Menu toggle: the hamburger and the cross sit on top of each other and swap with a
+   quick crossfade and turn. No background or border. */
 .dp-header .dp-mobile-toggle {
   display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
   margin-left: auto;
+  margin-right: -8px;
+  padding: 0;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  padding: 6px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  color: var(--dp-ink) !important;
+  color: var(--dp-header-ink) !important;
   line-height: 1;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
 }
 
 .dp-header .dp-mobile-toggle:hover {
-  color: var(--dp-accent) !important;
+  color: var(--dp-header-accent) !important;
+}
+
+.dp-mobile-toggle .dp-icon-hamburger,
+.dp-mobile-toggle .dp-icon-close {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .dp-mobile-toggle .dp-icon-hamburger {
-  display: block;
   width: 28px;
   height: 28px;
+  transform: translate(-50%, -50%);
 }
 
 .dp-mobile-toggle .dp-icon-close {
-  display: none;
   width: 26px;
   height: 26px;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.6);
 }
 
 .dp-mobile-toggle.is-active .dp-icon-hamburger {
-  display: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg) scale(0.6);
 }
 
 .dp-mobile-toggle.is-active .dp-icon-close {
-  display: block;
-  animation: dpRotateIn 0.2s ease forwards;
-}
-
-@keyframes dpRotateIn {
-  from {
-    opacity: 0;
-    transform: rotate(-45deg) scale(0.85);
-  }
-  to {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-}
-
-@keyframes dpNavFadeDown {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 991px) {
@@ -425,31 +435,47 @@ html {
     display: flex;
   }
 
-  /* The menu + CTA drop down under the main bar. The header is fixed, so a long
-     menu scrolls inside the drawer rather than moving the page. */
+  /* The menu fills the screen under the header: the links at the top (scrolling on
+     their own if they ever run long) and the button held at the foot. It is always
+     laid out, just hidden, so it can slide and fade both ways; assets/js/header.js
+     sets --dp-drawer-top to wherever the header ends. */
   .dp-header .dp-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    position: fixed;
+    top: var(--dp-drawer-top, var(--dp-header-height));
     right: 0;
-    max-height: calc(100vh - var(--dp-header-height));
-    max-height: calc(100svh - var(--dp-header-height));
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     margin: 0;
-    padding: 4px var(--dp-header-gutter) 28px;
+    padding: 8px var(--dp-header-gutter) calc(20px + env(safe-area-inset-bottom, 0px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     background-color: var(--dp-white);
     border-top: 1px solid rgba(42, 32, 41, 0.08);
-    box-shadow: 0 16px 36px rgba(42, 32, 41, 0.14);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    /* Closing: fade and lift quickly, then hide once it has finished */
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 1, 1),
+      visibility 0s linear 0.3s;
   }
 
   .dp-header .dp-nav.is-open {
-    display: flex;
-    animation: dpNavFadeDown 0.25s ease forwards;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    /* Opening: a slightly slower, softer settle */
+    transition:
+      opacity 0.35s ease,
+      transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+      visibility 0s linear 0s;
   }
 
   .dp-header .dp-nav-list {
@@ -464,14 +490,53 @@ html {
 
   .dp-header .dp-nav-link {
     display: block;
-    padding: 15px 0;
-    font-size: 16px;
+    padding: 18px 0;
+    font-size: 17px;
   }
 
+  /* The links and the button follow the panel in, one after another */
+  .dp-header .dp-nav-list li,
+  .dp-header .dp-nav .dp-cta-btn {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .dp-header .dp-nav.is-open .dp-nav-list li,
+  .dp-header .dp-nav.is-open .dp-cta-btn {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.4s ease var(--dp-stagger, 0ms),
+      transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) var(--dp-stagger, 0ms);
+  }
+
+  .dp-header .dp-nav-list li:nth-child(1) { --dp-stagger: 80ms; }
+  .dp-header .dp-nav-list li:nth-child(2) { --dp-stagger: 125ms; }
+  .dp-header .dp-nav-list li:nth-child(3) { --dp-stagger: 170ms; }
+  .dp-header .dp-nav-list li:nth-child(4) { --dp-stagger: 215ms; }
+  .dp-header .dp-nav-list li:nth-child(5) { --dp-stagger: 260ms; }
+  .dp-header .dp-nav-list li:nth-child(n + 6) { --dp-stagger: 300ms; }
+  .dp-header .dp-nav .dp-cta-btn { --dp-stagger: 320ms; }
+
+  /* The button sits at the foot of the screen, full width */
   .dp-header .dp-cta-btn {
-    margin-top: 22px;
-    height: 50px;
+    flex-shrink: 0;
+    margin-top: auto;
+    width: 100%;
+    height: 56px;
     font-size: 17px;
+  }
+
+  /* Room between the last link and the button when the links run long */
+  .dp-header .dp-nav-list {
+    margin-bottom: 28px;
+  }
+
+  /* The page underneath stays put while the menu is open */
+  html.dp-menu-open,
+  html.dp-menu-open body {
+    overflow: hidden;
   }
 }
 
@@ -512,9 +577,13 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .dp-header .dp-nav,
   .dp-header .dp-nav.is-open,
-  .dp-mobile-toggle.is-active .dp-icon-close {
-    animation: none;
+  .dp-header .dp-nav-list li,
+  .dp-header .dp-nav .dp-cta-btn,
+  .dp-mobile-toggle .dp-icon-hamburger,
+  .dp-mobile-toggle .dp-icon-close {
+    transition: none !important;
   }
 }
 

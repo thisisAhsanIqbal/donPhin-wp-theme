@@ -30,7 +30,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * stylesheet The section's palette, assets/css/{stylesheet}.css, loaded on all its pages.
  * menu       The header menu, used until a menu is assigned to the section in
  *            Appearance > Menus: array( label, path, optional screen reader label ).
- * cta        The header button: array( label, path ).
+ * cta        The header button: array( label, path, icon ), the icon being a file in
+ *            assets/images/icons/ without its .svg.
  *
  * @return array
  */
@@ -50,7 +51,7 @@ function donphin_sections() {
 				array( 'Tools', '/free-tools/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
-			'cta'        => array( 'Book Don', '/speaking/contact/' ),
+			'cta'        => array( 'Book Don', '/speaking/contact/', 'calendar' ),
 		),
 		'counsel'  => array(
 			'label'      => 'Private counsel',
@@ -67,7 +68,7 @@ function donphin_sections() {
 				array( 'Resources', '/private-counsel/resources/' ),
 				array( 'Contact', '/private-counsel/contact/' ),
 			),
-			'cta'        => array( 'Request A Conversation', '/private-counsel/contact/' ),
+			'cta'        => array( 'Enquire', '/private-counsel/contact/', 'send' ),
 		),
 		'speaking' => array(
 			'label'      => 'Speaking',
@@ -84,7 +85,7 @@ function donphin_sections() {
 				array( 'The 40//40 Solution', '/purchase-the-40-40-solution/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
-			'cta'        => array( 'Book Don', '/speaking/contact/' ),
+			'cta'        => array( 'Book Don', '/speaking/contact/', 'calendar' ),
 		),
 	);
 }
@@ -187,10 +188,11 @@ add_action( 'after_setup_theme', 'donphin_register_section_menus' );
  * A section's header menu and button, ready to print.
  *
  * From the menu assigned in Appearance > Menus if there is one (an item given the CSS
- * class "cta" there becomes the button), otherwise from donphin_sections().
+ * class "cta" there becomes the button, and a class "icon-calendar", say, picks its
+ * icon), otherwise from donphin_sections().
  *
  * @param string $key A key of donphin_sections().
- * @return array { links: array of array( label, url, aria label ), cta: array( label, url ) }
+ * @return array { links: array of array( label, url, aria label ), cta: array( label, url, icon ) }
  */
 function donphin_section_menu( $key ) {
 	$sections = donphin_sections();
@@ -200,7 +202,7 @@ function donphin_section_menu( $key ) {
 	foreach ( $section['menu'] as $link ) {
 		$links[] = array( $link[0], home_url( $link[1] ), isset( $link[2] ) ? $link[2] : '' );
 	}
-	$cta = array( $section['cta'][0], home_url( $section['cta'][1] ) );
+	$cta = array( $section['cta'][0], home_url( $section['cta'][1] ), isset( $section['cta'][2] ) ? $section['cta'][2] : '' );
 
 	$locations = get_nav_menu_locations();
 	$location  = 'section-' . $key;
@@ -210,7 +212,14 @@ function donphin_section_menu( $key ) {
 			$links = array();
 			foreach ( $items as $item ) {
 				if ( in_array( 'cta', (array) $item->classes, true ) ) {
-					$cta = array( $item->title, $item->url );
+					// Its icon: a class "icon-{name}" on the item, or the section's own
+					$icon = $cta[2];
+					foreach ( (array) $item->classes as $class ) {
+						if ( 0 === strpos( $class, 'icon-' ) ) {
+							$icon = substr( $class, 5 );
+						}
+					}
+					$cta = array( $item->title, $item->url, $icon );
 					continue;
 				}
 				$links[] = array( $item->title, $item->url, $item->attr_title );

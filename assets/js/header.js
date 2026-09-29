@@ -31,35 +31,71 @@ document.addEventListener('DOMContentLoaded', function() {
     followAdminBar();
   }
 
-  // Mobile menu toggle for each site header on the page
+  // Mobile menu: a full-screen panel under the header, links at the top and the
+  // button at the foot. The panel's slide and fade are in style.css; this opens and
+  // closes it and keeps it easy to use.
+  const smallScreen = window.matchMedia('(max-width: 991px)');
+
   document.querySelectorAll('.dp-header').forEach(function(header) {
     const toggleBtn = header.querySelector('.dp-mobile-toggle');
     const navWrap = toggleBtn && document.getElementById(toggleBtn.getAttribute('aria-controls'));
     if (!navWrap) return;
 
-    function setOpen(isOpen) {
-      toggleBtn.setAttribute('aria-expanded', String(isOpen));
-      toggleBtn.classList.toggle('is-active', isOpen);
-      navWrap.classList.toggle('is-open', isOpen);
+    const isOpen = function() { return navWrap.classList.contains('is-open'); };
+
+    // The panel starts wherever the header ends (lower when WordPress's toolbar shows)
+    function placePanel() {
+      header.style.setProperty('--dp-drawer-top', Math.round(header.getBoundingClientRect().bottom) + 'px');
     }
 
-    toggleBtn.addEventListener('click', function() {
-      setOpen(!navWrap.classList.contains('is-open'));
-    });
+    // fromKeyboard: opened with Enter or Space, so focus moves into the menu (not on a tap)
+    function setOpen(open, returnFocus, fromKeyboard) {
+      if (open) placePanel();
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      toggleBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      toggleBtn.classList.toggle('is-active', open);
+      navWrap.classList.toggle('is-open', open);
 
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!header.contains(e.target) && navWrap.classList.contains('is-open')) {
-        setOpen(false);
-      }
-    });
+      // The page underneath stays put while the menu is open
+      document.documentElement.classList.toggle('dp-menu-open', open);
 
-    // Close menu on Escape key and return focus to the toggle
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && navWrap.classList.contains('is-open')) {
-        setOpen(false);
+      if (open && fromKeyboard) {
+        // Into the menu for keyboard users, once it has started to appear
+        const first = navWrap.querySelector('a');
+        if (first) window.setTimeout(function() { first.focus({ preventScroll: true }); }, 120);
+      } else if (returnFocus) {
         toggleBtn.focus();
       }
+    }
+
+    toggleBtn.setAttribute('aria-label', 'Open menu');
+    toggleBtn.addEventListener('click', function(e) {
+      // A click from Enter or Space has no pointer position (detail is 0)
+      setOpen(!isOpen(), false, e.detail === 0);
+    });
+
+    // Choosing a link closes the menu (matters most for links within the same page)
+    navWrap.addEventListener('click', function(e) {
+      if (e.target.closest('a') && smallScreen.matches) setOpen(false, false);
+    });
+
+    // A click anywhere else on the page closes it too
+    document.addEventListener('click', function(e) {
+      if (isOpen() && !header.contains(e.target)) setOpen(false, false);
+    });
+
+    // Escape closes it and returns focus to the toggle
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isOpen()) setOpen(false, true);
+    });
+
+    // Turning a tablet or widening the window past the menu's size closes it
+    smallScreen.addEventListener('change', function(e) {
+      if (!e.matches && isOpen()) setOpen(false, false);
+    });
+
+    window.addEventListener('resize', function() {
+      if (isOpen()) placePanel();
     });
   });
 });

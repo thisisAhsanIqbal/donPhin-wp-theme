@@ -62,7 +62,10 @@ $socials  = donphin_social_links();
 						</li>
 					<?php endforeach; ?>
 				</ul>
-				<a href="<?php echo esc_url( $menu['cta'][1] ); ?>" class="dp-cta-btn"><?php echo esc_html( $menu['cta'][0] ); ?></a>
+				<a href="<?php echo esc_url( $menu['cta'][1] ); ?>" class="dp-cta-btn">
+					<?php echo donphin_icon( $menu['cta'][2], 'dp-cta-icon' ); // phpcs:ignore WordPress.Security.EscapeOutput -- the theme's own SVG file ?>
+					<span><?php echo esc_html( $menu['cta'][0] ); ?></span>
+				</a>
 			</nav>
 
 			<button class="dp-mobile-toggle" type="button" aria-label="<?php esc_attr_e( 'Toggle navigation', 'don-phin-esq' ); ?>" aria-controls="dp-site-nav" aria-expanded="false">
