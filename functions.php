@@ -17,6 +17,8 @@ $donphin_modules = array(
 	'sections',         // The site's sections (For You, Private Counsel, Speaking): menus, detection, body class
 	'enqueue',          // Stylesheets and scripts, by section and by page template
 	'redirects',        // Old and shorthand addresses, sent on to where the pages live now
+	'redirects-admin',  // Tools > Old Addresses: every redirect, where it leads, and forgetting old ones
+	'robots',           // robots.txt: AI assistants may read the site even while search engines are kept out
 	'page-transitions', // A soft fade as each page arrives (the fade is in style.css)
 	'header-meta-box',  // The "Header Section" box on the page screen
 	'contact-form',     // The Speaking and Private Counsel contact forms
