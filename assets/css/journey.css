@@ -1,0 +1,568 @@
+/*
+Theme: Don Phin, Esq.
+Page: The Journey (page-the-journey.php)
+Description: The Journey, part of Private Counsel, on cream: the year built around you
+beside Don at the table, its three parts, the conversations on the secondary band, what
+happens between them, the gift of The Inner Climb, and Don's closing line.
+Loads after private-counsel.css (functions.php), whose palette and book it uses.
+*/
+
+/* ==========================================================================
+   0. SHARED PIECES
+   ========================================================================== */
+/* Small tracked label in deep gold (bronze is too light for small type on cream) */
+.dp-jr-eyebrow {
+  font-family: var(--dp-font-family) !important;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-private-counsel-gold);
+  margin: 0 0 18px 0;
+}
+
+.dp-jr-eyebrow--center {
+  text-align: center;
+}
+
+.dp-jr-accent {
+  font-style: italic;
+  color: var(--dp-private-counsel-gold);
+}
+
+/* Outlined navy button for the light sections; fills navy on hover */
+a.dp-jr-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 52px;
+  padding: 0 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-private-counsel-navy);
+  background-color: transparent;
+  border: 1px solid var(--dp-private-counsel-navy);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-jr-button:hover,
+a.dp-jr-button:focus-visible {
+  color: var(--dp-private-counsel-cream);
+  background-color: var(--dp-private-counsel-navy);
+}
+
+a.dp-jr-button:focus-visible {
+  outline: 2px solid var(--dp-private-counsel-bronze);
+  outline-offset: 4px;
+}
+
+a.dp-jr-button svg {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+a.dp-jr-button:hover svg,
+a.dp-jr-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+/* ==========================================================================
+   1. HERO (the year built around you, beside Don at the table; the photo runs
+      to the right edge of the screen)
+   ========================================================================== */
+.dp-jr-hero {
+  background-color: var(--dp-private-counsel-cream);
+  color: var(--dp-private-counsel-text);
+}
+
+.dp-jr-hero-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.dp-jr-hero-content {
+  box-sizing: border-box;
+  padding: clamp(56px, 7vw, 120px) clamp(40px, 5vw, 88px) clamp(56px, 7vw, 120px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-jr-hero .dp-jr-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(38px, 4vw, 64px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 28px 0;
+}
+
+.dp-jr-hero .dp-jr-lead {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.5;
+  color: var(--dp-private-counsel-text);
+  max-width: 28em;
+  margin: 0 0 20px 0;
+}
+
+.dp-jr-hero .dp-jr-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.15vw, 17.5px);
+  line-height: 1.75;
+  color: var(--dp-private-counsel-muted);
+  max-width: 30em;
+  margin: 0;
+  padding-left: 18px;
+  border-left: 2px solid var(--dp-private-counsel-bronze);
+}
+
+.dp-jr-hero-photo {
+  margin: 0;
+  align-self: stretch;
+  min-height: 520px;
+}
+
+.dp-jr-hero-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 40%;
+}
+
+@media (max-width: 991px) {
+  .dp-jr-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-jr-hero-content {
+    padding: 56px var(--dp-header-gutter, 7vw) 44px;
+  }
+
+  .dp-jr-hero-photo {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-jr-hero .dp-jr-title {
+    font-size: 36px;
+  }
+
+  .dp-jr-hero .dp-jr-lead {
+    font-size: 19px;
+  }
+
+  .dp-jr-hero-photo {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ==========================================================================
+   2. A YEAR DESIGNED AROUND YOU (three parts across, each numbered, under a rule)
+   ========================================================================== */
+.dp-jr-year {
+  background-color: var(--dp-private-counsel-cream);
+}
+
+.dp-jr-year-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(64px, 7vw, 112px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-jr-parts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 72px);
+  list-style: none;
+  margin: clamp(28px, 3vw, 44px) 0 0 0;
+  padding: 0;
+}
+
+.dp-jr-part {
+  margin: 0;
+  padding-top: 24px;
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 55%, transparent);
+}
+
+.dp-jr-part-num {
+  display: block;
+  font-family: var(--dp-font-serif);
+  font-size: clamp(30px, 2.6vw, 42px);
+  font-style: italic;
+  line-height: 1;
+  color: var(--dp-private-counsel-bronze);
+  margin-bottom: 18px;
+}
+
+.dp-jr-year .dp-jr-part-title {
+  font-family: var(--dp-font-family) !important;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 12px 0;
+}
+
+.dp-jr-year .dp-jr-part-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(15.5px, 1.1vw, 17px);
+  line-height: 1.7;
+  color: var(--dp-private-counsel-text);
+  max-width: 26em;
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .dp-jr-parts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+}
+
+/* ==========================================================================
+   3. THE CONVERSATIONS (the photo flush to the left edge, the detail on the
+      secondary band beside it)
+   ========================================================================== */
+.dp-jr-talks {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  background-color: var(--dp-private-counsel-band);
+  color: var(--dp-private-counsel-text);
+}
+
+.dp-jr-talks-photo {
+  margin: 0;
+  min-height: 460px;
+}
+
+.dp-jr-talks-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 58% 40%;
+}
+
+.dp-jr-talks-content {
+  box-sizing: border-box;
+  align-self: center;
+  max-width: calc(560px + 2 * clamp(40px, 5vw, 88px));
+  padding: clamp(56px, 6vw, 96px) clamp(40px, 5vw, 88px);
+}
+
+.dp-jr-talks .dp-jr-talks-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(32px, 3vw, 48px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 10px 0;
+}
+
+.dp-jr-talks .dp-jr-talks-when {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(17px, 1.3vw, 20px);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--dp-private-counsel-gold);
+  margin: 0 0 26px 0;
+}
+
+.dp-jr-talks .dp-jr-talks-lead {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 18px 0;
+}
+
+/* Each topic follows a short bronze dash */
+.dp-jr-talks-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-jr-talks-list li {
+  position: relative;
+  font-family: var(--dp-font-family);
+  font-size: clamp(15.5px, 1.1vw, 16.5px);
+  line-height: 1.55;
+  color: var(--dp-private-counsel-text);
+  margin: 0;
+  padding: 12px 0 12px 34px;
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 10%, transparent);
+}
+
+.dp-jr-talks-list li:last-child {
+  border-bottom: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 10%, transparent);
+}
+
+.dp-jr-talks-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35em;
+  width: 18px;
+  height: 1px;
+  background-color: var(--dp-private-counsel-bronze);
+}
+
+@media (max-width: 991px) {
+  .dp-jr-talks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-jr-talks-photo {
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .dp-jr-talks-content {
+    max-width: none;
+    padding: 48px var(--dp-header-gutter, 7vw) 56px;
+  }
+}
+
+/* ==========================================================================
+   4. BETWEEN CONVERSATIONS (the rhythm of the year, centred on cream)
+   ========================================================================== */
+.dp-jr-between {
+  background-color: var(--dp-private-counsel-cream);
+}
+
+.dp-jr-between-container {
+  box-sizing: border-box;
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(72px, 8vw, 128px) var(--dp-header-gutter, 7vw) clamp(56px, 6vw, 88px);
+  text-align: center;
+}
+
+.dp-jr-between .dp-jr-between-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(30px, 3.2vw, 50px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 24px 0;
+}
+
+.dp-jr-between .dp-jr-between-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.75;
+  color: var(--dp-private-counsel-text);
+  max-width: 38em;
+  margin: 0 auto;
+}
+
+/* Two of the experiences, side by side, lifted off the cream by a soft shadow */
+.dp-jr-between-photos {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  max-width: calc(1000px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: 0 var(--dp-header-gutter, 7vw) clamp(64px, 7vw, 104px);
+}
+
+.dp-jr-between-photo {
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  box-shadow: 0 22px 44px -24px color-mix(in srgb, var(--dp-private-counsel-navy) 45%, transparent);
+}
+
+.dp-jr-between-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-jr-between-photo:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 640px) {
+  .dp-jr-between-photos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
+   5. THE GIFT (The Inner Climb on the secondary band: the book, what it is,
+      and the offer to send it)
+   ========================================================================== */
+.dp-jr-gift {
+  background-color: var(--dp-private-counsel-cream);
+}
+
+.dp-jr-gift-container {
+  box-sizing: border-box;
+  max-width: calc(1080px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: 0 var(--dp-header-gutter, 7vw);
+}
+
+.dp-jr-gift-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 0.8fr);
+  align-items: center;
+  gap: clamp(28px, 4vw, 64px);
+  padding: clamp(36px, 4vw, 56px) clamp(28px, 4vw, 64px);
+  background-color: var(--dp-private-counsel-band);
+  border-top: 2px solid var(--dp-private-counsel-bronze);
+}
+
+/* The book turns toward the reader on hover, as on the Private Counsel page */
+.dp-jr-gift-card:hover .dp-pc-book-cover {
+  transform: rotateY(-6deg);
+}
+
+.dp-jr-gift .dp-jr-gift-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dp-private-counsel-navy);
+  margin: 0 0 12px 0;
+}
+
+.dp-jr-gift .dp-jr-gift-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(15.5px, 1.1vw, 17px);
+  line-height: 1.7;
+  color: var(--dp-private-counsel-text);
+  max-width: 28em;
+  margin: 0;
+}
+
+/* The offer, set off by a hairline on its left */
+.dp-jr-gift-offer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-left: clamp(24px, 3vw, 48px);
+  border-left: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 14%, transparent);
+}
+
+.dp-jr-gift .dp-jr-gift-note {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.5;
+  color: var(--dp-private-counsel-navy);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .dp-jr-gift-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .dp-jr-gift-offer {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    padding-top: 28px;
+    border-left: 0;
+    border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-navy) 14%, transparent);
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-jr-gift-card {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+  }
+
+  .dp-jr-gift-container {
+    padding: 0;
+  }
+
+  .dp-jr-gift-card {
+    padding-left: var(--dp-header-gutter, 7vw);
+    padding-right: var(--dp-header-gutter, 7vw);
+  }
+}
+
+/* ==========================================================================
+   6. CLOSING LINE (Don's words, centred)
+   ========================================================================== */
+.dp-jr-close {
+  background-color: var(--dp-private-counsel-cream);
+}
+
+.dp-jr-close-figure {
+  box-sizing: border-box;
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(64px, 7vw, 112px) var(--dp-header-gutter, 7vw);
+  text-align: center;
+}
+
+.dp-jr-close-quote {
+  margin: 0 0 16px 0;
+  padding: 0;
+  border: 0;
+}
+
+.dp-jr-close-quote p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(24px, 2.4vw, 36px);
+  font-style: italic;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--dp-private-counsel-navy);
+  margin: 0;
+}
+
+.dp-jr-close-by {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-private-counsel-gold);
+}
+
+/* ==========================================================================
+   7. REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  a.dp-jr-button,
+  a.dp-jr-button svg,
+  .dp-jr-between-photo img {
+    transition: none;
+  }
+
+  .dp-jr-between-photo:hover img {
+    transform: none;
+  }
+}

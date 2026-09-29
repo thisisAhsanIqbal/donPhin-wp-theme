@@ -87,13 +87,26 @@ function donphin_enqueue_scripts() {
 		true
 	);
 
+	// The Journey is part of Private Counsel: it takes that page's stylesheet too
+	$is_journey = is_page_template( 'page-the-journey.php' ) || is_page( array( 'the-journey', 'journey' ) );
+
 	// Dedicated Stylesheet for Private Counsel Page (Zero clutter in style.css)
-	if ( is_page_template( 'page-private-counsel.php' ) || is_page( array( 'private-counsel', 'counsel' ) ) || ( isset( $_GET['header'] ) && 'counsel' === $_GET['header'] ) ) {
+	if ( $is_journey || is_page_template( 'page-private-counsel.php' ) || is_page( array( 'private-counsel', 'counsel' ) ) || ( isset( $_GET['header'] ) && 'counsel' === $_GET['header'] ) ) {
 		wp_enqueue_style(
 			'donphin-private-counsel',
 			get_stylesheet_directory_uri() . '/assets/css/private-counsel.css',
 			array( 'donphin-child-style' ),
 			donphin_asset_version( '/assets/css/private-counsel.css' )
+		);
+	}
+
+	// The Journey's own layout, on top of the Private Counsel palette
+	if ( $is_journey ) {
+		wp_enqueue_style(
+			'donphin-journey',
+			get_stylesheet_directory_uri() . '/assets/css/journey.css',
+			array( 'donphin-private-counsel' ),
+			donphin_asset_version( '/assets/css/journey.css' )
 		);
 	}
 

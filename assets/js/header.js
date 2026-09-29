@@ -12,6 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('scroll', markStuck, { passive: true });
   markStuck();
 
+  // Logged in, on phones: WordPress's toolbar scrolls away with the page there, so
+  // the header follows its bottom edge up to the top of the screen instead of
+  // leaving a gap where the toolbar was
+  const adminBar = document.getElementById('wpadminbar');
+
+  if (adminBar) {
+    function followAdminBar() {
+      const scrollsAway = window.getComputedStyle(adminBar).position !== 'fixed';
+      const top = scrollsAway ? Math.max(0, adminBar.getBoundingClientRect().bottom) + 'px' : '';
+      stuck.forEach(function(header) {
+        header.style.top = top;
+      });
+    }
+
+    window.addEventListener('scroll', followAdminBar, { passive: true });
+    window.addEventListener('resize', followAdminBar);
+    followAdminBar();
+  }
+
   // Mobile menu toggle for each site header on the page
   document.querySelectorAll('.dp-header').forEach(function(header) {
     const toggleBtn = header.querySelector('.dp-mobile-toggle');

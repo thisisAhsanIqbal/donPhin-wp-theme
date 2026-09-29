@@ -52,14 +52,14 @@ $youtube = donphin_social_links()['youtube'];
 		<?php get_template_part( 'template-parts/logo-marquee', null, array( 'labelledby' => 'dp-home-hero-proof-label' ) ); ?>
 	</div>
 
-	<!-- Portrait on the blue panel -->
+	<!-- Portrait, filling the right-hand panel -->
 	<div class="dp-home-hero-media">
 		<img
-			src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/phin.webp' ); ?>"
-			alt="Don Phin, Esq."
+			src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/donphin-greenbg.webp' ); ?>"
+			alt="Don Phin, Esq., smiling on a tree-lined street"
 			class="dp-home-hero-portrait"
-			width="1603"
-			height="1598"
+			width="1024"
+			height="1024"
 			fetchpriority="high"
 		/>
 	</div>

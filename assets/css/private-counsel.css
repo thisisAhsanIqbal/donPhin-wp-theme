@@ -10,17 +10,20 @@ and the enquiry beside The Inner Climb. Loaded only on that page, from functions
    0. TOKENS AND SHARED PIECES
    ========================================================================== */
 :root {
-  /* Deep, rich blues and gold: Don's direction for this page. Most sections sit on
-     navy; The Setting is the one pause, on ivory. */
-  --dp-pc-abyss: #0A1628;       /* deepest navy: the five chapters, the gift panel */
-  --dp-pc-navy: #10284A;        /* rich sapphire navy: hero, enquiries, navy type on ivory */
-  --dp-pc-sapphire: #1A3D6E;    /* lighter navy, for gradients and the doors */
-  --dp-pc-gold: #C9A15B;        /* antique gold: rules, fills, the button */
-  --dp-pc-gold-light: #E4C47F;  /* gold type on navy */
-  --dp-pc-gold-deep: #9A7130;   /* large gold type on ivory */
-  --dp-pc-gold-ink: #7E5A26;    /* small gold type on ivory (AA contrast) */
-  --dp-pc-cream: #F3EAD8;       /* type on navy, warmer than white */
-  --dp-pc-ivory: #F4ECDD;       /* The Setting's background */
+  /* The Private Counsel page's own palette. This stylesheet loads only on that
+     page, so these never reach the rest of the site. Change a colour here and
+     the whole page follows. */
+  --dp-private-counsel-navy: #0F1E38;        /* deep navy: the hero, the chapters, enquiries, headings on cream */
+  --dp-private-counsel-bronze: #A67C4E;      /* bronze: rules, fills, the button */
+  --dp-private-counsel-gold: #8A5A2B;        /* deep gold: gold type on the light sections */
+  --dp-private-counsel-cream: #FCFAF6;       /* cream: the light sections, and type on navy */
+  --dp-private-counsel-band: #EFE8DB;        /* secondary band: the book's pages, soft fills */
+  --dp-private-counsel-text: #1A2436;        /* body text on the light sections */
+  --dp-private-counsel-muted: #6B6357;       /* muted text on the light sections */
+
+  /* Mixed from the palette, so they follow it */
+  --dp-private-counsel-navy-soft: color-mix(in srgb, var(--dp-private-counsel-navy) 84%, white);      /* a lifted navy for gradients */
+  --dp-private-counsel-bronze-light: color-mix(in srgb, var(--dp-private-counsel-bronze) 62%, white); /* bronze type on navy, light enough to read */
 }
 
 /* Small label with a gold rule before it */
@@ -34,7 +37,7 @@ and the enquiry beside The Inner Climb. Loaded only on that page, from functions
   letter-spacing: 0.2em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
   margin: 0 0 22px 0;
 }
 
@@ -43,12 +46,12 @@ and the enquiry beside The Inner Climb. Loaded only on that page, from functions
   flex-shrink: 0;
   width: 28px;
   height: 1px;
-  background-color: var(--dp-pc-gold);
+  background-color: var(--dp-private-counsel-bronze);
 }
 
 .dp-pc-gold-accent {
   font-style: italic;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
 }
 
 /* Read by screen readers only */
@@ -77,19 +80,19 @@ a.dp-pc-button {
   font-weight: 400;
   line-height: 1;
   white-space: nowrap;
-  color: var(--dp-pc-abyss) !important;
-  background-color: var(--dp-pc-gold);
+  color: var(--dp-private-counsel-navy) !important;
+  background-color: var(--dp-private-counsel-bronze);
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
 
 a.dp-pc-button:hover,
 a.dp-pc-button:focus-visible {
-  background-color: var(--dp-pc-gold-light);
+  background-color: var(--dp-private-counsel-bronze-light);
 }
 
 a.dp-pc-button:focus-visible {
-  outline: 2px solid var(--dp-pc-gold-light);
+  outline: 2px solid var(--dp-private-counsel-bronze-light);
   outline-offset: 4px;
 }
 
@@ -108,23 +111,23 @@ a.dp-pc-button:focus-visible svg {
    blue, since the site's near-black reads the same as this page's deepest navy)
    ========================================================================== */
 .dp-header .dp-topbar {
-  background-color: var(--dp-pc-navy);
+  background-color: var(--dp-private-counsel-navy);
 }
 
 .dp-header .dp-tab:hover {
-  color: var(--dp-pc-gold-light);
-  background-color: rgba(255, 255, 255, 0.08);
+  color: var(--dp-private-counsel-bronze-light);
+  background-color: color-mix(in srgb, var(--dp-private-counsel-cream) 8%, transparent);
 }
 
 /* The active tab stays white so it joins the main bar, with a gold edge on top */
 .dp-header .dp-tab.is-active {
-  color: var(--dp-pc-navy);
-  background-color: var(--dp-white, #FFFFFF);
-  box-shadow: inset 0 2px 0 var(--dp-pc-gold);
+  color: var(--dp-private-counsel-navy);
+  background-color: var(--dp-private-counsel-cream);
+  box-shadow: inset 0 2px 0 var(--dp-private-counsel-bronze);
 }
 
 .dp-header .dp-topbar .dp-tab.is-active:focus-visible {
-  outline-color: var(--dp-pc-navy);
+  outline-color: var(--dp-private-counsel-navy);
 }
 
 /* ==========================================================================
@@ -136,8 +139,8 @@ a.dp-pc-button:focus-visible svg {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: var(--dp-pc-navy);
-  color: var(--dp-pc-cream);
+  background-color: var(--dp-private-counsel-navy);
+  color: var(--dp-private-counsel-cream);
 }
 
 /* Depth, drawn rather than photographed: a light behind the portrait, the navy
@@ -148,9 +151,9 @@ a.dp-pc-button:focus-visible svg {
   z-index: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(56% 50% at 74% 26%, rgba(43, 96, 163, 0.18) 0%, rgba(26, 61, 110, 0.06) 46%, rgba(16, 40, 74, 0) 73%),
-    radial-gradient(78% 62% at 6% 94%, rgba(10, 22, 40, 0.72) 0%, rgba(10, 22, 40, 0) 62%),
-    linear-gradient(180deg, rgba(10, 22, 40, 0.42) 0%, rgba(10, 22, 40, 0) 24%, rgba(10, 22, 40, 0) 68%, rgba(10, 22, 40, 0.70) 100%);
+    radial-gradient(56% 50% at 74% 26%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 18%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 6%, transparent) 46%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 73%),
+    radial-gradient(78% 62% at 6% 94%, color-mix(in srgb, var(--dp-private-counsel-navy) 72%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dp-private-counsel-navy) 42%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 24%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 68%, color-mix(in srgb, var(--dp-private-counsel-navy) 70%, transparent) 100%);
 }
 
 /* The faintest grain, so the flat navy reads as a surface */
@@ -194,7 +197,7 @@ a.dp-pc-button:focus-visible svg {
   line-height: 1.06;
   letter-spacing: -0.021em;
   text-wrap: balance;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
   max-width: 14em;
   margin: 0 0 26px 0;
 }
@@ -203,7 +206,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-serif);
   font-size: clamp(19px, 1.5vw, 23px);
   line-height: 1.5;
-  color: rgba(243, 234, 216, 0.88);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 88%, transparent);
   margin: 0 0 28px 0;
 }
 
@@ -215,8 +218,8 @@ a.dp-pc-button:focus-visible svg {
   max-width: 34em;
   margin: 0 0 34px 0;
   padding: 20px 28px 22px 26px;
-  border-left: 2px solid var(--dp-pc-gold);
-  background-image: linear-gradient(90deg, rgba(201, 161, 91, 0.12) 0%, rgba(201, 161, 91, 0) 78%);
+  border-left: 2px solid var(--dp-private-counsel-bronze);
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--dp-private-counsel-bronze) 12%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-bronze) 0%, transparent) 78%);
 }
 
 .dp-pc-creed-not {
@@ -226,14 +229,14 @@ a.dp-pc-button:focus-visible svg {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: rgba(243, 234, 216, 0.58);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 58%, transparent);
 }
 
 .dp-pc-creed-is {
   font-family: var(--dp-font-serif);
   font-size: clamp(22px, 1.9vw, 28px);
   line-height: 1.25;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
 }
 
 .dp-pc-hero-content {
@@ -253,7 +256,7 @@ a.dp-pc-button:focus-visible svg {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: rgba(243, 234, 216, 0.55);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 55%, transparent);
 }
 
 /* --- The portrait, a full-height panel flush with the top, right and bottom
@@ -293,7 +296,7 @@ a.dp-pc-button:focus-visible svg {
   z-index: 1;
   pointer-events: none;
   mix-blend-mode: multiply;
-  background-image: radial-gradient(90% 75% at 55% 30%, #E8EDF4 0%, #DCE3EE 55%, #B9C7DB 85%, #95AAC8 100%);
+  background-image: radial-gradient(90% 75% at 55% 30%, color-mix(in srgb, var(--dp-private-counsel-navy) 8%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 12%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 24%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 36%, white) 100%);
 }
 
 /* No seam anywhere: the panel dissolves into the navy on the left and at the
@@ -305,9 +308,9 @@ a.dp-pc-button:focus-visible svg {
   z-index: 3;
   pointer-events: none;
   background-image:
-    linear-gradient(90deg, var(--dp-pc-navy) 0%, rgba(16, 40, 74, 0.84) 11%, rgba(16, 40, 74, 0.30) 28%, rgba(16, 40, 74, 0) 50%),
-    linear-gradient(180deg, rgba(16, 40, 74, 0.45) 0%, rgba(16, 40, 74, 0) 20%),
-    linear-gradient(0deg, rgba(10, 22, 40, 0.92) 0%, rgba(10, 22, 40, 0.62) 8%, rgba(16, 40, 74, 0.26) 20%, rgba(16, 40, 74, 0) 34%);
+    linear-gradient(90deg, var(--dp-private-counsel-navy) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 84%, transparent) 11%, color-mix(in srgb, var(--dp-private-counsel-navy) 30%, transparent) 28%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 50%),
+    linear-gradient(180deg, color-mix(in srgb, var(--dp-private-counsel-navy) 45%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 20%),
+    linear-gradient(0deg, color-mix(in srgb, var(--dp-private-counsel-navy) 92%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 62%, transparent) 8%, color-mix(in srgb, var(--dp-private-counsel-navy) 26%, transparent) 20%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 34%);
 }
 
 .dp-pc-portrait-caption {
@@ -328,14 +331,14 @@ a.dp-pc-button:focus-visible svg {
   width: 44px;
   height: 1px;
   margin-bottom: 8px;
-  background-image: linear-gradient(90deg, rgba(201, 161, 91, 0) 0%, var(--dp-pc-gold) 50%, rgba(201, 161, 91, 0) 100%);
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--dp-private-counsel-bronze) 0%, transparent) 0%, var(--dp-private-counsel-bronze) 50%, color-mix(in srgb, var(--dp-private-counsel-bronze) 0%, transparent) 100%);
 }
 
 .dp-pc-portrait-name {
   font-family: var(--dp-font-serif);
   font-size: 24px;
   line-height: 1.2;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
 }
 
 .dp-pc-portrait-roles {
@@ -344,7 +347,7 @@ a.dp-pc-button:focus-visible svg {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
 }
 
 /* Small gold lozenge between words */
@@ -354,7 +357,7 @@ a.dp-pc-button:focus-visible svg {
   height: 4px;
   margin: 0 0.85em 0 0.95em;
   vertical-align: 0.18em;
-  background-color: var(--dp-pc-gold);
+  background-color: var(--dp-private-counsel-bronze);
   transform: rotate(45deg);
 }
 
@@ -367,7 +370,7 @@ a.dp-pc-button:focus-visible svg {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid rgba(201, 161, 91, 0.28);
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 28%, transparent);
 }
 
 .dp-pc-hero-terms li {
@@ -375,7 +378,7 @@ a.dp-pc-button:focus-visible svg {
   flex-direction: column;
   gap: 8px;
   padding: clamp(22px, 2.2vw, 32px) clamp(20px, 2.4vw, 44px) clamp(28px, 3vw, 44px);
-  border-left: 1px solid rgba(201, 161, 91, 0.16);
+  border-left: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 16%, transparent);
 }
 
 .dp-pc-hero-terms li:first-child {
@@ -388,14 +391,14 @@ a.dp-pc-button:focus-visible svg {
   font-style: italic;
   font-size: clamp(19px, 1.5vw, 23px);
   line-height: 1.2;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
 }
 
 .dp-pc-term-note {
   font-family: var(--dp-font-family);
   font-size: 15px;
   line-height: 1.55;
-  color: rgba(243, 234, 216, 0.66);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 66%, transparent);
 }
 
 /* The hero settles in once, on load; nothing moves after that */
@@ -462,12 +465,12 @@ a.dp-pc-button:focus-visible svg {
      head and under the caption */
   .dp-pc-arch::after {
     background-image:
-      linear-gradient(180deg, rgba(16, 40, 74, 0.34) 0%, rgba(16, 40, 74, 0) 18%),
-      linear-gradient(0deg, rgba(10, 22, 40, 0.90) 0%, rgba(10, 22, 40, 0.52) 13%, rgba(16, 40, 74, 0) 34%);
+      linear-gradient(180deg, color-mix(in srgb, var(--dp-private-counsel-navy) 34%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 18%),
+      linear-gradient(0deg, color-mix(in srgb, var(--dp-private-counsel-navy) 90%, transparent) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 52%, transparent) 13%, color-mix(in srgb, var(--dp-private-counsel-navy) 0%, transparent) 34%);
   }
 
   .dp-pc-arch-veil {
-    background-image: radial-gradient(100% 80% at 50% 30%, #E8EDF4 0%, #DCE3EE 55%, #BFCCDE 85%, #A2B4CE 100%);
+    background-image: radial-gradient(100% 80% at 50% 30%, color-mix(in srgb, var(--dp-private-counsel-navy) 8%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 12%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 22%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 32%, white) 100%);
   }
 
   /* Back to source order: the writing, the photograph, then the terms */
@@ -526,7 +529,7 @@ a.dp-pc-button:focus-visible svg {
   }
 
   .dp-pc-arch-veil {
-    background-image: radial-gradient(110% 82% at 50% 32%, #EEF1F6 0%, #E3E9F1 55%, #CDD7E5 85%, #B4C3D8 100%);
+    background-image: radial-gradient(110% 82% at 50% 32%, color-mix(in srgb, var(--dp-private-counsel-navy) 6%, white) 0%, color-mix(in srgb, var(--dp-private-counsel-navy) 10%, white) 55%, color-mix(in srgb, var(--dp-private-counsel-navy) 18%, white) 85%, color-mix(in srgb, var(--dp-private-counsel-navy) 26%, white) 100%);
   }
 
   /* Stacked, the terms read as a short list rather than three columns */
@@ -539,7 +542,7 @@ a.dp-pc-button:focus-visible svg {
     gap: 4px;
     padding: 22px 0;
     border-left: 0;
-    border-top: 1px solid rgba(201, 161, 91, 0.16);
+    border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 16%, transparent);
   }
 
   .dp-pc-hero-terms li:first-child {
@@ -560,8 +563,8 @@ a.dp-pc-button:focus-visible svg {
 .dp-pc-chapters {
   --dp-pc-ring: clamp(76px, 6.4vw, 104px);
 
-  background-color: var(--dp-pc-abyss);
-  color: var(--dp-pc-cream);
+  background-color: var(--dp-private-counsel-navy);
+  color: var(--dp-private-counsel-cream);
 }
 
 .dp-pc-chapters-container {
@@ -586,7 +589,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-family);
   font-size: clamp(15px, 1.1vw, 17px);
   line-height: 1.6;
-  color: rgba(243, 234, 216, 0.78);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 78%, transparent);
   margin: 0 0 clamp(18px, 1.8vw, 26px) 0;
 }
 
@@ -596,7 +599,7 @@ a.dp-pc-button:focus-visible svg {
   flex-shrink: 0;
   width: 32px;
   height: 1px;
-  background-color: var(--dp-pc-gold);
+  background-color: var(--dp-private-counsel-bronze);
 }
 
 /* The question is the statement */
@@ -608,7 +611,7 @@ a.dp-pc-button:focus-visible svg {
   line-height: 1.15;
   letter-spacing: -0.01em;
   text-wrap: balance;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
   margin: 0;
 }
 
@@ -631,7 +634,7 @@ a.dp-pc-button:focus-visible svg {
   left: 10%;
   right: 10%;
   height: 1px;
-  background: linear-gradient(90deg, rgba(201, 161, 91, 0.15), rgba(201, 161, 91, 0.6) 20%, rgba(201, 161, 91, 0.6) 80%, rgba(201, 161, 91, 0.15));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-private-counsel-bronze) 15%, transparent), color-mix(in srgb, var(--dp-private-counsel-bronze) 60%, transparent) 20%, color-mix(in srgb, var(--dp-private-counsel-bronze) 60%, transparent) 80%, color-mix(in srgb, var(--dp-private-counsel-bronze) 15%, transparent));
 }
 
 .dp-pc-chapter {
@@ -653,18 +656,18 @@ a.dp-pc-button:focus-visible svg {
   box-sizing: border-box;
   width: var(--dp-pc-ring);
   height: var(--dp-pc-ring);
-  color: var(--dp-pc-gold-light);
-  background-color: var(--dp-pc-abyss);
-  border: 1px solid rgba(201, 161, 91, 0.55);
+  color: var(--dp-private-counsel-bronze-light);
+  background-color: var(--dp-private-counsel-navy);
+  border: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 55%, transparent);
   border-radius: 50%;
-  box-shadow: 0 0 0 8px var(--dp-pc-abyss);
+  box-shadow: 0 0 0 8px var(--dp-private-counsel-navy);
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .dp-pc-chapter:hover .dp-pc-chapter-mark {
-  color: var(--dp-pc-abyss);
-  background-color: var(--dp-pc-gold);
-  border-color: var(--dp-pc-gold);
+  color: var(--dp-private-counsel-navy);
+  background-color: var(--dp-private-counsel-bronze);
+  border-color: var(--dp-private-counsel-bronze);
 }
 
 .dp-pc-chapter-icon {
@@ -680,7 +683,7 @@ a.dp-pc-button:focus-visible svg {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   line-height: 1.4;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
   margin: 0;
 }
 
@@ -711,7 +714,7 @@ a.dp-pc-button:focus-visible svg {
     right: auto;
     width: 1px;
     height: auto;
-    background: rgba(201, 161, 91, 0.5);
+    background: color-mix(in srgb, var(--dp-private-counsel-bronze) 50%, transparent);
   }
 
   .dp-pc-chapter {
@@ -722,7 +725,7 @@ a.dp-pc-button:focus-visible svg {
 
   .dp-pc-chapter-mark {
     flex-shrink: 0;
-    box-shadow: 0 0 0 6px var(--dp-pc-abyss);
+    box-shadow: 0 0 0 6px var(--dp-private-counsel-navy);
   }
 
   .dp-pc-chapters .dp-pc-chapter-name {
@@ -749,13 +752,13 @@ a.dp-pc-button:focus-visible svg {
       beside the statement, on ivory)
    ========================================================================== */
 .dp-pc-setting {
-  background-color: var(--dp-pc-ivory);
-  color: var(--dp-pc-navy);
+  background-color: var(--dp-private-counsel-cream);
+  color: var(--dp-private-counsel-navy);
 }
 
 /* The one light section: gold goes deeper here so it reads on ivory */
 .dp-pc-setting .dp-pc-gold-accent {
-  color: var(--dp-pc-gold-deep);
+  color: var(--dp-private-counsel-gold);
 }
 
 .dp-pc-setting-container {
@@ -791,7 +794,7 @@ a.dp-pc-button:focus-visible svg {
   line-height: 1.08;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  color: var(--dp-pc-navy);
+  color: var(--dp-private-counsel-navy);
   margin: 0 0 26px 0;
 }
 
@@ -799,7 +802,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.3vw, 19px);
   line-height: 1.7;
-  color: #3A4658;
+  color: var(--dp-private-counsel-text);
   max-width: 30em;
   margin: 0;
 }
@@ -811,11 +814,11 @@ a.dp-pc-button:focus-visible svg {
   font-style: italic;
   line-height: 1.35;
   text-wrap: pretty;
-  color: var(--dp-pc-gold-ink);
+  color: var(--dp-private-counsel-gold);
   max-width: 22em;
   margin: clamp(28px, 2.6vw, 40px) 0 0 0;
   padding-left: 22px;
-  border-left: 2px solid var(--dp-pc-gold);
+  border-left: 2px solid var(--dp-private-counsel-bronze);
 }
 
 @media (max-width: 991px) {
@@ -846,16 +849,16 @@ a.dp-pc-button:focus-visible svg {
        setting's text, set off by one gold hairline)
    ========================================================================== */
 .dp-pc-firststep {
-  background-color: var(--dp-pc-ivory);
-  color: var(--dp-pc-navy);
+  background-color: var(--dp-private-counsel-cream);
+  color: var(--dp-private-counsel-navy);
 }
 
 .dp-pc-firststep .dp-pc-eyebrow {
-  color: var(--dp-pc-gold-ink);
+  color: var(--dp-private-counsel-gold);
 }
 
 .dp-pc-firststep .dp-pc-gold-accent {
-  color: var(--dp-pc-gold-deep);
+  color: var(--dp-private-counsel-gold);
 }
 
 .dp-pc-firststep-container {
@@ -875,7 +878,7 @@ a.dp-pc-button:focus-visible svg {
   content: "";
   grid-column: 1 / -1;
   height: 1px;
-  background: linear-gradient(90deg, rgba(154, 113, 48, 0.55), rgba(154, 113, 48, 0.12));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-private-counsel-gold) 55%, transparent), color-mix(in srgb, var(--dp-private-counsel-gold) 12%, transparent));
 }
 
 .dp-pc-firststep .dp-pc-firststep-title {
@@ -885,7 +888,7 @@ a.dp-pc-button:focus-visible svg {
   line-height: 1.14;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  color: var(--dp-pc-navy);
+  color: var(--dp-private-counsel-navy);
   max-width: 17em;
   margin: 0;
 }
@@ -894,7 +897,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.3vw, 19px);
   line-height: 1.7;
-  color: #3A4658;
+  color: var(--dp-private-counsel-text);
   max-width: 30em;
   margin: 0 0 18px 0;
 }
@@ -932,8 +935,8 @@ a.dp-pc-button:focus-visible svg {
    4. ENQUIRIES WITH THE INNER CLIMB (the invitation beside a deeper gift panel, on navy)
    ========================================================================== */
 .dp-pc-enquire {
-  background-color: var(--dp-pc-navy);
-  color: var(--dp-pc-cream);
+  background-color: var(--dp-private-counsel-navy);
+  color: var(--dp-private-counsel-cream);
 }
 
 .dp-pc-enquire-container {
@@ -954,7 +957,7 @@ a.dp-pc-button:focus-visible svg {
   line-height: 1.04;
   letter-spacing: -0.025em;
   text-wrap: balance;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
   max-width: 11em;
   margin: 0 0 28px 0;
 }
@@ -963,7 +966,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-family);
   font-size: clamp(17px, 1.35vw, 20px);
   line-height: 1.65;
-  color: rgba(243, 234, 216, 0.8);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 80%, transparent);
   max-width: 30em;
   margin: 0 0 40px 0;
 }
@@ -975,10 +978,10 @@ a.dp-pc-button:focus-visible svg {
   gap: clamp(24px, 2.6vw, 40px);
   align-items: center;
   padding: clamp(32px, 3.2vw, 48px);
-  background-color: var(--dp-pc-abyss);
-  border: 1px solid rgba(201, 161, 91, 0.35);
-  border-top: 2px solid var(--dp-pc-gold);
-  color: var(--dp-pc-cream);
+  background-color: var(--dp-private-counsel-navy);
+  border: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 35%, transparent);
+  border-top: 2px solid var(--dp-private-counsel-bronze);
+  color: var(--dp-private-counsel-cream);
 }
 
 /* The book: a cream cover turned slightly away, with page edges on the right */
@@ -995,16 +998,16 @@ a.dp-pc-button:focus-visible svg {
   box-sizing: border-box;
   aspect-ratio: 2 / 3;
   padding: 16% 12% 14%;
-  background: linear-gradient(90deg, #D6CCB9 0%, #EEE6D6 5%, #F6F0E4 11%, #F3ECDF 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-private-counsel-band) 78%, var(--dp-private-counsel-muted)) 0%, var(--dp-private-counsel-band) 5%, var(--dp-private-counsel-cream) 11%, color-mix(in srgb, var(--dp-private-counsel-cream) 55%, var(--dp-private-counsel-band)) 100%);
   border-radius: 2px 4px 4px 2px;
   transform: rotateY(-18deg);
   transform-origin: left center;
   box-shadow:
-    1px 0 0 #E6DDCC,
-    2px 0 0 #FFFFFF,
-    3px 0 0 #E6DDCC,
-    4px 0 0 #FFFFFF,
-    5px 0 0 #E6DDCC,
+    1px 0 0 var(--dp-private-counsel-band),
+    2px 0 0 var(--dp-private-counsel-cream),
+    3px 0 0 var(--dp-private-counsel-band),
+    4px 0 0 var(--dp-private-counsel-cream),
+    5px 0 0 var(--dp-private-counsel-band),
     12px 14px 26px rgba(0, 0, 0, 0.4);
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -1018,7 +1021,7 @@ a.dp-pc-button:focus-visible svg {
   content: "";
   position: absolute;
   inset: 6%;
-  border: 1px solid rgba(154, 113, 48, 0.6);
+  border: 1px solid color-mix(in srgb, var(--dp-private-counsel-gold) 60%, transparent);
   pointer-events: none;
 }
 
@@ -1030,21 +1033,21 @@ a.dp-pc-button:focus-visible svg {
 }
 
 .dp-pc-book-range {
-  stroke: var(--dp-pc-navy);
+  stroke: var(--dp-private-counsel-navy);
   stroke-width: 1.6;
   stroke-linejoin: round;
 }
 
 /* The climb: a dotted gold path up to the summit */
 .dp-pc-book-path {
-  stroke: var(--dp-pc-gold);
+  stroke: var(--dp-private-counsel-bronze);
   stroke-width: 2.6;
   stroke-linecap: round;
   stroke-dasharray: 0.001 0.045;
 }
 
 .dp-pc-book-summit {
-  fill: var(--dp-pc-gold);
+  fill: var(--dp-private-counsel-bronze);
 }
 
 .dp-pc-book-title {
@@ -1054,7 +1057,7 @@ a.dp-pc-button:focus-visible svg {
   font-style: italic;
   line-height: 1.15;
   text-align: center;
-  color: var(--dp-pc-navy);
+  color: var(--dp-private-counsel-navy);
 }
 
 .dp-pc-gift .dp-pc-gift-eyebrow {
@@ -1063,7 +1066,7 @@ a.dp-pc-button:focus-visible svg {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: var(--dp-pc-gold-light);
+  color: var(--dp-private-counsel-bronze-light);
   margin: 0 0 12px 0;
 }
 
@@ -1072,7 +1075,7 @@ a.dp-pc-button:focus-visible svg {
   font-size: clamp(26px, 2.2vw, 34px);
   font-weight: 500;
   line-height: 1.1;
-  color: var(--dp-pc-cream);
+  color: var(--dp-private-counsel-cream);
   margin: 0 0 12px 0;
 }
 
@@ -1080,7 +1083,7 @@ a.dp-pc-button:focus-visible svg {
   font-family: var(--dp-font-family);
   font-size: 16px;
   line-height: 1.6;
-  color: rgba(243, 234, 216, 0.78);
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 78%, transparent);
   margin: 0;
 }
 
