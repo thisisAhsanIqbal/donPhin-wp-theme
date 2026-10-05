@@ -50,8 +50,10 @@ $foreword = array(
 		<div class="dp-ca-hero-content">
 			<p class="dp-pc-eyebrow">About Don</p>
 			<h1 id="dp-ca-title" class="dp-ca-title">It worked on me before it ever worked <em class="dp-pc-gold-accent">on a client.</em></h1>
-			<p class="dp-ca-lead">Today I keynote, and I serve as private counsel to three men at a time, for one year, on the life their wealth was supposed to make possible.</p>
-			<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-pc-button">
+			<p class="dp-ca-lead">For over forty years, I’ve had the privilege of sitting with CEOs, entrepreneurs, physicians, attorneys, family business owners, and men who’ve built extraordinary lives.</p>
+			<!-- Stays on the page: scrolls down to the invitation at the foot, whose button
+			     leads on to the contact page -->
+			<a href="#dp-ca-request" class="dp-pc-button dp-ca-jump">
 				Request an introduction
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
@@ -126,7 +128,7 @@ $foreword = array(
 	</div>
 </section>
 
-<section class="dp-ca-close" aria-labelledby="dp-ca-close-title">
+<section class="dp-ca-close" id="dp-ca-request" aria-labelledby="dp-ca-close-title">
 	<div class="dp-ca-close-container">
 		<h2 id="dp-ca-close-title" class="dp-ca-close-title">The bottom line is I love my work, and so do my clients, because we produce results.</h2>
 		<p class="dp-ca-close-text">How would you like to get together and learn how I can help you?</p>

@@ -2,8 +2,8 @@
 Theme: Don Phin, Esq.
 Page: Speaking — Resources (page-speaking-resources.php, at /speaking/resources/)
 Description: The ideas to take away, in the Speaking palette: the intro on paper, Don's line
-on a navy band, the downloads as gold-edged cards, press photos on deep navy, and the tools
-and programs. Loads after speaking.css (inc/enqueue.php), whose colours and labels it uses.
+on a navy band, the downloads as gold-edged cards each with a drawn cover, press photos on deep navy, and
+the tools and programs (the book featured on navy, then the toolkit's three shelves). Loads after speaking.css (inc/enqueue.php), whose colours and labels it uses.
 */
 
 /* ==========================================================================
@@ -162,7 +162,7 @@ a.dp-res-button:focus-visible svg {
 }
 
 /* ==========================================================================
-   3. DOWNLOADS AND TOOLS (two gold-edged cards on paper)
+   3. DOWNLOADS AND TOOLS (gold-edged cards with drawn covers; the featured book, then the shelves)
    ========================================================================== */
 .dp-res-downloads,
 .dp-res-tools {
@@ -223,27 +223,293 @@ a.dp-res-button:focus-visible svg {
   margin: 0 0 26px 0;
 }
 
-/* "Coming soon": quieter, centred, with the gold edge still marking it as a card */
-.dp-res-card--soon {
+/* Each download: its drawn cover beside its words */
+.dp-res-card--doc {
+  display: grid;
+  grid-template-columns: clamp(108px, 11vw, 140px) minmax(0, 1fr);
+  gap: clamp(20px, 2.4vw, 32px);
+  align-items: start;
+}
+
+.dp-res-card-body {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+/* The cover: a small book face with a spine shadow, a hairline frame, and a tilt that
+   straightens on hover */
+.dp-res-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  aspect-ratio: 3 / 4.2;
+  padding: 14px 12px 12px 18px;
+  overflow: hidden;
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-speaking-navy);
+  border-radius: 2px 4px 4px 2px;
+  box-shadow:
+    inset 6px 0 0 color-mix(in srgb, black 18%, transparent),
+    inset 8px 0 6px -4px color-mix(in srgb, white 18%, transparent),
+    0 16px 28px -14px color-mix(in srgb, var(--dp-speaking-navy) 65%, transparent);
+  transform: rotate(-2deg);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-res-cover::after {
+  content: "";
+  position: absolute;
+  inset: 7px 7px 7px 13px;
+  border: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+  pointer-events: none;
+}
+
+.dp-res-card--doc:hover .dp-res-cover {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.dp-res-cover-kind {
+  font-family: var(--dp-font-family);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  opacity: 0.8;
+}
+
+.dp-res-cover-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(13px, 1.15vw, 16px);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: auto 0;
+  padding: 8px 0;
+}
+
+.dp-res-cover-by {
+  font-family: var(--dp-font-family);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  opacity: 0.8;
+}
+
+.dp-res-cover--navy {
+  background: linear-gradient(160deg, var(--dp-speaking-navy) 0%, color-mix(in srgb, var(--dp-speaking-navy) 80%, black) 100%);
+}
+
+.dp-res-cover--navy .dp-res-cover-title {
+  color: var(--dp-speaking-gold);
+}
+
+.dp-res-cover--blue {
+  background: linear-gradient(160deg, var(--dp-speaking-blue) 0%, var(--dp-speaking-navy) 100%);
+}
+
+.dp-res-cover--gold {
+  color: var(--dp-speaking-navy);
+  background: linear-gradient(160deg, var(--dp-speaking-gold) 0%, var(--dp-speaking-orange) 100%);
+}
+
+.dp-res-cover--paper {
+  color: var(--dp-speaking-navy);
+  background: var(--dp-speaking-paper);
+  outline: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 14%, transparent);
+}
+
+.dp-res-cover--paper .dp-res-cover-kind {
+  color: var(--dp-speaking-blue);
+  opacity: 1;
+}
+
+/* The 40//40 Solution, featured across the width on navy, the book breaking out of its top */
+.dp-res-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  box-sizing: border-box;
+  margin: clamp(56px, 6vw, 88px) 0 clamp(36px, 4vw, 56px) 0;
+  padding: clamp(32px, 4vw, 56px);
+  color: var(--dp-white, #FFFFFF);
+  background:
+    radial-gradient(ellipse 60% 90% at 15% 50%, color-mix(in srgb, var(--dp-speaking-blue) 45%, transparent), color-mix(in srgb, var(--dp-speaking-blue) 0%, transparent) 70%),
+    var(--dp-speaking-navy);
+  border-top: 3px solid var(--dp-speaking-gold);
+}
+
+.dp-res-feature-book {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: calc(-1 * clamp(80px, 8vw, 120px)) auto 0;
+  filter: drop-shadow(0 24px 30px color-mix(in srgb, black 45%, transparent));
+}
+
+.dp-res-feature-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.dp-res-feature .dp-res-card-eyebrow {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--dp-speaking-gold);
+  margin: 0 0 10px 0;
+}
+
+.dp-res-feature .dp-res-card-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(28px, 2.6vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 8px 0;
+}
+
+.dp-res-feature .dp-res-card-sub {
+  font-family: var(--dp-font-serif);
+  font-size: 17px;
+  font-style: italic;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 78%, transparent);
+  margin: 0 0 16px 0;
+}
+
+.dp-res-feature .dp-res-card-text {
+  font-family: var(--dp-font-family);
+  font-size: 16px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 86%, transparent);
+  max-width: 34em;
+  margin: 0 0 26px 0;
+}
+
+/* The toolkit: three shelves side by side, each with its icon, title and short list */
+.dp-res-shelves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.dp-res-shelf {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: clamp(24px, 2.6vw, 34px);
+  background-color: var(--dp-white, #FFFFFF);
+  border: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 10%, transparent);
+  box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--dp-speaking-navy) 40%, transparent);
+}
+
+.dp-res-shelf-head {
+  margin: 0 0 18px 0;
+}
+
+.dp-res-shelf-icon {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  background-color: color-mix(in srgb, var(--dp-white, #FFFFFF) 55%, transparent);
-  box-shadow: none;
-}
-
-.dp-res-card--soon .dp-res-card-text {
-  max-width: 22em;
-  margin-bottom: 18px;
-}
-
-.dp-res-card--soon .dp-arrow-link {
+  width: 48px;
+  height: 48px;
+  margin: 0 0 18px 0;
   color: var(--dp-speaking-navy);
+  background-color: color-mix(in srgb, var(--dp-speaking-gold) 28%, transparent);
+  border-radius: 50%;
 }
 
-.dp-res-card--soon .dp-arrow-link:hover,
-.dp-res-card--soon .dp-arrow-link:focus-visible {
+.dp-res-shelf-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.dp-res-shelf .dp-res-shelf-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(21px, 1.7vw, 25px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--dp-speaking-navy);
+  margin: 0 0 6px 0;
+}
+
+.dp-res-shelf .dp-res-shelf-line {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0;
+}
+
+.dp-res-shelf .dp-res-shelf-list {
+  list-style: none;
+  margin: auto 0 0 0;
+  padding: 0;
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 12%, transparent);
+}
+
+.dp-res-shelf-list li {
+  margin: 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--dp-speaking-navy) 16%, transparent);
+}
+
+/* One row per tool: its name, and the action on the right */
+a.dp-res-tool {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+  color: var(--dp-speaking-navy);
+  text-decoration: none;
+  transition: padding 0.25s ease, color 0.2s ease;
+}
+
+.dp-res-tool-name {
+  font-family: var(--dp-font-family);
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.dp-res-tool-action {
+  flex-shrink: 0;
+  font-family: var(--dp-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 6px 10px;
   color: var(--dp-speaking-blue);
+  border: 1px solid color-mix(in srgb, var(--dp-speaking-blue) 35%, transparent);
+  border-radius: 999px;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+a.dp-res-tool:hover,
+a.dp-res-tool:focus-visible {
+  padding-left: 6px;
+  color: var(--dp-speaking-blue);
+}
+
+a.dp-res-tool:hover .dp-res-tool-action,
+a.dp-res-tool:focus-visible .dp-res-tool-action {
+  color: var(--dp-speaking-navy);
+  background-color: var(--dp-speaking-gold);
+  border-color: var(--dp-speaking-gold);
+}
+
+a.dp-res-tool:focus-visible {
+  outline: 2px solid var(--dp-speaking-blue);
+  outline-offset: 2px;
 }
 
 .dp-res-tools .dp-res-container {
@@ -350,9 +616,32 @@ a.dp-res-button:focus-visible svg {
     gap: 14px;
   }
 
-  .dp-res-card--soon {
-    padding-top: 32px;
-    padding-bottom: 32px;
+  .dp-res-shelves {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-feature-book {
+    max-width: 190px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1100px) {
+  .dp-res-shelves {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-res-card--doc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-cover {
+    width: 120px;
   }
 }
 
@@ -360,8 +649,15 @@ a.dp-res-button:focus-visible svg {
   a.dp-res-button,
   a.dp-res-button svg,
   .dp-res-photo img,
-  .dp-res-photo-download {
+  .dp-res-photo-download,
+  .dp-res-cover,
+  a.dp-res-tool,
+  .dp-res-tool-action {
     transition: none;
+  }
+
+  .dp-res-card--doc:hover .dp-res-cover {
+    transform: rotate(-2deg);
   }
 
   .dp-res-photo:hover img {

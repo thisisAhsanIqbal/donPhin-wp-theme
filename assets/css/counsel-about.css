@@ -393,3 +393,17 @@ a.dp-ca-button:focus-visible svg {
     transition: none;
   }
 }
+
+/* ==========================================================================
+   7. THE JUMP DOWN (the hero's button scrolls to the invitation at the foot, rather
+      than leaving the page; the parent theme, Kadence, does the smooth scrolling for
+      links within the page. Its arrow points down, and nudges down on hover)
+   ========================================================================== */
+a.dp-ca-jump svg {
+  transform: rotate(90deg);
+}
+
+a.dp-ca-jump:hover svg,
+a.dp-ca-jump:focus-visible svg {
+  transform: rotate(90deg) translateX(4px);
+}

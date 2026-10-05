@@ -9,6 +9,36 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.8.0 (2026-10-06)
+
+### Speaking Resources
+- Downloads: two new free guides join The Emotional Edge and the one-sheet, "Hiring and
+  Retaining Employees" (`assets/docs/hiring-and-retaining-employees.pdf`) and "The Power of
+  the Stories We Tell Ourselves" (`assets/docs/the-power-of-the-stories-we-tell-ourselves.pdf`).
+  Each card now has a small drawn cover in its own colour (navy, blue, gold, paper),
+  tilted slightly and straightening on hover. On phones the cover sits above the words.
+- Tools & Programs: the "Coming soon" card is gone. The 40//40 Solution is featured
+  across the width on navy, the book breaking out of its top (new transparent image
+  `assets/images/40-40/book-3d-clear.webp`). Below it the toolkit sits on three shelves:
+  Calculators & Planners (Turnover Cost Calculator, Retention Planner), HR Checklists &
+  Guides (OKRs, 60-Day Review, Stay Interviews), and Book Summaries (The Effective
+  Executive, Mastery, Antifragile).
+- Each toolkit item becomes a download once its PDF is added at
+  `assets/docs/tools/{name}.pdf` (e.g. `tools/turnover-cost-calculator.pdf`). Until then
+  it asks for a copy through the Speaking contact page, like the downloads.
+
+## 1.7.1 (2026-10-06)
+
+### Private Counsel About
+- The hero's "Request an introduction" button now keeps the visitor on the page: it
+  scrolls down to the invitation at the foot (the parent theme smooth-scrolls it), with
+  its arrow pointing down. Only the invitation's button goes on to the contact page.
+- The hero line no longer mentions keynotes (the Speaking side) or the offer's details:
+  "Today I keynote, and I serve as private counsel to three men at a time…" is now Don's
+  own words from A Year in the Life: "For over forty years, I've had the privilege of
+  sitting with CEOs, entrepreneurs, physicians, attorneys, family business owners, and
+  men who've built extraordinary lives."
+
 ## 1.7.0 (2026-10-06)
 
 ### Speaking
