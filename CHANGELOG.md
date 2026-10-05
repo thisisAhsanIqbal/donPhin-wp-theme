@@ -9,6 +9,30 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.9.0 (2026-10-06)
+
+### Speaking Resources: the library
+- Everything Don has made is now on the page: 125 resources in eight categories (Books &
+  Excerpts, Book Summaries, HR & Workplace Forms, HR & Management Checklists, Leadership,
+  Mindset & Executive Performance, Coaching Worksheets, Posters & Printables, Videos &
+  Lessons), in a new "The Library" section on white below Tools & Programs.
+- A search narrows every category as you type, and says how many match (for screen
+  readers too). Buttons along the top show one category. Long categories show their first
+  six items, with "Show all". Without JavaScript the whole library simply shows.
+- The contents live in `inc/resource-library.php` (new module), not in the page. Each item
+  becomes a download by itself once its file is in `assets/docs/library/`, named after it
+  (e.g. `library/hiring-checklist.pdf`; audio as `.mp3`). Videos take a link. Until then each
+  item's "Request" opens the Speaking contact form with the message already filled in
+  ("I'd like a copy of: …"), through a new `?resource=` on the contact page.
+- The three toolkit columns from 1.8.0 are gone (their items are in the library), and so
+  is `assets/docs/tools/`: use `assets/docs/library/` instead.
+- Tools & Programs: the Employee Turnover Cost Calculator and the Engagement & Retention
+  Program Planner now have cards of their own as interactive web tools. Each opens its
+  tool once it has a link (in `donphin_resource_tools()`), and until then requests access.
+- Downloads: the guide is now "Hiring and Retaining Employees in this Crazy Economy" (an
+  E-book), and The Power of the Stories We Tell Ourselves is labelled a Manifesto, as Don
+  names them.
+
 ## 1.8.0 (2026-10-06)
 
 ### Speaking Resources
