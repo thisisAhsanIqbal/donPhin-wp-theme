@@ -9,6 +9,24 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.7.0 (2026-10-06)
+
+### Speaking
+- The Vistage Speaker Top Performer Award in the hero, as a seal in the top-right corner
+  beside the headline: on a cream plate edged in gold (the badge's words are dark), tilted
+  slightly, straightening on hover. On tablets and phones it sits under the headline.
+  Images: `assets/images/speaking/vistage-badge-220.webp` and `-440.webp`, trimmed from
+  `vistagespeakerbadge.webp`.
+
+## 1.6.3 (2026-10-06)
+
+### Speaking
+- New speaker reel in the hero: https://www.youtube.com/watch?v=fTTt8cN4qWA. Its still is
+  the video's own YouTube thumbnail ("Don Phin · Speaker | Coach | Master of Emotional
+  Energy"), saved as `assets/images/speaking/reel2-960.webp` and `reel2-1280.webp`.
+- The play button sits in the dark space under the words, clear of the title and Don's
+  face; on phones it is a little smaller and the "Watch the speaker reel" label is hidden.
+
 ## 1.6.2 (2026-09-29)
 
 ### Fixes

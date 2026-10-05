@@ -24,8 +24,9 @@ get_header();
 $images = get_stylesheet_directory_uri() . '/assets/images/';
 $stage  = $images . 'speaking/';
 
-// Speaker reel: "Don Phin Speaking Demo 2022" on the eSpeakers channel
-$reel_id = 'cIrYglFKbg8';
+// Speaker reel on YouTube; its still is YouTube's own thumbnail for the video
+// (assets/images/speaking/reel2-*.webp)
+$reel_id = 'fTTt8cN4qWA';
 
 // The one-sheet links only appear once the PDF is in the theme at this path
 $one_sheet_path = '/assets/docs/don-phin-speaking-one-sheet.pdf';
@@ -155,6 +156,19 @@ $testimonials = array(
 			Sales on Stage. <em class="dp-speak-title-accent">How our stories and roles direct the sale.</em>
 		</h1>
 
+		<!-- The Vistage honour, as a seal beside the headline (on a light plate: its words are dark) -->
+		<figure class="dp-speak-award">
+			<img
+				src="<?php echo esc_url( $stage . 'vistage-badge-220.webp' ); ?>"
+				srcset="<?php echo esc_attr( $stage . 'vistage-badge-220.webp 220w, ' . $stage . 'vistage-badge-440.webp 440w' ); ?>"
+				sizes="(max-width: 640px) 120px, 172px"
+				alt="Vistage Speaker Top Performer Award"
+				width="220"
+				height="165"
+				decoding="async"
+			/>
+		</figure>
+
 		<div class="dp-speak-hero-intro">
 			<p class="dp-speak-hero-lead">Buyer and seller walk onto the sales stage with stories already playing in their heads.</p>
 
@@ -173,12 +187,12 @@ $testimonials = array(
 				aria-label="<?php esc_attr_e( 'Play Don Phin’s speaker reel (opens on YouTube if the player cannot load)', 'don-phin-esq' ); ?>"
 			>
 				<img
-					src="<?php echo esc_url( $stage . 'reel-1600.webp' ); ?>"
-					srcset="<?php echo esc_attr( $stage . 'reel-960.webp 960w, ' . $stage . 'reel-1600.webp 1600w, ' . $stage . 'reel-2400.webp 2400w' ); ?>"
+					src="<?php echo esc_url( $stage . 'reel2-1280.webp' ); ?>"
+					srcset="<?php echo esc_attr( $stage . 'reel2-960.webp 960w, ' . $stage . 'reel2-1280.webp 1280w' ); ?>"
 					sizes="(max-width: 1600px) 86vw, 1360px"
 					alt=""
-					width="1600"
-					height="900"
+					width="1280"
+					height="720"
 					loading="eager"
 					decoding="async"
 					fetchpriority="high"

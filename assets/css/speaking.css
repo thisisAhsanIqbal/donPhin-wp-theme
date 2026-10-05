@@ -57,11 +57,73 @@ Loaded only on that page, from functions.php.
 }
 
 .dp-speak-hero-container {
+  position: relative;
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
   /* Same gutter as the header, so the headline lines up with the logo */
   padding: clamp(64px, 8vw, 128px) var(--dp-header-gutter, 7vw) 0;
+}
+
+/* The Vistage Top Performer Award, as a seal in the hero's top-right corner beside the
+   headline. Its words are dark, so it sits on a cream plate edged in gold. */
+.dp-speak-award {
+  position: absolute;
+  top: clamp(56px, 7.4vw, 116px);
+  right: var(--dp-header-gutter, 7vw);
+  box-sizing: border-box;
+  width: 212px;
+  margin: 0;
+  padding: 18px 20px 16px;
+  background-color: var(--dp-speaking-paper);
+  border-top: 3px solid var(--dp-speaking-gold);
+  box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--dp-speaking-navy) 70%, transparent);
+  transform: rotate(2deg);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-speak-award:hover {
+  transform: rotate(0deg) translateY(-3px);
+}
+
+.dp-speak-award img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Tablets and phones: the seal joins the flow under the headline, smaller and straight */
+@media (max-width: 991px) {
+  .dp-speak-award {
+    position: static;
+    width: 160px;
+    margin: 28px 0 0;
+    padding: 14px 16px 12px;
+    transform: none;
+  }
+
+  .dp-speak-award:hover {
+    transform: none;
+  }
+
+  /* No seal beside it now, so the headline takes the full width again */
+  .dp-speak-hero .dp-speak-hero-container .dp-speak-title {
+    max-width: 13em;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-speak-award {
+    width: 132px;
+    margin-top: 22px;
+    padding: 11px 13px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-speak-award {
+    transition: none;
+  }
 }
 
 .dp-speak-hero .dp-speak-eyebrow {
@@ -83,7 +145,8 @@ Loaded only on that page, from functions.php.
   letter-spacing: -0.03em;
   text-wrap: balance;
   color: var(--dp-white, #FFFFFF);
-  max-width: 13em;
+  /* Keeps clear of the Vistage seal in the top-right corner */
+  max-width: min(13em, calc(100% - 250px));
   margin: 0;
 }
 
@@ -151,6 +214,9 @@ Loaded only on that page, from functions.php.
 /* A yellow badge on the open wall to Don's right, clear of his face */
 .dp-speak-reel .dp-video-icon {
   z-index: 1;
+  /* In the empty dark space under "Don Phin" on the left of the thumbnail, clear of the
+     words and of Don's face */
+  top: 74%;
   left: 27%;
   color: var(--dp-speaking-navy);
   background-color: var(--dp-speaking-gold);
@@ -226,13 +292,23 @@ Loaded only on that page, from functions.php.
     font-size: 16px;
   }
 
+  /* The thumbnail is small on phones: the play button alone says "play", a little
+     smaller, under the words and clear of Don */
   .dp-speak-reel-label {
-    gap: 10px;
-    font-size: 11px;
+    display: none;
   }
 
-  .dp-speak-reel-label::before {
-    width: 20px;
+  .dp-speak-reel .dp-video-icon {
+    top: 76%;
+    left: 24%;
+    width: 46px;
+    height: 46px;
+    padding-left: 3px;
+  }
+
+  .dp-speak-reel .dp-video-icon svg {
+    width: 22px;
+    height: 22px;
   }
 }
 
