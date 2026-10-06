@@ -9,6 +9,33 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.10.0 (2026-10-06)
+
+### Resources, managed in the admin
+- Each section now has its own library of resources, managed in the admin: "Speaking
+  Resources" (Private Counsel can have its own later, by adding it to
+  `donphin_resource_sides()` in `inc/resources.php`). Each resource has a title, a short
+  summary (the excerpt), a description, a category, and either a document from the Media
+  Library or a link (a video, a web tool, a page), plus an optional small label.
+- Categories have a short name (for the filter buttons), an icon and an order, set on
+  Speaking Resources > Categories.
+- The list of resources in the admin shows which ones have their document yet.
+- Import: while a library is empty, its list offers to import the starter resources (the
+  125 from 1.9.0, in `inc/resources-seed.php`). Run it once on each site (it won't run
+  into a library that already has resources).
+- Every resource has a page of its own (`single-resource.php`, `assets/css/resource.css`)
+  at `/speaking/resources/{resource}/`: the title and its download (or link, or "Request a
+  copy") on a navy band; the preview beside its description, details and an invitation to
+  book Don; then more from the same category. PDFs show in the browser's viewer (on phones,
+  their first page and a button to open them); images, audio and video show in place, and
+  YouTube or Vimeo links play in place. Anything else is a drawn page with its title.
+  The page belongs to its section (header, menu, colours).
+- The Speaking Resources page now reads its library from the admin. Each row opens the
+  resource's page, and one with a document can also be downloaded straight from its row.
+- `inc/resource-library.php` is replaced by `inc/resources.php` (post types, categories,
+  data), `inc/resources-admin.php` (the admin) and `inc/resources-seed.php` (the starter
+  list). `assets/docs/library/` is no longer used: documents go in the Media Library.
+
 ## 1.9.0 (2026-10-06)
 
 ### Speaking Resources: the library

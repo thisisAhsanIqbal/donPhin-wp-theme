@@ -163,6 +163,12 @@ function donphin_section_for_post( $post_id ) {
 		return 'counsel';
 	}
 
+	// A resource belongs to the section whose library it's in
+	$side = donphin_resource_side( get_post_type( $post_id ) );
+	if ( $side ) {
+		return $side;
+	}
+
 	if ( 'page' !== get_post_type( $post_id ) ) {
 		return '';
 	}

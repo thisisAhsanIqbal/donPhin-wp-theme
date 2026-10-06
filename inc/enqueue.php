@@ -122,6 +122,11 @@ function donphin_enqueue_scripts() {
 		}
 	}
 
+	// A resource's own page (single-resource.php), in any section's library
+	if ( is_singular( donphin_resource_post_types() ) ) {
+		donphin_enqueue_asset( 'css', 'resource', $page_deps );
+	}
+
 	// The home page and the 404 page aren't page templates
 	if ( is_front_page() ) {
 		donphin_enqueue_asset( 'css', 'gateway', array( 'donphin-child-style' ) );

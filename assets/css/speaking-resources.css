@@ -700,12 +700,18 @@ button.dp-lib-chip[aria-pressed="true"] .dp-lib-chip-count {
 }
 
 .dp-lib-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin: 0;
   border-bottom: 1px dashed color-mix(in srgb, var(--dp-speaking-navy) 16%, transparent);
 }
 
-/* One row per resource: its name (and tag), the action on the right */
+/* One row per resource: its name (and label) opens its page; a file can also be taken
+   straight away from the pill on the right */
 a.dp-lib-link {
+  flex: 1;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -734,29 +740,12 @@ a.dp-lib-link {
   color: color-mix(in srgb, var(--dp-speaking-navy) 60%, transparent);
 }
 
-.dp-lib-action {
+.dp-lib-arrow {
   flex-shrink: 0;
-  font-family: var(--dp-font-family);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1;
-  padding: 6px 10px;
-  color: var(--dp-speaking-blue);
-  border: 1px solid color-mix(in srgb, var(--dp-speaking-blue) 35%, transparent);
-  border-radius: 999px;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-/* Ready to take away: filled gold from the start */
-.dp-lib-action--download,
-.dp-lib-action--listen,
-.dp-lib-action--watch,
-.dp-lib-action--open {
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-speaking-gold);
-  border-color: var(--dp-speaking-gold);
+  width: 18px;
+  height: 18px;
+  color: color-mix(in srgb, var(--dp-speaking-navy) 35%, transparent);
+  transition: transform 0.25s ease, color 0.2s ease;
 }
 
 a.dp-lib-link:hover,
@@ -765,24 +754,45 @@ a.dp-lib-link:focus-visible {
   color: var(--dp-speaking-blue);
 }
 
-a.dp-lib-link:hover .dp-lib-action,
-a.dp-lib-link:focus-visible .dp-lib-action {
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-speaking-gold);
-  border-color: var(--dp-speaking-gold);
+a.dp-lib-link:hover .dp-lib-arrow,
+a.dp-lib-link:focus-visible .dp-lib-arrow {
+  color: var(--dp-speaking-blue);
+  transform: translateX(3px);
 }
 
-a.dp-lib-link:hover .dp-lib-action--download,
-a.dp-lib-link:hover .dp-lib-action--listen,
-a.dp-lib-link:hover .dp-lib-action--watch,
-a.dp-lib-link:hover .dp-lib-action--open {
-  background-color: var(--dp-speaking-orange);
-  border-color: var(--dp-speaking-orange);
-}
-
-a.dp-lib-link:focus-visible {
+a.dp-lib-link:focus-visible,
+a.dp-lib-get:focus-visible {
   outline: 2px solid var(--dp-speaking-blue);
   outline-offset: 2px;
+}
+
+a.dp-lib-get {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--dp-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  padding: 7px 10px;
+  color: var(--dp-speaking-navy);
+  background-color: var(--dp-speaking-gold);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+a.dp-lib-get svg {
+  width: 14px;
+  height: 14px;
+}
+
+a.dp-lib-get:hover,
+a.dp-lib-get:focus-visible {
+  color: var(--dp-speaking-navy);
+  background-color: var(--dp-speaking-orange);
 }
 
 button.dp-lib-more {
@@ -983,7 +993,8 @@ button.dp-lib-more:focus-visible {
   a.dp-res-webtool,
   .dp-res-webtool-action svg,
   a.dp-lib-link,
-  .dp-lib-action {
+  .dp-lib-arrow,
+  a.dp-lib-get {
     transition: none;
   }
 

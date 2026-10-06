@@ -23,7 +23,8 @@ $donphin_modules = array(
 	'header-meta-box',  // The "Header Section" box on the page screen
 	'contact-form',     // The Speaking and Private Counsel contact forms
 	'toolkit-signup',   // Free toolkit sign-ups (home page form)
-	'resource-library', // Everything on the Speaking Resources page's library, by category
+	'resources',        // Each section's resources (Speaking Resources in the admin), with a page each
+	'resources-admin',  // Their admin: the document or link, category settings, the starter import
 );
 
 foreach ( $donphin_modules as $donphin_module ) {
