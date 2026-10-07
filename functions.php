@@ -25,6 +25,7 @@ $donphin_modules = array(
 	'toolkit-signup',   // Free toolkit sign-ups (home page form)
 	'resources',        // Each section's resources (Speaking Resources in the admin), with a page each
 	'resources-admin',  // Their admin: the document or link, category settings, the starter import
+	'resources-split',  // Counsel Resources > Set up from Speaking: the one library split into each side's
 );
 
 foreach ( $donphin_modules as $donphin_module ) {

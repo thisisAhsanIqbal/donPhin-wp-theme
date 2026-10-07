@@ -47,7 +47,6 @@ function donphin_resources_seed_speaking() {
 				),
 				'A to Z of Work Ideas and Questions',
 				'Bathroom Book of Time',
-				'From Chaos to Order',
 				'The Great Job Opportunity',
 				'Mastering Time Management',
 				'The Truth About HR and You',

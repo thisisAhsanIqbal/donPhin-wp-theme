@@ -62,7 +62,7 @@ function donphin_sections() {
 			'slug'       => 'private-counsel',
 			'aliases'    => array( 'private', 'counsel' ),
 			'pages'      => array( 'for-advisors', 'advisors' ),
-			'templates'  => array( 'page-private-counsel.php', 'page-the-journey.php', 'page-counsel-about.php', 'page-counsel-contact.php' ),
+			'templates'  => array( 'page-private-counsel.php', 'page-the-journey.php', 'page-counsel-about.php', 'page-counsel-contact.php', 'page-counsel-resources.php' ),
 			'stylesheet' => 'private-counsel',
 			'menu'       => array(
 				array( 'Home', '/private-counsel/', 'Private Counsel home' ),

@@ -12,8 +12,9 @@
  *
  * Downloads are PDFs in assets/docs/. Until a file is there, its button asks for a copy
  * through the Speaking contact page instead, and switches to a download by itself once
- * the file is added. The library is managed in the admin, under Speaking Resources: each
- * resource has a page of its own (single-resource.php) with a preview and its download.
+ * the file is added. The library (HR Tools) is managed in the admin, under Speaking
+ * Resources: each resource has a page of its own (single-resource.php) with a preview and
+ * its download. Its heading and intro are in the "Resource library" box on this page.
  *
  * @package DonPhinEsq
  */
@@ -78,17 +79,8 @@ $downloads = array(
 	),
 );
 
-// The web tools, and the library from Speaking Resources in the admin (inc/resources.php)
-$tools         = donphin_resource_tools();
-$library       = donphin_resource_library( 'speaking' );
-$library_total = array_sum(
-	array_map(
-		function ( $category ) {
-			return count( $category['items'] );
-		},
-		$library
-	)
-);
+// The web tools (the library is template-parts/resource-library.php)
+$tools = donphin_resource_tools();
 
 // Press photos: shown small, downloaded full size
 $photos = array(
@@ -239,93 +231,18 @@ $photos = array(
 	</div>
 </section>
 
-<?php if ( $library ) : ?>
-<section class="dp-res-library" id="dp-res-library" aria-labelledby="dp-res-library-title">
-	<div class="dp-res-container">
-
-		<header class="dp-res-head">
-			<p class="dp-speak-label">The library</p>
-			<h2 id="dp-res-library-title" class="dp-res-heading">Every tool Don has made, in one place</h2>
-			<p class="dp-res-head-text"><?php echo esc_html( $library_total ); ?> checklists, forms, worksheets, books and videos, built over forty years of helping companies keep good people.</p>
-		</header>
-
-		<div class="dp-lib" data-dp-lib>
-
-			<!-- Search and the category buttons; shown by resource-library.js, since they need it -->
-			<div class="dp-lib-controls" data-dp-lib-controls hidden>
-				<label class="dp-lib-search">
-					<span class="screen-reader-text">Search the library</span>
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-					<input type="search" placeholder="<?php echo esc_attr( sprintf( 'Search %d resources…', $library_total ) ); ?>" autocomplete="off" data-dp-lib-search>
-				</label>
-
-				<div class="dp-lib-chips" role="group" aria-label="Show one category">
-					<button type="button" class="dp-lib-chip" data-cat="all" aria-pressed="true">
-						All <span class="dp-lib-chip-count"><?php echo esc_html( $library_total ); ?></span>
-					</button>
-					<?php foreach ( $library as $category ) : ?>
-						<button type="button" class="dp-lib-chip" data-cat="<?php echo esc_attr( $category['key'] ); ?>" aria-pressed="false">
-							<?php echo esc_html( $category['chip'] ); ?> <span class="dp-lib-chip-count"><?php echo esc_html( count( $category['items'] ) ); ?></span>
-						</button>
-					<?php endforeach; ?>
-				</div>
-			</div>
-
-			<p class="dp-lib-status screen-reader-text" aria-live="polite" data-dp-lib-status></p>
-
-			<div class="dp-lib-groups">
-				<?php foreach ( $library as $category ) : ?>
-					<?php $key = $category['key']; ?>
-					<section class="dp-lib-group" id="dp-lib-<?php echo esc_attr( $key ); ?>" data-cat="<?php echo esc_attr( $key ); ?>" aria-labelledby="dp-lib-<?php echo esc_attr( $key ); ?>-title">
-						<header class="dp-lib-group-head">
-							<span class="dp-lib-group-icon" aria-hidden="true">
-								<?php echo donphin_resource_icon( $category['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
-							</span>
-							<div class="dp-lib-group-words">
-								<h3 id="dp-lib-<?php echo esc_attr( $key ); ?>-title" class="dp-lib-group-title"><?php echo esc_html( $category['title'] ); ?></h3>
-								<p class="dp-lib-group-line"><?php echo esc_html( $category['line'] ); ?></p>
-							</div>
-							<span class="dp-lib-group-count" data-dp-lib-count><?php echo esc_html( count( $category['items'] ) ); ?></span>
-						</header>
-
-						<ul class="dp-lib-list">
-							<?php foreach ( $category['items'] as $resource ) : ?>
-								<li class="dp-lib-item" data-search="<?php echo esc_attr( strtolower( $resource['name'] . ' ' . $resource['tag'] ) ); ?>">
-									<a class="dp-lib-link" href="<?php echo esc_url( $resource['url'] ); ?>">
-										<span class="dp-lib-name">
-											<?php echo esc_html( $resource['name'] ); ?>
-											<?php if ( $resource['tag'] ) : ?>
-												<span class="dp-lib-tag"><?php echo esc_html( $resource['tag'] ); ?></span>
-											<?php endif; ?>
-										</span>
-										<svg class="dp-lib-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="9 6 15 12 9 18"/></svg>
-									</a>
-									<?php if ( $resource['file'] ) : ?>
-										<a class="dp-lib-get" href="<?php echo esc_url( $resource['file']['url'] ); ?>" download aria-label="<?php echo esc_attr( sprintf( 'Download %s (%s)', $resource['name'], $resource['file']['ext'] ) ); ?>">
-											<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
-											<?php echo esc_html( $resource['file']['ext'] ); ?>
-										</a>
-									<?php endif; ?>
-								</li>
-							<?php endforeach; ?>
-						</ul>
-
-						<button type="button" class="dp-lib-more" aria-expanded="false" data-dp-lib-more hidden>
-							<?php echo esc_html( sprintf( 'Show all %d', count( $category['items'] ) ) ); ?>
-						</button>
-					</section>
-				<?php endforeach; ?>
-			</div>
-
-			<p class="dp-lib-empty" data-dp-lib-empty hidden>
-				Nothing in the library matches that yet.
-				<a href="<?php echo esc_url( $contact_url ); ?>">Ask Don</a> — he may have just the thing.
-			</p>
-
-		</div>
-	</div>
-</section>
-<?php endif; ?>
+<?php
+get_template_part(
+	'template-parts/resource-library',
+	null,
+	array(
+		'side'    => 'speaking',
+		'label'   => 'The library',
+		'heading' => donphin_resource_page_text( get_the_ID(), 'heading', 'speaking' ),
+		'intro'   => donphin_resource_page_text( get_the_ID(), 'intro', 'speaking' ),
+	)
+);
+?>
 
 <?php
 get_footer();

@@ -20,6 +20,10 @@ get_header();
 // Result of a submitted form, set by the redirect in inc/contact-form.php
 $contact_status = isset( $_GET['contact'] ) ? sanitize_key( wp_unslash( $_GET['contact'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
+// Arriving from a "Request a copy" on a Counsel resource: the message names what was asked for
+$requested = isset( $_GET['resource'] ) ? sanitize_text_field( wp_unslash( $_GET['resource'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$message   = '' !== $requested ? sprintf( 'I’d like a copy of: %s', $requested ) : '';
+
 $reach_options = array( 'Email', 'Phone', 'Either' );
 ?>
 
@@ -93,7 +97,7 @@ $reach_options = array( 'Email', 'Phone', 'Either' );
 
 				<p class="dp-contact-field">
 					<label for="dp-contact-message">What’s on your mind?</label>
-					<textarea id="dp-contact-message" name="message" rows="6" required></textarea>
+					<textarea id="dp-contact-message" name="message" rows="6" required><?php echo esc_textarea( $message ); ?></textarea>
 				</p>
 
 				<!-- Hidden from people; bots that fill it in are ignored -->

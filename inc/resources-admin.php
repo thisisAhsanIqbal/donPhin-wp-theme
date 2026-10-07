@@ -347,3 +347,76 @@ function donphin_resources_import_side( $side ) {
 	return $added;
 }
 add_action( 'admin_post_donphin_import_resources', 'donphin_resources_import' );
+
+/* --------------------------------------------------------------------------
+ * The "Resource library" box on each side's Resources page: its heading and intro
+ * ------------------------------------------------------------------------ */
+
+/**
+ * The Resources page templates, by section
+ *
+ * @return array
+ */
+function donphin_resource_page_templates() {
+	return array(
+		'page-speaking-resources.php' => 'speaking',
+		'page-counsel-resources.php'  => 'counsel',
+	);
+}
+
+/**
+ * Add the box to pages using one of those templates
+ */
+function donphin_resource_page_add_meta_box( $post_type, $post ) {
+	$templates = donphin_resource_page_templates();
+	if ( 'page' !== $post_type || ! isset( $templates[ get_page_template_slug( $post ) ] ) ) {
+		return;
+	}
+	add_meta_box( 'donphin_resource_page', __( 'Resource library', 'don-phin-esq' ), 'donphin_resource_page_meta_box', 'page', 'normal', 'high' );
+}
+add_action( 'add_meta_boxes', 'donphin_resource_page_add_meta_box', 10, 2 );
+
+/**
+ * Print it: the heading and intro, each showing the section's own as its placeholder
+ */
+function donphin_resource_page_meta_box( $post ) {
+	$templates = donphin_resource_page_templates();
+	$sides     = donphin_resource_sides();
+	$defaults  = $sides[ $templates[ get_page_template_slug( $post ) ] ]['library'];
+	wp_nonce_field( 'donphin_save_resource_page', 'donphin_resource_page_nonce' );
+	?>
+	<p>
+		<label for="dp_library_heading"><strong><?php esc_html_e( 'Heading', 'don-phin-esq' ); ?></strong></label><br>
+		<input type="text" id="dp_library_heading" name="dp_library_heading" class="widefat" value="<?php echo esc_attr( get_post_meta( $post->ID, '_dp_library_heading', true ) ); ?>" placeholder="<?php echo esc_attr( $defaults['heading'] ); ?>">
+	</p>
+	<p>
+		<label for="dp_library_intro"><strong><?php esc_html_e( 'Intro', 'don-phin-esq' ); ?></strong></label><br>
+		<textarea id="dp_library_intro" name="dp_library_intro" class="widefat" rows="3" placeholder="<?php echo esc_attr( $defaults['intro'] ); ?>"><?php echo esc_textarea( get_post_meta( $post->ID, '_dp_library_intro', true ) ); ?></textarea>
+	</p>
+	<p class="description"><?php esc_html_e( 'Left empty, each shows what’s in grey. The library itself is managed under its Resources menu.', 'don-phin-esq' ); ?></p>
+	<?php
+}
+
+/**
+ * Save it
+ */
+function donphin_resource_page_save( $post_id ) {
+	if ( ! isset( $_POST['donphin_resource_page_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['donphin_resource_page_nonce'] ) ), 'donphin_save_resource_page' ) ) {
+		return;
+	}
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ! current_user_can( 'edit_page', $post_id ) ) {
+		return;
+	}
+	$values = array(
+		'_dp_library_heading' => isset( $_POST['dp_library_heading'] ) ? sanitize_text_field( wp_unslash( $_POST['dp_library_heading'] ) ) : '',
+		'_dp_library_intro'   => isset( $_POST['dp_library_intro'] ) ? sanitize_textarea_field( wp_unslash( $_POST['dp_library_intro'] ) ) : '',
+	);
+	foreach ( $values as $key => $value ) {
+		if ( '' === $value ) {
+			delete_post_meta( $post_id, $key );
+		} else {
+			update_post_meta( $post_id, $key, $value );
+		}
+	}
+}
+add_action( 'save_post_page', 'donphin_resource_page_save' );

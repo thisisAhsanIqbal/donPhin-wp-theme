@@ -9,6 +9,42 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.11.1 (2026-10-07)
+
+### Fix
+- Set up from Speaking: after Apply, it still listed copying The 40//40 Solution (full
+  PDF) as to do, and pressing Apply again would have copied it twice. It looked for the
+  copy under its Speaking category ("Books & Excerpts") rather than its Counsel one
+  ("Books"); it now finds it by title.
+
+## 1.11.0 (2026-10-07)
+
+### Each side its own resources: HR Tools (Speaking) and Private Counsel
+- Don split the one library in two. Speaking's Resources page now shows **HR Tools** (97
+  resources, with his intro: "I have created a great deal of content related to the
+  workplace. Some of it may benefit you!"); Private Counsel gets its own 24, in two groups
+  (Books; Checklists, Reports, Tools and More).
+- **Counsel Resources** is a new admin menu, Private Counsel's own library, with its own
+  categories, its resources' pages at `/private-counsel/resources/{resource}/` in the
+  Private Counsel header and colours, and requests for a copy going to its contact form
+  (which now fills in the message, as Speaking's does).
+- **Counsel Resources > Set up from Speaking** makes the split (`inc/resources-split.php`):
+  it shows every change and the list each resource ends up on, and changes nothing until
+  Apply is pressed. It moves the Private Counsel resources, copies the two on both lists
+  (the 40//40 Solution full PDF, and the 90-Day Strategic Plan) keeping their document,
+  makes the five on hold drafts (on hold, confirm with client), deletes From Chaos to Order
+  (its document, if any, stays in the Media Library), and puts HR Tools' books in Don's
+  order. Safe to run twice.
+- New page template **Private Counsel — Resources** (`page-counsel-resources.php`,
+  `counsel-resources.css`): the heading on navy, then the library.
+- The library is now one part for both sides (`template-parts/resource-library.php`), in
+  each side's colours and shapes (`resource-library.css`; its styles moved out of
+  `speaking-resources.css`). Every number is counted from what's there, and categories
+  with nothing in them don't show.
+- Each Resources page has a **Resource library** box for its heading and intro (HR Tools
+  and its intro on Speaking; "Resources" and none on Private Counsel, until changed).
+- From Chaos to Order is gone from the starter list (`inc/resources-seed.php`).
+
 ## 1.10.3 (2026-10-07)
 
 ### Fix

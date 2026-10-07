@@ -31,6 +31,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * contact    Where requests for a copy go.
  * cta        The invitation beside each resource: title, text, and the button's label
  *            (the button leads to contact).
+ * library    The library's heading and intro on the section's Resources page, until
+ *            they're changed in the page's "Resource library" box.
  *
  * @return array
  */
@@ -49,18 +51,29 @@ function donphin_resource_sides() {
 				'text'  => 'Don brings these ideas to life on stage, for sales meetings, leadership retreats and conferences.',
 				'label' => 'Book Don',
 			),
+			'library'   => array(
+				'heading' => 'HR Tools',
+				'intro'   => 'I have created a great deal of content related to the workplace. Some of it may benefit you!',
+			),
 		),
-		// Private Counsel, once its Resources page is built:
-		// 'counsel' => array(
-		// 	'post_type' => 'dp_counsel_resource',
-		// 	'taxonomy'  => 'dp_counsel_res_cat',
-		// 	'base'      => 'private-counsel/resources',
-		// 	'name'      => 'Counsel Resources',
-		// 	'singular'  => 'Counsel Resource',
-		// 	'icon'      => 'dashicons-portfolio',
-		// 	'contact'   => '/private-counsel/contact/',
-		// 	'cta'       => array( 'title' => '…', 'text' => '…', 'label' => 'Enquire' ),
-		// ),
+		'counsel'  => array(
+			'post_type' => 'dp_counsel_resource',
+			'taxonomy'  => 'dp_counsel_res_cat',
+			'base'      => 'private-counsel/resources',
+			'name'      => 'Counsel Resources',
+			'singular'  => 'Counsel Resource',
+			'icon'      => 'dashicons-portfolio',
+			'contact'   => '/private-counsel/contact/',
+			'cta'       => array(
+				'title' => 'When you’re ready for what comes next',
+				'text'  => 'Private counsel is by introduction, for one man at a time.',
+				'label' => 'Request an introduction',
+			),
+			'library'   => array(
+				'heading' => 'Resources', // A placeholder until Don names it
+				'intro'   => '',
+			),
+		),
 	);
 }
 
@@ -363,4 +376,19 @@ function donphin_resource_tools() {
 			'url'  => '',
 		),
 	);
+}
+
+/**
+ * The heading or intro of a Resources page's library: as set in the page's "Resource
+ * library" box (inc/resources-admin.php), or the section's own
+ *
+ * @param int    $page_id The Resources page.
+ * @param string $field   'heading' or 'intro'.
+ * @param string $side    A key of donphin_resource_sides().
+ * @return string
+ */
+function donphin_resource_page_text( $page_id, $field, $side ) {
+	$sides = donphin_resource_sides();
+	$value = (string) get_post_meta( $page_id, '_dp_library_' . $field, true );
+	return '' !== $value ? $value : $sides[ $side ]['library'][ $field ];
 }
