@@ -11,7 +11,7 @@
  * The journey in brief; the transformation it is for; how it unfolds (Day of Discovery,
  * Assessment, Personal Blueprint, the Journey); the three immersions; the counsel between
  * them; what is constant and what is shaped around him; access (three men, by
- * introduction); Don's gift of The Inner Climb, and one line of his to close.
+ * introduction); Don's gift of his book, The Next Journey, and one line of his to close.
  *
  * @package DonPhinEsq
  */
@@ -31,7 +31,7 @@ $steps = array(
 	array( 'Day of Discovery', 'A full day, one-on-one. We talk, we walk, we share a meal. I ask the questions you’ve probably never been asked.' ),
 	array( 'The Assessment', 'The Everything But Your Money™ Whole-Life Assessment, over a month: health and personality assessments, and confidential conversations with the friends, family and colleagues you give me permission to speak with.' ),
 	array( 'Your Personal Blueprint', 'What I see, laid out plainly: where you are across purpose, health, relationships and spirit, and what the year could be.' ),
-	array( 'The Journey', 'One year. Three private immersions, and counsel on call — designed around you, not a curriculum.' ),
+	array( 'The Journey', 'One year. Three private immersions, monthly meetings, and counsel on call — designed around you, not a curriculum.' ),
 );
 
 // The three immersions: numeral, name, the line from the offer, what it is, and its photo
@@ -49,7 +49,7 @@ $immersions = array(
 		'num'   => 'II',
 		'name'  => 'Deep Immersion',
 		'line'  => 'The long evenings.',
-		'text'  => 'Somewhere built for long, unhurried conversation, where fear, judgment and regret are finally spoken. Whatever is actually there.',
+		'text'  => 'Somewhere built for long, unhurried conversation, where fear, judgment, and regret are finally spoken. Whatever is actually there is released.',
 		'image' => $images . 'counsel/room-900.webp',
 		'alt'   => 'Don Phin in a long, unhurried conversation in a book-lined study',
 		'focus' => '62% 40%',
@@ -58,7 +58,7 @@ $immersions = array(
 		'num'   => 'III',
 		'name'  => 'Integration',
 		'line'  => 'Stillness.',
-		'text'  => 'A quieter setting, built for stillness. We look back at the year and design the life you live next.',
+		'text'  => 'A quieter setting, built for stillness and health. We look back at the year and design the life you live next.',
 		'image' => $journey . 'phin-meditating-800.webp',
 		'alt'   => 'Don Phin meditating on a wooden deck above a misty valley',
 		'focus' => '50% 45%',
@@ -82,7 +82,7 @@ $constant = array(
 $bespoke = array(
 	'Where the immersions happen, and what we do there',
 	'Which dimension leads',
-	'Who from your world joins: a son on the trail, a partner at dinner',
+	'Who from your world joins: a son on the trail, a former partner or spouse at dinner',
 	'The pace between',
 );
 ?>
@@ -93,8 +93,8 @@ $bespoke = array(
 		<div class="dp-jr-hero-content">
 			<p class="dp-jr-eyebrow">The Next Journey</p>
 			<h1 id="dp-jr-title" class="dp-jr-title">One man. One year. <em class="dp-jr-accent">Built around you.</em></h1>
-			<p class="dp-jr-lead">A personal transformation journey: one year, three private immersions, and counsel on call.</p>
-			<p class="dp-jr-text">This isn’t coaching, consulting or therapy. I don’t have a program to put you through. I have a year to design around you.</p>
+			<p class="dp-jr-lead">A personal transformation journey: one year, three private immersions, monthly meetings, and counsel on call.</p>
+			<p class="dp-jr-text">This isn’t coaching, consulting, or therapy. I don’t have a program to put you through. I have a year to design around you.</p>
 		</div>
 
 		<figure class="dp-jr-hero-photo">
@@ -123,12 +123,12 @@ $bespoke = array(
 		</header>
 
 		<div class="dp-jr-story-body">
-			<p>Around every man who has mastered wealth stands a team built to protect his fortune. On the Tuesday morning after the sale, the succession, or the last day in the corner office, he has the boat, the watch, and the question he has never said out loud: <em>what was it for?</em></p>
-			<p class="dp-jr-story-after">Twelve months later he has set down the guilt of what the building cost. His son calls him first. His body carries him up the trail he once watched from the car. His calendar holds only what he chose. He is happy, visibly so, and fully inside the life he paid for.</p>
+			<p>Around every man who has mastered wealth stands a team built to protect his fortune. On the Tuesday morning after the sale, the succession, or the last day in the corner office, he has the boat, the watch, and the question he has never said out loud: <em>What was it for? Who am I now?</em></p>
+			<p class="dp-jr-story-after">Twelve months later, he has let go of any guilt associated with what the building cost. His son or daughter calls him first. His body lets him act with vigor on the court or up the trail. His calendar holds only what he chose. He is happy, visibly so, and fully inside the life he paid for.</p>
 		</div>
 
 		<blockquote class="dp-jr-story-pull">
-			<p>The moment on the trail when he says the thing he has never said to anyone, and hears, perhaps for the first time in years, that he is a good man with permission to stop punishing himself.</p>
+			<p>The moment on the trail when he says the thing he has never said to anyone, and hears, perhaps for the first time in years, that he is a good man with permission and ability to stop punishing himself.</p>
 		</blockquote>
 
 	</div>
@@ -251,7 +251,7 @@ $bespoke = array(
 <section class="dp-jr-access" aria-labelledby="dp-jr-access-title">
 	<div class="dp-jr-access-container">
 		<p class="dp-pc-eyebrow">Access</p>
-		<h2 id="dp-jr-access-title" class="dp-jr-access-title">Three men at any one time. <em class="dp-pc-gold-accent">Mathematics, not marketing.</em></h2>
+		<h2 id="dp-jr-access-title" class="dp-jr-access-title">I will only be able to take three men on this journey. <em class="dp-pc-gold-accent">Mathematics, not marketing.</em></h2>
 		<p class="dp-jr-access-text">By introduction only: from wealth advisors, estate attorneys, family offices, and men who have made the journey. When the three seats are filled, there is a quiet waitlist.</p>
 		<a href="<?php echo esc_url( $request_url ); ?>" class="dp-pc-button">
 			Request an introduction
@@ -264,7 +264,7 @@ $bespoke = array(
 	<div class="dp-jr-gift-container">
 		<div class="dp-jr-gift-card">
 
-			<!-- The cover, drawn as on the Private Counsel page: a path climbing to a summit -->
+			<!-- The cover, drawn as on the Private Counsel page (a path climbing to a summit), titled for this book -->
 			<div class="dp-pc-book" aria-hidden="true">
 				<div class="dp-pc-book-cover">
 					<svg class="dp-pc-book-art" viewBox="0 0 120 90" focusable="false">
@@ -272,14 +272,15 @@ $bespoke = array(
 						<path class="dp-pc-book-path" d="M34 84c10-4 18-9 14-15s-12-6-4-12 14-5 12-13 2-12 12-20" fill="none" pathLength="1"/>
 						<circle class="dp-pc-book-summit" cx="68" cy="22" r="3"/>
 					</svg>
-					<span class="dp-pc-book-title">The Inner Climb</span>
+					<span class="dp-pc-book-title">The Next Journey</span>
 				</div>
 			</div>
 
 			<div class="dp-jr-gift-body">
 				<p class="dp-jr-eyebrow">A gift from Don</p>
-				<h2 id="dp-jr-gift-title" class="dp-jr-gift-title">The Inner Climb</h2>
-				<p class="dp-jr-gift-text">This short guide was written for men on the journey to a more meaningful, connected, and fulfilled life.</p>
+				<h2 id="dp-jr-gift-title" class="dp-jr-gift-title"><span class="dp-jr-gift-kicker">A Wealthy Man’s Guide to</span> The Next Journey</h2>
+				<p class="dp-jr-gift-subtitle">Letting Your Life Catch Up to Your Wealth</p>
+				<p class="dp-jr-gift-text">This short book was written for men on the journey to a more meaningful, connected, and fulfilled life.</p>
 			</div>
 
 			<div class="dp-jr-gift-offer">

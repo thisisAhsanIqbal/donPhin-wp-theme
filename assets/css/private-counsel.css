@@ -26,7 +26,7 @@ and the enquiry beside The Inner Climb. Loaded only on that page, from functions
   --dp-private-counsel-bronze-light: color-mix(in srgb, var(--dp-private-counsel-bronze) 62%, white); /* bronze type on navy, light enough to read */
 }
 
-/* Small label with a gold rule before it */
+/* Small tracked label */
 .dp-pc-eyebrow {
   display: flex;
   align-items: center;
@@ -39,14 +39,6 @@ and the enquiry beside The Inner Climb. Loaded only on that page, from functions
   line-height: 1.5;
   color: var(--dp-private-counsel-bronze-light);
   margin: 0 0 22px 0;
-}
-
-.dp-pc-eyebrow::before {
-  content: "";
-  flex-shrink: 0;
-  width: 28px;
-  height: 1px;
-  background-color: var(--dp-private-counsel-bronze);
 }
 
 .dp-pc-gold-accent {
@@ -761,6 +753,10 @@ a.dp-pc-button:focus-visible svg {
   color: var(--dp-private-counsel-text);
   max-width: 30em;
   margin: 0;
+}
+
+.dp-pc-setting .dp-pc-setting-text + .dp-pc-setting-text {
+  margin-top: 1em;
 }
 
 /* The closing line, in gold italic behind a short gold rule */

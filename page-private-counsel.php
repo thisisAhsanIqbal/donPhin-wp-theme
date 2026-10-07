@@ -62,7 +62,7 @@ $chapters = array(
 					Request an introduction
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>
-				<span class="dp-pc-hero-note">Three men at a time &middot; By introduction</span>
+				<span class="dp-pc-hero-note">One man at a time &middot; By introduction</span>
 			</div>
 		</div>
 
@@ -92,7 +92,7 @@ $chapters = array(
 		<ul class="dp-pc-hero-terms">
 			<li>
 				<span class="dp-pc-term-name">Personal</span>
-				<span class="dp-pc-term-note">Three men at any one time. Never more.</span>
+				<span class="dp-pc-term-note">One man at a time. Never more.</span>
 			</li>
 			<li>
 				<span class="dp-pc-term-name">Confidential</span>
@@ -100,7 +100,7 @@ $chapters = array(
 			</li>
 			<li>
 				<span class="dp-pc-term-name">Fully present</span>
-				<span class="dp-pc-term-note">No script. No agenda.</span>
+				<span class="dp-pc-term-note">No script. No agenda. 100% about you.</span>
 			</li>
 		</ul>
 
@@ -114,7 +114,7 @@ $chapters = array(
 			<!-- Not shown; names the section for screen readers -->
 			<h2 id="dp-pc-chapters-title" class="dp-pc-sr">The five dimensions of a life</h2>
 			<p class="dp-pc-chapters-lead">
-				You’ve been extraordinarily intentional about building one dimension of your life.
+				<span>You’ve been extraordinarily intentional about building one dimension of your life, <em class="dp-pc-gold-accent">Wealth.</em></span>
 			</p>
 			<p class="dp-pc-chapters-question">What might happen if you brought that same intention to the others?</p>
 		</header>
@@ -153,7 +153,10 @@ $chapters = array(
 				You need one room where <em class="dp-pc-gold-accent">nothing is performed.</em>
 			</h2>
 			<p class="dp-pc-setting-text">
-				A confidential environment where you do not have to protect an image, appear certain, or already know the answer. A place where you can slow down, examine the whole situation, and tell yourself the truth.
+				It’s not about another climb. The process is motivating and fun! The result is transformational!
+			</p>
+			<p class="dp-pc-setting-text">
+				It’s a confidential environment where you do not have to protect an image, appear certain, or already know the answer. A place where you can slow down, examine the whole situation, and tell yourself the truth. This is a year-long process, not a singular event.
 			</p>
 			<p class="dp-pc-setting-note">Not everybody wants to have their private conversations with a group.</p>
 		</div>
@@ -173,7 +176,7 @@ $chapters = array(
 		</div>
 
 		<div class="dp-pc-firststep-body">
-			<p>Every engagement begins with <strong>The Everything But Your Money™ Whole-Life Assessment</strong>. Over a month, it opens with a Day of Discovery, a full day one-on-one, followed by health and personality assessments and confidential conversations with the friends, family and colleagues you give me permission to speak with.</p>
+			<p>Every engagement begins with <strong>The Everything But Your Money™ Whole-Life Assessment</strong>. Over a month, it opens with a Day of Discovery, a full day one-on-one, followed by health and personality assessments and confidential conversations with the friends, family, and colleagues you give me permission to speak with.</p>
 			<p>The result is your Personal Blueprint. I’ll tell you what I see and, if we both believe a year together makes sense, I’ll design The Next Journey specifically around you.</p>
 			<a class="dp-pc-firststep-link" href="<?php echo esc_url( home_url( '/private-counsel/the-journey/' ) ); ?>">
 				See how the year unfolds
@@ -193,7 +196,7 @@ $chapters = array(
 				One conversation is usually <em class="dp-pc-gold-accent">enough to know.</em>
 			</h2>
 			<p class="dp-pc-enquire-text">
-				I work with three men at any one time, by introduction only: from wealth advisors, estate attorneys, family offices, and men who have made the journey. If someone referred you here, I would be pleased to learn more. When the three seats are filled, there is a quiet waitlist.
+				I work with one man at any one time, by introduction only: from wealth advisors, estate attorneys, family offices, and men who have made the journey. If someone referred you here, I would be pleased to learn more. When three seats are filled, there is a quiet waitlist.
 			</p>
 			<a href="<?php echo esc_url( $enquire_url ); ?>" class="dp-pc-button">
 				Request an introduction

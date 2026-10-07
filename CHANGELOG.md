@@ -9,6 +9,32 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.10.3 (2026-10-07)
+
+### Fix
+- Private Counsel: "Wealth." in the five-dimensions line sat apart from the sentence (the
+  line is a flex row, so the word took the row's gap); the sentence is now one piece.
+
+## 1.10.2 (2026-10-07)
+
+### Eyebrows without the rule
+- The small gold line before the Private Counsel eyebrows (`.dp-pc-eyebrow`) is gone, on
+  Private Counsel, The Journey and Counsel About.
+
+## 1.10.1 (2026-10-07)
+
+### Private Counsel and The Journey: updated copy
+- Private Counsel (from `reference/Document1.docx`): one man at a time (hero note, the
+  "Personal" term, the enquiry text); "100% about you" added to "Fully present"; the five
+  dimensions now name Wealth; the one-room section opens with "It's not about another
+  climb..." and closes on "a year-long process, not a singular event".
+- The Journey (from `reference/Document2.docx`): monthly meetings added to the offer; the
+  transformation story rewritten ("Who am I now?", "son or daughter", "on the court or up
+  the trail", "permission and ability"); Immersions II and III reworded; "a former partner
+  or spouse at dinner"; the access heading is now "I will only be able to take three men on
+  this journey."; the gift is now Don's book *A Wealthy Man's Guide to The Next Journey:
+  Letting Your Life Catch Up to Your Wealth* (kicker and subtitle styled in `journey.css`).
+
 ## 1.10.0 (2026-10-06)
 
 ### Resources, managed in the admin

@@ -782,6 +782,28 @@ a.dp-jr-button:focus-visible svg {
   margin: 0 0 12px 0;
 }
 
+/* The book's full title: a small kicker above it, the subtitle below */
+.dp-jr-gift .dp-jr-gift-kicker {
+  display: block;
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-private-counsel-gold);
+  margin-bottom: 6px;
+}
+
+.dp-jr-gift .dp-jr-gift-subtitle {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(16px, 1.2vw, 18px);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--dp-private-counsel-text);
+  margin: 0 0 14px 0;
+}
+
 .dp-jr-gift .dp-jr-gift-text {
   font-family: var(--dp-font-family);
   font-size: clamp(15.5px, 1.1vw, 17px);
