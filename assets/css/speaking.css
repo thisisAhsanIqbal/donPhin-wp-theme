@@ -1,40 +1,118 @@
 /*
 Theme: Don Phin, Esq.
-Page: Speaking (page-speaking.php)
-Description: Speaking page — hero with the speaker reel, the Victim / Villain / Hero framework,
-what changes after Don speaks, the three programs, the numbers, the stage photograph,
-testimonials, and the closing invitation.
-Loaded only on that page, from functions.php.
+Page: Speaking (page-speaking.php), and the Speaking section's palette
+Description: The Speaking section's colours (loaded on every page of the section), then the
+Speaking page itself — the first screen with the reel beside the pitch, the client logos,
+the numbers, testimonials, the Victim / Villain / Hero framework, what changes after Don
+speaks, the three programs, the stage photograph, and the closing invitation.
 */
 
 /* ==========================================================================
-   COLOURS (the Speaking page's own palette; this stylesheet loads only on that
-   page, so these never reach the rest of the site. Change a colour here and the
-   whole page follows.)
+   COLOURS (the Speaking section's palette: every Speaking page, and the header
+   there, takes its colours from these. Change a colour here and they all follow.)
    ========================================================================== */
 :root {
-  --dp-speaking-navy: #12284A;    /* deep backgrounds, headings and body text */
-  --dp-speaking-blue: #1E5AA8;    /* the hero and The Shift, labels, accents, arrows */
-  --dp-speaking-gold: #F2B035;    /* highlights, the gold sections, badges */
-  --dp-speaking-orange: #E8952C;  /* hover on anything gold */
-  --dp-speaking-paper: #F8F6F1;   /* light section backgrounds */
+  /* The brand four */
+  --dp-speaking-orange: #FF6B35;  /* High-Octane Orange: primary calls to action */
+  --dp-speaking-navy: #004E64;    /* Deep Trust Navy: headings and deep backgrounds */
+  --dp-speaking-teal: #25CED1;    /* Electric Teal: accents, highlighted words, accent on navy */
+  --dp-speaking-paper: #F7F9F9;   /* Crisp White / Light Gray: light section backgrounds */
 
-  /* The yellow highlighter stroke behind words, mixed from the gold */
-  --dp-speaking-marker: color-mix(in srgb, var(--dp-speaking-gold) 75%, transparent);
+  /* Working shades of the four, for where the brand colours alone can't be read */
+  --dp-speaking-deep: #00303E;          /* type on orange and teal, the darkest backgrounds */
+  --dp-speaking-blue: #00728F;          /* small accent type and links on light (teal is too light there) */
+  --dp-speaking-orange-ink: #D9531E;    /* orange set as large type on light (the bright orange is too faint) */
+
+  /* The teal highlighter stroke behind words */
+  --dp-speaking-marker: color-mix(in srgb, var(--dp-speaking-teal) 55%, transparent);
+
+  /* Typefaces (the files load from "fonts" in donphin_sections(), inc/sections.php): Inter
+     for reading, and Montserrat wherever the rest of the site sets its serif — headlines
+     and large statements */
+  --dp-font-family: "Inter", sans-serif;
+  --dp-font-serif: "Montserrat", sans-serif;
 }
 
 /* ==========================================================================
-   SHARED: SMALL LABEL AND ACCENT
+   HEADLINES (every Speaking page: each page's title and section headings in bold
+   capitals, their italic accent lines light and in ordinary case. Titles that are
+   names — programs, resources — stay as written, to be read.)
    ========================================================================== */
+:root body.speaking-header :is(
+  .dp-speak-title,
+  .dp-speak-praise-title,
+  .dp-speak-framework-title,
+  .dp-speak-changes-title,
+  .dp-speak-programs-title,
+  .dp-speak-cta-title,
+  .dp-about-title,
+  .dp-about-section-title,
+  .dp-about-cta-title,
+  .dp-contact-title,
+  .dp-res-title,
+  .dp-res-heading,
+  .dp-lib-heading,
+  .dp-book-letter-title,
+  .dp-book-fit-title,
+  .dp-book-order-title,
+  .dp-rd-side-title,
+  .dp-rd-related-title
+) {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+:root body.speaking-header :is(
+  .dp-speak-title,
+  .dp-speak-praise-title,
+  .dp-speak-framework-title,
+  .dp-speak-changes-title,
+  .dp-speak-programs-title,
+  .dp-speak-cta-title,
+  .dp-about-title,
+  .dp-about-section-title,
+  .dp-about-cta-title,
+  .dp-contact-title,
+  .dp-res-title,
+  .dp-res-heading,
+  .dp-lib-heading,
+  .dp-book-letter-title,
+  .dp-book-fit-title,
+  .dp-book-order-title,
+  .dp-rd-side-title,
+  .dp-rd-related-title
+) em {
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  text-transform: none;
+}
+
+/* ==========================================================================
+   SHARED: SPACING, SMALL LABEL, ACCENT AND THE ORANGE BUTTON
+   ========================================================================== */
+.dp-speak-hero,
+.dp-speak-trusted,
+.dp-speak-stats,
+.dp-speak-praise,
+.dp-speak-framework,
+.dp-speak-shift,
+.dp-speak-changes,
+.dp-speak-programs,
+.dp-speak-cta {
+  /* Top and bottom padding of a section */
+  --dp-speak-space: clamp(56px, 6.4vw, 104px);
+}
+
 .dp-speak-label {
   font-family: var(--dp-font-family);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.5;
   color: var(--dp-speaking-blue);
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
 }
 
 .dp-speak-accent {
@@ -42,152 +120,225 @@ Loaded only on that page, from functions.php.
   color: var(--dp-speaking-blue);
 }
 
+/* "Book Don" and "Start a conversation": orange with dark type, navy with white on hover */
+a.dp-dark-button.dp-speak-button {
+  height: 60px;
+  padding: 0 34px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--dp-speaking-deep) !important;
+  background-color: var(--dp-speaking-orange);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-dark-button.dp-speak-button:hover,
+a.dp-dark-button.dp-speak-button:focus-visible {
+  color: var(--dp-white, #FFFFFF) !important;
+  background-color: var(--dp-speaking-navy);
+}
+
+a.dp-dark-button.dp-speak-button:focus-visible {
+  outline-color: var(--dp-speaking-orange);
+}
+
 /* ==========================================================================
-   1. HERO (on cobalt: headline, the intro in two columns, then the reel overlapping the section below)
+   0. THE FIRST SCREEN (the hero and the client logos together fill the window under
+      the header on laptops and desktops; the hero takes whatever the logos leave)
+   ========================================================================== */
+@media (min-width: 992px) {
+  .dp-speak-intro {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--dp-header-height, 68px));
+    min-height: calc(100svh - var(--dp-header-height, 68px));
+  }
+
+  .dp-speak-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The content sits in the middle of the space */
+  .dp-speak-hero-container {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   1. FIRST SCREEN (on light gray: the headline and the reel side by side, the lead,
+      the buttons and the Vistage seal under the headline. Phones: headline, reel,
+      then the rest.)
    ========================================================================== */
 .dp-speak-hero {
-  /* How much of the reel hangs over the white of the next section */
-  --dp-speak-overlap: clamp(72px, 12vw, 200px);
+  /* A faint teal glow in the top-right corner: its strength, then its size */
+  --dp-speak-glow: 9%;
+  --dp-speak-glow-size: 50% 70%;
 
   background:
-    linear-gradient(180deg, transparent calc(100% - var(--dp-speak-overlap)), var(--dp-speaking-paper) calc(100% - var(--dp-speak-overlap))),
-    radial-gradient(ellipse 45% 55% at 90% 8%, color-mix(in srgb, var(--dp-speaking-blue) 30%, transparent), color-mix(in srgb, var(--dp-speaking-blue) 0%, transparent) 70%),
-    linear-gradient(135deg, var(--dp-speaking-navy) 0%, var(--dp-speaking-blue) 100%);
-  color: var(--dp-white, #FFFFFF);
+    radial-gradient(ellipse var(--dp-speak-glow-size) at 100% 0%, color-mix(in srgb, var(--dp-speaking-teal) var(--dp-speak-glow), transparent), color-mix(in srgb, var(--dp-speaking-teal) 0%, transparent) 70%),
+    var(--dp-speaking-paper);
+  color: var(--dp-speaking-navy);
+}
+
+/* Phones: the same glow would cover much more of a narrow screen, so it is fainter and smaller */
+@media (max-width: 640px) {
+  .dp-speak-hero {
+    --dp-speak-glow: 6%;
+    --dp-speak-glow-size: 70% 30%;
+  }
 }
 
 .dp-speak-hero-container {
-  position: relative;
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
   /* Same gutter as the header, so the headline lines up with the logo */
-  padding: clamp(64px, 8vw, 128px) var(--dp-header-gutter, 7vw) 0;
+  padding: clamp(32px, 3.6vw, 64px) var(--dp-header-gutter, 7vw) clamp(40px, 4vw, 72px);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-areas:
+    "head reel"
+    "body reel";
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: clamp(32px, 4vw, 80px);
+  row-gap: clamp(20px, 2vw, 32px);
 }
 
-/* The Vistage Top Performer Award, as a seal in the hero's top-right corner beside the
-   headline. Its words are dark, so it sits on a cream plate edged in gold. */
-.dp-speak-award {
-  position: absolute;
-  top: clamp(56px, 7.4vw, 116px);
-  right: var(--dp-header-gutter, 7vw);
-  box-sizing: border-box;
-  width: 212px;
-  margin: 0;
-  padding: 18px 20px 16px;
-  background-color: var(--dp-speaking-paper);
-  border-top: 3px solid var(--dp-speaking-gold);
-  box-shadow: 0 22px 44px -20px color-mix(in srgb, var(--dp-speaking-navy) 70%, transparent);
-  transform: rotate(2deg);
-  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+.dp-speak-hero-head {
+  grid-area: head;
+  align-self: end;
 }
 
-.dp-speak-award:hover {
-  transform: rotate(0deg) translateY(-3px);
+.dp-speak-hero-body {
+  grid-area: body;
+  align-self: start;
 }
 
-.dp-speak-award img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Tablets and phones: the seal joins the flow under the headline, smaller and straight */
-@media (max-width: 991px) {
-  .dp-speak-award {
-    position: static;
-    width: 160px;
-    margin: 28px 0 0;
-    padding: 14px 16px 12px;
-    transform: none;
-  }
-
-  .dp-speak-award:hover {
-    transform: none;
-  }
-
-  /* No seal beside it now, so the headline takes the full width again */
-  .dp-speak-hero .dp-speak-hero-container .dp-speak-title {
-    max-width: 13em;
-  }
-}
-
-@media (max-width: 640px) {
-  .dp-speak-award {
-    width: 132px;
-    margin-top: 22px;
-    padding: 11px 13px 10px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dp-speak-award {
-    transition: none;
-  }
+.dp-speak-reel {
+  grid-area: reel;
+  align-self: center;
 }
 
 .dp-speak-hero .dp-speak-eyebrow {
   font-family: var(--dp-font-family);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.16em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  line-height: 1.6;
-  color: var(--dp-speaking-gold);
-  margin: 0 0 28px 0;
+  line-height: 1.5;
+  color: var(--dp-speaking-blue);
+  margin: 0 0 18px 0;
 }
 
 .dp-speak-hero .dp-speak-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(44px, 6vw, 100px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: clamp(34px, 3vw, 58px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
   text-wrap: balance;
-  color: var(--dp-white, #FFFFFF);
-  /* Keeps clear of the Vistage seal in the top-right corner */
-  max-width: min(13em, calc(100% - 250px));
+  color: var(--dp-speaking-navy);
   margin: 0;
+}
+
+/* "Sales on Stage." on its own line, the promise in orange under it, a step smaller */
+.dp-speak-title-main,
+.dp-speak-title-accent {
+  display: block;
+}
+
+/* Heavier than other headlines' accent lines (HEADLINES, above), so it holds its own beside
+   the title */
+:root body.speaking-header .dp-speak-title .dp-speak-title-accent {
+  font-weight: 600;
 }
 
 .dp-speak-title-accent {
+  margin-top: 0.12em;
+  font-size: 0.8em;
   font-style: italic;
-  font-weight: 400;
-  color: var(--dp-speaking-gold);
-}
-
-/* The lead and the body sit side by side under a hairline */
-.dp-speak-hero-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  column-gap: clamp(32px, 5vw, 96px);
-  align-items: start;
-  margin: clamp(40px, 4.5vw, 64px) 0 clamp(48px, 5vw, 80px);
-  padding-top: clamp(24px, 2.4vw, 36px);
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  line-height: 1.12;
+  color: var(--dp-speaking-orange);
 }
 
 .dp-speak-hero .dp-speak-hero-lead {
-  font-family: var(--dp-font-serif);
-  font-size: clamp(22px, 2vw, 30px);
-  line-height: 1.3;
-  color: var(--dp-white, #FFFFFF);
-  max-width: 16em;
-  margin: 0;
+  font-family: var(--dp-font-family);
+  font-size: clamp(19px, 1.45vw, 23px);
+  line-height: 1.55;
+  color: var(--dp-speaking-navy);
+  max-width: 30em;
+  margin: 0 0 clamp(24px, 2.2vw, 32px) 0;
 }
 
-.dp-speak-hero .dp-speak-hero-body {
+/* The two buttons side by side */
+.dp-speak-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.dp-speak-hero a.dp-arrow-link {
+  font-size: 19px;
+  color: var(--dp-speaking-navy);
+  text-decoration-color: color-mix(in srgb, var(--dp-speaking-navy) 30%, transparent);
+}
+
+.dp-speak-hero a.dp-arrow-link:hover,
+.dp-speak-hero a.dp-arrow-link:focus-visible {
+  color: var(--dp-speaking-blue);
+  text-decoration-color: currentColor;
+}
+
+/* The Vistage Top Performer Award, as a credential under the buttons and a hairline:
+   the seal, and the award's name in words beside it */
+.dp-speak-hero .dp-speak-award {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 30em;
+  margin: clamp(28px, 2.6vw, 40px) 0 0;
+  padding-top: clamp(20px, 2vw, 28px);
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 14%, transparent);
+}
+
+.dp-speak-award-seal {
+  flex-shrink: 0;
+  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.dp-speak-award-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dp-speak-award-name {
   font-family: var(--dp-font-family);
-  font-size: clamp(17px, 1.3vw, 19px);
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.86);
-  max-width: 34em;
-  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--dp-speaking-navy);
+}
+
+.dp-speak-award-title {
+  font-family: var(--dp-font-family);
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--dp-text, #4A4A4A);
 }
 
 /* Reel: the shared .dp-video (style.css) gives the box, the play badge and the player */
 .dp-speak-reel {
-  box-shadow: 0 28px 60px -24px color-mix(in srgb, var(--dp-speaking-navy) 50%, transparent);
+  box-shadow: 0 28px 60px -28px color-mix(in srgb, var(--dp-speaking-deep) 60%, transparent);
 }
 
 .dp-speak-reel .dp-video-play {
@@ -207,38 +358,42 @@ Loaded only on that page, from functions.php.
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(20deg, color-mix(in srgb, var(--dp-speaking-navy) 66%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-navy) 0%, transparent) 50%);
+  background: linear-gradient(20deg, color-mix(in srgb, var(--dp-speaking-deep) 70%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-deep) 0%, transparent) 50%);
   pointer-events: none;
 }
 
-/* A yellow badge on the open wall to Don's right, clear of his face */
+/* An orange badge in the empty dark space under "Don Phin" on the left of the thumbnail,
+   clear of the words and of Don's face */
 .dp-speak-reel .dp-video-icon {
   z-index: 1;
-  /* In the empty dark space under "Don Phin" on the left of the thumbnail, clear of the
-     words and of Don's face */
   top: 74%;
   left: 27%;
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-deep);
+  background-color: var(--dp-speaking-orange);
 }
 
 .dp-speak-reel .dp-video-play:hover .dp-video-icon,
 .dp-speak-reel .dp-video-play:focus-visible .dp-video-icon {
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-speaking-orange);
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-speaking-navy);
+}
+
+.dp-speak-reel .dp-video-play:focus-visible {
+  outline-color: var(--dp-speaking-orange);
 }
 
 .dp-speak-reel-label {
   position: absolute;
   z-index: 1;
-  left: clamp(20px, 3vw, 44px);
-  bottom: clamp(18px, 2.8vw, 40px);
+  left: clamp(20px, 3vw, 40px);
+  bottom: clamp(18px, 2.6vw, 36px);
   display: flex;
   align-items: center;
   gap: 14px;
   font-family: var(--dp-font-family);
-  font-size: 13px;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
@@ -248,48 +403,67 @@ Loaded only on that page, from functions.php.
 .dp-speak-reel-label::before {
   content: "";
   width: 32px;
-  height: 1px;
-  background-color: var(--dp-speaking-gold);
+  height: 2px;
+  background-color: var(--dp-speaking-teal);
 }
 
+/* Tablets and phones: headline, reel, then the lead and buttons, one under another */
 @media (max-width: 991px) {
-  .dp-speak-hero-intro {
+  .dp-speak-hero-container {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 18px;
+    grid-template-areas:
+      "head"
+      "reel"
+      "body";
+    grid-template-rows: auto;
+    row-gap: 24px;
+  }
+
+  .dp-speak-hero .dp-speak-title {
+    max-width: 16em;
   }
 }
 
 @media (max-width: 640px) {
-  .dp-speak-hero {
-    --dp-speak-overlap: 64px;
-  }
-
   .dp-speak-hero-container {
-    padding-top: 48px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+    row-gap: 20px;
   }
 
   .dp-speak-hero .dp-speak-eyebrow {
-    font-size: 11.5px;
-    letter-spacing: 0.14em;
-    margin-bottom: 20px;
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
   }
 
   .dp-speak-hero .dp-speak-title {
-    font-size: 40px;
-    line-height: 1.04;
-  }
-
-  .dp-speak-hero-intro {
-    margin: 32px 0 40px;
-    padding-top: 22px;
+    font-size: 34px;
+    line-height: 1.06;
   }
 
   .dp-speak-hero .dp-speak-hero-lead {
-    font-size: 22px;
+    font-size: 19px;
   }
 
-  .dp-speak-hero .dp-speak-hero-body {
-    font-size: 16px;
+  /* The buttons full width, one under the other */
+  .dp-speak-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .dp-speak-hero a.dp-speak-button {
+    justify-content: center;
+  }
+
+  .dp-speak-hero a.dp-arrow-link {
+    align-self: center;
+  }
+
+  .dp-speak-award-seal {
+    width: 48px;
+    height: 48px;
   }
 
   /* The thumbnail is small on phones: the play button alone says "play", a little
@@ -301,8 +475,8 @@ Loaded only on that page, from functions.php.
   .dp-speak-reel .dp-video-icon {
     top: 76%;
     left: 24%;
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
     padding-left: 3px;
   }
 
@@ -313,11 +487,12 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   1b. TRUSTED BY (the client logos drifting right to left under the reel, on white;
-       the marquee itself is shared, in style.css)
+   2. TRUSTED BY (the client logos drifting right to left under the first screen,
+      on white; the marquee itself is shared, in style.css)
    ========================================================================== */
 .dp-speak-trusted {
-  background-color: var(--dp-speaking-paper);
+  background-color: var(--dp-white, #FFFFFF);
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 10%, transparent);
 }
 
 .dp-speak-trusted-container {
@@ -327,18 +502,19 @@ Loaded only on that page, from functions.php.
   gap: clamp(24px, 3vw, 48px);
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(40px, 4.4vw, 64px) var(--dp-header-gutter, 7vw) 0;
+  padding: clamp(24px, 2.6vw, 40px) var(--dp-header-gutter, 7vw);
 }
 
 .dp-speak-trusted .dp-speak-trusted-label {
   flex-shrink: 0;
   font-family: var(--dp-font-family);
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
-  color: var(--dp-text, #4A4A4A);
+  color: var(--dp-speaking-navy);
   margin: 0;
 }
 
@@ -353,18 +529,320 @@ Loaded only on that page, from functions.php.
   .dp-speak-trusted-container {
     flex-direction: column;
     align-items: stretch;
-    gap: 18px;
-    padding-top: 36px;
+    gap: 16px;
+    padding-top: 28px;
+    padding-bottom: 28px;
   }
 }
 
 /* ==========================================================================
-   2. THE HIDDEN CONVERSATIONS (on white: the premise set large, the framework's
+   3. THE NUMBERS (on navy: what audiences achieved, when there are figures, then
+      Don's own four numbers between hairlines)
+   ========================================================================== */
+.dp-speak-stats {
+  background:
+    radial-gradient(ellipse 45% 90% at 0% 100%, color-mix(in srgb, var(--dp-speaking-teal) 14%, transparent), color-mix(in srgb, var(--dp-speaking-teal) 0%, transparent) 70%),
+    var(--dp-speaking-navy);
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-speak-stats-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: clamp(48px, 5vw, 80px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-speak-stats .dp-speak-stats-title {
+  font-family: var(--dp-font-family) !important;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-speaking-teal);
+  margin: 0 0 24px 0;
+}
+
+/* Audience results: the figure in orange, what changed under it, and whose result it was */
+.dp-speak-results {
+  list-style: none;
+  margin: 0 0 clamp(40px, 4.4vw, 64px) 0;
+  padding: 0 0 clamp(40px, 4.4vw, 64px) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px clamp(24px, 3vw, 48px);
+}
+
+.dp-speak-result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.dp-speak-result-number {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(56px, 6vw, 104px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--dp-speaking-orange);
+}
+
+.dp-speak-result-label {
+  font-family: var(--dp-font-family);
+  font-size: clamp(19px, 1.4vw, 22px);
+  line-height: 1.4;
+  color: var(--dp-white, #FFFFFF);
+  max-width: 18em;
+}
+
+.dp-speak-result-source {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.dp-speak-stats-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.dp-speak-stats .dp-speak-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0 clamp(16px, 2vw, 32px);
+}
+
+.dp-speak-stats .dp-speak-stat:first-child {
+  padding-left: 0;
+}
+
+.dp-speak-stat + .dp-speak-stat {
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dp-speak-stat-number {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(48px, 5vw, 84px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-speak-stat-suffix {
+  color: var(--dp-speaking-teal);
+}
+
+.dp-speak-stat-label {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 16em;
+}
+
+/* Two by two */
+@media (max-width: 991px) {
+  .dp-speak-stats-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 36px;
+  }
+
+  .dp-speak-stats .dp-speak-stat:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .dp-speak-stats .dp-speak-stat {
+    gap: 10px;
+    padding-right: 12px;
+  }
+
+  .dp-speak-stats .dp-speak-stat:nth-child(even) {
+    padding-left: 16px;
+  }
+
+  .dp-speak-stat-number {
+    font-size: 46px;
+  }
+
+  .dp-speak-stat-label {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ==========================================================================
+   4. FROM THE ROOM (three testimonials as white cards, on light gray)
+   ========================================================================== */
+.dp-speak-praise {
+  background-color: var(--dp-speaking-paper);
+  color: var(--dp-speaking-navy);
+}
+
+.dp-speak-praise-container {
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
+}
+
+.dp-speak-praise .dp-speak-praise-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(36px, 3.4vw, 56px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--dp-speaking-navy);
+  margin: 0 0 clamp(28px, 3vw, 44px) 0;
+}
+
+.dp-speak-praise-accent {
+  font-style: italic;
+  color: var(--dp-speaking-orange);
+}
+
+.dp-speak-praise-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 36px);
+}
+
+.dp-speak-quote {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: clamp(28px, 2.6vw, 40px);
+  background-color: var(--dp-white, #FFFFFF);
+  border-top: 3px solid var(--dp-speaking-teal);
+  box-shadow: 0 18px 40px -30px color-mix(in srgb, var(--dp-speaking-navy) 50%, transparent);
+}
+
+/* The curly quote sits at the top of its line box, so the box is cropped tight to it */
+.dp-speak-quote-mark {
+  display: block;
+  overflow: hidden;
+  height: 0.34em;
+  font-family: var(--dp-font-serif);
+  font-size: 88px;
+  line-height: 0.74;
+  color: var(--dp-speaking-teal);
+  margin-bottom: 20px;
+}
+
+.dp-speak-praise .dp-speak-quote-text {
+  flex: 1;
+  margin: 0 0 24px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  quotes: none;
+  font-style: normal;
+}
+
+.dp-speak-praise .dp-speak-quote-text p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(19px, 1.4vw, 22px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--dp-speaking-navy);
+  margin: 0;
+}
+
+/* The headshot beside the name and role, under a rule at the foot of every card,
+   so the three line up */
+.dp-speak-quote-by {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 12%, transparent);
+}
+
+/* The photos are already teal circles; this only keeps them round and sized */
+.dp-speak-quote-photo {
+  flex-shrink: 0;
+  display: block;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+
+.dp-speak-quote-who {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.dp-speak-quote-name {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--dp-speaking-navy);
+}
+
+.dp-speak-quote-role {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--dp-text, #4A4A4A);
+}
+
+@media (max-width: 991px) {
+  .dp-speak-praise-list {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 44em;
+  }
+}
+
+@media (max-width: 640px) {
+  .dp-speak-praise .dp-speak-praise-title {
+    font-size: 34px;
+  }
+
+  .dp-speak-quote {
+    padding: 28px 24px;
+  }
+
+  .dp-speak-quote-mark {
+    font-size: 72px;
+    margin-bottom: 16px;
+  }
+
+  .dp-speak-praise .dp-speak-quote-text p {
+    font-size: 19px;
+  }
+}
+
+/* ==========================================================================
+   5. THE HIDDEN CONVERSATIONS (on white: the premise set large, the framework's
       heading beside its intro, then Victim → Villain → Hero as three cards
       in soft red, amber and green, joined by arrows)
    ========================================================================== */
 .dp-speak-framework {
-  background-color: var(--dp-speaking-paper);
+  background-color: var(--dp-white, #FFFFFF);
   color: var(--dp-speaking-navy);
 }
 
@@ -372,20 +850,20 @@ Loaded only on that page, from functions.php.
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(72px, 9vw, 140px) var(--dp-header-gutter, 7vw) clamp(80px, 10vw, 140px);
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
 }
 
-/* The premise: one large statement, the second sentence marked in yellow */
+/* The premise: one large statement, the second sentence marked in teal */
 .dp-speak-framework .dp-speak-premise {
   font-family: var(--dp-font-serif);
-  font-size: clamp(34px, 4.4vw, 72px);
+  font-size: clamp(34px, 4vw, 64px);
   font-weight: 500;
-  line-height: 1.08;
+  line-height: 1.1;
   letter-spacing: -0.025em;
   text-wrap: balance;
   color: var(--dp-speaking-navy);
   max-width: 18em;
-  margin: 0 0 clamp(64px, 7vw, 112px) 0;
+  margin: 0 0 clamp(44px, 5vw, 72px) 0;
 }
 
 .dp-speak-premise-accent {
@@ -403,8 +881,8 @@ Loaded only on that page, from functions.php.
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   column-gap: clamp(32px, 5vw, 96px);
   align-items: end;
-  margin-bottom: clamp(40px, 4.4vw, 64px);
-  padding-top: clamp(28px, 3vw, 40px);
+  margin-bottom: clamp(32px, 3.4vw, 48px);
+  padding-top: clamp(24px, 2.6vw, 36px);
   border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 14%, transparent);
 }
 
@@ -420,7 +898,7 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-framework .dp-speak-framework-intro {
   font-family: var(--dp-font-serif);
-  font-size: clamp(20px, 1.6vw, 25px);
+  font-size: clamp(21px, 1.7vw, 26px);
   line-height: 1.4;
   color: var(--dp-speaking-navy);
   max-width: 28em;
@@ -452,7 +930,7 @@ Loaded only on that page, from functions.php.
   height: 40px;
   padding: 10px;
   color: var(--dp-speaking-blue);
-  background-color: var(--dp-speaking-paper);
+  background-color: var(--dp-white, #FFFFFF);
   border: 1px solid color-mix(in srgb, var(--dp-speaking-blue) 30%, transparent);
   border-radius: 50%;
   position: relative;
@@ -480,7 +958,7 @@ Loaded only on that page, from functions.php.
   display: flex;
   flex-direction: column;
   margin: 0;
-  padding: clamp(28px, 2.6vw, 44px);
+  padding: clamp(28px, 2.4vw, 40px);
   background-color: var(--story-bg);
   border-top: 3px solid var(--story-ink);
   /* Opacity is for the scroll fade in reveal.js, which this rule would otherwise replace */
@@ -512,18 +990,18 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-framework .dp-speak-story-name {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(40px, 3.4vw, 58px);
+  font-size: clamp(40px, 3.4vw, 56px);
   font-style: italic;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--story-ink);
-  margin: 0 0 20px 0;
+  margin: 0 0 18px 0;
 }
 
 .dp-speak-framework .dp-speak-story-line {
   font-family: var(--dp-font-serif);
-  font-size: clamp(20px, 1.5vw, 23px);
+  font-size: clamp(21px, 1.6vw, 25px);
   line-height: 1.3;
   color: var(--dp-speaking-navy);
   margin: 0 0 12px 0;
@@ -531,11 +1009,10 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-framework .dp-speak-story-traits {
   font-family: var(--dp-font-family);
-  font-size: 15px;
+  font-size: 18px;
   line-height: 1.5;
-  letter-spacing: 0.02em;
   color: var(--dp-text, #4A4A4A);
-  margin: 0 0 32px 0;
+  margin: 0 0 28px 0;
 }
 
 /* Outcomes line up along the bottom of the three cards, in the card's colour */
@@ -544,12 +1021,12 @@ Loaded only on that page, from functions.php.
   align-items: center;
   gap: 10px;
   margin: auto 0 0 0;
-  padding-top: 18px;
+  padding-top: 16px;
   border-top: 1px solid color-mix(in srgb, var(--story-ink) 25%, transparent);
   font-family: var(--dp-font-family);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.3;
   color: var(--story-ink);
@@ -569,7 +1046,7 @@ Loaded only on that page, from functions.php.
 @media (max-width: 991px) {
   .dp-speak-framework-head {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 18px;
+    row-gap: 16px;
   }
 
   .dp-speak-stories {
@@ -578,7 +1055,7 @@ Loaded only on that page, from functions.php.
 
   .dp-speak-story-step {
     width: auto;
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   .dp-speak-story-step svg {
@@ -590,19 +1067,14 @@ Loaded only on that page, from functions.php.
   }
 
   .dp-speak-framework .dp-speak-story-traits {
-    margin-bottom: 24px;
+    margin-bottom: 22px;
   }
 }
 
 @media (max-width: 640px) {
-  .dp-speak-framework-container {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
-
   .dp-speak-framework .dp-speak-premise {
     font-size: 32px;
-    margin-bottom: 56px;
+    margin-bottom: 40px;
   }
 
   /* Phones let the two sentences flow together */
@@ -615,11 +1087,11 @@ Loaded only on that page, from functions.php.
   }
 
   .dp-speak-framework .dp-speak-framework-intro {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .dp-speak-story {
-    padding: 28px 24px;
+    padding: 26px 22px;
   }
 
   .dp-speak-framework .dp-speak-story-name {
@@ -628,13 +1100,13 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   2b. THE SHIFT (the one idea to take away, set large on cobalt: the label on
-       the left, the statement beside it, its second half in yellow)
+   6. THE SHIFT (the one idea to take away, set large on navy: the label on
+      the left, the statement beside it, its second half in teal)
    ========================================================================== */
 .dp-speak-shift {
   background:
-    radial-gradient(ellipse 50% 80% at 100% 0%, color-mix(in srgb, var(--dp-speaking-blue) 22%, transparent), color-mix(in srgb, var(--dp-speaking-blue) 0%, transparent) 70%),
-    linear-gradient(135deg, var(--dp-speaking-navy) 0%, var(--dp-speaking-blue) 100%);
+    radial-gradient(ellipse 50% 80% at 100% 0%, color-mix(in srgb, var(--dp-speaking-teal) 16%, transparent), color-mix(in srgb, var(--dp-speaking-teal) 0%, transparent) 70%),
+    linear-gradient(135deg, var(--dp-speaking-deep) 0%, var(--dp-speaking-navy) 100%);
   color: var(--dp-white, #FFFFFF);
 }
 
@@ -646,35 +1118,27 @@ Loaded only on that page, from functions.php.
   align-items: start;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(72px, 8.4vw, 128px) var(--dp-header-gutter, 7vw);
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
 }
 
-/* A short yellow rule, then the label, level with the statement's first line */
+/* The label, level with the statement's first line */
 .dp-speak-shift .dp-speak-shift-label {
   display: flex;
   align-items: center;
   gap: 14px;
   font-family: var(--dp-font-family) !important;
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.5;
-  color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-teal);
   margin: 0.9em 0 0 0;
-}
-
-.dp-speak-shift-label::before {
-  content: "";
-  flex-shrink: 0;
-  width: 32px;
-  height: 1px;
-  background-color: var(--dp-speaking-gold);
 }
 
 .dp-speak-shift .dp-speak-shift-text {
   font-family: var(--dp-font-serif);
-  font-size: clamp(30px, 3.4vw, 58px);
+  font-size: clamp(30px, 3.4vw, 56px);
   font-weight: 400;
   line-height: 1.14;
   letter-spacing: -0.02em;
@@ -686,13 +1150,13 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-shift-accent {
   font-style: italic;
-  color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-teal);
 }
 
 @media (max-width: 991px) {
   .dp-speak-shift-container {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 22px;
+    row-gap: 20px;
   }
 
   .dp-speak-shift .dp-speak-shift-label {
@@ -701,21 +1165,17 @@ Loaded only on that page, from functions.php.
 }
 
 @media (max-width: 640px) {
-  .dp-speak-shift-container {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
-
   .dp-speak-shift .dp-speak-shift-text {
     font-size: 30px;
   }
 }
 
 /* ==========================================================================
-   3. WHAT CHANGES AFTER DON SPEAKS (heading beside a numbered list, on sunny yellow)
+   7. WHAT CHANGES AFTER DON SPEAKS (the heading on an orange panel beside a
+      numbered list, on light gray)
    ========================================================================== */
 .dp-speak-changes {
-  background-color: var(--dp-speaking-gold);
+  background-color: var(--dp-speaking-paper);
   color: var(--dp-speaking-navy);
 }
 
@@ -723,37 +1183,58 @@ Loaded only on that page, from functions.php.
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(80px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  column-gap: clamp(40px, 6vw, 112px);
+  column-gap: clamp(36px, 5vw, 96px);
   align-items: start;
 }
 
-/* Heading stays in view while the list scrolls past it */
+/* The orange panel stays in view while the list scrolls past it */
 .dp-speak-changes-head {
   position: sticky;
-  top: 32px;
+  /* Clear of the sticky header, with room to breathe under it */
+  top: calc(var(--dp-header-height, 68px) + 32px);
+  box-sizing: border-box;
+  padding: clamp(32px, 3.4vw, 56px);
+  background-color: var(--dp-speaking-orange);
+  color: var(--dp-white, #FFFFFF);
 }
 
 .dp-speak-changes .dp-speak-changes-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(36px, 3.6vw, 60px);
+  font-size: clamp(34px, 3.2vw, 54px);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.06;
   letter-spacing: -0.02em;
-  color: var(--dp-speaking-navy);
+  color: var(--dp-white, #FFFFFF);
   max-width: 9em;
-  margin: 0 0 28px 0;
+  margin: 0 0 20px 0;
 }
 
 .dp-speak-changes .dp-speak-changes-intro {
   font-family: var(--dp-font-serif);
-  font-size: clamp(20px, 1.6vw, 25px);
+  font-size: clamp(21px, 1.7vw, 26px);
   line-height: 1.4;
-  color: var(--dp-speaking-navy);
+  color: var(--dp-white, #FFFFFF);
   max-width: 22em;
-  margin: 0;
+  margin: 0 0 28px 0;
+}
+
+/* On orange the button is navy, turning to the darkest navy on hover */
+.dp-speak-changes a.dp-speak-changes-button {
+  height: 56px;
+  font-size: 19px;
+  background-color: var(--dp-speaking-navy);
+}
+
+.dp-speak-changes a.dp-speak-changes-button:hover,
+.dp-speak-changes a.dp-speak-changes-button:focus-visible {
+  background-color: var(--dp-speaking-deep);
+}
+
+.dp-speak-changes a.dp-speak-changes-button:focus-visible {
+  outline-color: var(--dp-speaking-deep);
 }
 
 /* Numbered by a CSS counter, so the numbers are decoration only */
@@ -766,31 +1247,32 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-changes .dp-speak-changes-list li {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
+  grid-template-columns: 52px minmax(0, 1fr);
   column-gap: 16px;
   margin: 0;
-  padding: 26px 0 30px;
-  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-blue) 22%, transparent);
+  padding: 22px 0 24px;
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 14%, transparent);
   counter-increment: change;
   font-family: var(--dp-font-serif);
-  font-size: clamp(22px, 2vw, 32px);
+  font-size: clamp(22px, 1.9vw, 30px);
   font-weight: 400;
-  line-height: 1.25;
+  line-height: 1.28;
   letter-spacing: -0.01em;
   color: var(--dp-speaking-navy);
+}
+
+.dp-speak-changes .dp-speak-changes-list li:first-child {
+  padding-top: 4px;
+  border-top: 0;
 }
 
 .dp-speak-changes-list li::before {
   content: counter(change, decimal-leading-zero);
   font-size: 20px;
   font-style: italic;
+  font-weight: 600;
   line-height: 1.6;
-  color: var(--dp-speaking-navy);
-}
-
-/* Brand blue is too light on yellow, so accents here are cobalt */
-.dp-speak-changes .dp-speak-accent {
-  color: var(--dp-speaking-navy);
+  color: var(--dp-speaking-blue);
 }
 
 @media (max-width: 991px) {
@@ -800,7 +1282,7 @@ Loaded only on that page, from functions.php.
 
   .dp-speak-changes-head {
     position: static;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 
   .dp-speak-changes .dp-speak-changes-title {
@@ -809,20 +1291,24 @@ Loaded only on that page, from functions.php.
 }
 
 @media (max-width: 640px) {
-  .dp-speak-changes-container {
-    padding-top: 64px;
-    padding-bottom: 56px;
+  .dp-speak-changes-head {
+    padding: 28px 24px;
   }
 
   .dp-speak-changes .dp-speak-changes-title {
-    font-size: 34px;
-    margin-bottom: 20px;
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+
+  .dp-speak-changes a.dp-speak-changes-button {
+    width: 100%;
+    justify-content: center;
   }
 
   .dp-speak-changes .dp-speak-changes-list li {
     grid-template-columns: 40px minmax(0, 1fr);
     column-gap: 8px;
-    padding: 22px 0 24px;
+    padding: 20px 0 22px;
     font-size: 22px;
   }
 
@@ -832,7 +1318,7 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   4. PROGRAMS (on deep blue over the blurred stage photo: heading beside the numbered programs)
+   8. PROGRAMS (on navy over the blurred stage photo: heading beside the numbered programs)
    ========================================================================== */
 .dp-speak-programs {
   position: relative;
@@ -852,12 +1338,12 @@ Loaded only on that page, from functions.php.
   z-index: -2;
 }
 
-/* Blue wash keeps the text readable over the photo's bright spots */
+/* Navy wash keeps the text readable over the photo's bright spots */
 .dp-speak-programs::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--dp-speaking-navy) 90%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-navy) 78%, transparent) 50%, color-mix(in srgb, var(--dp-speaking-navy) 92%, transparent) 100%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--dp-speaking-deep) 92%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-navy) 84%, transparent) 50%, color-mix(in srgb, var(--dp-speaking-deep) 94%, transparent) 100%);
   z-index: -1;
 }
 
@@ -867,36 +1353,39 @@ Loaded only on that page, from functions.php.
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(80px, 10vw, 140px) var(--dp-header-gutter, 7vw);
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   grid-template-areas:
     "head list"
     "head more";
-  column-gap: clamp(40px, 6vw, 112px);
+  column-gap: clamp(36px, 5vw, 96px);
 }
 
 .dp-speak-programs-head {
   grid-area: head;
   align-self: start;
   position: sticky;
-  top: 32px;
+  /* Clear of the sticky header, with room to breathe under it */
+  top: calc(var(--dp-header-height, 68px) + 32px);
 }
 
 .dp-speak-programs .dp-speak-programs-eyebrow {
-  color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-teal);
   max-width: 24em;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .dp-speak-programs .dp-speak-programs-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(40px, 4vw, 68px);
+  font-size: clamp(40px, 3.8vw, 64px);
   font-weight: 600;
   line-height: 1.04;
   letter-spacing: -0.02em;
   color: var(--dp-white, #FFFFFF);
   margin: 0;
+  /* "See the programs" in the first screen lands here, clear of the header */
+  scroll-margin-top: calc(var(--dp-header-height, 68px) + 32px);
 }
 
 .dp-speak-programs-title span,
@@ -906,16 +1395,16 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-programs-accent {
   font-style: italic;
-  color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-teal);
 }
 
 .dp-speak-programs .dp-speak-programs-sub {
   font-family: var(--dp-font-family);
-  font-size: clamp(17px, 1.3vw, 19px);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(19px, 1.4vw, 22px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
   max-width: 24em;
-  margin: 28px 0 0 0;
+  margin: 24px 0 0 0;
 }
 
 /* Programs: numbered by a CSS counter, so the numbers are decoration only */
@@ -932,13 +1421,13 @@ Loaded only on that page, from functions.php.
   grid-template-columns: 56px minmax(0, 1fr);
   column-gap: 16px;
   margin: 0;
-  padding: 40px 0 44px;
+  padding: 32px 0 36px;
   border-top: 1px solid rgba(255, 255, 255, 0.18);
   counter-increment: program;
 }
 
 .dp-speak-program:first-child {
-  padding-top: 8px;
+  padding-top: 6px;
   border-top: 0;
 }
 
@@ -952,29 +1441,29 @@ Loaded only on that page, from functions.php.
   font-size: 22px;
   font-style: italic;
   line-height: 1.3;
-  color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-teal);
 }
 
-/* The format as a yellow tag */
+/* The format as a teal tag */
 .dp-speak-programs .dp-speak-program-format {
   display: inline-block;
   font-family: var(--dp-font-family);
-  font-size: 11.5px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1;
-  color: var(--dp-speaking-navy);
-  background-color: var(--dp-speaking-gold);
+  color: var(--dp-speaking-deep);
+  background-color: var(--dp-speaking-teal);
   border-radius: 999px;
-  margin: 0 0 16px 0;
-  padding: 7px 12px 6px;
+  margin: 0 0 14px 0;
+  padding: 8px 13px 7px;
 }
 
 .dp-speak-programs .dp-speak-program-title {
   font-family: var(--dp-font-serif) !important;
   font-size: clamp(28px, 2.4vw, 38px);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.12;
   letter-spacing: -0.01em;
   color: var(--dp-white, #FFFFFF);
@@ -983,18 +1472,18 @@ Loaded only on that page, from functions.php.
 
 .dp-speak-programs .dp-speak-program-subtitle {
   font-family: var(--dp-font-serif);
-  font-size: clamp(18px, 1.4vw, 21px);
+  font-size: clamp(20px, 1.5vw, 23px);
   font-style: italic;
   line-height: 1.4;
-  color: var(--dp-speaking-gold);
-  margin: 0 0 18px 0;
+  color: var(--dp-speaking-teal);
+  margin: 0 0 16px 0;
 }
 
 .dp-speak-programs .dp-speak-program-text {
   font-family: var(--dp-font-family);
-  font-size: 17px;
-  line-height: 1.65;
-  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(18px, 1.3vw, 20px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
   max-width: 38em;
   margin: 0 0 12px 0;
 }
@@ -1006,23 +1495,24 @@ Loaded only on that page, from functions.php.
 /* One-sheet link lines up with the program text, past the numbers */
 .dp-speak-programs .dp-speak-programs-more {
   grid-area: more;
-  margin: 48px 0 0 72px;
+  margin: 40px 0 0 72px;
 }
 
-/* Arrow link recoloured for the ink background */
+/* Arrow link recoloured for the navy background */
 .dp-speak-programs a.dp-arrow-link {
+  font-size: 19px;
   color: var(--dp-white, #FFFFFF);
-  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-decoration-color: rgba(255, 255, 255, 0.35);
 }
 
 .dp-speak-programs a.dp-arrow-link:hover,
 .dp-speak-programs a.dp-arrow-link:focus-visible {
-  color: var(--dp-speaking-orange);
+  color: var(--dp-speaking-teal);
   text-decoration-color: currentColor;
 }
 
 .dp-speak-programs a.dp-arrow-link:focus-visible {
-  outline-color: var(--dp-speaking-gold);
+  outline-color: var(--dp-speaking-teal);
 }
 
 @media (max-width: 991px) {
@@ -1036,7 +1526,7 @@ Loaded only on that page, from functions.php.
 
   .dp-speak-programs-head {
     position: static;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
 
   .dp-speak-programs .dp-speak-programs-more {
@@ -1045,23 +1535,18 @@ Loaded only on that page, from functions.php.
 }
 
 @media (max-width: 640px) {
-  .dp-speak-programs-container {
-    padding-top: 64px;
-    padding-bottom: 64px;
-  }
-
   .dp-speak-programs .dp-speak-programs-title {
     font-size: 38px;
   }
 
   .dp-speak-programs-head {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
 
   .dp-speak-program {
     grid-template-columns: minmax(0, 1fr);
     row-gap: 6px;
-    padding: 32px 0 36px;
+    padding: 28px 0 32px;
   }
 
   .dp-speak-program:first-child {
@@ -1073,11 +1558,11 @@ Loaded only on that page, from functions.php.
   }
 
   .dp-speak-programs .dp-speak-program-text {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .dp-speak-programs .dp-speak-programs-more {
-    margin-top: 40px;
+    margin-top: 32px;
   }
 
   /* The link text is too long for one line on a phone */
@@ -1088,111 +1573,7 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   5. STATS BAND (four numbers between hairlines, on white)
-   ========================================================================== */
-.dp-speak-stats {
-  background-color: var(--dp-speaking-paper);
-  color: var(--dp-speaking-navy);
-}
-
-.dp-speak-stats-container {
-  box-sizing: border-box;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: clamp(64px, 7vw, 112px) var(--dp-header-gutter, 7vw);
-}
-
-.dp-speak-stats-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.dp-speak-stats .dp-speak-stat {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin: 0;
-  padding: 0 clamp(16px, 2vw, 32px);
-}
-
-.dp-speak-stats .dp-speak-stat:first-child {
-  padding-left: 0;
-}
-
-.dp-speak-stat + .dp-speak-stat {
-  border-left: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 14%, transparent);
-}
-
-/* Each number sits on a stroke of yellow marker */
-.dp-speak-stat-number {
-  align-self: flex-start;
-  padding: 0 0.08em;
-  font-family: var(--dp-font-serif);
-  font-size: clamp(52px, 5.6vw, 96px);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--dp-speaking-navy);
-  background-image: linear-gradient(transparent 60%, var(--dp-speaking-marker) 60%, var(--dp-speaking-marker) 88%, transparent 88%);
-}
-
-.dp-speak-stat-suffix {
-  color: var(--dp-speaking-blue);
-}
-
-.dp-speak-stat-label {
-  font-family: var(--dp-font-family);
-  font-size: 13px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1.5;
-  color: var(--dp-text, #4A4A4A);
-  max-width: 16em;
-}
-
-/* Two by two */
-@media (max-width: 991px) {
-  .dp-speak-stats-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 44px;
-  }
-
-  .dp-speak-stats .dp-speak-stat:nth-child(odd) {
-    padding-left: 0;
-    border-left: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .dp-speak-stats-container {
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
-
-  .dp-speak-stats .dp-speak-stat {
-    gap: 10px;
-    padding-right: 12px;
-  }
-
-  .dp-speak-stats .dp-speak-stat:nth-child(even) {
-    padding-left: 16px;
-  }
-
-  .dp-speak-stat-number {
-    font-size: 48px;
-  }
-
-  .dp-speak-stat-label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-  }
-}
-
-/* ==========================================================================
-   6. DON IN THE ROOM (full-width stage photograph with its caption on it)
+   9. DON IN THE ROOM (full-width stage photograph with its caption on it)
    ========================================================================== */
 .dp-speak-room {
   position: relative;
@@ -1207,7 +1588,7 @@ Loaded only on that page, from functions.php.
   height: auto;
   /* The photo's own 16:9, never taller than most of the screen */
   aspect-ratio: 16 / 9;
-  max-height: 90vh;
+  max-height: 72vh;
   object-fit: cover;
   /* Keeps Don's head clear of the top edge when the height is capped */
   object-position: 50% 18%;
@@ -1218,7 +1599,7 @@ Loaded only on that page, from functions.php.
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, color-mix(in srgb, var(--dp-speaking-navy) 62%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-navy) 0%, transparent) 40%);
+  background: linear-gradient(0deg, color-mix(in srgb, var(--dp-speaking-deep) 66%, transparent) 0%, color-mix(in srgb, var(--dp-speaking-deep) 0%, transparent) 40%);
   pointer-events: none;
 }
 
@@ -1232,18 +1613,12 @@ Loaded only on that page, from functions.php.
   align-items: center;
   gap: 14px;
   font-family: var(--dp-font-family);
-  font-size: 13px;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1;
   color: var(--dp-white, #FFFFFF);
-}
-
-.dp-speak-room-caption::before {
-  content: "";
-  width: 32px;
-  height: 1px;
-  background-color: var(--dp-speaking-gold);
 }
 
 /* Phones: a squarer crop that keeps Don in frame */
@@ -1254,175 +1629,25 @@ Loaded only on that page, from functions.php.
   }
 
   .dp-speak-room-caption {
-    font-size: 12px;
+    font-size: 12.5px;
   }
 }
 
 /* ==========================================================================
-   7. FROM THE ROOM (three testimonials, on navy)
-   ========================================================================== */
-.dp-speak-praise {
-  background-color: var(--dp-speaking-navy);
-  color: var(--dp-white, #FFFFFF);
-}
-
-.dp-speak-praise-container {
-  box-sizing: border-box;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: clamp(72px, 9vw, 128px) var(--dp-header-gutter, 7vw);
-}
-
-.dp-speak-praise .dp-speak-praise-title {
-  font-family: var(--dp-font-serif) !important;
-  font-size: clamp(36px, 3.6vw, 60px);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: var(--dp-white, #FFFFFF);
-  margin: 0 0 clamp(40px, 5vw, 64px) 0;
-}
-
-.dp-speak-praise-accent {
-  font-style: italic;
-  color: var(--dp-speaking-gold);
-}
-
-.dp-speak-praise-list {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(32px, 4vw, 64px);
-}
-
-.dp-speak-quote {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-}
-
-/* The curly quote sits at the top of its line box, so the box is cropped tight to it */
-.dp-speak-quote-mark {
-  display: block;
-  overflow: hidden;
-  height: 0.34em;
-  font-family: var(--dp-font-serif);
-  font-size: 92px;
-  line-height: 0.74;
-  color: var(--dp-speaking-gold);
-  margin-bottom: 26px;
-}
-
-.dp-speak-praise .dp-speak-quote-text {
-  flex: 1;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: none;
-  quotes: none;
-  font-style: normal;
-}
-
-.dp-speak-praise .dp-speak-quote-text p {
-  font-family: var(--dp-font-serif);
-  font-size: clamp(18px, 1.3vw, 20px);
-  font-weight: 400;
-  line-height: 1.55;
-  color: var(--dp-white, #FFFFFF);
-  margin: 0;
-}
-
-/* Space between the quote and its foot, however long the quote runs */
-.dp-speak-praise .dp-speak-quote-text {
-  margin-bottom: 28px;
-}
-
-/* The headshot beside the name and role, under a rule at the foot of every card,
-   so the three line up */
-.dp-speak-quote-by {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-top: auto;
-  padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-/* The photos are already gold circles; this only keeps them round and sized */
-.dp-speak-quote-photo {
-  flex-shrink: 0;
-  display: block;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-}
-
-.dp-speak-quote-who {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  min-width: 0;
-}
-
-.dp-speak-quote-name {
-  font-family: var(--dp-font-family);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1.3;
-  color: var(--dp-speaking-gold);
-}
-
-.dp-speak-quote-role {
-  font-family: var(--dp-font-family);
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.5;
-  color: var(--dp-white, #FFFFFF);
-}
-
-@media (max-width: 991px) {
-  .dp-speak-praise-list {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
-    max-width: 44em;
-  }
-}
-
-@media (max-width: 640px) {
-  .dp-speak-praise-container {
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
-
-  .dp-speak-praise .dp-speak-praise-title {
-    font-size: 34px;
-  }
-
-  .dp-speak-quote-mark {
-    font-size: 72px;
-    margin-bottom: 18px;
-  }
-
-  .dp-speak-praise .dp-speak-quote-text p {
-    font-size: 18px;
-  }
-}
-
-/* ==========================================================================
-   8. CLOSING CALL TO ACTION (centred close on sunny yellow)
+   10. CLOSING CALL TO ACTION (centred close on navy, the button in orange)
    ========================================================================== */
 .dp-speak-cta {
-  background-color: var(--dp-speaking-gold);
-  color: var(--dp-speaking-navy);
+  background:
+    radial-gradient(ellipse 55% 90% at 50% 120%, color-mix(in srgb, var(--dp-speaking-teal) 22%, transparent), color-mix(in srgb, var(--dp-speaking-teal) 0%, transparent) 70%),
+    linear-gradient(180deg, var(--dp-speaking-navy) 0%, var(--dp-speaking-deep) 100%);
+  color: var(--dp-white, #FFFFFF);
 }
 
 .dp-speak-cta-container {
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(88px, 11vw, 160px) var(--dp-header-gutter, 7vw);
+  padding: var(--dp-speak-space) var(--dp-header-gutter, 7vw);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1433,47 +1658,52 @@ Loaded only on that page, from functions.php.
   display: block;
   width: 56px;
   height: 3px;
-  background-color: var(--dp-speaking-navy);
-  margin-bottom: clamp(28px, 3vw, 40px);
+  background-color: var(--dp-speaking-orange);
+  margin-bottom: clamp(24px, 2.6vw, 36px);
 }
 
 .dp-speak-cta .dp-speak-cta-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(44px, 6vw, 104px);
-  font-weight: 400;
+  font-size: clamp(42px, 5.4vw, 92px);
+  font-weight: 500;
   line-height: 1.02;
   letter-spacing: -0.025em;
-  color: var(--dp-speaking-navy);
-  margin: 0 0 clamp(28px, 3vw, 40px) 0;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 clamp(24px, 2.6vw, 36px) 0;
 }
 
 .dp-speak-cta-line {
   display: block;
 }
 
+.dp-speak-cta-accent {
+  font-style: italic;
+  color: var(--dp-speaking-teal);
+}
+
 /* The three formats, as on the one-sheet: Keynote | Breakout | Executive Session */
 .dp-speak-cta .dp-speak-cta-formats {
   font-family: var(--dp-font-family);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   line-height: 1.6;
-  color: var(--dp-speaking-navy);
-  margin: 0 0 18px 0;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 16px 0;
 }
 
 .dp-speak-cta-formats span {
-  color: var(--dp-speaking-blue);
+  color: var(--dp-speaking-teal);
 }
 
 .dp-speak-cta .dp-speak-cta-text {
   font-family: var(--dp-font-family);
-  font-size: clamp(17px, 1.35vw, 20px);
-  line-height: 1.65;
-  color: var(--dp-speaking-navy);
+  font-size: clamp(19px, 1.5vw, 23px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
   max-width: 32em;
-  margin: 0 0 40px 0;
+  margin: 0 0 36px 0;
 }
 
 .dp-speak-cta-actions {
@@ -1484,43 +1714,38 @@ Loaded only on that page, from functions.php.
   gap: 20px 36px;
 }
 
-.dp-speak-cta a.dp-speak-cta-button {
-  height: 62px;
-  padding: 0 38px;
-  font-size: 20px;
-  background-color: var(--dp-speaking-navy);
+/* On navy the hover turns white, with navy type */
+.dp-speak-cta a.dp-dark-button.dp-speak-button:hover,
+.dp-speak-cta a.dp-dark-button.dp-speak-button:focus-visible {
+  color: var(--dp-speaking-navy) !important;
+  background-color: var(--dp-white, #FFFFFF);
 }
 
-.dp-speak-cta a.dp-speak-cta-button:hover,
-.dp-speak-cta a.dp-speak-cta-button:focus-visible {
-  background-color: var(--dp-speaking-blue);
+.dp-speak-cta a.dp-arrow-link {
+  font-size: 19px;
+  color: var(--dp-white, #FFFFFF);
+  text-decoration-color: rgba(255, 255, 255, 0.35);
 }
 
-.dp-speak-cta a.dp-speak-cta-button:focus-visible,
-.dp-speak-cta a.dp-arrow-link:focus-visible {
-  outline-color: var(--dp-speaking-navy);
-}
-
-/* On gold, the hover stays navy: blue and orange are too light to read there */
 .dp-speak-cta a.dp-arrow-link:hover,
 .dp-speak-cta a.dp-arrow-link:focus-visible {
-  color: var(--dp-speaking-navy);
+  color: var(--dp-speaking-teal);
+  text-decoration-color: currentColor;
+}
+
+.dp-speak-cta a.dp-arrow-link:focus-visible {
+  outline-color: var(--dp-speaking-teal);
 }
 
 @media (max-width: 640px) {
-  .dp-speak-cta-container {
-    padding-top: 72px;
-    padding-bottom: 72px;
-  }
-
   .dp-speak-cta .dp-speak-cta-title {
     font-size: 40px;
     line-height: 1.06;
   }
 
   .dp-speak-cta .dp-speak-cta-text {
-    font-size: 16px;
-    margin-bottom: 32px;
+    font-size: 19px;
+    margin-bottom: 28px;
   }
 
   .dp-speak-cta-actions {
@@ -1532,8 +1757,6 @@ Loaded only on that page, from functions.php.
 
   .dp-speak-cta a.dp-speak-cta-button {
     justify-content: center;
-    height: 56px;
-    font-size: 18px;
   }
 
   .dp-speak-cta a.dp-arrow-link {
@@ -1542,7 +1765,7 @@ Loaded only on that page, from functions.php.
 }
 
 /* ==========================================================================
-   9. REDUCED MOTION
+   11. REDUCED MOTION
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   a.dp-arrow-link,

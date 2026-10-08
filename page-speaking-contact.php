@@ -21,6 +21,7 @@ $contact_status = isset( $_GET['contact'] ) ? sanitize_key( wp_unslash( $_GET['c
 
 // Arriving from a "Request" on the Resources page: the message names what was asked for
 $requested = isset( $_GET['resource'] ) ? sanitize_text_field( wp_unslash( $_GET['resource'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$requested = mb_substr( $requested, 0, 160 ); // A resource's name, at most
 $message   = '' !== $requested ? sprintf( 'I’d like a copy of: %s', $requested ) : '';
 
 // Rough audience sizes, enough to plan the room, as value => label (the values stay

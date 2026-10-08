@@ -11,13 +11,15 @@ bronze and cream, square). Loads after the section's palette (inc/enqueue.php).
    0. THE SECTION'S COLOURS AND SHAPES
    ========================================================================== */
 .dp-lib-section {
-  --dp-lib-ink: var(--dp-speaking-navy, #12284A);           /* headings, names */
-  --dp-lib-link: var(--dp-speaking-blue, #1E5AA8);          /* labels, links, focus */
-  --dp-lib-accent: var(--dp-speaking-gold, #F2B035);        /* icons' rings, the download pills */
-  --dp-lib-accent-hover: var(--dp-speaking-orange, #E8952C);
-  --dp-lib-on-accent: var(--dp-speaking-navy, #12284A);     /* type on the accent */
+  --dp-lib-ink: var(--dp-speaking-navy, #004E64);           /* headings, names */
+  --dp-lib-link: var(--dp-speaking-blue, #00728F);          /* labels, links, focus */
+  --dp-lib-accent: var(--dp-speaking-teal, #25CED1);        /* icons' rings */
+  --dp-lib-button: var(--dp-speaking-orange, #FF6B35);      /* the download pills */
+  --dp-lib-on-accent: var(--dp-speaking-deep, #00303E);     /* type on the pills */
+  --dp-lib-accent-hover: var(--dp-speaking-navy, #004E64);  /* the pills on hover */
+  --dp-lib-on-accent-hover: var(--dp-white, #FFFFFF);
   --dp-lib-bg: var(--dp-white, #FFFFFF);                   /* the section */
-  --dp-lib-soft: var(--dp-speaking-paper, #F8F6F1);         /* the search box, hovers */
+  --dp-lib-soft: var(--dp-speaking-paper, #F7F9F9);         /* the search box, hovers */
   --dp-lib-card: var(--dp-white, #FFFFFF);
   --dp-lib-text: var(--dp-text, #4A4A4A);
   --dp-lib-radius: 999px;                                   /* chips, search and pills */
@@ -27,8 +29,10 @@ bronze and cream, square). Loads after the section's palette (inc/enqueue.php).
   --dp-lib-ink: var(--dp-private-counsel-navy);
   --dp-lib-link: var(--dp-private-counsel-gold);
   --dp-lib-accent: var(--dp-private-counsel-bronze);
+  --dp-lib-button: var(--dp-private-counsel-bronze);
   --dp-lib-accent-hover: var(--dp-private-counsel-gold);
   --dp-lib-on-accent: var(--dp-private-counsel-cream);
+  --dp-lib-on-accent-hover: var(--dp-private-counsel-cream);
   --dp-lib-bg: var(--dp-private-counsel-cream);
   --dp-lib-soft: var(--dp-private-counsel-band);
   --dp-lib-card: var(--dp-private-counsel-cream);
@@ -348,10 +352,10 @@ a.dp-lib-get {
   line-height: 1;
   padding: 7px 10px;
   color: var(--dp-lib-on-accent);
-  background-color: var(--dp-lib-accent);
+  background-color: var(--dp-lib-button);
   border-radius: var(--dp-lib-radius);
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a.dp-lib-get svg {
@@ -361,7 +365,7 @@ a.dp-lib-get svg {
 
 a.dp-lib-get:hover,
 a.dp-lib-get:focus-visible {
-  color: var(--dp-lib-on-accent);
+  color: var(--dp-lib-on-accent-hover);
   background-color: var(--dp-lib-accent-hover);
 }
 

@@ -237,12 +237,17 @@ function donphin_resource_category( $term ) {
  * Everything about one resource that the pages need
  *
  * @param WP_Post|int $post The resource.
- * @return array name, tag, summary, url (its page), file (url, mime, ext, size, id),
+ * @return array Empty if there's no such resource; otherwise name, tag, summary,
+ *               url (its page), file (url, mime, ext, size, id),
  *               link (a video, tool or page), kind ('pdf', 'image', 'audio', 'video',
  *               'link', 'file' or 'none'), request (the contact form, asking for it).
  */
 function donphin_resource( $post ) {
-	$post    = get_post( $post );
+	$post = get_post( $post );
+	if ( ! $post ) {
+		return array();
+	}
+
 	$side    = donphin_resource_side( $post->post_type );
 	$sides   = donphin_resource_sides();
 	$file_id = (int) get_post_meta( $post->ID, '_dp_res_file', true );

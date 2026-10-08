@@ -83,7 +83,15 @@ function donphin_enqueue_scripts() {
 		null
 	);
 
-	// Font tokens (the only place font families are defined)
+	// The section's own typefaces, where it has them (its palette stylesheet points the
+	// font tokens at them)
+	$sections = donphin_sections();
+	$section  = $sections[ donphin_get_header_section() ];
+	if ( ! empty( $section['fonts'] ) ) {
+		wp_enqueue_style( 'donphin-section-fonts', $section['fonts'], array(), null );
+	}
+
+	// Font tokens (the only place font families are defined, bar a section's own)
 	donphin_enqueue_asset( 'css', 'fonts', array( 'donphin-google-fonts' ) );
 
 	// Child Theme Stylesheet
@@ -105,8 +113,7 @@ function donphin_enqueue_scripts() {
 	donphin_enqueue_asset( 'js', 'page-transitions' );
 
 	// The section's palette and header colours, on every page of the section
-	$sections   = donphin_sections();
-	$stylesheet = $sections[ donphin_get_header_section() ]['stylesheet'];
+	$stylesheet = $section['stylesheet'];
 	$page_deps  = array( 'donphin-child-style' );
 	if ( $stylesheet ) {
 		donphin_enqueue_asset( 'css', $stylesheet, array( 'donphin-child-style' ) );

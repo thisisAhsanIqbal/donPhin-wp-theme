@@ -22,6 +22,7 @@ $contact_status = isset( $_GET['contact'] ) ? sanitize_key( wp_unslash( $_GET['c
 
 // Arriving from a "Request a copy" on a Counsel resource: the message names what was asked for
 $requested = isset( $_GET['resource'] ) ? sanitize_text_field( wp_unslash( $_GET['resource'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$requested = mb_substr( $requested, 0, 160 ); // A resource's name, at most
 $message   = '' !== $requested ? sprintf( 'I’d like a copy of: %s', $requested ) : '';
 
 $reach_options = array( 'Email', 'Phone', 'Either' );

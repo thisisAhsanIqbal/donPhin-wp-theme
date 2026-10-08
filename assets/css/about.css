@@ -13,12 +13,13 @@ takes its colours from the Speaking palette there.
 :root {
   /* The page's roles, filled from the Speaking palette (the values after the commas
      are the same colours, should speaking.css ever be missing) */
-  --dp-about-navy: var(--dp-speaking-navy, #12284A);        /* highlights, closing band, tags, headings */
-  --dp-about-gold: var(--dp-speaking-gold, #F2B035);        /* rules, the button */
-  --dp-about-gold-ink: var(--dp-speaking-blue, #1E5AA8);    /* small accent type on paper (gold is too light there) */
-  --dp-about-gold-light: var(--dp-speaking-gold, #F2B035);  /* gold type on navy */
-  --dp-about-hover: var(--dp-speaking-orange, #E8952C);     /* hover on anything gold */
-  --dp-about-cream: var(--dp-speaking-paper, #F8F6F1);      /* page background */
+  --dp-about-navy: var(--dp-speaking-navy, #004E64);        /* highlights, closing band, tags, headings */
+  --dp-about-gold: var(--dp-speaking-teal, #25CED1);        /* rules */
+  --dp-about-gold-ink: var(--dp-speaking-blue, #00728F);    /* small accent type on paper (teal is too light there) */
+  --dp-about-gold-light: var(--dp-speaking-teal, #25CED1);  /* accent type on navy */
+  --dp-about-button: var(--dp-speaking-orange, #FF6B35);    /* the button */
+  --dp-about-button-ink: var(--dp-speaking-deep, #00303E);  /* type on the button */
+  --dp-about-cream: var(--dp-speaking-paper, #F7F9F9);      /* page background */
   --dp-about-text: #3E4652;                                 /* body copy on paper */
 }
 
@@ -587,8 +588,8 @@ a.dp-about-cta-button {
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
-  color: var(--dp-about-navy);
-  background-color: var(--dp-about-gold);
+  color: var(--dp-about-button-ink);
+  background-color: var(--dp-about-button);
   border-radius: 2px;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -597,7 +598,7 @@ a.dp-about-cta-button {
 a.dp-about-cta-button:hover,
 a.dp-about-cta-button:focus-visible {
   color: var(--dp-about-navy);
-  background-color: var(--dp-about-hover);
+  background-color: var(--dp-white, #FFFFFF);
 }
 
 a.dp-about-cta-button:focus-visible {

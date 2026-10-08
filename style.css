@@ -5,7 +5,7 @@ Description: Custom professional Kadence child theme for Don Phin, Esq. featurin
 Author: Kadence WP / Custom
 Author URI: https://www.donphin.com/
 Template: kadence
-Version: 1.11.1
+Version: 1.14.0
 Text Domain: don-phin-esq
 */
 
@@ -136,13 +136,16 @@ html {
   --dp-header-cta-text: var(--dp-white);
   --dp-header-cta-hover-bg: var(--dp-accent);
   --dp-header-cta-hover-text: var(--dp-white);
+  --dp-header-cta-height: 36px;               /* the button's height in the bar */
 }
 
 .speaking-header .dp-header {
-  --dp-header-ink: var(--dp-speaking-navy, #12284A);
-  --dp-header-accent: var(--dp-speaking-blue, #1E5AA8);
-  --dp-header-cta-bg: var(--dp-speaking-blue, #1E5AA8);
-  --dp-header-cta-hover-bg: var(--dp-speaking-navy, #12284A);
+  --dp-header-ink: var(--dp-speaking-navy, #004E64);
+  --dp-header-accent: var(--dp-speaking-blue, #00728F);
+  --dp-header-cta-bg: var(--dp-speaking-orange, #FF6B35);
+  --dp-header-cta-text: var(--dp-speaking-deep, #00303E);
+  --dp-header-cta-hover-bg: var(--dp-speaking-navy, #004E64);
+  --dp-header-cta-height: 44px;
 }
 
 /* Deep gold rather than bronze: small type and cream on bronze are too light to read */
@@ -204,7 +207,7 @@ html {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 36px;
+  height: var(--dp-header-cta-height);
   padding: 0 33px;
   font-size: 18px;
   font-weight: 400;
@@ -487,10 +490,24 @@ html {
 /* ==========================================================================
    7. SITE FOOTER (simple minimalist centered footer)
    ========================================================================== */
+/* The footer's colours, as tokens a section can set (as the header's are) */
+.dp-footer {
+  --dp-footer-bg: #1a2638;
+  --dp-footer-accent: var(--dp-accent-light, #8DB6F5);  /* icons, the rule under the name, focus */
+  --dp-footer-title-weight: 500;
+}
+
+/* Speaking: the darkest navy, a step below the closing band above it, with teal accents */
+.speaking-header .dp-footer {
+  --dp-footer-bg: var(--dp-speaking-deep, #00303E);
+  --dp-footer-accent: var(--dp-speaking-teal, #25CED1);
+  --dp-footer-title-weight: 700;
+}
+
 .dp-footer {
   position: relative;
   font-family: var(--dp-font-family) !important;
-  background-color: #1a2638;
+  background-color: var(--dp-footer-bg);
   color: #FFFFFF;
   padding: clamp(44px, 5.4vw, 64px) 20px clamp(28px, 3vw, 36px);
   text-align: center;
@@ -504,7 +521,7 @@ html {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, rgba(141, 182, 245, 0) 0%, rgba(141, 182, 245, 0.55) 50%, rgba(141, 182, 245, 0) 100%);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--dp-footer-accent) 0%, transparent) 0%, color-mix(in srgb, var(--dp-footer-accent) 55%, transparent) 50%, color-mix(in srgb, var(--dp-footer-accent) 0%, transparent) 100%);
 }
 
 .dp-footer-simple {
@@ -520,7 +537,7 @@ html {
 .dp-footer-title {
   font-family: var(--dp-font-serif, "Fraunces", Georgia, serif) !important;
   font-size: 20px;
-  font-weight: 500;
+  font-weight: var(--dp-footer-title-weight);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #e6edf5;
@@ -533,7 +550,7 @@ html {
   width: 40px;
   height: 1px;
   margin: 4px 0 10px;
-  background-color: var(--dp-accent-light, #8DB6F5);
+  background-color: var(--dp-footer-accent);
 }
 
 /* The four details: one centred row on desktop and tablet */
@@ -559,7 +576,7 @@ html {
   flex-shrink: 0;
   width: 15px;
   height: 15px;
-  color: var(--dp-accent-light, #8DB6F5);
+  color: var(--dp-footer-accent);
   opacity: 0.85;
 }
 
@@ -583,7 +600,7 @@ html {
 }
 
 .dp-footer-details a:focus-visible {
-  outline: 2px solid var(--dp-accent-light, #8DB6F5);
+  outline: 2px solid var(--dp-footer-accent);
   outline-offset: 3px;
 }
 

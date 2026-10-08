@@ -164,11 +164,14 @@ function donphin_resource_save_term( $term_id ) {
 	if ( ! isset( $_POST['donphin_resource_term_nonce'] ) || ! wp_verify_nonce( sanitize_key( wp_unslash( $_POST['donphin_resource_term_nonce'] ) ), 'donphin_save_resource_term' ) ) {
 		return;
 	}
+	if ( ! current_user_can( 'manage_categories' ) ) {
+		return;
+	}
 	$icons = donphin_resource_icons();
 	$icon  = isset( $_POST['dp_icon'] ) ? sanitize_key( wp_unslash( $_POST['dp_icon'] ) ) : '';
 	update_term_meta( $term_id, 'dp_chip', isset( $_POST['dp_chip'] ) ? sanitize_text_field( wp_unslash( $_POST['dp_chip'] ) ) : '' );
 	update_term_meta( $term_id, 'dp_icon', isset( $icons[ $icon ] ) ? $icon : 'file' );
-	update_term_meta( $term_id, 'dp_order', isset( $_POST['dp_order'] ) ? (int) $_POST['dp_order'] : 0 );
+	update_term_meta( $term_id, 'dp_order', isset( $_POST['dp_order'] ) ? (int) wp_unslash( $_POST['dp_order'] ) : 0 );
 }
 
 foreach ( donphin_resource_sides() as $donphin_res_side ) {

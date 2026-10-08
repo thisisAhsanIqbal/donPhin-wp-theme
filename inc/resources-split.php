@@ -8,6 +8,7 @@
  * - the Private Counsel resources move to Counsel Resources, into its two categories
  *   (Books; Checklists, Reports, Tools and More), in Don's order
  * - the two on both lists are copied there too, keeping the same document
+ * - a link that would lead to the Speaking side leads straight to where it means instead
  * - the resources on hold become drafts (kept, but not shown)
  * - From Chaos to Order is deleted (its document, if any, stays in the Media Library)
  * - HR Tools' books are put in Don's order
@@ -46,7 +47,11 @@ function donphin_resources_split_brief() {
 					),
 					array( 'title' => 'The 40//40 Solution in Sales (Audio)' ), // The audio excerpt
 					array( 'title' => 'The 40//40 Solution in Sales' ),         // The PDF excerpt
-					array( 'title' => 'The 40//40 Solution on Amazon' ),
+					array(
+						// Straight to Amazon: its Speaking link (the 40//40 page) would cross sides
+						'title' => 'The 40//40 Solution on Amazon',
+						'url'   => 'https://amzn.to/2maEiy3',
+					),
 				),
 			),
 			array(
@@ -194,6 +199,9 @@ function donphin_resources_split_plan() {
 
 			if ( is_array( $copied ) ) {
 				$steps[] = array( 'what' => empty( $item['both'] ) ? 'move' : 'copy', 'title' => $item['title'], 'detail' => 'Already in Counsel Resources', 'done' => true );
+				if ( ! empty( $item['url'] ) && get_post_meta( $copied['post']->ID, '_dp_res_url', true ) !== $item['url'] ) {
+					$steps[] = array( 'what' => 'link', 'title' => $copied['post']->post_title, 'detail' => 'Its link becomes ' . $item['url'], 'done' => false, 'post_id' => $copied['post']->ID, 'url' => $item['url'] );
+				}
 				if ( is_array( $found ) && ! empty( $item['both'] ) ) {
 					$lists[ $found['post']->ID ] = 'HR Tools, Private Counsel';
 				}
@@ -212,6 +220,7 @@ function donphin_resources_split_plan() {
 				'post_id'  => $found['post']->ID,
 				'group'    => $group,
 				'position' => $position,
+				'url'      => isset( $item['url'] ) ? $item['url'] : '',
 			);
 			$lists[ $found['post']->ID ] = empty( $item['both'] ) ? 'Private Counsel' : 'HR Tools, Private Counsel';
 		}
@@ -312,18 +321,33 @@ function donphin_resources_split_apply() {
 		switch ( $step['what'] ) {
 			case 'move':
 			case 'copy':
+				// The group's category first: without it, nothing moves
 				$group = $step['group'];
 				if ( ! isset( $terms[ $group['name'] ] ) ) {
 					$terms[ $group['name'] ] = donphin_resources_split_category( $group, count( $terms ) );
 				}
+				if ( is_wp_error( $terms[ $group['name'] ] ) ) {
+					$log[] = sprintf( 'Not done: %s (couldn’t make the category “%s”: %s)', $step['title'], $group['name'], $terms[ $group['name'] ]->get_error_message() );
+					unset( $terms[ $group['name'] ] );
+					break;
+				}
+
 				if ( 'move' === $step['what'] ) {
-					set_post_type( $post_id, $sides['counsel']['post_type'] );
+					if ( ! set_post_type( $post_id, $sides['counsel']['post_type'] ) ) {
+						$log[] = 'Not done: couldn’t move ' . $step['title'];
+						break;
+					}
 					wp_set_object_terms( $post_id, array(), $sides['speaking']['taxonomy'] );
-					wp_update_post( array( 'ID' => $post_id, 'menu_order' => $step['position'] ) );
+					wp_update_post(
+						array(
+							'ID'         => $post_id,
+							'menu_order' => $step['position'],
+						)
+					);
 					$target = $post_id;
 				} else {
 					$source = get_post( $post_id );
-					$target = wp_insert_post(
+					$target = $source ? wp_insert_post(
 						array(
 							'post_type'    => $sides['counsel']['post_type'],
 							'post_status'  => 'publish',
@@ -331,10 +355,11 @@ function donphin_resources_split_apply() {
 							'post_content' => $source->post_content,
 							'post_excerpt' => $source->post_excerpt,
 							'menu_order'   => $step['position'],
-						)
-					);
+						),
+						true
+					) : 0;
 					if ( ! $target || is_wp_error( $target ) ) {
-						$log[] = 'Couldn’t copy ' . $step['title'];
+						$log[] = 'Not done: couldn’t copy ' . $step['title'] . ( is_wp_error( $target ) ? ' (' . $target->get_error_message() . ')' : '' );
 						break;
 					}
 					foreach ( array( '_dp_res_file', '_dp_res_url', '_dp_res_tag' ) as $key ) {
@@ -344,23 +369,47 @@ function donphin_resources_split_apply() {
 						}
 					}
 				}
-				wp_set_object_terms( $target, $terms[ $group['name'] ], $sides['counsel']['taxonomy'] );
-				$log[] = ( 'move' === $step['what'] ? 'Moved ' : 'Copied ' ) . $step['title'];
+
+				$filed = wp_set_object_terms( $target, $terms[ $group['name'] ], $sides['counsel']['taxonomy'] );
+				if ( ! empty( $step['url'] ) ) {
+					update_post_meta( $target, '_dp_res_url', esc_url_raw( $step['url'] ) );
+				}
+				$log[] = ( 'move' === $step['what'] ? 'Moved ' : 'Copied ' ) . $step['title']
+					. ( is_wp_error( $filed ) ? ' (but couldn’t file it under ' . $group['name'] . ': set its category by hand)' : '' );
+				break;
+
+			case 'link':
+				$log[] = update_post_meta( $post_id, '_dp_res_url', esc_url_raw( $step['url'] ) )
+					? 'Link: ' . $step['title'] . ' → ' . $step['url']
+					: 'Not done: couldn’t change the link of ' . $step['title'];
 				break;
 
 			case 'hold':
-				wp_update_post( array( 'ID' => $post_id, 'post_status' => 'draft' ) );
-				$log[] = 'On hold (draft): ' . $step['title'];
+				$result = wp_update_post(
+					array(
+						'ID'          => $post_id,
+						'post_status' => 'draft',
+					),
+					true
+				);
+				$log[]  = is_wp_error( $result ) ? 'Not done: ' . $step['title'] . ' (' . $result->get_error_message() . ')' : 'On hold (draft): ' . $step['title'];
 				break;
 
 			case 'delete':
-				wp_delete_post( $post_id, true );
-				$log[] = 'Deleted: ' . $step['title'] . '. ' . $step['detail'];
+				$log[] = wp_delete_post( $post_id, true )
+					? 'Deleted: ' . $step['title'] . '. ' . $step['detail']
+					: 'Not done: couldn’t delete ' . $step['title'];
 				break;
 
 			case 'order':
-				wp_update_post( array( 'ID' => $post_id, 'menu_order' => $step['position'] ) );
-				$log[] = sprintf( 'HR Tools book #%d: %s', $step['position'] + 1, $step['title'] );
+				$result = wp_update_post(
+					array(
+						'ID'         => $post_id,
+						'menu_order' => $step['position'],
+					),
+					true
+				);
+				$log[]  = is_wp_error( $result ) ? 'Not done: ' . $step['title'] . ' (' . $result->get_error_message() . ')' : sprintf( 'HR Tools book #%d: %s', $step['position'] + 1, $step['title'] );
 				break;
 		}
 	}
@@ -373,7 +422,7 @@ function donphin_resources_split_apply() {
  *
  * @param array $group The group, as in donphin_resources_split_brief().
  * @param int   $index Its place among the groups.
- * @return int The category's ID.
+ * @return int|WP_Error The category's ID, or why it couldn't be made.
  */
 function donphin_resources_split_category( $group, $index ) {
 	$sides    = donphin_resource_sides();
@@ -381,6 +430,9 @@ function donphin_resources_split_category( $group, $index ) {
 	$term     = term_exists( $group['name'], $taxonomy );
 	if ( ! $term ) {
 		$term = wp_insert_term( $group['name'], $taxonomy );
+	}
+	if ( is_wp_error( $term ) ) {
+		return $term;
 	}
 	$term_id = (int) $term['term_id'];
 	update_term_meta( $term_id, 'dp_chip', $group['chip'] );
@@ -433,6 +485,7 @@ function donphin_resources_split_page() {
 		'hold'   => 'On hold',
 		'delete' => 'Delete',
 		'order'  => 'Order',
+		'link'   => 'Link',
 	);
 	?>
 	<div class="wrap">
@@ -440,7 +493,16 @@ function donphin_resources_split_page() {
 		<p><?php esc_html_e( 'Splits the one library into Private Counsel’s and HR Tools (Speaking), as Don marked it up. Nothing changes until you press Apply; pressing it again only does what isn’t done yet.', 'don-phin-esq' ); ?></p>
 
 		<?php if ( $log ) : ?>
-			<div class="notice notice-success"><p><strong><?php esc_html_e( 'Done.', 'don-phin-esq' ); ?></strong></p><ul style="list-style:disc;padding-left:20px">
+			<?php
+			// Anything that didn't work says so, and Apply again retries just that
+			$failed = array_filter(
+				$log,
+				function ( $line ) {
+					return 0 === strpos( $line, 'Not done' ) || false !== strpos( $line, 'by hand' );
+				}
+			);
+			?>
+			<div class="notice <?php echo $failed ? 'notice-warning' : 'notice-success'; ?>"><p><strong><?php echo esc_html( $failed ? sprintf( 'Done, but %d didn’t work (below). Press Apply again to retry them.', count( $failed ) ) : 'Done.' ); ?></strong></p><ul style="list-style:disc;padding-left:20px">
 				<?php foreach ( $log as $line ) : ?>
 					<li><?php echo esc_html( $line ); ?></li>
 				<?php endforeach; ?>

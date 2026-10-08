@@ -4,9 +4,11 @@
  *
  * Used automatically by the page with the slug "speaking".
  *
- * Written for meeting planners and sales leaders: the reel, the client logos,
- * Don's Victim / Villain / Hero framework, what changes after he speaks, the three programs,
- * the numbers, the room, what clients say, and the invitation to book.
+ * Written for meeting planners and sales leaders. The first screen holds the headline,
+ * the button to book and the reel side by side; then the proof, high up: the client logos,
+ * audience results and the numbers, and what clients say. After that, Don's Victim / Villain /
+ * Hero framework, what changes after he speaks, the three programs, the room, and the
+ * invitation to book.
  *
  * The reel shows a still until it is clicked, so YouTube is only contacted for
  * people who actually watch (see assets/js/video.js). Without JavaScript the
@@ -31,6 +33,8 @@ $reel_id = 'fTTt8cN4qWA';
 // The one-sheet links only appear once the PDF is in the theme at this path
 $one_sheet_path = '/assets/docs/don-phin-speaking-one-sheet.pdf';
 $one_sheet_url  = file_exists( get_stylesheet_directory() . $one_sheet_path ) ? get_stylesheet_directory_uri() . $one_sheet_path : '';
+
+$contact_url = home_url( '/speaking/contact/' );
 
 // The story running underneath the conversation. 'hero' is the one that works.
 $stories = array(
@@ -98,7 +102,13 @@ $programs = array(
 	),
 );
 
-// 'value' is set large, 'suffix' in blue beside it
+// What audiences achieved after Don spoke, set large at the top of the numbers band. Only
+// real, attributable figures go here (ask the client for each one's source); the row is left
+// out while the list is empty. For example:
+// array( 'value' => '40%', 'label' => 'Increase in sales the following quarter', 'source' => 'Company name' ),
+$results = array();
+
+// Don's own numbers. 'value' is set large, 'suffix' in teal beside it.
 $stats = array(
 	array(
 		'value'  => '800',
@@ -122,62 +132,49 @@ $stats = array(
 	),
 );
 
-// What clients say, each with a headshot in assets/images/speaking/ (240px copies
-// of the originals beside them)
+// What clients say, each with a headshot in assets/images/speaking/: {photo}-240.webp and
+// -480.webp are the originals beside them, made small, with the background recoloured teal
 $testimonials = array(
 	array(
 		'quote' => 'Don presented his program The 40//40 Solution for Leadership and Engagement for our Fall Summit. Wonderful feedback and survey results. Our membership always thanks us when we bring Don to speak and consistently asks us to have him come back.',
 		'name'  => 'Preston Diamond',
 		'role'  => 'Managing Director, Institute of WorkComp Professionals',
-		'photo' => 'preston-diamond-240.webp',
+		'photo' => 'preston-diamond-teal',
 	),
 	array(
 		'quote' => 'Don has a way of breaking down the complex emotional energy in relationships to basic, common-sense, matter-of-fact thinking. The best takeaway from the 40//40 is the space for co-creation. When living in the 40//40, teamwork and sales are fostered.',
 		'name'  => 'Don Mader',
 		'role'  => 'CEO, Southeastern Printing',
-		'photo' => 'don-mader-240.webp',
+		'photo' => 'don-mader-teal',
 	),
 	array(
 		'quote' => 'It is rare when a speaker can have such a powerful effect simultaneously on doctors, assistants, and office managers. His presentation is talked about almost continually and has allowed all of us to be more successful in creating team cohesion and strength.',
 		'name'  => 'Sanford M. Fisch',
 		'role'  => 'CEO & Co-Founder, American Academy of Estate Planning Attorneys',
-		'photo' => 'sanford-fisch-240.webp',
+		'photo' => 'sanford-fisch-teal',
 	),
 );
 
 ?>
 
+<!-- The first screen, with the header: the hero and the client logos under it -->
+<div class="dp-speak-intro">
+
+<!-- The pitch and the button on the left, the reel on the right. Phones read headline,
+     reel, then the rest, so the reel still comes up first. -->
 <section class="dp-speak-hero" aria-labelledby="dp-speak-title">
 	<div class="dp-speak-hero-container">
 
-		<p class="dp-speak-eyebrow">For meeting planners, sales leaders &amp; industry sales groups</p>
+		<header class="dp-speak-hero-head">
+			<p class="dp-speak-eyebrow">For meeting planners, sales leaders &amp; industry sales groups</p>
 
-		<h1 id="dp-speak-title" class="dp-speak-title">
-			Sales on Stage. <em class="dp-speak-title-accent">How our stories and roles direct the sale.</em>
-		</h1>
+			<h1 id="dp-speak-title" class="dp-speak-title">
+				<span class="dp-speak-title-main">Sales on Stage.</span>
+				<em class="dp-speak-title-accent">How our stories and roles direct the sale.</em>
+			</h1>
+		</header>
 
-		<!-- The Vistage honour, as a seal beside the headline (on a light plate: its words are dark) -->
-		<figure class="dp-speak-award">
-			<img
-				src="<?php echo esc_url( $stage . 'vistage-badge-220.webp' ); ?>"
-				srcset="<?php echo esc_attr( $stage . 'vistage-badge-220.webp 220w, ' . $stage . 'vistage-badge-440.webp 440w' ); ?>"
-				sizes="(max-width: 640px) 120px, 172px"
-				alt="Vistage Speaker Top Performer Award"
-				width="220"
-				height="165"
-				decoding="async"
-			/>
-		</figure>
-
-		<div class="dp-speak-hero-intro">
-			<p class="dp-speak-hero-lead">Buyer and seller walk onto the sales stage with stories already playing in their heads.</p>
-
-			<p class="dp-speak-hero-body">
-				Those stories shape the roles they play, the emotions they bring, and what happens next. Change the story, and you can change the sale.
-			</p>
-		</div>
-
-		<!-- Speaker reel: a still until it is played; it overlaps into the section below -->
+		<!-- Speaker reel: a still until it is played -->
 		<div class="dp-video dp-speak-reel" data-video="<?php echo esc_attr( $reel_id ); ?>" data-title="<?php esc_attr_e( 'Don Phin speaker reel', 'don-phin-esq' ); ?>">
 			<a
 				class="dp-video-play"
@@ -189,7 +186,7 @@ $testimonials = array(
 				<img
 					src="<?php echo esc_url( $stage . 'reel2-1280.webp' ); ?>"
 					srcset="<?php echo esc_attr( $stage . 'reel2-960.webp 960w, ' . $stage . 'reel2-1280.webp 1280w' ); ?>"
-					sizes="(max-width: 1600px) 86vw, 1360px"
+					sizes="(max-width: 991px) 92vw, 56vw"
 					alt=""
 					width="1280"
 					height="720"
@@ -206,14 +203,126 @@ $testimonials = array(
 			</a>
 		</div>
 
+		<div class="dp-speak-hero-body">
+			<p class="dp-speak-hero-lead">
+				Buyer and seller walk onto the sales stage with stories already playing in their heads. Change the story, and you can change the sale.
+			</p>
+
+			<div class="dp-speak-hero-actions">
+				<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-button">
+					Book Don
+					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
+				</a>
+				<a href="#dp-speak-programs-title" class="dp-arrow-link">
+					See the programs
+					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
+				</a>
+			</div>
+
+			<!-- The Vistage honour, as a credential under the buttons: the seal, and the award's name in words -->
+			<p class="dp-speak-award">
+				<img
+					class="dp-speak-award-seal"
+					src="<?php echo esc_url( $stage . 'vistage-seal-112.webp' ); ?>"
+					srcset="<?php echo esc_attr( $stage . 'vistage-seal-112.webp 112w, ' . $stage . 'vistage-seal-224.webp 224w' ); ?>"
+					sizes="56px"
+					alt=""
+					width="112"
+					height="112"
+					decoding="async"
+				/>
+				<span class="dp-speak-award-text">
+					<span class="dp-speak-award-name">Vistage Speaker</span>
+					<span class="dp-speak-award-title">Top Performer Award</span>
+				</span>
+			</p>
+		</div>
+
 	</div>
 </section>
 
-<!-- The organisations that have booked Don, drifting right to left under the reel -->
+<!-- The organisations that have booked Don, drifting right to left along the foot of the first screen -->
 <section class="dp-speak-trusted" aria-labelledby="dp-speak-trusted-label">
 	<div class="dp-speak-trusted-container">
 		<p id="dp-speak-trusted-label" class="dp-speak-trusted-label">Trusted by</p>
 		<?php get_template_part( 'template-parts/logo-marquee', null, array( 'labelledby' => 'dp-speak-trusted-label' ) ); ?>
+	</div>
+</section>
+
+</div>
+
+<!-- The proof in numbers: what audiences achieved (once there are figures), then Don's own -->
+<section class="dp-speak-stats" aria-label="<?php esc_attr_e( 'Results and numbers', 'don-phin-esq' ); ?>">
+	<div class="dp-speak-stats-container">
+
+		<?php if ( $results ) : ?>
+			<h2 class="dp-speak-stats-title">What audiences changed</h2>
+			<ul class="dp-speak-results">
+				<?php foreach ( $results as $result ) : ?>
+					<li class="dp-speak-result">
+						<span class="dp-speak-result-number"><?php echo esc_html( $result['value'] ); ?></span>
+						<span class="dp-speak-result-label"><?php echo esc_html( $result['label'] ); ?></span>
+						<?php if ( ! empty( $result['source'] ) ) : ?>
+							<span class="dp-speak-result-source"><?php echo esc_html( $result['source'] ); ?></span>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+
+		<ul class="dp-speak-stats-list">
+			<?php foreach ( $stats as $stat ) : ?>
+				<?php
+				// The digits count up as the numbers come into view (assets/js/count-up.js); any
+				// letters after them ("M" in 1M) stay put. The final figure is already here for
+				// anyone without JavaScript.
+				preg_match( '/^(\d+)(.*)$/', $stat['value'], $parts );
+				?>
+				<li class="dp-speak-stat">
+					<span class="dp-speak-stat-number"><span class="dp-count" data-count="<?php echo esc_attr( $parts[1] ); ?>"><?php echo esc_html( $parts[1] ); ?></span><?php echo esc_html( $parts[2] ); ?><?php if ( $stat['suffix'] ) : ?><span class="dp-speak-stat-suffix"><?php echo esc_html( $stat['suffix'] ); ?></span><?php endif; ?></span>
+					<span class="dp-speak-stat-label"><?php echo esc_html( $stat['label'] ); ?></span>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+
+	</div>
+</section>
+
+<section class="dp-speak-praise" aria-labelledby="dp-speak-praise-title">
+	<div class="dp-speak-praise-container">
+
+		<h2 id="dp-speak-praise-title" class="dp-speak-praise-title">From the <em class="dp-speak-praise-accent">Room</em></h2>
+
+		<div class="dp-speak-praise-list">
+			<?php foreach ( $testimonials as $testimonial ) : ?>
+				<figure class="dp-speak-quote">
+					<span class="dp-speak-quote-mark" aria-hidden="true">&ldquo;</span>
+
+					<blockquote class="dp-speak-quote-text">
+						<p><?php echo esc_html( $testimonial['quote'] ); ?></p>
+					</blockquote>
+
+					<figcaption class="dp-speak-quote-by">
+						<img
+							class="dp-speak-quote-photo"
+							src="<?php echo esc_url( $stage . $testimonial['photo'] . '-240.webp' ); ?>"
+							srcset="<?php echo esc_attr( $stage . $testimonial['photo'] . '-240.webp 240w, ' . $stage . $testimonial['photo'] . '-480.webp 480w' ); ?>"
+							sizes="72px"
+							alt=""
+							width="240"
+							height="240"
+							loading="lazy"
+							decoding="async"
+						/>
+						<span class="dp-speak-quote-who">
+							<span class="dp-speak-quote-name"><?php echo esc_html( $testimonial['name'] ); ?></span>
+							<span class="dp-speak-quote-role"><?php echo esc_html( $testimonial['role'] ); ?></span>
+						</span>
+					</figcaption>
+				</figure>
+			<?php endforeach; ?>
+		</div>
+
 	</div>
 </section>
 
@@ -263,7 +372,7 @@ $testimonials = array(
 	</div>
 </section>
 
-<!-- The shift: the one idea to take away from the framework, on cobalt -->
+<!-- The shift: the one idea to take away from the framework, on navy -->
 <section class="dp-speak-shift" aria-labelledby="dp-speak-shift-label">
 	<div class="dp-speak-shift-container">
 		<h2 id="dp-speak-shift-label" class="dp-speak-shift-label">The shift</h2>
@@ -276,11 +385,16 @@ $testimonials = array(
 <section class="dp-speak-changes" aria-labelledby="dp-speak-changes-title">
 	<div class="dp-speak-changes-container">
 
+		<!-- The heading on an orange panel, the list beside it -->
 		<header class="dp-speak-changes-head">
 			<h2 id="dp-speak-changes-title" class="dp-speak-changes-title">What Changes After Don Speaks</h2>
 			<p class="dp-speak-changes-intro">
-				Remember… <em class="dp-speak-accent">facts tell, and stories sell!</em>
+				Remember… <em>facts tell, and stories sell!</em>
 			</p>
+			<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-changes-button">
+				Book Don
+				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
+			</a>
 		</header>
 
 		<ol class="dp-speak-changes-list">
@@ -332,25 +446,6 @@ $testimonials = array(
 	</div>
 </section>
 
-<section class="dp-speak-stats" aria-label="<?php esc_attr_e( 'Don Phin by the numbers', 'don-phin-esq' ); ?>">
-	<div class="dp-speak-stats-container">
-		<ul class="dp-speak-stats-list">
-			<?php foreach ( $stats as $stat ) : ?>
-				<?php
-				// The digits count up as the numbers come into view (assets/js/count-up.js); any
-				// letters after them ("M" in 1M) stay put. The final figure is already here for
-				// anyone without JavaScript.
-				preg_match( '/^(\d+)(.*)$/', $stat['value'], $parts );
-				?>
-				<li class="dp-speak-stat">
-					<span class="dp-speak-stat-number"><span class="dp-count" data-count="<?php echo esc_attr( $parts[1] ); ?>"><?php echo esc_html( $parts[1] ); ?></span><?php echo esc_html( $parts[2] ); ?><?php if ( $stat['suffix'] ) : ?><span class="dp-speak-stat-suffix"><?php echo esc_html( $stat['suffix'] ); ?></span><?php endif; ?></span>
-					<span class="dp-speak-stat-label"><?php echo esc_html( $stat['label'] ); ?></span>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-	</div>
-</section>
-
 <figure class="dp-speak-room">
 	<img
 		src="<?php echo esc_url( $stage . 'donSpeaking_169-1600.webp' ); ?>"
@@ -365,42 +460,6 @@ $testimonials = array(
 	<figcaption class="dp-speak-room-caption">Don in the room</figcaption>
 </figure>
 
-<section class="dp-speak-praise" aria-labelledby="dp-speak-praise-title">
-	<div class="dp-speak-praise-container">
-
-		<h2 id="dp-speak-praise-title" class="dp-speak-praise-title">From the <em class="dp-speak-praise-accent">Room</em></h2>
-
-		<div class="dp-speak-praise-list">
-			<?php foreach ( $testimonials as $testimonial ) : ?>
-				<figure class="dp-speak-quote">
-					<span class="dp-speak-quote-mark" aria-hidden="true">&ldquo;</span>
-
-					<blockquote class="dp-speak-quote-text">
-						<p><?php echo esc_html( $testimonial['quote'] ); ?></p>
-					</blockquote>
-
-					<figcaption class="dp-speak-quote-by">
-						<img
-							class="dp-speak-quote-photo"
-							src="<?php echo esc_url( $stage . $testimonial['photo'] ); ?>"
-							alt=""
-							width="240"
-							height="240"
-							loading="lazy"
-							decoding="async"
-						/>
-						<span class="dp-speak-quote-who">
-							<span class="dp-speak-quote-name"><?php echo esc_html( $testimonial['name'] ); ?></span>
-							<span class="dp-speak-quote-role"><?php echo esc_html( $testimonial['role'] ); ?></span>
-						</span>
-					</figcaption>
-				</figure>
-			<?php endforeach; ?>
-		</div>
-
-	</div>
-</section>
-
 <section class="dp-speak-cta" aria-labelledby="dp-speak-cta-title">
 	<div class="dp-speak-cta-container">
 
@@ -408,7 +467,7 @@ $testimonials = array(
 
 		<h2 id="dp-speak-cta-title" class="dp-speak-cta-title">
 			<span class="dp-speak-cta-line">Book Don for Your</span>
-			<em class="dp-speak-cta-line dp-speak-accent">Next Sales Meeting</em>
+			<em class="dp-speak-cta-line dp-speak-cta-accent">Next Sales Meeting</em>
 		</h2>
 
 		<p class="dp-speak-cta-formats">Keynote<span aria-hidden="true"> | </span>Breakout<span aria-hidden="true"> | </span>Executive Session</p>
@@ -418,7 +477,7 @@ $testimonials = array(
 		</p>
 
 		<div class="dp-speak-cta-actions">
-			<a href="<?php echo esc_url( home_url( '/speaking/contact/' ) ); ?>" class="dp-dark-button dp-speak-cta-button">
+			<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-button dp-speak-cta-button">
 				Start a conversation
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>

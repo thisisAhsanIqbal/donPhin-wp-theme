@@ -9,6 +9,138 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.14.0 (2026-10-09)
+
+### Speaking: footer
+- On Speaking pages the footer takes the section's palette: the darkest navy (`#00303E`, a step
+  below the closing band above it) with teal icons, rule under the name and edge along the top,
+  and the name in bold Montserrat. Elsewhere it is unchanged.
+- The footer's colours are tokens a section can set (`--dp-footer-bg`, `--dp-footer-accent`,
+  `--dp-footer-title-weight`), as the header's are.
+
+## 1.13.9 (2026-10-09)
+
+### Speaking page
+- "The shift" and "Don in the room" labels lose the short teal line in front of them.
+
+## 1.13.8 (2026-10-09)
+
+### Fix
+- Speaking page: the orange What Changes panel and the programs heading, which stay in view
+  while their lists scroll, slid under the sticky header. They now stop 32px below it.
+
+## 1.13.7 (2026-10-09)
+
+### Speaking page
+- What Changes After Don Speaks: the heading and "Remember… facts tell, and stories sell!" on
+  the orange panel are white.
+
+## 1.13.6 (2026-10-09)
+
+### Speaking: header button
+- "Book Don" in the Speaking header has no calendar icon, and is a little taller (36px → 44px).
+  The button's height is now a header token, `--dp-header-cta-height`, which a section can set;
+  the full-width button in the phone menu stays as it was.
+
+## 1.13.5 (2026-10-09)
+
+### Speaking page
+- The teal glow in the hero's top-right corner is lighter (16% → 9%), and fainter and smaller
+  still on phones (6%, over the top of the screen only).
+
+## 1.13.4 (2026-10-09)
+
+### Speaking page
+- The Vistage award moves off the reel's corner to a credential line under the hero's
+  buttons: the seal (`assets/images/speaking/vistage-seal-112.webp` and `-224.webp`, cut
+  from the badge) with "Vistage Speaker · Top Performer Award" in words beside it.
+
+## 1.13.3 (2026-10-09)
+
+### Speaking page
+- The hero's orange line, "How our stories and roles direct the sale.", is set in weight 600.
+
+## 1.13.2 (2026-10-09)
+
+### Speaking page: first screen
+- The header, the hero and the "Trusted by" logos together fill the window on laptops and
+  desktops, the logos along its foot; the hero takes the space the logos leave, its content
+  centred in it. On tablets and phones the hero is as tall as its content.
+
+## 1.13.1 (2026-10-09)
+
+### Speaking page: first screen
+- The headline reads in two parts: "Sales on Stage." on a line of its own, and "How our stories
+  and roles direct the sale." in orange under it, a step smaller. Before, the orange line ran on
+  from the end of the first, splitting it across lines on wide screens.
+- With the header, the first screen fills the window on laptops and desktops, its content
+  centred top to bottom. Stacked on tablets and phones, it is as tall as its content.
+
+## 1.13.0 (2026-10-09)
+
+### Speaking: new typefaces
+- Speaking pages set headlines in Montserrat and text in Inter (the rest of the site keeps
+  Fraunces and Zalando Sans). The fonts load only on Speaking pages: a section can now name
+  its own Google Fonts stylesheet (`fonts` in `donphin_sections()`), and its palette stylesheet
+  points `--dp-font-family` and `--dp-font-serif` at them.
+- Each Speaking page's title and section headings are bold capitals; their italic accent lines
+  stay light and in ordinary case. Program and resource titles, and the 40//40 page's
+  headline sentence, stay as written.
+- The testimonials on the Speaking page are set in Inter, as body text.
+
+## 1.12.0 (2026-10-09)
+
+### Speaking: new brand colours
+- The Speaking side takes the client's new palette: High-Octane Orange `#FF6B35` for calls to
+  action, Deep Trust Navy `#004E64` for headings and deep backgrounds, Electric Teal `#25CED1`
+  for accents, and Crisp White `#F7F9F9` behind body text. All of it lives in
+  `assets/css/speaking.css`; the about, contact, resources and single resource pages and the
+  header's "Book Don" follow it.
+- `--dp-speaking-gold` is now `--dp-speaking-teal`. New working shades: `--dp-speaking-deep`
+  (type on orange and teal) and `--dp-speaking-orange-ink` (orange as large type on light,
+  where the bright orange is too faint to read).
+- Buttons on Speaking pages (Book Don, the contact form's Send, the resource downloads, the
+  about page's button) are orange with dark navy type, and navy with white type on hover.
+  Private Counsel's buttons are unchanged.
+- The testimonial headshots have teal backgrounds instead of yellow
+  (`assets/images/speaking/*-teal-240.webp` and `-480.webp`; the originals are kept).
+
+### Speaking page: layout
+- The reel sits beside the headline, so it's in the first screen on laptops and desktops;
+  on phones it comes straight after the headline. "Book Don" and "See the programs" sit
+  under the lead, and the Vistage seal is pinned to the reel's corner.
+- Proof comes higher: the client logos right under the first screen, then the numbers (now on
+  navy), then the testimonials (now white cards), before the framework.
+- A row of audience results ("40% increase in sales") sits at the top of the numbers band, once
+  there are real figures: add them to `$results` in `page-speaking.php`. Until then the row
+  is left out.
+- Body text is larger throughout (about 19–23px on desktop, 18–19px on phones; small labels
+  from 12–13px to 14–15px).
+- Less empty space: section padding is down by about a third, and the stage photo is never
+  taller than 72% of the screen.
+- What Changes After Don Speaks puts its heading on an orange panel with a "Book Don" button,
+  and the closing invitation is on navy with the orange button.
+
+## 1.11.3 (2026-10-07)
+
+### Safer handling
+- Set up from Speaking checks every change it makes. Anything that fails is reported as
+  "Not done" (with WordPress's reason) instead of "Done", and the notice turns to a warning;
+  pressing Apply again retries just those. A category that can't be made no longer stops
+  the page with an error.
+- A category's short name, icon and order are saved only for people allowed to manage
+  categories.
+- The contact forms take at most 160 characters from a "Request a copy" link.
+- Looking up a resource that doesn't exist returns nothing rather than an error.
+
+## 1.11.2 (2026-10-07)
+
+### Fix
+- Private Counsel: "The 40//40 Solution on Amazon" linked to the Speaking side's 40//40
+  page (`/speaking/purchase-the-40-40-solution/`), a link across sides. Set up from
+  Speaking now points it straight to Amazon (`https://amzn.to/2maEiy3`): when moving it
+  on a site not yet split, or as one "Link" change where the split is already done.
+
 ## 1.11.1 (2026-10-07)
 
 ### Fix

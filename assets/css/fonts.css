@@ -10,6 +10,10 @@ browser will clamp to the nearest loaded weight or synthesize a fake bold/italic
 
   "Zalando Sans" (sans)   400-700
   "Fraunces" (serif)      400-700, 400-700 italic (optical sizes 9-144)
+
+A section can bring its own typefaces: its stylesheet redefines the two tokens below
+on its pages ("fonts" in donphin_sections(), inc/sections.php, loads the files). The
+Speaking section does this, with Inter and Montserrat (see assets/css/speaking.css).
 */
 
 :root {

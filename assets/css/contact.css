@@ -18,14 +18,24 @@ layout reads as Speaking or as Private Counsel. Loaded from functions.php.
   --dp-contact-text: var(--dp-text, #4A4A4A);
   --dp-contact-accent: var(--dp-accent, #1F6BE0);
   --dp-contact-rule: var(--dp-accent, #1F6BE0);
+
+  /* The send button: ink, then the accent on hover */
+  --dp-contact-button: var(--dp-contact-ink);
+  --dp-contact-button-text: var(--dp-white, #FFFFFF);
+  --dp-contact-button-hover: var(--dp-contact-accent);
+  --dp-contact-button-hover-text: var(--dp-white, #FFFFFF);
 }
 
 .speaking-header .dp-contact,
 .speaking-header .dp-thanks {
-  --dp-contact-bg: var(--dp-speaking-paper, #F8F6F1);
-  --dp-contact-ink: var(--dp-speaking-navy, #12284A);
-  --dp-contact-accent: var(--dp-speaking-blue, #1E5AA8);
-  --dp-contact-rule: var(--dp-speaking-gold, #F2B035);
+  --dp-contact-bg: var(--dp-speaking-paper, #F7F9F9);
+  --dp-contact-ink: var(--dp-speaking-navy, #004E64);
+  --dp-contact-accent: var(--dp-speaking-blue, #00728F);
+  --dp-contact-rule: var(--dp-speaking-teal, #25CED1);
+  /* Speaking's calls to action are orange */
+  --dp-contact-button: var(--dp-speaking-orange, #FF6B35);
+  --dp-contact-button-text: var(--dp-speaking-deep, #00303E);
+  --dp-contact-button-hover: var(--dp-speaking-navy, #004E64);
 }
 
 .counsel-header .dp-contact,
@@ -294,12 +304,14 @@ layout reads as Speaking or as Private Counsel. Loaded from functions.php.
 }
 
 .dp-contact button.dp-contact-button {
-  background-color: var(--dp-contact-ink);
+  color: var(--dp-contact-button-text) !important;
+  background-color: var(--dp-contact-button);
 }
 
 .dp-contact button.dp-contact-button:hover,
 .dp-contact button.dp-contact-button:focus-visible {
-  background-color: var(--dp-contact-accent);
+  color: var(--dp-contact-button-hover-text) !important;
+  background-color: var(--dp-contact-button-hover);
 }
 
 /* Bot trap: off-screen, never seen or focused by people */
@@ -453,10 +465,12 @@ layout reads as Speaking or as Private Counsel. Loaded from functions.php.
 }
 
 .dp-thanks .dp-dark-button {
-  background-color: var(--dp-contact-ink);
+  color: var(--dp-contact-button-text) !important;
+  background-color: var(--dp-contact-button);
 }
 
 .dp-thanks .dp-dark-button:hover,
 .dp-thanks .dp-dark-button:focus-visible {
-  background-color: var(--dp-contact-accent);
+  color: var(--dp-contact-button-hover-text) !important;
+  background-color: var(--dp-contact-button-hover);
 }

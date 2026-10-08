@@ -30,10 +30,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * pages      Other page slugs that belong to it without being filed under it.
  * templates  Page templates that always belong to it, wherever the page is filed.
  * stylesheet The section's palette, assets/css/{stylesheet}.css, loaded on all its pages.
+ * fonts      A Google Fonts stylesheet for the section's own typefaces, loaded on all its
+ *            pages (the stylesheet above points the font tokens at them), or ''.
  * menu       The header menu, used until a menu is assigned to the section in
  *            Appearance > Menus: array( label, path, optional screen reader label ).
  * cta        The header button: array( label, path, icon ), the icon being a file in
- *            assets/images/icons/ without its .svg.
+ *            assets/images/icons/ without its .svg (leave it off for a button without one).
  *
  * @return array
  */
@@ -48,6 +50,7 @@ function donphin_sections() {
 			'pages'      => array(),
 			'templates'  => array(),
 			'stylesheet' => '',
+			'fonts'      => '',
 			'menu'       => array(
 				array( 'About', '/speaking/about/' ),
 				array( 'Tools', '/free-tools/' ),
@@ -64,6 +67,7 @@ function donphin_sections() {
 			'pages'      => array( 'for-advisors', 'advisors' ),
 			'templates'  => array( 'page-private-counsel.php', 'page-the-journey.php', 'page-counsel-about.php', 'page-counsel-contact.php', 'page-counsel-resources.php' ),
 			'stylesheet' => 'private-counsel',
+			'fonts'      => '',
 			'menu'       => array(
 				array( 'Home', '/private-counsel/', 'Private Counsel home' ),
 				array( 'The Next Journey', '/private-counsel/the-journey/' ),
@@ -82,6 +86,8 @@ function donphin_sections() {
 			'pages'      => array(),
 			'templates'  => array( 'page-speaking.php', 'page-speaking-about.php', 'page-speaking-contact.php', 'page-speaking-resources.php', 'page-purchase-the-40-40-solution.php' ),
 			'stylesheet' => 'speaking',
+			// Montserrat for headlines, Inter for reading, both variable over these weights
+			'fonts'      => 'https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Montserrat:ital,wght@0,400..800;1,400..800&display=swap',
 			'menu'       => array(
 				array( 'Home', '/speaking/', 'Speaking home' ),
 				array( 'About', '/speaking/about/' ),
@@ -89,7 +95,7 @@ function donphin_sections() {
 				array( 'The 40//40 Solution', '/speaking/purchase-the-40-40-solution/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
-			'cta'        => array( 'Book Don', '/speaking/contact/', 'calendar' ),
+			'cta'        => array( 'Book Don', '/speaking/contact/' ),
 		),
 	);
 }

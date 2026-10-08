@@ -11,12 +11,14 @@ section's palette (inc/enqueue.php).
    0. THE SECTION'S COLOURS
    ========================================================================== */
 .dp-rd {
-  --dp-rd-deep: var(--dp-speaking-navy, #12284A);   /* the hero, headings */
-  --dp-rd-lift: var(--dp-speaking-blue, #1E5AA8);   /* the hero's glow, links, labels */
-  --dp-rd-accent: var(--dp-speaking-gold, #F2B035); /* the button, rules */
-  --dp-rd-accent-hover: var(--dp-speaking-orange, #E8952C);
-  --dp-rd-on-accent: var(--dp-speaking-navy, #12284A);
-  --dp-rd-paper: var(--dp-speaking-paper, #F8F6F1); /* the light sections */
+  --dp-rd-deep: var(--dp-speaking-navy, #004E64);   /* the hero, headings */
+  --dp-rd-lift: var(--dp-speaking-blue, #00728F);   /* the hero's glow, links, labels */
+  --dp-rd-accent: var(--dp-speaking-teal, #25CED1); /* rules */
+  --dp-rd-button: var(--dp-speaking-orange, #FF6B35); /* the button */
+  --dp-rd-on-accent: var(--dp-speaking-deep, #00303E); /* type on the button */
+  --dp-rd-accent-hover: var(--dp-speaking-navy, #004E64); /* the button on hover */
+  --dp-rd-on-accent-hover: var(--dp-white, #FFFFFF);
+  --dp-rd-paper: var(--dp-speaking-paper, #F7F9F9); /* the light sections */
   --dp-rd-text: var(--dp-text, #4A4A4A);
 }
 
@@ -24,8 +26,10 @@ section's palette (inc/enqueue.php).
   --dp-rd-deep: var(--dp-private-counsel-navy);
   --dp-rd-lift: var(--dp-private-counsel-navy-soft);
   --dp-rd-accent: var(--dp-private-counsel-bronze);
+  --dp-rd-button: var(--dp-private-counsel-bronze);
   --dp-rd-accent-hover: var(--dp-private-counsel-gold);
   --dp-rd-on-accent: var(--dp-private-counsel-cream);
+  --dp-rd-on-accent-hover: var(--dp-private-counsel-cream);
   --dp-rd-paper: var(--dp-private-counsel-cream);
   --dp-rd-text: var(--dp-private-counsel-text);
 }
@@ -125,14 +129,14 @@ a.dp-rd-button {
   line-height: 1;
   white-space: nowrap;
   color: var(--dp-rd-on-accent);
-  background-color: var(--dp-rd-accent);
+  background-color: var(--dp-rd-button);
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a.dp-rd-button:hover,
 a.dp-rd-button:focus-visible {
-  color: var(--dp-rd-on-accent);
+  color: var(--dp-rd-on-accent-hover);
   background-color: var(--dp-rd-accent-hover);
 }
 
