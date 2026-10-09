@@ -9,6 +9,61 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.16.3 (2026-10-10)
+
+### Speaking blog: the card about Don
+- The "Written by" card at the foot of a Speaking post is on the brand orange (`#FF6B35`)
+  with a soft glow and rounded corners. Its words are white, and Don's portrait has a white
+  ring. "More about Don" is white and turns deep navy on hover. Private Counsel's card is
+  unchanged.
+
+## 1.16.2 (2026-10-10)
+
+### Blogs: "In this post" on phones and tablets
+- Below 1200px, "In this post" is a card that folds away: its heading is a button with the
+  number of sections and an arrow (open to begin with; choosing a heading folds it).
+- Each heading is numbered (01, 02, 03) with an arrow, and the one being read is lit.
+  Speaking: a navy card with a teal glow and bold teal numbers. Private Counsel: the soft
+  band under a bronze rule, with italic bronze numerals in Fraunces.
+- Choosing a heading scrolls to it smoothly (instantly with reduced motion). Without the
+  script, the list simply shows.
+
+## 1.16.1 (2026-10-10)
+
+### Blogs: the post page lines up with the header
+- The post page keeps to the header's own frame (1600px, with the header's gutter), so its
+  edges meet the logo and the header's button at every width.
+- Speaking, wide screens (1200px and up): the hero is two columns, the words from the logo's
+  edge and the featured picture out to the button's. Below that, the picture sits under the
+  words, inside the navy band.
+- The sharing rail starts at the logo's edge, and "In this post" ends at the button's; the
+  words stay in their centred column between them. "Keep reading" uses the same frame.
+- Private Counsel keeps its centred hero, with the bronze rule under the byline and the
+  framed picture below it.
+
+## 1.16.0 (2026-10-09)
+
+### Blogs: the post page, redesigned
+- One reading column (760px) for the hero, the picture and the words, so all their edges line
+  up.
+- The hero: a back link to the blog, the category as a chip, the title, the excerpt as a
+  summary (when the post has one), and a byline with Don's portrait, the date and the reading
+  time.
+- The featured picture keeps its own shape and is never cropped or enlarged past its size
+  (pictures from the old site have their title baked in). On Speaking it sits over the hero's
+  edge; on Private Counsel it's framed like a print.
+- Wide screens: sharing links (LinkedIn, X, email, copy link) in a rail on the left, and
+  "In this post" (the post's headings, marking the one being read) on the right. Below
+  1200px, "In this post" sits above the words.
+- A thin bar along the top shows how far through the post the reader is (`assets/js/blog.js`).
+- The words: a larger opening line, a short stroke over each heading, and a list of bold-led
+  points set as a panel (hairlines on Private Counsel).
+- The end: the category and sharing links, a card about Don (bio per side, linking to that
+  side's About page), previous and next as cards, the side's invitation, then "Keep reading"
+  as the list's cards.
+- Empty paragraphs and the old site's empty sharing footer in pasted posts are left out of the
+  page; the post itself is unchanged.
+
 ## 1.15.0 (2026-10-09)
 
 ### Blogs: one for Speaking, one for Private Counsel

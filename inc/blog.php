@@ -36,6 +36,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * intro      The line under the heading.
  * cta        The invitation after each post and at the foot of the list: title, text,
  *            the button's label and where it leads.
+ * author     The card about Don at the foot of each post: a line about him, and his
+ *            About page on this side.
  *
  * @return array
  */
@@ -57,6 +59,10 @@ function donphin_blog_sides() {
 				'label' => 'Book Don',
 				'url'   => '/speaking/contact/',
 			),
+			'author'    => array(
+				'bio' => 'Trial lawyer turned keynote speaker. Seventeen years arguing cases to juries taught Don that facts alone never win a room. Stories do. He’s the author of The 40//40 Solution.',
+				'url' => '/speaking/about/',
+			),
 		),
 		'counsel'  => array(
 			'post_type' => 'dp_counsel_post',
@@ -73,6 +79,10 @@ function donphin_blog_sides() {
 				'text'  => 'Private counsel is by introduction, for one man at a time.',
 				'label' => 'Request an introduction',
 				'url'   => '/private-counsel/contact/',
+			),
+			'author'    => array(
+				'bio' => 'For over forty years, Don has sat with CEOs, entrepreneurs, physicians and family business owners: first as an employment lawyer, then as a founder, and now as private counsel.',
+				'url' => '/private-counsel/about/',
 			),
 		),
 	);
@@ -277,6 +287,53 @@ function donphin_blog_categories( $side ) {
 		)
 	);
 	return is_wp_error( $terms ) ? array() : $terms;
+}
+
+/**
+ * A post's words, ready for its page, and its headings for "In this post"
+ *
+ * Each main heading (h2) gets an id to link to. Empty paragraphs (only spaces or
+ * &nbsp;, common in posts pasted from the old site) are left out, as is the old site's
+ * empty sharing footer; the words themselves are untouched.
+ *
+ * @param string $html The post's content, after the_content filters.
+ * @return array { html: string, toc: array of array( id, text ) }
+ */
+function donphin_blog_prepare_content( $html ) {
+	$html = preg_replace( '#<p>(?:\s|&nbsp;|&\#160;|\xC2\xA0)*</p>#u', '', $html );
+	$html = preg_replace( '#<footer class="entry-footer">.*?</footer>#s', '', $html );
+
+	$toc  = array();
+	$used = array();
+	$html = preg_replace_callback(
+		'#<h2(\s[^>]*)?>(.*?)</h2>#is',
+		function ( $match ) use ( &$toc, &$used ) {
+			$attrs = isset( $match[1] ) ? $match[1] : '';
+			$text  = trim( wp_strip_all_tags( $match[2] ) );
+			if ( '' === $text ) {
+				return $match[0];
+			}
+			if ( preg_match( '#\sid=["\']([^"\']+)["\']#', $attrs, $id ) ) {
+				$id = $id[1];
+			} else {
+				$base = sanitize_title( $text );
+				$id   = $base;
+				for ( $n = 2; isset( $used[ $id ] ); $n++ ) {
+					$id = $base . '-' . $n;
+				}
+				$attrs .= ' id="' . esc_attr( $id ) . '"';
+			}
+			$used[ $id ] = true;
+			$toc[]       = array( $id, $text );
+			return '<h2' . $attrs . '>' . $match[2] . '</h2>';
+		},
+		$html
+	);
+
+	return array(
+		'html' => $html,
+		'toc'  => $toc,
+	);
 }
 
 /* ==========================================================================

@@ -141,6 +141,9 @@ function donphin_enqueue_scripts() {
 	// A blog: its list, a category of it, or a post (archive-blog.php, single-blog.php)
 	if ( donphin_blog_side_for_request() ) {
 		donphin_enqueue_asset( 'css', 'blog', $page_deps );
+		if ( is_singular( donphin_blog_post_types() ) ) {
+			donphin_enqueue_asset( 'js', 'blog' );
+		}
 	}
 
 	// The home page and the 404 page aren't page templates
