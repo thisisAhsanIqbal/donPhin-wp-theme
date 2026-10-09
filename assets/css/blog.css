@@ -1,0 +1,1310 @@
+/*
+Theme: Don Phin, Esq.
+Page: A section's blog (archive-blog.php, e.g. /speaking/blog/) and its posts (single-blog.php)
+Description: One structure, each section's own branding. The colours come from the section's
+palette (the tokens below), the typefaces from the section's font tokens, and the layout
+differs where the brands do:
+- Speaking: bold, on light gray. The list is a grid of cards edged in teal, the post opens on
+  a navy band, and every button is orange.
+- Private Counsel: quiet and editorial, on cream. The list is a ruled column of posts, the
+  post opens centred on cream with a bronze initial, and the buttons are bronze.
+Loads after the section's palette (inc/enqueue.php), whose colours it uses.
+*/
+
+/* ==========================================================================
+   0. THE SECTION'S COLOURS (Speaking first, then Private Counsel's)
+   ========================================================================== */
+.dp-blog {
+  --dp-bl-deep: var(--dp-speaking-navy, #004E64);       /* deep bands, headings */
+  --dp-bl-darkest: var(--dp-speaking-deep, #00303E);    /* type on the button */
+  --dp-bl-lift: var(--dp-speaking-blue, #00728F);       /* links, labels on light */
+  --dp-bl-accent: var(--dp-speaking-teal, #25CED1);     /* rules, edges, accents on deep */
+  --dp-bl-button: var(--dp-speaking-orange, #FF6B35);   /* the button */
+  --dp-bl-on-button: var(--dp-speaking-deep, #00303E);
+  --dp-bl-button-hover: var(--dp-speaking-navy, #004E64);
+  --dp-bl-on-button-hover: var(--dp-white, #FFFFFF);
+  --dp-bl-paper: var(--dp-speaking-paper, #F7F9F9);     /* the light sections */
+  --dp-bl-card: var(--dp-white, #FFFFFF);
+  --dp-bl-text: var(--dp-text, #4A4A4A);
+  --dp-bl-muted: color-mix(in srgb, var(--dp-bl-deep) 62%, transparent);
+  --dp-bl-on-deep: var(--dp-white, #FFFFFF);
+  --dp-bl-container: calc(1120px + 2 * var(--dp-header-gutter, 7vw));
+
+  color: var(--dp-bl-text);
+  background-color: var(--dp-bl-paper);
+}
+
+.dp-blog--counsel {
+  --dp-bl-deep: var(--dp-private-counsel-navy);
+  --dp-bl-darkest: var(--dp-private-counsel-navy);
+  --dp-bl-lift: var(--dp-private-counsel-gold);
+  --dp-bl-accent: var(--dp-private-counsel-bronze);
+  --dp-bl-button: var(--dp-private-counsel-bronze);
+  --dp-bl-on-button: var(--dp-private-counsel-cream);
+  --dp-bl-button-hover: var(--dp-private-counsel-gold);
+  --dp-bl-on-button-hover: var(--dp-private-counsel-cream);
+  --dp-bl-paper: var(--dp-private-counsel-cream);
+  --dp-bl-card: var(--dp-private-counsel-cream);
+  --dp-bl-text: var(--dp-private-counsel-text);
+  --dp-bl-muted: var(--dp-private-counsel-muted);
+  --dp-bl-on-deep: var(--dp-private-counsel-cream);
+  --dp-bl-container: calc(980px + 2 * var(--dp-header-gutter, 7vw));
+}
+
+/* ==========================================================================
+   1. SHARED PIECES: the small labels, the meta line, the button
+   ========================================================================== */
+.dp-blog-label,
+.dp-blog-feature-label,
+.dp-blog-note-by {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-bl-lift);
+  margin: 0 0 16px 0;
+}
+
+.dp-blog-label a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dp-blog-label a:hover,
+.dp-blog-label a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.dp-blog-accent {
+  font-style: italic;
+  color: var(--dp-bl-lift);
+}
+
+.dp-blog .dp-blog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--dp-bl-muted);
+  margin: 0 0 10px 0;
+}
+
+.dp-blog-meta-cat {
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dp-bl-lift);
+}
+
+.dp-blog .dp-blog-excerpt {
+  font-family: var(--dp-font-family);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dp-bl-text);
+  margin: 0;
+}
+
+a.dp-blog-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  height: 54px;
+  padding: 0 28px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-bl-on-button);
+  background-color: var(--dp-bl-button);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a.dp-blog-button:hover,
+a.dp-blog-button:focus-visible {
+  color: var(--dp-bl-on-button-hover);
+  background-color: var(--dp-bl-button-hover);
+}
+
+a.dp-blog-button:focus-visible {
+  outline: 2px solid var(--dp-bl-lift);
+  outline-offset: 3px;
+}
+
+a.dp-blog-button svg,
+.dp-blog-more svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+a.dp-blog-button:hover svg,
+a.dp-blog-button:focus-visible svg {
+  transform: translateX(4px);
+}
+
+.dp-blog-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dp-speaking-orange-ink, var(--dp-bl-lift));
+  text-decoration: none;
+}
+
+.dp-blog--counsel .dp-blog-more {
+  color: var(--dp-bl-lift);
+}
+
+.dp-blog .dp-arrow-link {
+  color: var(--dp-bl-deep);
+}
+
+.dp-blog .dp-arrow-link:hover,
+.dp-blog .dp-arrow-link:focus-visible {
+  color: var(--dp-bl-lift);
+}
+
+/* A post's picture: its featured image, or a drawn panel in the section's colours */
+.dp-blog-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dp-blog-art {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 20px 24px;
+  background:
+    radial-gradient(ellipse 70% 90% at 90% 0%, color-mix(in srgb, var(--dp-bl-accent) 40%, transparent), transparent 70%),
+    var(--dp-bl-deep);
+  color: var(--dp-bl-on-deep);
+}
+
+.dp-blog-art-mark {
+  font-family: var(--dp-font-serif);
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--dp-bl-accent);
+}
+
+.dp-blog-art-by {
+  font-family: var(--dp-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dp-bl-on-deep) 70%, transparent);
+}
+
+/* ==========================================================================
+   2. THE LIST: HERO (Speaking: left-aligned on light gray with a teal glow.
+      Private Counsel: centred on navy, ruled in bronze.)
+   ========================================================================== */
+.dp-blog-hero {
+  background:
+    radial-gradient(ellipse 45% 80% at 92% 0%, color-mix(in srgb, var(--dp-bl-accent) 22%, transparent), transparent 70%),
+    var(--dp-bl-paper);
+}
+
+.dp-blog-hero-container {
+  box-sizing: border-box;
+  max-width: var(--dp-bl-container);
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 112px) var(--dp-header-gutter, 7vw) clamp(40px, 5vw, 64px);
+}
+
+.dp-blog-hero .dp-blog-heading {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(38px, 4.4vw, 68px);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  color: var(--dp-bl-deep);
+  max-width: 16em;
+  margin: 0;
+}
+
+.dp-blog-hero .dp-blog-intro {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.35vw, 20px);
+  line-height: 1.65;
+  color: var(--dp-bl-text);
+  max-width: 34em;
+  margin: 22px 0 0 0;
+}
+
+.dp-blog-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(28px, 3vw, 40px);
+}
+
+a.dp-blog-topic {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 18px;
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--dp-bl-deep);
+  border: 1.5px solid color-mix(in srgb, var(--dp-bl-deep) 28%, transparent);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+a.dp-blog-topic:hover,
+a.dp-blog-topic:focus-visible {
+  border-color: var(--dp-bl-deep);
+}
+
+a.dp-blog-topic[aria-current="page"] {
+  color: var(--dp-bl-on-deep);
+  background-color: var(--dp-bl-deep);
+  border-color: var(--dp-bl-deep);
+}
+
+/* Private Counsel: centred on navy */
+.dp-blog--counsel .dp-blog-hero {
+  background:
+    radial-gradient(ellipse 55% 90% at 50% 0%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 70%, transparent), transparent 70%),
+    var(--dp-private-counsel-navy);
+  border-bottom: 1px solid var(--dp-private-counsel-bronze);
+}
+
+.dp-blog--counsel .dp-blog-hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  padding-bottom: clamp(56px, 7vw, 96px);
+  text-align: center;
+}
+
+.dp-blog--counsel .dp-blog-hero .dp-blog-label {
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--dp-private-counsel-bronze-light);
+}
+
+.dp-blog--counsel .dp-blog-hero .dp-blog-heading {
+  color: var(--dp-private-counsel-cream);
+  font-size: clamp(42px, 4.8vw, 76px);
+  letter-spacing: -0.022em;
+}
+
+.dp-blog--counsel .dp-blog-hero .dp-blog-accent {
+  color: var(--dp-private-counsel-bronze-light);
+}
+
+.dp-blog--counsel .dp-blog-hero .dp-blog-intro {
+  font-family: var(--dp-font-serif);
+  font-style: italic;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 84%, transparent);
+  max-width: 30em;
+}
+
+.dp-blog--counsel .dp-blog-topics {
+  justify-content: center;
+  gap: 8px 28px;
+}
+
+/* Words, not pills: underlined in bronze when chosen */
+.dp-blog--counsel a.dp-blog-topic {
+  height: auto;
+  padding: 6px 0;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 76%, transparent);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+}
+
+.dp-blog--counsel a.dp-blog-topic:hover,
+.dp-blog--counsel a.dp-blog-topic:focus-visible,
+.dp-blog--counsel a.dp-blog-topic[aria-current="page"] {
+  color: var(--dp-private-counsel-cream);
+  background: none;
+  border-bottom-color: var(--dp-private-counsel-bronze);
+}
+
+/* ==========================================================================
+   3. THE LIST: THE POSTS (Speaking: the newest wide, then cards three across.
+      Private Counsel: one ruled column, each post's picture beside it.)
+   ========================================================================== */
+.dp-blog-list-container {
+  box-sizing: border-box;
+  max-width: var(--dp-bl-container);
+  margin: 0 auto;
+  padding: clamp(8px, 1vw, 16px) var(--dp-header-gutter, 7vw) clamp(64px, 8vw, 112px);
+}
+
+.dp-blog--counsel .dp-blog-list-container {
+  padding-top: clamp(48px, 6vw, 88px);
+}
+
+.dp-blog-feature-title a,
+.dp-blog-card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The whole card answers to its title's link */
+.dp-blog-feature,
+.dp-blog-card {
+  position: relative;
+}
+
+.dp-blog-feature-title a::after,
+.dp-blog-card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.dp-blog-feature-title a:focus-visible,
+.dp-blog-card-title a:focus-visible {
+  outline: none;
+}
+
+.dp-blog-feature:has(a:focus-visible),
+.dp-blog-card:has(a:focus-visible) {
+  outline: 2px solid var(--dp-bl-lift);
+  outline-offset: 4px;
+}
+
+.dp-blog-feature-picture,
+.dp-blog-card-picture {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background-color: var(--dp-bl-deep);
+}
+
+.dp-blog-feature-picture .dp-blog-image,
+.dp-blog-card-picture .dp-blog-image {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-blog-feature:hover .dp-blog-image,
+.dp-blog-card:hover .dp-blog-image {
+  transform: scale(1.04);
+}
+
+/* The newest, wide: its picture beside it */
+.dp-blog-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  margin: 0 0 clamp(40px, 4vw, 56px) 0;
+  background-color: var(--dp-bl-card);
+  border-top: 4px solid var(--dp-bl-accent);
+  box-shadow: 0 30px 60px -40px color-mix(in srgb, var(--dp-bl-deep) 55%, transparent);
+}
+
+.dp-blog-feature-picture {
+  aspect-ratio: auto;
+  min-height: 340px;
+}
+
+.dp-blog-feature-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 3.4vw, 52px);
+}
+
+.dp-blog-feature .dp-blog-feature-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-bl-deep);
+  margin: 0 0 14px 0;
+}
+
+/* The rest, three across */
+.dp-blog .dp-blog-posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.4vw, 32px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-blog-posts > li {
+  display: flex;
+  margin: 0;
+}
+
+.dp-blog-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--dp-bl-card);
+  border-top: 3px solid var(--dp-bl-accent);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
+}
+
+.dp-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 44px -30px color-mix(in srgb, var(--dp-bl-deep) 55%, transparent);
+}
+
+.dp-blog-card-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px 24px 26px;
+}
+
+.dp-blog-card .dp-blog-card-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--dp-bl-deep);
+  margin: 0 0 10px 0;
+}
+
+.dp-blog-card .dp-blog-excerpt {
+  font-size: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dp-blog-card .dp-blog-more {
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+/* Private Counsel: the newest and the rest in one ruled column, the picture beside each */
+.dp-blog--counsel .dp-blog-feature,
+.dp-blog--counsel .dp-blog-card {
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(24px, 3.6vw, 56px);
+  align-items: center;
+  margin: 0;
+  padding: clamp(32px, 3.6vw, 48px) 0;
+  background: none;
+  border-top: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 45%, transparent);
+  box-shadow: none;
+  transform: none;
+}
+
+.dp-blog--counsel .dp-blog-card {
+  display: grid;
+}
+
+.dp-blog--counsel .dp-blog-feature {
+  padding-top: 0;
+}
+
+.dp-blog--counsel .dp-blog-feature-picture,
+.dp-blog--counsel .dp-blog-card-picture {
+  aspect-ratio: 16 / 10;
+  min-height: 0;
+}
+
+.dp-blog--counsel .dp-blog-feature-text,
+.dp-blog--counsel .dp-blog-card-text {
+  padding: 0;
+}
+
+.dp-blog--counsel .dp-blog-posts {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.dp-blog--counsel .dp-blog-feature-label {
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--dp-private-counsel-bronze);
+  margin-bottom: 10px;
+}
+
+.dp-blog--counsel .dp-blog-feature-title,
+.dp-blog--counsel .dp-blog-card-title {
+  font-weight: 500 !important;
+  letter-spacing: -0.015em;
+}
+
+.dp-blog--counsel .dp-blog-card .dp-blog-card-title {
+  font-size: clamp(24px, 2vw, 30px);
+}
+
+.dp-blog--counsel .dp-blog-card .dp-blog-excerpt {
+  font-size: 16px;
+  -webkit-line-clamp: 3;
+}
+
+.dp-blog--counsel .dp-blog-meta-cat {
+  font-weight: 400;
+  letter-spacing: 0.18em;
+}
+
+.dp-blog--counsel .dp-blog-card .dp-blog-more {
+  margin-top: 0;
+}
+
+.dp-blog--counsel .dp-blog-art {
+  background:
+    radial-gradient(ellipse 70% 90% at 50% 0%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 80%, transparent), transparent 70%),
+    var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-art-mark {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--dp-private-counsel-bronze-light);
+}
+
+/* Nothing yet */
+.dp-blog-empty {
+  padding: clamp(48px, 6vw, 88px) 0;
+  text-align: center;
+}
+
+.dp-blog-empty .dp-blog-empty-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 500;
+  color: var(--dp-bl-deep);
+  margin: 0 0 8px 0;
+}
+
+.dp-blog-empty .dp-blog-empty-text {
+  font-family: var(--dp-font-family);
+  font-size: 16px;
+  color: var(--dp-bl-muted);
+  margin: 0;
+}
+
+.dp-blog-empty a {
+  color: var(--dp-bl-lift);
+}
+
+/* The pages */
+.dp-blog-pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: clamp(40px, 4vw, 56px);
+}
+
+.dp-blog-pages .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dp-bl-deep);
+  border: 1.5px solid color-mix(in srgb, var(--dp-bl-deep) 20%, transparent);
+  text-decoration: none;
+}
+
+.dp-blog-pages a.page-numbers:hover,
+.dp-blog-pages a.page-numbers:focus-visible {
+  border-color: var(--dp-bl-deep);
+}
+
+.dp-blog-pages .page-numbers.current {
+  color: var(--dp-bl-on-deep);
+  background-color: var(--dp-bl-deep);
+  border-color: var(--dp-bl-deep);
+}
+
+.dp-blog-pages .page-numbers.dots {
+  border-color: transparent;
+}
+
+/* ==========================================================================
+   4. THE LIST: THE INVITATION (Speaking: on navy. Private Counsel: on the
+      soft band, centred.)
+   ========================================================================== */
+.dp-blog-cta {
+  background:
+    radial-gradient(ellipse 50% 90% at 10% 100%, color-mix(in srgb, var(--dp-bl-accent) 26%, transparent), transparent 70%),
+    var(--dp-bl-deep);
+  color: var(--dp-bl-on-deep);
+}
+
+.dp-blog-cta-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(760px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(64px, 7vw, 104px) var(--dp-header-gutter, 7vw);
+  text-align: center;
+}
+
+.dp-blog-cta .dp-blog-section-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-bl-on-deep);
+  margin: 0;
+}
+
+.dp-blog-cta .dp-blog-cta-text {
+  font-family: var(--dp-font-family);
+  font-size: 18px;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--dp-bl-on-deep) 82%, transparent);
+  max-width: 32em;
+  margin: 16px 0 32px 0;
+}
+
+.dp-blog-cta a.dp-blog-button:hover,
+.dp-blog-cta a.dp-blog-button:focus-visible {
+  color: var(--dp-bl-darkest);
+  background-color: var(--dp-bl-accent);
+}
+
+.dp-blog--counsel .dp-blog-cta {
+  background: var(--dp-private-counsel-band);
+  color: var(--dp-private-counsel-text);
+  border-top: 1px solid color-mix(in srgb, var(--dp-private-counsel-bronze) 45%, transparent);
+}
+
+.dp-blog--counsel .dp-blog-cta .dp-blog-section-title {
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-cta .dp-blog-cta-text {
+  font-family: var(--dp-font-serif);
+  font-style: italic;
+  color: var(--dp-private-counsel-muted);
+}
+
+.dp-blog--counsel .dp-blog-cta a.dp-blog-button:hover,
+.dp-blog--counsel .dp-blog-cta a.dp-blog-button:focus-visible {
+  color: var(--dp-private-counsel-cream);
+  background-color: var(--dp-private-counsel-navy);
+}
+
+/* ==========================================================================
+   5. A POST: HERO (Speaking: on a navy band, the picture laid over its edge.
+      Private Counsel: centred on cream, the picture below.)
+   ========================================================================== */
+.dp-blog-post-hero {
+  background:
+    radial-gradient(ellipse 50% 90% at 85% 0%, color-mix(in srgb, var(--dp-bl-lift) 45%, transparent), transparent 70%),
+    var(--dp-bl-deep);
+  color: var(--dp-bl-on-deep);
+}
+
+.dp-blog-post-hero-container {
+  box-sizing: border-box;
+  max-width: calc(880px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 88px) var(--dp-header-gutter, 7vw) clamp(48px, 6vw, 80px);
+}
+
+.dp-blog-single--image .dp-blog-post-hero-container {
+  padding-bottom: clamp(120px, 14vw, 200px);
+}
+
+.dp-blog-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 clamp(20px, 2.4vw, 32px) 0;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--dp-bl-on-deep) 45%, transparent);
+}
+
+.dp-blog-crumbs a {
+  color: var(--dp-bl-accent);
+  text-decoration: none;
+}
+
+.dp-blog-crumbs a:hover,
+.dp-blog-crumbs a:focus-visible {
+  color: var(--dp-bl-on-deep);
+}
+
+.dp-blog-post-hero .dp-blog-post-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(34px, 4.2vw, 62px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--dp-bl-on-deep);
+  margin: 0;
+}
+
+.dp-blog-post-hero .dp-blog-post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--dp-bl-on-deep) 72%, transparent);
+  margin: 22px 0 0 0;
+}
+
+.dp-blog-post-figure {
+  box-sizing: border-box;
+  max-width: calc(1040px + 2 * var(--dp-header-gutter, 7vw));
+  margin: calc(-1 * clamp(88px, 11vw, 160px)) auto 0;
+  padding: 0 var(--dp-header-gutter, 7vw);
+}
+
+.dp-blog-post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 620px;
+  object-fit: cover;
+  box-shadow: 0 30px 60px -30px color-mix(in srgb, var(--dp-bl-deep) 60%, transparent);
+}
+
+/* Private Counsel: centred on cream, ruled in bronze */
+.dp-blog--counsel .dp-blog-post-hero {
+  background: var(--dp-private-counsel-cream);
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-post-hero-container {
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  padding-bottom: clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+
+.dp-blog--counsel.dp-blog-single--image .dp-blog-post-hero-container {
+  padding-bottom: clamp(40px, 5vw, 64px);
+}
+
+.dp-blog--counsel .dp-blog-crumbs {
+  justify-content: center;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: color-mix(in srgb, var(--dp-private-counsel-navy) 35%, transparent);
+}
+
+.dp-blog--counsel .dp-blog-crumbs a {
+  color: var(--dp-private-counsel-gold);
+}
+
+.dp-blog--counsel .dp-blog-crumbs a:hover,
+.dp-blog--counsel .dp-blog-crumbs a:focus-visible {
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-post-hero .dp-blog-post-title {
+  font-weight: 500;
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-post-hero .dp-blog-post-meta {
+  justify-content: center;
+  font-family: var(--dp-font-serif);
+  font-style: italic;
+  color: var(--dp-private-counsel-muted);
+}
+
+/* A short bronze rule under the meta */
+.dp-blog--counsel .dp-blog-post-hero-container::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 1px;
+  margin: clamp(28px, 3vw, 40px) auto 0;
+  background-color: var(--dp-private-counsel-bronze);
+}
+
+.dp-blog--counsel .dp-blog-post-figure {
+  max-width: calc(980px + 2 * var(--dp-header-gutter, 7vw));
+  margin-top: 0;
+}
+
+.dp-blog--counsel .dp-blog-post-image {
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   6. A POST: THE WORDS (one comfortable column)
+   ========================================================================== */
+.dp-blog-post-body {
+  box-sizing: border-box;
+  max-width: calc(720px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) var(--dp-header-gutter, 7vw) clamp(56px, 7vw, 96px);
+}
+
+.dp-blog-content {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.25vw, 19px);
+  line-height: 1.8;
+  color: var(--dp-bl-text);
+}
+
+.dp-blog-content > :first-child,
+.dp-blog-content > :first-child > :first-child {
+  margin-top: 0;
+}
+
+.dp-blog-content p,
+.dp-blog-content ul,
+.dp-blog-content ol {
+  margin: 0 0 1.4em 0;
+}
+
+.dp-blog-content h2,
+.dp-blog-content h3,
+.dp-blog-content h4 {
+  font-family: var(--dp-font-serif) !important;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--dp-bl-deep);
+  margin: 2em 0 0.7em 0;
+}
+
+.dp-blog-content h2 {
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 700;
+}
+
+.dp-blog-content h3 {
+  font-size: clamp(21px, 1.7vw, 26px);
+  font-weight: 700;
+}
+
+.dp-blog-content h2 b,
+.dp-blog-content h2 strong,
+.dp-blog-content h3 b,
+.dp-blog-content h3 strong {
+  font-weight: inherit;
+}
+
+.dp-blog-content b,
+.dp-blog-content strong {
+  font-weight: 600;
+  color: var(--dp-bl-deep);
+}
+
+.dp-blog-content a {
+  color: var(--dp-bl-lift);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--dp-bl-accent) 70%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+.dp-blog-content a:hover,
+.dp-blog-content a:focus-visible {
+  color: var(--dp-bl-deep);
+  text-decoration-color: var(--dp-bl-accent);
+}
+
+.dp-blog-content ul,
+.dp-blog-content ol {
+  padding-left: 1.3em;
+}
+
+.dp-blog-content li {
+  margin: 0 0 0.7em 0;
+  padding-left: 0.3em;
+}
+
+.dp-blog-content li::marker {
+  color: var(--dp-bl-accent);
+}
+
+.dp-blog-content blockquote {
+  margin: 2em 0;
+  padding: 4px 0 4px 28px;
+  border-left: 4px solid var(--dp-bl-accent);
+  font-family: var(--dp-font-serif);
+  font-size: clamp(21px, 1.8vw, 26px);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--dp-bl-deep);
+}
+
+.dp-blog-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.dp-blog-content img,
+.dp-blog-content figure {
+  max-width: 100%;
+  height: auto;
+}
+
+.dp-blog-content figure {
+  margin: 2em 0;
+}
+
+.dp-blog-content figcaption {
+  font-size: 14px;
+  color: var(--dp-bl-muted);
+  margin-top: 10px;
+}
+
+.dp-blog-content hr {
+  width: 56px;
+  margin: 2.6em auto;
+  border: 0;
+  border-top: 2px solid var(--dp-bl-accent);
+}
+
+/* Private Counsel: the serif carries the headings and quotes, and the first letter is bronze */
+.dp-blog--counsel .dp-blog-content h2,
+.dp-blog--counsel .dp-blog-content h3 {
+  font-weight: 500;
+}
+
+.dp-blog--counsel .dp-blog-content b,
+.dp-blog--counsel .dp-blog-content strong {
+  color: var(--dp-private-counsel-navy);
+}
+
+.dp-blog--counsel .dp-blog-content blockquote {
+  font-style: italic;
+  font-weight: 400;
+  border-left-width: 1px;
+}
+
+/* (Posts pasted from the old site arrive wrapped in .entry-content) */
+.dp-blog--counsel .dp-blog-content > p:first-of-type::first-letter,
+.dp-blog--counsel .dp-blog-content > .entry-content:first-child > p:first-of-type::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--dp-font-serif);
+  font-size: 4.2em;
+  line-height: 0.82;
+  color: var(--dp-private-counsel-bronze);
+}
+
+/* ==========================================================================
+   7. A POST: DON'S NOTE, AND THE POSTS EITHER SIDE
+   ========================================================================== */
+.dp-blog-note {
+  margin-top: clamp(40px, 5vw, 64px);
+  padding: clamp(28px, 3vw, 40px);
+  background-color: var(--dp-white, #FFFFFF);
+  border-left: 4px solid var(--dp-bl-button);
+  box-shadow: 0 22px 44px -30px color-mix(in srgb, var(--dp-bl-deep) 45%, transparent);
+}
+
+.dp-blog-note .dp-blog-note-by {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.dp-blog-note .dp-blog-note-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--dp-bl-deep);
+  margin: 0 0 8px 0;
+}
+
+.dp-blog-note .dp-blog-note-text {
+  font-family: var(--dp-font-family);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--dp-bl-text);
+  margin: 0 0 22px 0;
+}
+
+.dp-blog--counsel .dp-blog-note {
+  text-align: center;
+  background:
+    radial-gradient(ellipse 60% 90% at 50% 0%, color-mix(in srgb, var(--dp-private-counsel-navy-soft) 70%, transparent), transparent 70%),
+    var(--dp-private-counsel-navy);
+  border-left: 0;
+  border-top: 1px solid var(--dp-private-counsel-bronze);
+  box-shadow: none;
+}
+
+.dp-blog--counsel .dp-blog-note .dp-blog-note-by {
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  color: var(--dp-private-counsel-bronze-light);
+}
+
+.dp-blog--counsel .dp-blog-note .dp-blog-note-title {
+  font-weight: 500;
+  color: var(--dp-private-counsel-cream);
+}
+
+.dp-blog--counsel .dp-blog-note .dp-blog-note-text {
+  font-family: var(--dp-font-serif);
+  font-style: italic;
+  color: color-mix(in srgb, var(--dp-private-counsel-cream) 82%, transparent);
+}
+
+.dp-blog-adjacent {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(40px, 5vw, 56px);
+  padding-top: clamp(28px, 3vw, 36px);
+  border-top: 1px solid color-mix(in srgb, var(--dp-bl-deep) 14%, transparent);
+}
+
+a.dp-blog-adjacent-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--dp-bl-deep);
+  text-decoration: none;
+}
+
+a.dp-blog-adjacent-link--newer {
+  grid-column: 2;
+  text-align: right;
+}
+
+.dp-blog-adjacent-dir {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-bl-lift);
+}
+
+.dp-blog-adjacent-title {
+  font-family: var(--dp-font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+a.dp-blog-adjacent-link:hover .dp-blog-adjacent-title,
+a.dp-blog-adjacent-link:focus-visible .dp-blog-adjacent-title {
+  text-decoration: underline;
+  text-decoration-color: var(--dp-bl-accent);
+  text-underline-offset: 4px;
+}
+
+.dp-blog--counsel .dp-blog-adjacent {
+  border-top-color: color-mix(in srgb, var(--dp-private-counsel-bronze) 45%, transparent);
+}
+
+.dp-blog--counsel .dp-blog-adjacent-title {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   8. A POST: MORE FROM THE BLOG (on white, three across)
+   ========================================================================== */
+.dp-blog-related {
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-blog--counsel .dp-blog-related {
+  background-color: var(--dp-private-counsel-band);
+}
+
+.dp-blog-related-container {
+  box-sizing: border-box;
+  max-width: calc(1120px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(56px, 6vw, 96px) var(--dp-header-gutter, 7vw);
+}
+
+.dp-blog-related-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin: 0 0 28px 0;
+}
+
+.dp-blog-related .dp-blog-section-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.4vw, 36px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--dp-bl-deep);
+  margin: 0;
+}
+
+.dp-blog .dp-blog-related-posts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-blog-related-posts li {
+  display: flex;
+  margin: 0;
+}
+
+a.dp-blog-related-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+  color: var(--dp-bl-deep);
+  background-color: var(--dp-bl-paper);
+  border-top: 3px solid var(--dp-bl-accent);
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
+}
+
+a.dp-blog-related-card:hover,
+a.dp-blog-related-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 40px -26px color-mix(in srgb, var(--dp-bl-deep) 50%, transparent);
+}
+
+a.dp-blog-related-card:focus-visible {
+  outline: 2px solid var(--dp-bl-lift);
+  outline-offset: 3px;
+}
+
+.dp-blog-related-title {
+  font-family: var(--dp-font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.dp-blog--counsel a.dp-blog-related-card {
+  border-top-width: 1px;
+}
+
+.dp-blog--counsel .dp-blog-related-title {
+  font-weight: 500;
+  font-size: 21px;
+}
+
+/* ==========================================================================
+   9. SMALLER SCREENS
+   ========================================================================== */
+@media (max-width: 991px) {
+  .dp-blog .dp-blog-posts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dp-blog .dp-blog-related-posts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-blog-feature {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-blog-feature-picture {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .dp-blog .dp-blog-posts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-blog--counsel .dp-blog-feature,
+  .dp-blog--counsel .dp-blog-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .dp-blog-adjacent {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  a.dp-blog-adjacent-link--newer {
+    grid-column: auto;
+    text-align: left;
+  }
+
+  a.dp-blog-button {
+    white-space: normal;
+    height: auto;
+    min-height: 54px;
+    padding-block: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.dp-blog-button,
+  a.dp-blog-button svg,
+  .dp-blog-card,
+  .dp-blog-image,
+  a.dp-blog-related-card {
+    transition: none;
+  }
+
+  .dp-blog-card:hover,
+  a.dp-blog-related-card:hover,
+  .dp-blog-feature:hover .dp-blog-image,
+  .dp-blog-card:hover .dp-blog-image {
+    transform: none;
+  }
+}

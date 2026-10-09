@@ -73,6 +73,7 @@ function donphin_sections() {
 				array( 'The Next Journey', '/private-counsel/the-journey/' ),
 				array( 'About', '/private-counsel/about/' ),
 				array( 'Resources', '/private-counsel/resources/' ),
+				array( 'Blog', '/private-counsel/blog/' ),
 				array( 'Contact', '/private-counsel/contact/' ),
 			),
 			'cta'        => array( 'Enquire', '/private-counsel/contact/', 'send' ),
@@ -92,6 +93,7 @@ function donphin_sections() {
 				array( 'Home', '/speaking/', 'Speaking home' ),
 				array( 'About', '/speaking/about/' ),
 				array( 'Resources', '/speaking/resources/' ),
+				array( 'Blog', '/speaking/blog/' ),
 				array( 'The 40//40 Solution', '/speaking/purchase-the-40-40-solution/' ),
 				array( 'Contact', '/speaking/contact/' ),
 			),
@@ -175,6 +177,12 @@ function donphin_section_for_post( $post_id ) {
 		return $side;
 	}
 
+	// And a blog post to the section whose blog it's in
+	$side = donphin_blog_side( get_post_type( $post_id ) );
+	if ( $side ) {
+		return $side;
+	}
+
 	if ( 'page' !== get_post_type( $post_id ) ) {
 		return '';
 	}
@@ -223,6 +231,11 @@ function donphin_get_header_section() {
 	// 2. A post or page: its own section
 	if ( ! $key && is_singular() ) {
 		$key = donphin_section_for_post( get_queried_object_id() );
+	}
+
+	// A blog's list, or one of its categories: the blog's section
+	if ( ! $key ) {
+		$key = donphin_blog_side_for_request();
 	}
 
 	// 3. A page that doesn't exist: the section of the address asked for, or else of

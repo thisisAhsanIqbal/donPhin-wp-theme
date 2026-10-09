@@ -138,6 +138,11 @@ function donphin_enqueue_scripts() {
 		donphin_enqueue_asset( 'css', 'resource', $page_deps );
 	}
 
+	// A blog: its list, a category of it, or a post (archive-blog.php, single-blog.php)
+	if ( donphin_blog_side_for_request() ) {
+		donphin_enqueue_asset( 'css', 'blog', $page_deps );
+	}
+
 	// The home page and the 404 page aren't page templates
 	if ( is_front_page() ) {
 		donphin_enqueue_asset( 'css', 'gateway', array( 'donphin-child-style' ) );

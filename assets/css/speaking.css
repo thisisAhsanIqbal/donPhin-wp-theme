@@ -56,7 +56,9 @@ speaks, the three programs, the stage photograph, and the closing invitation.
   .dp-book-fit-title,
   .dp-book-order-title,
   .dp-rd-side-title,
-  .dp-rd-related-title
+  .dp-rd-related-title,
+  .dp-blog-heading,
+  .dp-blog-section-title
 ) {
   font-weight: 800;
   letter-spacing: -0.01em;
@@ -81,7 +83,9 @@ speaks, the three programs, the stage photograph, and the closing invitation.
   .dp-book-fit-title,
   .dp-book-order-title,
   .dp-rd-side-title,
-  .dp-rd-related-title
+  .dp-rd-related-title,
+  .dp-blog-heading,
+  .dp-blog-section-title
 ) em {
   font-weight: 400;
   letter-spacing: -0.015em;

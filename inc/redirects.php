@@ -94,7 +94,8 @@ function donphin_find_page( $path ) {
 }
 
 /**
- * The published page that used to live at a path, from the addresses remembered on pages
+ * The published page (or blog post) that used to live at a path, from the addresses
+ * remembered on them
  *
  * @param string $path A site path such as 'the-journey'.
  * @return WP_Post|null
@@ -102,7 +103,7 @@ function donphin_find_page( $path ) {
 function donphin_find_moved_page( $path ) {
 	$found = get_posts(
 		array(
-			'post_type'      => 'page',
+			'post_type'      => array_merge( array( 'page' ), donphin_blog_post_types() ),
 			'post_status'    => 'publish',
 			'meta_key'       => '_dp_old_path', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- only on requests for missing pages
 			'meta_value'     => trim( $path, '/' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
@@ -113,10 +114,12 @@ function donphin_find_moved_page( $path ) {
 }
 
 /**
- * Remember a page's old address whenever its address changes, so the old one keeps working
+ * Remember a page's (or a blog post's) old address whenever its address changes, so the
+ * old one keeps working
  */
 function donphin_remember_old_path( $post_id, $after, $before ) {
-	if ( 'page' !== $after->post_type || 'publish' !== $before->post_status || wp_is_post_revision( $post_id ) ) {
+	$is_blog = in_array( $after->post_type, donphin_blog_post_types(), true );
+	if ( ( 'page' !== $after->post_type && ! $is_blog ) ||'publish' !== $before->post_status || wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 	if ( $after->post_name === $before->post_name && $after->post_parent === $before->post_parent ) {
@@ -124,8 +127,14 @@ function donphin_remember_old_path( $post_id, $after, $before ) {
 	}
 
 	// The address the page had before this save
-	$old = trim( get_page_uri( $before ), '/' );
-	$new = trim( get_page_uri( $after ), '/' );
+	if ( $is_blog ) {
+		// A blog post's address is its blog's base and its slug
+		$old = donphin_site_path( get_permalink( $before ) );
+		$new = donphin_site_path( get_permalink( $after ) );
+	} else {
+		$old = trim( get_page_uri( $before ), '/' );
+		$new = trim( get_page_uri( $after ), '/' );
+	}
 	if ( '' === $old || $old === $new ) {
 		return;
 	}

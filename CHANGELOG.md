@@ -9,6 +9,25 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.15.0 (2026-10-09)
+
+### Blogs: one for Speaking, one for Private Counsel
+- Each side has its own blog, kept apart: Speaking Blog and Counsel Blog in the admin, each with
+  its own posts and categories. A post belongs to one side only.
+- Addresses: `/speaking/blog/` and `/private-counsel/blog/` for the lists, `{blog}/{post}/` for a
+  post, `{blog}/topic/{category}/` for a category. "Blog" is in both headers.
+- The list (`archive-blog.php`) and the post (`single-blog.php`) are shared, and each side
+  brings its own look (`assets/css/blog.css`). Speaking: Montserrat in bold capitals on light
+  gray, cards edged in teal, the post on a navy band, orange buttons. Private Counsel:
+  Fraunces on cream and navy, an editorial column ruled in bronze, a bronze first letter,
+  bronze buttons.
+- A post page has the reading time, Don's note with the side's invitation, the posts before
+  and after it, and three more from the same blog (its category first).
+- Posts > "Move to Speaking Blog / Counsel Blog" moves an ordinary WordPress post into a side.
+  Its old address redirects to the new one (301), as it does when a blog post's slug changes.
+- The two blogs' headings and intros are placeholders in `donphin_blog_sides()` (`inc/blog.php`)
+  until Don names them.
+
 ## 1.14.0 (2026-10-09)
 
 ### Speaking: footer

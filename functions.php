@@ -26,6 +26,7 @@ $donphin_modules = array(
 	'resources',        // Each section's resources (Speaking Resources in the admin), with a page each
 	'resources-admin',  // Their admin: the document or link, category settings, the starter import
 	'resources-split',  // Counsel Resources > Set up from Speaking: the one library split into each side's
+	'blog',             // Each section's own blog (Speaking Blog in the admin): its list, posts and categories
 );
 
 foreach ( $donphin_modules as $donphin_module ) {
