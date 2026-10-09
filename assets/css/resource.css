@@ -1,8 +1,9 @@
 /*
 Theme: Don Phin, Esq.
 Page: A resource's own page (single-resource.php, e.g. /speaking/resources/hiring-checklist/)
-Description: The title and its download on a deep band, the preview beside what it's about
-and the invitation, then more from the same category. Its colours come from the section
+Description: On the header's own frame: the title on the section's band (deep for Speaking
+and Private Counsel, warm stone for HR Tools), the preview with its download beside what
+it's about and the invitation, then more from the same category. Its colours come from the section
 it belongs to (the tokens below), so every section's library can use it. Loads after the
 section's palette (inc/enqueue.php).
 */
@@ -20,6 +21,15 @@ section's palette (inc/enqueue.php).
   --dp-rd-on-accent-hover: var(--dp-white, #FFFFFF);
   --dp-rd-paper: var(--dp-speaking-paper, #F7F9F9); /* the light sections */
   --dp-rd-text: var(--dp-text, #4A4A4A);
+
+  /* The hero: a deep band, lifting gently towards the far corner, with a soft light
+     rising from beneath the preview; its type in white */
+  --dp-rd-hero-bg:
+    radial-gradient(circle at 88% 120%, color-mix(in srgb, var(--dp-rd-lift) 45%, transparent) 0, transparent 50%),
+    linear-gradient(115deg, var(--dp-rd-deep) 0%, var(--dp-rd-deep) 45%, color-mix(in srgb, var(--dp-rd-deep) 78%, var(--dp-rd-lift)) 100%);
+  --dp-rd-hero-rule: 0;
+  --dp-rd-on-hero: var(--dp-white, #FFFFFF);
+  --dp-rd-crumb: var(--dp-rd-accent);
 }
 
 .counsel-header .dp-rd {
@@ -45,21 +55,28 @@ section's palette (inc/enqueue.php).
   --dp-rd-on-accent-hover: var(--dp-ink, #2A2029);
   --dp-rd-paper: var(--dp-paper, #F6F4F1);
   --dp-rd-text: var(--dp-text, #4A4A4A);
+
+  /* The hero on warm stone, as on the HR Tools page (hr-tools.css), its type in ink */
+  --dp-rd-hero-bg:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 255, 255, 0.45), transparent 70%),
+    #EBE5DC;
+  --dp-rd-hero-rule: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+  --dp-rd-on-hero: var(--dp-ink, #2A2029);
+  --dp-rd-crumb: var(--dp-accent, #1F6BE0);
 }
 
 /* ==========================================================================
-   1. HERO (on the deep band: the way back, the title, and the download)
+   1. HERO (on the section's band: the way back, the title, and the way to the preview)
    ========================================================================== */
 .dp-rd-hero {
-  background:
-    radial-gradient(ellipse 50% 90% at 85% 0%, color-mix(in srgb, var(--dp-rd-lift) 45%, transparent), color-mix(in srgb, var(--dp-rd-lift) 0%, transparent) 70%),
-    var(--dp-rd-deep);
-  color: var(--dp-white, #FFFFFF);
+  background: var(--dp-rd-hero-bg);
+  border-bottom: var(--dp-rd-hero-rule);
+  color: var(--dp-rd-on-hero);
 }
 
 .dp-rd-hero-container {
   box-sizing: border-box;
-  max-width: calc(1120px + 2 * var(--dp-header-gutter, 7vw));
+  max-width: 1600px; /* the header's own frame (.dp-header-inner), so the page lines up with it */
   margin: 0 auto;
   padding: clamp(40px, 5vw, 72px) var(--dp-header-gutter, 7vw) clamp(48px, 6vw, 84px);
 }
@@ -76,17 +93,17 @@ section's palette (inc/enqueue.php).
   letter-spacing: 0.14em;
   text-transform: uppercase;
   line-height: 1.4;
-  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 45%, transparent);
+  color: color-mix(in srgb, var(--dp-rd-on-hero) 45%, transparent);
 }
 
 .dp-rd-crumbs a {
-  color: var(--dp-rd-accent);
+  color: var(--dp-rd-crumb);
   text-decoration: none;
 }
 
 .dp-rd-crumbs a:hover,
 .dp-rd-crumbs a:focus-visible {
-  color: var(--dp-white, #FFFFFF);
+  color: var(--dp-rd-on-hero);
 }
 
 .dp-rd-hero .dp-rd-title {
@@ -96,7 +113,7 @@ section's palette (inc/enqueue.php).
   line-height: 1.06;
   letter-spacing: -0.02em;
   text-wrap: balance;
-  color: var(--dp-white, #FFFFFF);
+  color: var(--dp-rd-on-hero);
   max-width: 18em;
   margin: 0;
 }
@@ -106,7 +123,7 @@ section's palette (inc/enqueue.php).
   font-size: clamp(17px, 1.4vw, 21px);
   font-style: italic;
   line-height: 1.4;
-  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 72%, transparent);
+  color: color-mix(in srgb, var(--dp-rd-on-hero) 72%, transparent);
   margin: 12px 0 0 0;
 }
 
@@ -114,7 +131,7 @@ section's palette (inc/enqueue.php).
   font-family: var(--dp-font-family);
   font-size: clamp(16px, 1.25vw, 19px);
   line-height: 1.65;
-  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 86%, transparent);
+  color: color-mix(in srgb, var(--dp-rd-on-hero) 86%, transparent);
   max-width: 36em;
   margin: 20px 0 0 0;
 }
@@ -154,7 +171,7 @@ a.dp-rd-button:focus-visible {
 }
 
 a.dp-rd-button:focus-visible {
-  outline: 2px solid var(--dp-white, #FFFFFF);
+  outline: 2px solid var(--dp-rd-on-hero);
   outline-offset: 3px;
 }
 
@@ -164,11 +181,23 @@ a.dp-rd-button svg {
   height: 18px;
 }
 
+/* "Preview the PDF ↓": a small arrow that nods down on hover */
+a.dp-rd-button svg.dp-rd-button-down {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+a.dp-rd-button:hover svg.dp-rd-button-down,
+a.dp-rd-button:focus-visible svg.dp-rd-button-down {
+  transform: translateY(3px);
+}
+
 .dp-rd-size {
   font-family: var(--dp-font-family);
   font-size: 14px;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 68%, transparent);
+  color: color-mix(in srgb, var(--dp-rd-on-hero) 68%, transparent);
 }
 
 /* ==========================================================================
@@ -184,14 +213,72 @@ a.dp-rd-button svg {
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
   gap: clamp(32px, 4vw, 64px);
   align-items: start;
-  max-width: calc(1120px + 2 * var(--dp-header-gutter, 7vw));
+  max-width: 1600px; /* the header's own frame (.dp-header-inner), so the page lines up with it */
   margin: 0 auto;
   padding: clamp(48px, 6vw, 88px) var(--dp-header-gutter, 7vw);
 }
 
-/* The preview rises into the hero a little, like a page laid on the desk */
+/* The preview rises into the hero a little, like a page laid on the desk. "Preview the
+   PDF" lands on it just under the sticky header. */
 .dp-rd-preview {
   margin-top: calc(-1 * clamp(72px, 8vw, 120px));
+  scroll-margin-top: calc(var(--dp-header-height, 68px) + 24px);
+}
+
+/* See it first, then download: the bar attached under the preview, kept in view at the
+   foot of the window while the preview scrolls by, until the preview ends */
+.dp-rd-getbar {
+  position: sticky;
+  bottom: 16px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 20px;
+  margin-top: 16px;
+  padding: 16px 16px 16px 24px;
+  background-color: var(--dp-rd-deep);
+  border-radius: 10px;
+  box-shadow: 0 24px 48px -20px color-mix(in srgb, var(--dp-rd-deep) 70%, transparent);
+}
+
+.dp-rd-getbar .dp-rd-getbar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+
+.dp-rd-getbar-title {
+  font-family: var(--dp-font-serif);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--dp-white, #FFFFFF);
+}
+
+.dp-rd-getbar-detail {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 70%, transparent);
+}
+
+a.dp-rd-button.dp-rd-getbar-button {
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 6px;
+}
+
+a.dp-rd-button.dp-rd-getbar-button:focus-visible {
+  outline-color: var(--dp-white, #FFFFFF);
+}
+
+/* The pictures in a preview sit a little apart from the bar */
+.dp-rd-preview--image .dp-rd-getbar,
+.dp-rd-preview--video .dp-rd-getbar {
+  margin-top: 20px;
 }
 
 .dp-rd-pdf {
@@ -403,7 +490,7 @@ a.dp-rd-button svg {
 
 .dp-rd-related-container {
   box-sizing: border-box;
-  max-width: calc(1120px + 2 * var(--dp-header-gutter, 7vw));
+  max-width: 1600px; /* the header's own frame (.dp-header-inner), so the page lines up with it */
   margin: 0 auto;
   padding: clamp(56px, 6vw, 96px) var(--dp-header-gutter, 7vw);
 }
@@ -552,9 +639,20 @@ a.dp-rd-card:focus-visible {
   .dp-rd-preview {
     margin-top: calc(-1 * clamp(40px, 8vw, 72px));
   }
+
+  .dp-rd-getbar {
+    bottom: 12px;
+    padding: 16px;
+  }
+
+  a.dp-rd-button.dp-rd-getbar-button {
+    justify-content: center;
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  a.dp-rd-button svg.dp-rd-button-down,
   a.dp-rd-button,
   a.dp-rd-card {
     transition: none;

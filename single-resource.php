@@ -3,9 +3,13 @@
  * A resource's own page (e.g. /speaking/resources/hiring-checklist/), for any section's
  * library (inc/resources.php picks this template for every resource type).
  *
- * The title, its label and summary, and the download (or the link, or a request for a
- * copy) on the hero; then the preview beside what it's about; then more from the same
- * category. The preview follows what the resource is:
+ * The title, its label and summary on the hero; then the preview beside what it's about;
+ * then more from the same category. See it first, then download: a file the page can show
+ * (a PDF, an image, audio, video) has "Preview the PDF" on the hero, leading down to the
+ * preview, and its download in a bar attached to the preview, kept in view while the
+ * preview scrolls by (the PDF viewer's own toolbar is hidden, so that's the one way down).
+ * Anything else keeps its button on the hero: the link, or a request for a copy.
+ * The preview follows what the resource is:
  * - a PDF shows in the browser's own viewer on larger screens, and on phones (whose
  *   browsers don't show PDFs in a page) as its first page, with a button to open it all
  * - an image shows itself, audio and video play in place, and a YouTube or Vimeo link
@@ -53,9 +57,23 @@ while ( have_posts() ) :
 	);
 	$format = $formats[ $resource['kind'] ];
 
+	// See it first, then download: a file the page can show (a PDF, image, audio or video)
+	// is previewed first. The hero's button leads down to the preview, and the download
+	// sits in a bar attached to the preview, kept in view while the preview scrolls by.
+	$previewable = $file && in_array( $resource['kind'], array( 'pdf', 'image', 'audio', 'video' ), true );
+	$download    = $file ? 'Download ' . ( 'audio' === $resource['kind'] ? 'the audio' : $file['ext'] ) : '';
+	$preview_cta = array(
+		'pdf'   => 'Preview the PDF',
+		'image' => 'See the image',
+		'audio' => 'Listen first',
+		'video' => 'Watch first',
+	);
+
 	// The main button
 	$is_external = 'link' === $resource['kind'] && ! wp_validate_redirect( $resource['link'], false );
-	if ( $file ) {
+	if ( $previewable ) {
+		$button = array( $preview_cta[ $resource['kind'] ], '#dp-rd-preview', false );
+	} elseif ( $file ) {
 		$button = array( 'Download ' . ( 'audio' === $resource['kind'] ? 'the audio' : $file['ext'] ), $file['url'], true );
 	} elseif ( 'link' === $resource['kind'] ) {
 		$button = array( $embed ? 'Open the video' : 'Open', $resource['link'], false );
@@ -113,11 +131,15 @@ while ( have_posts() ) :
 
 			<div class="dp-rd-actions">
 				<a class="dp-rd-button" href="<?php echo esc_url( $button[1] ); ?>"<?php echo $button[2] ? ' download' : ''; ?><?php echo $is_external ? ' target="_blank" rel="noopener"' : ''; ?>>
-					<?php if ( $file ) : ?>
+					<?php if ( $previewable ) : ?>
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+					<?php elseif ( $file ) : ?>
 						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
 					<?php endif; ?>
 					<?php echo esc_html( $button[0] ); ?>
-					<?php if ( ! $file ) : ?>
+					<?php if ( $previewable ) : ?>
+						<svg class="dp-rd-button-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+					<?php elseif ( ! $file ) : ?>
 						<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 					<?php endif; ?>
 				</a>
@@ -133,9 +155,10 @@ while ( have_posts() ) :
 	<div class="dp-rd-body">
 		<div class="dp-rd-body-container">
 
-			<div class="dp-rd-preview dp-rd-preview--<?php echo esc_attr( $embed ? 'embed' : $resource['kind'] ); ?>">
+			<div class="dp-rd-preview dp-rd-preview--<?php echo esc_attr( $embed ? 'embed' : $resource['kind'] ); ?>" id="dp-rd-preview">
 				<?php if ( 'pdf' === $resource['kind'] ) : ?>
-					<object class="dp-rd-pdf" data="<?php echo esc_url( $file['url'] . '#view=FitH' ); ?>" type="application/pdf" aria-label="<?php echo esc_attr( 'Preview of ' . $resource['name'] ); ?>"></object>
+					<!-- The browser's own viewer, without its toolbar: the download is ours, below -->
+					<object class="dp-rd-pdf" data="<?php echo esc_url( $file['url'] . '#toolbar=0&navpanes=0&view=FitH' ); ?>" type="application/pdf" aria-label="<?php echo esc_attr( 'Preview of ' . $resource['name'] ); ?>"></object>
 					<!-- Phones: the first page, and the whole PDF a tap away -->
 					<div class="dp-rd-pdf-small">
 						<?php if ( $first_page ) : ?>
@@ -171,6 +194,20 @@ while ( have_posts() ) :
 					<?php if ( 'audio' === $resource['kind'] ) : ?>
 						<audio class="dp-rd-audio" src="<?php echo esc_url( $file['url'] ); ?>" controls preload="metadata"></audio>
 					<?php endif; ?>
+				<?php endif; ?>
+
+				<?php if ( $previewable ) : ?>
+					<!-- The download, attached to the preview and kept in view while it scrolls by -->
+					<div class="dp-rd-getbar">
+						<p class="dp-rd-getbar-text">
+							<span class="dp-rd-getbar-title">Like what you see?</span>
+							<span class="dp-rd-getbar-detail"><?php echo esc_html( 'Download it, free' . ( $file['size'] ? ' · ' . $file['ext'] . ' · ' . $file['size'] : '' ) ); ?></span>
+						</p>
+						<a class="dp-rd-button dp-rd-getbar-button" href="<?php echo esc_url( $file['url'] ); ?>" download>
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/></svg>
+							<?php echo esc_html( $download ); ?>
+						</a>
+					</div>
 				<?php endif; ?>
 			</div>
 

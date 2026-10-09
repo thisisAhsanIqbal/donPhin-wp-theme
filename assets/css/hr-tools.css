@@ -1,103 +1,585 @@
 /*
 Theme: Don Phin, Esq.
 Page: HR Tools (page-hr-tools.php, at /hr-tools/)
-Description: The heading and intro on paper, centred, with a faint blue glow and how much
-is in the library; the library below it is in resource-library.css. In the site's own ink
-and blue (style.css), as HR Tools belongs to neither side.
+Description: The hero, on the header's own frame so its edges meet the logo and the menu:
+on warm stone (#EBE5DC), the words on the left (the label, the
+heading underlined in blue, Don's line as a signed note, the way down to the tools and how
+much is there, its figures counting up as the page opens) and on the right a small fanned stack of pages, the biggest categories,
+each a way into its list. The library below it is in resource-library.css. In the site's
+own ink and blue (style.css), as HR Tools belongs to neither side.
 */
 
 /* ==========================================================================
-   1. HERO (on paper: the label, the heading, the intro and the facts, centred)
+   1. THE HERO: ON WARM STONE, WITH THE SOFTEST LIGHT FROM ABOVE
    ========================================================================== */
 .dp-hr-hero {
+  --dp-hr-bg: #EBE5DC; /* warm stone: the hero, and the folded corners of its pages */
+
+  position: relative;
+  overflow: hidden;
   background:
-    radial-gradient(ellipse 60% 90% at 50% 0%, color-mix(in srgb, var(--dp-accent-light, #8DB6F5) 30%, transparent), transparent 70%),
-    var(--dp-paper, #F6F4F1);
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255, 255, 255, 0.45), transparent 70%),
+    var(--dp-hr-bg);
   border-bottom: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
 }
 
 .dp-hr-hero-container {
+  position: relative;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(40px, 5vw, 96px);
   align-items: center;
-  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  max-width: 1600px; /* the header's own frame (.dp-header-inner) */
   margin: 0 auto;
-  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw) clamp(56px, 7vw, 96px);
-  text-align: center;
+  padding: clamp(56px, 7vw, 104px) var(--dp-header-gutter, 7vw) clamp(64px, 8vw, 120px);
 }
 
+/* ==========================================================================
+   2. THE WORDS
+   ========================================================================== */
 .dp-hr-hero .dp-hr-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px 0;
+  padding: 7px 14px 7px 12px;
   font-family: var(--dp-font-family);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  line-height: 1.5;
+  line-height: 1.3;
   color: var(--dp-accent, #1F6BE0);
-  margin: 0 0 18px 0;
+  background-color: color-mix(in srgb, var(--dp-accent, #1F6BE0) 9%, var(--dp-white, #FFFFFF));
+  border: 1px solid color-mix(in srgb, var(--dp-accent, #1F6BE0) 22%, transparent);
+  border-radius: 999px;
+}
+
+.dp-hr-label-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--dp-accent, #1F6BE0);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--dp-accent, #1F6BE0) 18%, transparent);
 }
 
 .dp-hr-hero .dp-hr-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(42px, 5vw, 76px);
+  font-size: clamp(56px, 7.2vw, 116px);
   font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+  line-height: 0.95;
+  letter-spacing: -0.035em;
   color: var(--dp-ink, #2A2029);
   margin: 0;
 }
 
-.dp-hr-hero .dp-hr-intro {
-  font-family: var(--dp-font-serif);
-  font-size: clamp(18px, 1.5vw, 22px);
-  font-style: italic;
-  line-height: 1.55;
-  color: var(--dp-text, #4A4A4A);
-  max-width: 30em;
-  margin: 22px 0 0 0;
+/* A short blue stroke under the heading */
+.dp-hr-hero .dp-hr-title::after {
+  content: "";
+  display: block;
+  width: 88px;
+  height: 5px;
+  margin-top: clamp(18px, 2vw, 26px);
+  background: linear-gradient(90deg, var(--dp-accent, #1F6BE0), var(--dp-accent-light, #8DB6F5));
+  border-radius: 3px;
 }
 
-/* How much is there: three facts, ruled apart */
-.dp-hr-hero .dp-hr-facts {
+/* Don's line, as a note he signed */
+.dp-hr-note {
+  position: relative;
+  max-width: 34em;
+  margin: clamp(26px, 3vw, 36px) 0 0 0;
+  padding-left: 30px;
+}
+
+.dp-hr-note::before {
+  content: "\201C";
+  position: absolute;
+  top: -14px;
+  left: -4px;
+  font-family: var(--dp-font-serif);
+  font-size: 72px;
+  line-height: 1;
+  color: var(--dp-accent, #1F6BE0);
+  opacity: 0.35;
+}
+
+.dp-hr-hero .dp-hr-intro {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.dp-hr-hero .dp-hr-intro p {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.6vw, 24px);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--dp-ink, #2A2029);
+  margin: 0;
+}
+
+.dp-hr-signed {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dp-text, #4A4A4A);
+}
+
+.dp-hr-signed img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: 50% 20%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--dp-white, #FFFFFF), 0 0 0 3px color-mix(in srgb, var(--dp-accent, #1F6BE0) 35%, transparent);
+}
+
+/* The way down, and how much is there */
+.dp-hr-actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px 0;
+  align-items: center;
+  gap: 20px clamp(24px, 3vw, 40px);
+  margin-top: clamp(32px, 3.6vw, 48px);
+}
+
+a.dp-hr-button {
+  font-family: var(--dp-font-family) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  height: 54px;
+  padding: 0 26px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-accent, #1F6BE0);
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 14px 28px -16px color-mix(in srgb, var(--dp-accent, #1F6BE0) 80%, transparent);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+a.dp-hr-button:hover,
+a.dp-hr-button:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  background-color: var(--dp-ink, #2A2029);
+  transform: translateY(-1px);
+}
+
+a.dp-hr-button:focus-visible {
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 3px;
+}
+
+a.dp-hr-button svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.25s ease;
+}
+
+a.dp-hr-button:hover svg,
+a.dp-hr-button:focus-visible svg {
+  transform: translateY(3px);
+}
+
+.dp-hr-hero .dp-hr-facts {
+  display: flex;
+  gap: 0;
   list-style: none;
-  margin: clamp(28px, 3vw, 40px) 0 0 0;
+  margin: 0;
   padding: 0;
 }
 
 .dp-hr-facts li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin: 0;
-  padding: 0 20px;
-  font-family: var(--dp-font-family);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1.4;
-  color: var(--dp-text, #4A4A4A);
+  padding: 0 clamp(16px, 2vw, 26px);
   border-left: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
 }
 
 .dp-hr-facts li:first-child {
+  padding-left: 0;
   border-left: 0;
+}
+
+/* Each figure keeps its final width while it counts up (count-up.js), so nothing shifts */
+.dp-hr-facts .dp-count {
+  display: inline-block;
+  min-width: calc(var(--dp-digits, 1) * 1ch);
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: right; /* the digits sit against what follows (the % of "100%") */
 }
 
 .dp-hr-facts strong {
   font-family: var(--dp-font-serif);
-  font-size: 22px;
+  font-size: 30px;
   font-weight: 600;
+  line-height: 1;
   color: var(--dp-ink, #2A2029);
-  margin-right: 4px;
 }
 
-/* Phones: the facts may wrap, so no rule at the start of a line */
-@media (max-width: 600px) {
-  .dp-hr-facts li {
-    padding: 0 12px;
+.dp-hr-facts li > span {
+  font-family: var(--dp-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-text, #4A4A4A);
+}
+
+/* ==========================================================================
+   3. THE PAGES: THE BIGGEST CATEGORIES, FANNED, THE BIGGEST IN FRONT
+   ========================================================================== */
+.dp-hr-hero .dp-hr-deck {
+  position: relative;
+  height: clamp(380px, 32vw, 460px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-hr-card {
+  position: absolute;
+  top: 50%;
+  left: 38%;
+  width: clamp(232px, 17vw, 265px);
+  margin: 0;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* 1 is the front page (the biggest category), 3 the back */
+.dp-hr-card--1 {
+  z-index: 3;
+  transform: translate(-74%, -50%) rotate(-5deg);
+}
+
+.dp-hr-card--2 {
+  z-index: 2;
+  transform: translate(-18%, -54%) rotate(3deg);
+}
+
+.dp-hr-card--3 {
+  z-index: 1;
+  transform: translate(14%, -46%) rotate(10deg);
+}
+
+.dp-hr-deck:hover .dp-hr-card--1 {
+  transform: translate(-80%, -52%) rotate(-7deg);
+}
+
+.dp-hr-deck:hover .dp-hr-card--2 {
+  transform: translate(-18%, -57%) rotate(2deg);
+}
+
+.dp-hr-deck:hover .dp-hr-card--3 {
+  transform: translate(18%, -46%) rotate(12deg);
+}
+
+.dp-hr-card a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  aspect-ratio: 8.5 / 11;
+  padding: 24px 24px 22px;
+  color: var(--dp-ink, #2A2029);
+  background-color: var(--dp-white, #FFFFFF);
+  border-top: 5px solid var(--dp-accent, #1F6BE0);
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--dp-ink, #2A2029) 6%, transparent),
+    0 30px 50px -28px color-mix(in srgb, var(--dp-ink, #2A2029) 45%, transparent);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dp-hr-card--2 a {
+  border-top-color: var(--dp-ink, #2A2029);
+}
+
+.dp-hr-card--3 a {
+  background-color: color-mix(in srgb, var(--dp-accent-light, #8DB6F5) 22%, var(--dp-white, #FFFFFF));
+  border-top-color: var(--dp-accent-light, #8DB6F5);
+}
+
+/* A folded corner */
+.dp-hr-card a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--dp-ink, #2A2029) 12%, var(--dp-hr-bg)) 50%, var(--dp-hr-bg) 50%);
+  border-bottom-right-radius: 6px;
+}
+
+.dp-hr-card a:hover,
+.dp-hr-card a:focus-visible {
+  transform: translateY(-6px);
+  box-shadow:
+    0 1px 0 color-mix(in srgb, var(--dp-ink, #2A2029) 6%, transparent),
+    0 40px 60px -28px color-mix(in srgb, var(--dp-ink, #2A2029) 55%, transparent);
+}
+
+.dp-hr-card a:focus-visible {
+  outline: 2px solid var(--dp-accent, #1F6BE0);
+  outline-offset: 4px;
+}
+
+.dp-hr-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.dp-hr-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--dp-accent, #1F6BE0);
+  background-color: color-mix(in srgb, var(--dp-accent-light, #8DB6F5) 30%, transparent);
+  border-radius: 50%;
+}
+
+.dp-hr-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.dp-hr-card-count {
+  font-family: var(--dp-font-serif);
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--dp-ink, #2A2029);
+}
+
+/* The number and the category's short name, at the right, where every page shows */
+.dp-hr-card-tally {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.dp-hr-card-chip {
+  font-family: var(--dp-font-family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-text, #4A4A4A);
+}
+
+/* The full name, the lines and "See them" on the front page; the pages behind show
+   only what peeks out (their number and short name) */
+.dp-hr-card--2 .dp-hr-card-title,
+.dp-hr-card--3 .dp-hr-card-title,
+.dp-hr-card--2 .dp-hr-card-more,
+.dp-hr-card--3 .dp-hr-card-more {
+  visibility: hidden;
+}
+
+/* A page pointed at (or tabbed to) comes to the front, showing all of itself */
+.dp-hr-card:hover,
+.dp-hr-card:focus-within {
+  z-index: 4;
+}
+
+.dp-hr-card:hover .dp-hr-card-title,
+.dp-hr-card:hover .dp-hr-card-more,
+.dp-hr-card:focus-within .dp-hr-card-title,
+.dp-hr-card:focus-within .dp-hr-card-more {
+  visibility: visible;
+}
+
+.dp-hr-card-title {
+  margin-top: 22px;
+  font-family: var(--dp-font-serif);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Faint ruled lines, as on a page */
+.dp-hr-card-lines {
+  flex: 1;
+  margin-top: 18px;
+  background: repeating-linear-gradient(180deg, transparent 0 18px, color-mix(in srgb, var(--dp-ink, #2A2029) 9%, transparent) 18px 19px);
+  -webkit-mask-image: linear-gradient(180deg, black 20%, transparent);
+  mask-image: linear-gradient(180deg, black 20%, transparent);
+}
+
+.dp-hr-card-more {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dp-accent, #1F6BE0);
+}
+
+/* ==========================================================================
+   4. SMALLER SCREENS (below 1200px): THE WORDS, THEN THE THREE PAGES SIDE BY SIDE
+      AS SMALL CARDS (no fan: there isn't the room for every page to show)
+   ========================================================================== */
+@media (max-width: 1199px) {
+  .dp-hr-hero-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-hr-hero .dp-hr-deck {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 20px);
+    height: auto;
+    max-width: 640px;
+  }
+
+  .dp-hr-card,
+  .dp-hr-deck:hover .dp-hr-card {
+    position: static;
+    width: auto;
+  }
+
+  /* Back in reading order, the biggest first, each with a slight tilt */
+  .dp-hr-card--1,
+  .dp-hr-deck:hover .dp-hr-card--1 {
+    order: 1;
+    transform: rotate(-2deg);
+  }
+
+  .dp-hr-card--2,
+  .dp-hr-deck:hover .dp-hr-card--2 {
+    order: 2;
+    transform: rotate(1.5deg);
+  }
+
+  .dp-hr-card--3,
+  .dp-hr-deck:hover .dp-hr-card--3 {
+    order: 3;
+    transform: rotate(-1deg);
+  }
+
+  .dp-hr-card a {
+    aspect-ratio: auto;
+    min-height: 0;
+    padding: 16px 16px 18px;
+  }
+
+  .dp-hr-card a::after {
+    width: 22px;
+    height: 22px;
+  }
+
+  .dp-hr-card-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .dp-hr-card-tally {
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .dp-hr-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dp-hr-card-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dp-hr-card-count {
+    font-size: clamp(30px, 6vw, 40px);
+  }
+
+  .dp-hr-card-chip {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  /* Small cards: the number and name say it; the rest would only crowd them */
+  .dp-hr-card .dp-hr-card-title,
+  .dp-hr-card .dp-hr-card-lines,
+  .dp-hr-card .dp-hr-card-more,
+  .dp-hr-card:hover .dp-hr-card-title,
+  .dp-hr-card:hover .dp-hr-card-more {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-hr-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  a.dp-hr-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* The facts across the full width in three equal columns, like the pages below them,
+     each centred in its column */
+  .dp-hr-hero .dp-hr-facts {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .dp-hr-facts li,
+  .dp-hr-facts li:first-child {
+    align-items: center;
+    padding: 2px 8px;
+    text-align: center;
+  }
+
+  .dp-hr-facts li:first-child {
     border-left: 0;
+  }
+}
+
+/* The narrowest phones: the figures a touch smaller, so none meets a rule */
+@media (max-width: 400px) {
+  .dp-hr-facts strong {
+    font-size: 26px;
+  }
+
+  .dp-hr-facts li > span {
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-hr-card,
+  .dp-hr-card a,
+  a.dp-hr-button,
+  a.dp-hr-button svg {
+    transition: none;
   }
 }

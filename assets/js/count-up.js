@@ -3,7 +3,9 @@
  *
  * Any .dp-count with a data-count holds its final figure in the markup. Once its group
  * comes near the screen, it counts up to that figure from zero, easing in to land. It
- * counts once. Groups are the nearest <section>, so a row of numbers counts together.
+ * counts once. Groups are the nearest <section>, so a row of numbers counts together. A
+ * figure can take its time: data-count-duration (in milliseconds) on any figure of a group
+ * sets how long the group takes, instead of the usual 1.8 seconds.
  *
  * Checked on scroll rather than with an IntersectionObserver, which can miss the change
  * on these pages (see reveal.js). Visitors who prefer less motion see the figures as they are.
@@ -32,9 +34,11 @@
     group.done = true;
     const start = performance.now();
     const targets = group.items.map(function(el) { return parseInt(el.getAttribute('data-count'), 10) || 0; });
+    const timed = group.items.find(function(el) { return el.hasAttribute('data-count-duration'); });
+    const duration = timed ? (parseInt(timed.getAttribute('data-count-duration'), 10) || DURATION) : DURATION;
 
     function frame(now) {
-      const t = Math.min(1, (now - start) / DURATION);
+      const t = Math.min(1, (now - start) / duration);
       const eased = 1 - Math.pow(1 - t, 3); // ease out: quick at first, settling on the figure
       group.items.forEach(function(el, i) {
         el.textContent = format.format(Math.round(targets[i] * eased));

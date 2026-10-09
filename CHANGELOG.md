@@ -9,6 +9,71 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.18.5 (2026-10-10)
+
+### Resources: a resource's page lines up with the header, and a new hero ground
+- A resource's page (hero, preview and side, "More …") keeps to the header's own frame
+  (1600px with its gutter), so its edges meet the logo and the menu at every width. The
+  preview gets wider with it.
+- HR Tools: the hero is on the same warm stone as the HR Tools page (`#EBE5DC`, the softest
+  light from above, a hairline beneath), with the title in ink and the way back in blue.
+- Speaking and Private Counsel: the deep band lifts gently towards the far corner, with a
+  soft light rising from beneath, in place of the blotchy glow.
+- The hero's colours are tokens a section sets (`--dp-rd-hero-bg`, `--dp-rd-on-hero`,
+  `--dp-rd-crumb`, `--dp-rd-hero-rule` in `resource.css`), as the rest of the page's are.
+
+## 1.18.4 (2026-10-10)
+
+### Resources: see it first, then download
+- On a resource's page (HR Tools, Speaking and Private Counsel alike), a file the page can
+  show (a PDF, an image, audio, video) is previewed before it's downloaded. The hero's
+  button is now "Preview the PDF" (or "See the image", "Listen first", "Watch first"),
+  leading down to the preview.
+- The download sits in a bar attached under the preview, "Like what you see? Download it,
+  free · PDF · 976 KB" with the Download button. It stays in view at the foot of the window
+  while the preview scrolls by, and settles under the preview at its end. On phones the
+  button fills the bar's width.
+- The PDF viewer shows without its own toolbar (`#toolbar=0&navpanes=0`), so its download
+  and print buttons are gone and the bar is the way to download (in Chrome and Edge;
+  Firefox and Safari keep their viewer's own controls).
+- Links and resources not online yet keep their button on the hero ("Open", "Request a copy").
+
+## 1.18.3 (2026-10-10)
+
+### HR Tools: a calmer hero, and figures that count up
+- The hero is on a plain warm stone (`#EBE5DC`, `--dp-hr-bg` in `hr-tools.css`) with only the
+  softest light from above. The dotted grid and the blue glow are gone. The pages' folded
+  corners take the same stone.
+- The facts (tools, categories, 100% free) count up from 0 to their figure, slowly and
+  smoothly (2.6 seconds, easing in to land), as the page opens. Each figure keeps its final
+  width while it counts, so nothing beside it shifts. Visitors who prefer less motion see
+  the figures as they are.
+- `count-up.js` takes an optional `data-count-duration` (in milliseconds) per group; the
+  Speaking page keeps its usual 1.8 seconds.
+
+## 1.18.2 (2026-10-10)
+
+### HR Tools: the hero on phones
+- The facts (tools, categories, free) span the full width in three equal columns, each
+  centred, lining up with the three category cards below them. There's more room (28px)
+  between them and the Browse the tools button.
+- On the narrowest phones (400px and under) the figures are a touch smaller, so none runs
+  into a divider.
+
+## 1.18.1 (2026-10-10)
+
+### HR Tools: the hero, redesigned
+- On the header's own frame (1600px with its gutter), so the hero's edges meet the logo and
+  the menu, on paper with a blue glow and a faint dotted grid on the right.
+- Left: a "Free for everyone" pill, "HR Tools" large with a blue stroke under it, Don's line
+  as a note he signed (a quote mark, and his portrait and name), a **Browse the tools** button
+  that leads down to the library, and the facts as three figures (tools, categories, 100% free).
+- Right: a fanned stack of three pages, the biggest categories, the biggest in front. Each
+  page shows its icon, count and short name, and leads to its list. Pointing at a page
+  brings it to the front with its full name.
+- Below 1200px: the words, then the three pages as small tilted cards side by side (icon,
+  count, short name). On phones the button fills the width.
+
 ## 1.18.0 (2026-10-10)
 
 ### HR Tools: a library of its own, common to everyone

@@ -35,7 +35,7 @@ function donphin_template_assets() {
 		),
 		'page-hr-tools.php'                    => array(
 			'css' => array( 'resource-library', 'hr-tools' ),
-			'js'  => array( 'resource-library' ),
+			'js'  => array( 'resource-library', 'count-up' ),
 		),
 		'page-the-journey.php'                 => array( 'css' => array( 'journey' ) ),
 		'page-counsel-about.php'               => array( 'css' => array( 'counsel-about' ) ),
