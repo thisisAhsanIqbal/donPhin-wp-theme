@@ -33,6 +33,10 @@ function donphin_template_assets() {
 			'css' => array( 'resource-library', 'counsel-resources' ),
 			'js'  => array( 'resource-library' ),
 		),
+		'page-hr-tools.php'                    => array(
+			'css' => array( 'resource-library', 'hr-tools' ),
+			'js'  => array( 'resource-library' ),
+		),
 		'page-the-journey.php'                 => array( 'css' => array( 'journey' ) ),
 		'page-counsel-about.php'               => array( 'css' => array( 'counsel-about' ) ),
 		'page-counsel-contact.php'             => array( 'css' => array( 'contact' ) ),

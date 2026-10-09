@@ -54,6 +54,7 @@ function donphin_admin_menu_sides() {
 	$icons     = array(
 		'speaking' => 'dashicons-megaphone',
 		'counsel'  => 'dashicons-businessperson',
+		'foryou'   => 'dashicons-clipboard',
 	);
 	// A short name, where the side's full one is too long (Leads' lists)
 	$short     = array(
@@ -80,6 +81,15 @@ function donphin_admin_menu_sides() {
 			'deep'     => '#0F1E38',
 			'current'  => '#D2B48C',
 		),
+		// HR Tools (For You): the site's own ink and blue, as on its page (style.css)
+		'foryou'   => array(
+			'accent'   => '#8DB6F5',
+			'fill'     => '#1F6BE0',
+			'fill-end' => '#1857B8',
+			'on-fill'  => '#FFFFFF',
+			'deep'     => '#2A2029',
+			'current'  => '#8DB6F5',
+		),
 	);
 	$sections  = donphin_sections();
 	$blogs     = donphin_blog_sides();
@@ -93,7 +103,9 @@ function donphin_admin_menu_sides() {
 
 		$sides[ $key ] = array(
 			'slug'     => 'edit.php?post_type=' . $first['post_type'],
-			'label'    => isset( $sections[ $key ] ) ? ucwords( $sections[ $key ]['label'] ) : ucwords( $key ), // "Private counsel" reads "Private Counsel" in the menu
+			// A side is named after its section ("Private counsel" reads "Private Counsel"); a
+			// section with only a library (For You's HR Tools) after its library
+			'label'    => ( ! $blog && $library ) ? $library['name'] : ( isset( $sections[ $key ] ) ? ucwords( $sections[ $key ]['label'] ) : ucwords( $key ) ),
 			'short'    => isset( $short[ $key ] ) ? $short[ $key ] : ( isset( $sections[ $key ] ) ? ucwords( $sections[ $key ]['label'] ) : ucwords( $key ) ),
 			'icon'     => isset( $icons[ $key ] ) ? $icons[ $key ] : 'dashicons-category',
 			'colors'   => isset( $colors[ $key ] ) ? $colors[ $key ] : array(),
@@ -157,7 +169,11 @@ function donphin_admin_menu_post_type_args( $args, $post_type ) {
 		$args['show_in_menu']        = $side['slug'];
 		$args['show_in_admin_bar']   = true; // Still in "+ New" on the toolbar
 		$args['labels']              = isset( $args['labels'] ) ? (array) $args['labels'] : array();
-		$args['labels']['all_items'] = $is_blog ? __( 'Blog posts', 'don-phin-esq' ) : __( 'Resources', 'don-phin-esq' );
+		if ( $is_blog ) {
+			$args['labels']['all_items'] = __( 'Blog posts', 'don-phin-esq' );
+		} else {
+			$args['labels']['all_items'] = isset( $side['library']['menu'][0] ) ? $side['library']['menu'][0] : __( 'Resources', 'don-phin-esq' );
+		}
 		return $args;
 	}
 
@@ -215,7 +231,7 @@ function donphin_admin_menu_add_items() {
 		$index = 0;
 		$parts = array(
 			'blog'    => array( __( 'Add blog post', 'don-phin-esq' ), __( 'Blog categories', 'don-phin-esq' ) ),
-			'library' => array( __( 'Add resource', 'don-phin-esq' ), __( 'Resource categories', 'don-phin-esq' ) ),
+			'library' => isset( $side['library']['menu'][2] ) ? array( $side['library']['menu'][1], $side['library']['menu'][2] ) : array( __( 'Add resource', 'don-phin-esq' ), __( 'Resource categories', 'don-phin-esq' ) ),
 		);
 		foreach ( $parts as $part => $labels ) {
 			if ( ! $side[ $part ] ) {
@@ -580,8 +596,8 @@ add_filter( 'xmlrpc_methods', 'donphin_comments_no_pingback_method' );
    ========================================================================== */
 
 /**
- * Every menu in its own colours: each side, and Leads in the site's own blue and ink (the
- * header's, style.css). By key: its menu's address, its name, its colours (see
+ * Every menu in its own colours: each side (and HR Tools), and Leads in green, the colour
+ * of something new waiting. By key: its menu's address, its name, its colours (see
  * donphin_admin_menu_sides()) and the post types whose screens are its.
  *
  * @return array
@@ -603,12 +619,12 @@ function donphin_admin_menu_colored() {
 		'slug'   => DONPHIN_LEADS_MENU,
 		'label'  => __( 'Leads', 'don-phin-esq' ),
 		'colors' => array(
-			'accent'   => '#8DB6F5',
-			'fill'     => '#1F6BE0',
-			'fill-end' => '#1857B8',
+			'accent'   => '#6FD3A5',
+			'fill'     => '#1E8E5A',
+			'fill-end' => '#17704A',
 			'on-fill'  => '#FFFFFF',
-			'deep'     => '#2A2029',
-			'current'  => '#8DB6F5',
+			'deep'     => '#14261E',
+			'current'  => '#6FD3A5',
 		),
 		'types'  => donphin_admin_menu_lead_types(),
 	);

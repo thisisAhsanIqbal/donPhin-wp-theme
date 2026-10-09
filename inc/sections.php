@@ -35,7 +35,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * menu       The header menu, used until a menu is assigned to the section in
  *            Appearance > Menus: array( label, path, optional screen reader label ).
  * cta        The header button: array( label, path, icon ), the icon being a file in
- *            assets/images/icons/ without its .svg (leave it off for a button without one).
+ *            assets/images/icons/ without its .svg (leave it off for a button without one),
+ *            or an empty array for no button.
  *
  * @return array
  */
@@ -48,15 +49,17 @@ function donphin_sections() {
 			'slug'       => '',
 			'aliases'    => array( 'for-you' ),
 			'pages'      => array(),
-			'templates'  => array(),
+			'templates'  => array( 'page-hr-tools.php' ),
 			'stylesheet' => '',
 			'fonts'      => '',
+			// The way into each side, and HR Tools, the library everyone can use. No button: booking
+			// and enquiring belong to each side's own header.
 			'menu'       => array(
-				array( 'About', '/speaking/about/' ),
-				array( 'Tools', '/free-tools/' ),
-				array( 'Contact', '/speaking/contact/' ),
+				array( 'Speaking', '/speaking/' ),
+				array( 'Private Counsel', '/private-counsel/' ),
+				array( 'HR Tools', '/hr-tools/' ),
 			),
-			'cta'        => array( 'Book Don', '/speaking/contact/', 'calendar' ),
+			'cta'        => array(),
 		),
 		'counsel'  => array(
 			'label'      => 'Private counsel',
@@ -292,7 +295,8 @@ add_action( 'after_setup_theme', 'donphin_register_section_menus' );
  * icon), otherwise from donphin_sections().
  *
  * @param string $key A key of donphin_sections().
- * @return array { links: array of array( label, url, aria label ), cta: array( label, url, icon ) }
+ * @return array { links: array of array( label, url, aria label ), cta: array( label, url, icon ),
+ *               or an empty array when the section has no button }
  */
 function donphin_section_menu( $key ) {
 	$sections = donphin_sections();
@@ -302,7 +306,7 @@ function donphin_section_menu( $key ) {
 	foreach ( $section['menu'] as $link ) {
 		$links[] = array( $link[0], home_url( $link[1] ), isset( $link[2] ) ? $link[2] : '' );
 	}
-	$cta = array( $section['cta'][0], home_url( $section['cta'][1] ), isset( $section['cta'][2] ) ? $section['cta'][2] : '' );
+	$cta = empty( $section['cta'] ) ? array() : array( $section['cta'][0], home_url( $section['cta'][1] ), isset( $section['cta'][2] ) ? $section['cta'][2] : '' );
 
 	$locations = get_nav_menu_locations();
 	$location  = 'section-' . $key;
@@ -313,7 +317,7 @@ function donphin_section_menu( $key ) {
 			foreach ( $items as $item ) {
 				if ( in_array( 'cta', (array) $item->classes, true ) ) {
 					// Its icon: a class "icon-{name}" on the item, or the section's own
-					$icon = $cta[2];
+					$icon = isset( $cta[2] ) ? $cta[2] : '';
 					foreach ( (array) $item->classes as $class ) {
 						if ( 0 === strpos( $class, 'icon-' ) ) {
 							$icon = substr( $class, 5 );

@@ -9,6 +9,46 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.18.0 (2026-10-10)
+
+### HR Tools: a library of its own, common to everyone
+- HR Tools is no longer part of Speaking. There are now three separate libraries:
+  - `/speaking/resources/`: Speaking's (its downloads, press photos and programs, plus an
+    empty library of its own for anything Speaking-only later, headed "More from Don")
+  - `/private-counsel/resources/`: Private Counsel's (unchanged)
+  - `/hr-tools/`: **HR Tools**, belonging to neither side (the For You section's library)
+- **HR Tools in the admin**: its own menu (All HR tools, Add HR tool, Tool categories), in the
+  site's ink and blue. **Leads** moves to green.
+- **The page** (`page-hr-tools.php`, `assets/css/hr-tools.css`): the heading and intro centred
+  on paper with a faint blue glow, how much is there (tools, categories, "Free to use"), then
+  the library with its search and category buttons. Each tool's page is
+  `/hr-tools/{tool}/`. All of it wears the For You header and the site's own ink and blue
+  (new For You colours in `resource-library.css` and `resource.css`).
+- On a tool's page: the way back reads "HR Tools", and the invitation is "Want help putting
+  these to work?", leading to the gateway, where the reader picks a side. Requests for a copy
+  go through Don's main (Speaking) form.
+- The For You header's "HR Resources" becomes **HR Tools**, linking to `/hr-tools/`.
+- **Tools › Move HR Tools** (`inc/hr-tools-move.php`) does the move once, showing everything
+  first. Every Speaking resource becomes an HR tool (words, document, label, order, status
+  kept), its old `/speaking/resources/{tool}/` address 301-redirects to the new one, the
+  8 categories move as they are (short names, icons, order), and the HR Tools page is created.
+  It waits until Counsel Resources has been set up from Speaking, and it leaves the menu once
+  done. Done on this site: 102 resources and 8 categories moved.
+- The starter list (`inc/resources-seed.php`) now belongs to HR Tools. "Set up from Speaking"
+  leaves the Tools menu once Counsel Resources has anything in it.
+
+## 1.17.3 (2026-10-10)
+
+### For You header: only what's common to both sides
+- The For You header (pages outside a side, the default 404) now offers the way into each
+  side and the HR library everyone can use: **Speaking**, **Private Counsel** and
+  **HR Resources** (the HR Tools library on Speaking Resources, `/speaking/resources/#dp-res-library`).
+- About, Tools and Contact are gone, and so is the Book Don button: booking and enquiring
+  belong to each side's own header. ("Tools" pointed at `/free-tools/`, a page that doesn't
+  exist.)
+- A section's header button is now optional: `'cta' => array()` in `donphin_sections()`
+  (or no item classed "cta" in its Appearance › Menus menu) leaves it out.
+
 ## 1.17.2 (2026-10-10)
 
 ### Admin: Leads in its own colours, and tidier

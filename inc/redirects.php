@@ -94,7 +94,7 @@ function donphin_find_page( $path ) {
 }
 
 /**
- * The published page (or blog post) that used to live at a path, from the addresses
+ * The published page (or blog post, or resource) that used to live at a path, from the addresses
  * remembered on them
  *
  * @param string $path A site path such as 'the-journey'.
@@ -103,7 +103,7 @@ function donphin_find_page( $path ) {
 function donphin_find_moved_page( $path ) {
 	$found = get_posts(
 		array(
-			'post_type'      => array_merge( array( 'page' ), donphin_blog_post_types() ),
+			'post_type'      => array_merge( array( 'page' ), donphin_blog_post_types(), donphin_resource_post_types() ),
 			'post_status'    => 'publish',
 			'meta_key'       => '_dp_old_path', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- only on requests for missing pages
 			'meta_value'     => trim( $path, '/' ), // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value

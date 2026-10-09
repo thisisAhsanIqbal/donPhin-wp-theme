@@ -1,0 +1,103 @@
+/*
+Theme: Don Phin, Esq.
+Page: HR Tools (page-hr-tools.php, at /hr-tools/)
+Description: The heading and intro on paper, centred, with a faint blue glow and how much
+is in the library; the library below it is in resource-library.css. In the site's own ink
+and blue (style.css), as HR Tools belongs to neither side.
+*/
+
+/* ==========================================================================
+   1. HERO (on paper: the label, the heading, the intro and the facts, centred)
+   ========================================================================== */
+.dp-hr-hero {
+  background:
+    radial-gradient(ellipse 60% 90% at 50% 0%, color-mix(in srgb, var(--dp-accent-light, #8DB6F5) 30%, transparent), transparent 70%),
+    var(--dp-paper, #F6F4F1);
+  border-bottom: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+}
+
+.dp-hr-hero-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: calc(820px + 2 * var(--dp-header-gutter, 7vw));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw) clamp(56px, 7vw, 96px);
+  text-align: center;
+}
+
+.dp-hr-hero .dp-hr-label {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--dp-accent, #1F6BE0);
+  margin: 0 0 18px 0;
+}
+
+.dp-hr-hero .dp-hr-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(42px, 5vw, 76px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  color: var(--dp-ink, #2A2029);
+  margin: 0;
+}
+
+.dp-hr-hero .dp-hr-intro {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(18px, 1.5vw, 22px);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 30em;
+  margin: 22px 0 0 0;
+}
+
+/* How much is there: three facts, ruled apart */
+.dp-hr-hero .dp-hr-facts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 0;
+  list-style: none;
+  margin: clamp(28px, 3vw, 40px) 0 0 0;
+  padding: 0;
+}
+
+.dp-hr-facts li {
+  margin: 0;
+  padding: 0 20px;
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--dp-text, #4A4A4A);
+  border-left: 1px solid var(--dp-rule, rgba(42, 32, 41, 0.14));
+}
+
+.dp-hr-facts li:first-child {
+  border-left: 0;
+}
+
+.dp-hr-facts strong {
+  font-family: var(--dp-font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--dp-ink, #2A2029);
+  margin-right: 4px;
+}
+
+/* Phones: the facts may wrap, so no rule at the start of a line */
+@media (max-width: 600px) {
+  .dp-hr-facts li {
+    padding: 0 12px;
+    border-left: 0;
+  }
+}

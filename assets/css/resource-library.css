@@ -1,10 +1,11 @@
 /*
 Theme: Don Phin, Esq.
 Part: A section's resource library (template-parts/resource-library.php), on each side's
-Resources page: the search, the category buttons, and each category's list.
-Description: One layout for every side, in that side's colours and shapes: the tokens
+Resources page and on HR Tools: the search, the category buttons, and each category's list.
+Description: One layout for every library, in its section's colours and shapes: the tokens
 below are set per section (Speaking: navy, blue and gold, rounded; Private Counsel: navy,
-bronze and cream, square). Loads after the section's palette (inc/enqueue.php).
+bronze and cream, square; HR Tools: ink, blue and paper, softly rounded). Loads after the
+section's palette (inc/enqueue.php).
 */
 
 /* ==========================================================================
@@ -38,6 +39,23 @@ bronze and cream, square). Loads after the section's palette (inc/enqueue.php).
   --dp-lib-card: var(--dp-private-counsel-cream);
   --dp-lib-text: var(--dp-private-counsel-text);
   --dp-lib-radius: 0;
+}
+
+/* HR Tools (For You, common to both sides): the site's own ink and blue, on paper, with
+   softly rounded corners between Speaking's pills and Private Counsel's squares */
+.foryou-header .dp-lib-section {
+  --dp-lib-ink: var(--dp-ink, #2A2029);
+  --dp-lib-link: var(--dp-accent, #1F6BE0);
+  --dp-lib-accent: var(--dp-accent-light, #8DB6F5);
+  --dp-lib-button: var(--dp-accent, #1F6BE0);
+  --dp-lib-on-accent: var(--dp-white, #FFFFFF);
+  --dp-lib-accent-hover: var(--dp-ink, #2A2029);
+  --dp-lib-on-accent-hover: var(--dp-white, #FFFFFF);
+  --dp-lib-bg: var(--dp-white, #FFFFFF);
+  --dp-lib-soft: var(--dp-paper, #F6F4F1);
+  --dp-lib-card: var(--dp-white, #FFFFFF);
+  --dp-lib-text: var(--dp-text, #4A4A4A);
+  --dp-lib-radius: 8px;
 }
 
 /* ==========================================================================

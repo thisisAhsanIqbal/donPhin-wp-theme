@@ -251,6 +251,10 @@ function donphin_resources_import_notice() {
 	if ( ! $side || ! donphin_resources_seed( $side ) ) {
 		return;
 	}
+	// HR Tools fills from Speaking's library (Tools > Move HR Tools), not from the starter list
+	if ( 'foryou' === $side && function_exists( 'donphin_hr_tools_move_pending' ) && donphin_hr_tools_move_pending() ) {
+		return;
+	}
 	$sides = donphin_resource_sides();
 	$count = wp_count_posts( $sides[ $side ]['post_type'] );
 	if ( array_sum( (array) $count ) > 0 ) {
@@ -364,6 +368,7 @@ function donphin_resource_page_templates() {
 	return array(
 		'page-speaking-resources.php' => 'speaking',
 		'page-counsel-resources.php'  => 'counsel',
+		'page-hr-tools.php'           => 'foryou',
 	);
 }
 

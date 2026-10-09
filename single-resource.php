@@ -94,7 +94,7 @@ while ( have_posts() ) :
 	<header class="dp-rd-hero">
 		<div class="dp-rd-hero-container">
 			<nav class="dp-rd-crumbs" aria-label="Breadcrumb">
-				<a href="<?php echo esc_url( $library . '#dp-res-library' ); ?>">Resources</a>
+				<a href="<?php echo esc_url( $library . '#dp-res-library' ); ?>"><?php echo esc_html( isset( $side['crumb'] ) ? $side['crumb'] : 'Resources' ); ?></a>
 				<?php if ( $category ) : ?>
 					<span aria-hidden="true">/</span>
 					<a href="<?php echo esc_url( $library . '#dp-lib-' . $category['term']->slug ); ?>"><?php echo esc_html( $category['title'] ); ?></a>
@@ -196,7 +196,7 @@ while ( have_posts() ) :
 				<div class="dp-rd-cta">
 					<p class="dp-rd-cta-title"><?php echo esc_html( $side['cta']['title'] ); ?></p>
 					<p class="dp-rd-cta-text"><?php echo esc_html( $side['cta']['text'] ); ?></p>
-					<a class="dp-arrow-link" href="<?php echo esc_url( home_url( $side['contact'] ) ); ?>">
+					<a class="dp-arrow-link" href="<?php echo esc_url( home_url( isset( $side['cta']['url'] ) ? $side['cta']['url'] : $side['contact'] ) ); ?>">
 						<?php echo esc_html( $side['cta']['label'] ); ?>
 						<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 					</a>

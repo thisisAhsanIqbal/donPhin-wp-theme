@@ -1,6 +1,6 @@
 <?php
 /**
- * The starter resources, imported once from Speaking Resources > Import (see
+ * The starter resources, imported once from HR Tools > Import (see
  * inc/resources-admin.php). Loaded only for the import; after it, the resources are
  * managed in the admin and this list is just a record of where they started.
  *
@@ -12,7 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * The Speaking library as it was first gathered, by category, for the one-time import
+ * The HR Tools library as it was first gathered (it began as the Speaking library), by
+ * category, for the one-time import
  *
  * A category: title, chip (its short name, on the filter buttons), line, icon (a key of
  * donphin_resource_icons()), and items. An item is its title, or an array with 'name'
@@ -20,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array
  */
-function donphin_resources_seed_speaking() {
+function donphin_resources_seed_foryou() {
 	return array(
 		'books'      => array(
 			'title' => 'Books & Excerpts',

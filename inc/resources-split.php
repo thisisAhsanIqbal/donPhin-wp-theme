@@ -447,6 +447,10 @@ function donphin_resources_split_category( $group, $index ) {
  */
 function donphin_resources_split_menu() {
 	$sides = donphin_resource_sides();
+	// Done once Counsel Resources has anything in it (the split's own notice says the same)
+	if ( array_sum( (array) wp_count_posts( $sides['counsel']['post_type'] ) ) > 0 && ! isset( $_POST['donphin_split_apply'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- checked on the page
+		return;
+	}
 	add_submenu_page(
 		donphin_admin_menu_grouped() ? 'tools.php' : 'edit.php?post_type=' . $sides['counsel']['post_type'],
 		__( 'Set up from Speaking', 'don-phin-esq' ),

@@ -30,9 +30,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * icon       The admin menu's dashicon.
  * contact    Where requests for a copy go.
  * cta        The invitation beside each resource: title, text, and the button's label
- *            (the button leads to contact).
+ *            (the button leads to contact, or to its own 'url' if it has one).
  * library    The library's heading and intro on the section's Resources page, until
  *            they're changed in the page's "Resource library" box.
+ * crumb      Optional: the way back from a resource to its library ("Resources").
+ * menu       Optional: the library's items in the admin menu (inc/admin-menu.php): the
+ *            list, "Add" and categories ("Resources", "Add resource", "Resource categories").
+ *
+ * Speaking and Private Counsel each have their own; HR Tools belongs to neither side: it
+ * is the For You section's, common to everyone, with its own page at /hr-tools/
+ * (page-hr-tools.php).
  *
  * @return array
  */
@@ -51,9 +58,11 @@ function donphin_resource_sides() {
 				'text'  => 'Don brings these ideas to life on stage, for sales meetings, leadership retreats and conferences.',
 				'label' => 'Book Don',
 			),
+			// Speaking's own library, empty since HR Tools became a library of its own
+			// (below): it shows on the Resources page once something is added to it
 			'library'   => array(
-				'heading' => 'HR Tools',
-				'intro'   => 'I have created a great deal of content related to the workplace. Some of it may benefit you!',
+				'heading' => 'More from Don',
+				'intro'   => '',
 			),
 		),
 		'counsel'  => array(
@@ -72,6 +81,29 @@ function donphin_resource_sides() {
 			'library'   => array(
 				'heading' => 'Resources', // A placeholder until Don names it
 				'intro'   => '',
+			),
+		),
+		// HR Tools: common to everyone, part of neither side
+		'foryou'   => array(
+			'post_type' => 'dp_hr_tool',
+			'taxonomy'  => 'dp_hr_tool_cat',
+			'base'      => 'hr-tools',
+			'name'      => 'HR Tools',
+			'singular'  => 'HR Tool',
+			'icon'      => 'dashicons-portfolio',
+			// Requests for a copy reach Don's office through its main form (Speaking's)
+			'contact'   => '/speaking/contact/',
+			'crumb'     => 'HR Tools',
+			'menu'      => array( 'All HR tools', 'Add HR tool', 'Tool categories' ),
+			'cta'       => array(
+				'title' => 'Want help putting these to work?',
+				'text'  => 'Don speaks to teams about the people side of business, and works one to one with leaders.',
+				'label' => 'See how Don can help',
+				'url'   => '/', // The gateway: the reader chooses the side
+			),
+			'library'   => array(
+				'heading' => 'HR Tools',
+				'intro'   => 'I have created a great deal of content related to the workplace. Some of it may benefit you!',
 			),
 		),
 	);

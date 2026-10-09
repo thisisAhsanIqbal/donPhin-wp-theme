@@ -34,6 +34,19 @@ section's palette (inc/enqueue.php).
   --dp-rd-text: var(--dp-private-counsel-text);
 }
 
+/* HR Tools (For You, common to both sides): the site's own ink, blue and paper */
+.foryou-header .dp-rd {
+  --dp-rd-deep: var(--dp-ink, #2A2029);
+  --dp-rd-lift: var(--dp-accent, #1F6BE0);
+  --dp-rd-accent: var(--dp-accent-light, #8DB6F5);
+  --dp-rd-button: var(--dp-accent, #1F6BE0);
+  --dp-rd-on-accent: var(--dp-white, #FFFFFF);
+  --dp-rd-accent-hover: var(--dp-accent-light, #8DB6F5);
+  --dp-rd-on-accent-hover: var(--dp-ink, #2A2029);
+  --dp-rd-paper: var(--dp-paper, #F6F4F1);
+  --dp-rd-text: var(--dp-text, #4A4A4A);
+}
+
 /* ==========================================================================
    1. HERO (on the deep band: the way back, the title, and the download)
    ========================================================================== */
