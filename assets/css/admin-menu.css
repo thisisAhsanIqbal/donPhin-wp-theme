@@ -1,0 +1,168 @@
+/*
+Theme: Don Phin, Esq.
+Page: The admin (inc/admin-menu.php)
+Description: Each side of the site in its own colours in the admin menu, so it's clear at a
+glance which side you're working on. The colours are set per side by inc/admin-menu.php
+(--dp-am-accent, -fill, -fill-end, -on-fill, -deep, -current) on the side's menu item and
+on the body of its screens; this file only says where they go:
+- always: a stripe down the item's edge and the icon in the side's accent, so the sides
+  read apart even while closed (and no closed side looks chosen)
+- hovered: a faint wash of the accent
+- open: the side's colour across its bar, its list on the side's dark ground with the
+  accent stripe carried down, and the item you're on marked in the side's highlight; the
+  blog's items and the library's are set apart by a hairline
+- each of its screens: the side's name as a small tag before the title, and a line of
+  its colour along the top of the editor
+Everything else in the menu keeps the admin colour scheme chosen in the user's profile.
+*/
+
+/* ==========================================================================
+   1. ALWAYS: THE STRIPE AND THE ICON
+   ========================================================================== */
+#adminmenu li.menu-top.dp-am-side > a.menu-top {
+  box-shadow: inset 3px 0 0 var(--dp-am-accent);
+  transition: background-color 0.15s ease;
+}
+
+#adminmenu li.menu-top.dp-am-side div.wp-menu-image::before,
+#adminmenu li.menu-top.dp-am-side:hover div.wp-menu-image::before,
+#adminmenu li.menu-top.dp-am-side.opensub div.wp-menu-image::before,
+#adminmenu li.menu-top.dp-am-side > a.menu-top:focus div.wp-menu-image::before {
+  color: var(--dp-am-accent);
+}
+
+/* A count on the item itself (Leads' unread enquiries): in the accent, and in white on
+   the colour once the menu's open */
+#adminmenu li.menu-top.dp-am-side > a.menu-top .awaiting-mod {
+  color: var(--dp-am-deep);
+  background-color: var(--dp-am-accent);
+}
+
+#adminmenu li.menu-top.dp-am-side.wp-has-current-submenu > a.menu-top .awaiting-mod {
+  color: var(--dp-am-fill-end);
+  background-color: var(--dp-am-on-fill);
+}
+
+/* ==========================================================================
+   2. HOVERED (WHILE CLOSED): A WASH OF THE ACCENT
+   ========================================================================== */
+#adminmenu li.menu-top.dp-am-side:hover > a.menu-top,
+#adminmenu li.menu-top.dp-am-side.opensub > a.menu-top,
+#adminmenu li.menu-top.dp-am-side > a.menu-top:focus {
+  color: #FFFFFF;
+  background-color: color-mix(in srgb, var(--dp-am-accent) 18%, #1D2327);
+}
+
+/* ==========================================================================
+   3. OPEN: THE SIDE'S COLOUR ACROSS ITS BAR, ITS LIST ON ITS DARK GROUND
+   ========================================================================== */
+#adminmenu li.menu-top.dp-am-side.wp-has-current-submenu > a.wp-has-current-submenu,
+#adminmenu li.menu-top.dp-am-side.wp-has-current-submenu:hover > a.wp-has-current-submenu {
+  font-weight: 600;
+  color: var(--dp-am-on-fill);
+  background: linear-gradient(90deg, var(--dp-am-fill), var(--dp-am-fill-end));
+  box-shadow: none;
+}
+
+#adminmenu li.menu-top.dp-am-side.wp-has-current-submenu div.wp-menu-image::before {
+  color: var(--dp-am-on-fill);
+}
+
+/* The list: open in place, or flying out from a closed side */
+#adminmenu li.dp-am-side .wp-submenu,
+#adminmenu li.dp-am-side.wp-has-current-submenu .wp-submenu,
+#adminmenu li.dp-am-side.wp-has-current-submenu.opensub .wp-submenu {
+  background-color: var(--dp-am-deep);
+}
+
+#adminmenu li.dp-am-side.wp-has-current-submenu .wp-submenu {
+  box-shadow: inset 3px 0 0 var(--dp-am-accent);
+}
+
+/* The little pointer beside a flying-out list takes its colour too */
+#adminmenu li.dp-am-side.wp-has-submenu.wp-not-current-submenu.opensub:hover::after,
+#adminmenu li.dp-am-side.wp-has-submenu.wp-not-current-submenu:focus-within::after {
+  border-right-color: var(--dp-am-deep);
+}
+
+#adminmenu li.dp-am-side .wp-submenu a {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+#adminmenu li.dp-am-side .wp-submenu a:hover,
+#adminmenu li.dp-am-side .wp-submenu a:focus {
+  color: var(--dp-am-current);
+}
+
+/* The item you're on: in white, with the highlight down its edge */
+#adminmenu li.dp-am-side .wp-submenu li.current a,
+#adminmenu li.dp-am-side .wp-submenu li.current a:hover,
+#adminmenu li.dp-am-side .wp-submenu li.current a:focus {
+  font-weight: 600;
+  color: #FFFFFF;
+  box-shadow: inset 3px 0 0 var(--dp-am-current);
+}
+
+/* A closed menu's list, flying out on hover, widens to its longest item (with its count)
+   rather than wrapping it */
+#adminmenu li.dp-am-side.wp-not-current-submenu .wp-submenu {
+  width: max-content;
+  min-width: 160px;
+}
+
+#adminmenu li.dp-am-side.wp-not-current-submenu .wp-submenu a {
+  white-space: nowrap;
+}
+
+/* A count beside an item sits at its end, on its line, however long the name */
+#adminmenu li.dp-am-side .wp-submenu a:has(.awaiting-mod) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+#adminmenu li.dp-am-side .wp-submenu a .awaiting-mod {
+  flex-shrink: 0;
+  margin-left: 0;
+  color: var(--dp-am-deep);
+  background-color: var(--dp-am-current);
+}
+
+/* The library's items, set apart from the blog's by a hairline (the sides, not Leads) */
+#adminmenu li.dp-am-side:not(.dp-am-side-leads) .wp-submenu li:not(.wp-first-item):has(> a[href^="edit.php?post_type="]) {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   4. EACH OF THE SIDE'S SCREENS: ITS NAME BEFORE THE TITLE
+   ========================================================================== */
+body.dp-admin-side #wpbody-content .wrap > h1:first-of-type::before {
+  content: var(--dp-am-label);
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 4px 11px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: 4px;
+  color: var(--dp-am-on-fill);
+  background: linear-gradient(90deg, var(--dp-am-fill), var(--dp-am-fill-end));
+  border-radius: 999px;
+}
+
+/* The block editor has no such title: a line of the side's colour along its top instead */
+body.dp-admin-side .editor-header,
+body.dp-admin-side .edit-post-header {
+  box-shadow: inset 0 3px 0 var(--dp-am-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #adminmenu li.menu-top.dp-am-side > a.menu-top {
+    transition: none;
+  }
+}

@@ -9,6 +9,62 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.17.2 (2026-10-10)
+
+### Admin: Leads in its own colours, and tidier
+- Leads is coloured like the sides, in the site's own blue and ink (the header's): a light
+  blue stripe and icon, a blue bar when open, its list on ink, and a "Leads" tag on its
+  screens.
+- Its lists are named "Speaking enquiries" and "Counsel enquiries" (each side has a short
+  name in `donphin_admin_menu_sides()`).
+- Counts sit at the end of their item's line, in the menu's highlight, instead of wrapping
+  under it. A closed menu's list flying out on hover widens to its longest item.
+- One list of coloured menus (`donphin_admin_menu_colored()`: the sides, then Leads) now
+  drives the menu's classes, its colours and the tags on its screens.
+
+## 1.17.1 (2026-10-10)
+
+### Admin: each side in its own colours (`assets/css/admin-menu.css`)
+- Always: a stripe down the edge of each side's menu item and its icon in the side's
+  accent (Speaking orange, Private Counsel bronze). The sides read apart while closed, and
+  no closed side looks chosen.
+- Hovered: a faint wash of the accent.
+- Open: the side's colour across its bar (an orange or bronze gradient), its list on the
+  side's dark ground (Speaking's deep navy, Private Counsel's navy) with the stripe carried
+  down, and the item you're on in white with the side's highlight (teal, or light bronze)
+  down its edge. A hairline sets the library's items apart from the blog's.
+- Each of the side's screens: the side's name as a small tag before the title, and a line of
+  its colour along the top of the block editor.
+- The colours sit with each side in `donphin_admin_menu_sides()`. Items are marked through
+  WordPress's `add_menu_classes` filter, so a new side needs only its colours. Leads and the
+  rest of the menu keep the admin colour scheme chosen in each user's profile.
+
+## 1.17.0 (2026-10-10)
+
+### Admin: the menu grouped by side (`inc/admin-menu.php`)
+- **Speaking** and **Private Counsel** each have one menu: Blog posts, Add blog post, Blog
+  categories, Resources, Add resource, Resource categories. They replace the four separate
+  items (Speaking Resources, Counsel Resources, Speaking Blog, Counsel Blog). The sides come
+  from `donphin_blog_sides()` and `donphin_resource_sides()`, so a new side gets its menu with
+  no change to this file.
+- **Leads** holds All enquiries, Enquiries: Speaking, Enquiries: Private Counsel (filtered by
+  the form each came from) and Toolkit sign-ups. A badge counts enquiries nobody has opened,
+  and each unopened one is marked "New" in the list. Opening it marks it read.
+- Order: Dashboard, Speaking, Private Counsel, Leads, Pages, Media, then the rest as before
+  (plugins' menus keep their places).
+- **Posts** is hidden while it holds only WordPress's sample post. It returns by itself, with
+  its "Move to …" links, if anything else lands there. "+ New › Post" and Quick Draft go with it.
+- **Comments are off**: closed everywhere, no pingbacks, existing ones not shown, the menu
+  and the toolbar bubble gone.
+- **Set up from Speaking** (the one-time split of the library) moves under Tools.
+- Built only on WordPress's own menu APIs (`show_in_menu`, `add_menu_page`, `add_submenu_page`,
+  `parent_file`, `submenu_file`, `menu_order`). Every screen keeps its address. Switches:
+  `define( 'DONPHIN_DEFAULT_ADMIN_MENU', true );` in `wp-config.php` (or the
+  `donphin_group_admin_menu` filter) restores the default menu, and the `donphin_comments_off`
+  filter turns comments back on.
+- Each side's blog now registers just before its library (`init`, priority 9), so the blog
+  comes first in the side's menu.
+
 ## 1.16.3 (2026-10-10)
 
 ### Speaking blog: the card about Don

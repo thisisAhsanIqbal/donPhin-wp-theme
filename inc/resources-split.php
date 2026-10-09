@@ -442,12 +442,13 @@ function donphin_resources_split_category( $group, $index ) {
 }
 
 /**
- * The page under Counsel Resources
+ * The page under Counsel Resources, or under Tools once the admin menu is grouped by side
+ * (inc/admin-menu.php): it is a one-time step, so it stays out of the side's own menu
  */
 function donphin_resources_split_menu() {
 	$sides = donphin_resource_sides();
 	add_submenu_page(
-		'edit.php?post_type=' . $sides['counsel']['post_type'],
+		donphin_admin_menu_grouped() ? 'tools.php' : 'edit.php?post_type=' . $sides['counsel']['post_type'],
 		__( 'Set up from Speaking', 'don-phin-esq' ),
 		__( 'Set up from Speaking', 'don-phin-esq' ),
 		'manage_options',
@@ -579,7 +580,7 @@ function donphin_resources_split_notice() {
 	printf(
 		'<div class="notice notice-info"><p><strong>%s</strong> <a href="%s">%s</a></p></div>',
 		esc_html__( 'Counsel Resources is empty.', 'don-phin-esq' ),
-		esc_url( admin_url( 'edit.php?post_type=' . $sides['counsel']['post_type'] . '&page=donphin-resources-split' ) ),
+		esc_url( menu_page_url( 'donphin-resources-split', false ) ),
 		esc_html__( 'Set it up from Speaking Resources (shows every change first) →', 'don-phin-esq' )
 	);
 }

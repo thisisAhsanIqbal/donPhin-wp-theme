@@ -188,7 +188,8 @@ function donphin_register_blogs() {
 		);
 	}
 }
-add_action( 'init', 'donphin_register_blogs' );
+// Before the libraries (priority 10), so each side's blog comes first in its admin menu
+add_action( 'init', 'donphin_register_blogs', 9 );
 
 /**
  * Refresh WordPress's addresses when the blogs change (a section added, a base moved),
