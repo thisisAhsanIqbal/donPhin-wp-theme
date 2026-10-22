@@ -366,9 +366,8 @@ add_action( 'admin_post_donphin_import_resources', 'donphin_resources_import' );
  */
 function donphin_resource_page_templates() {
 	return array(
-		'page-speaking-resources.php' => 'speaking',
-		'page-counsel-resources.php'  => 'counsel',
-		'page-hr-tools.php'           => 'foryou',
+		'page-counsel-resources.php' => 'counsel',
+		'page-hr-tools.php'          => 'foryou',
 	);
 }
 

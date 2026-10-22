@@ -392,30 +392,6 @@ function donphin_resource_library( $side ) {
 }
 
 /**
- * The two interactive web tools, shown as cards on the Speaking Resources page
- *
- * Each: name, line, icon (24x24 SVG insides), url ('' until the tool is live).
- *
- * @return array
- */
-function donphin_resource_tools() {
-	return array(
-		array(
-			'name' => 'Employee Turnover Cost Calculator',
-			'line' => 'Put a number on what it costs every time someone walks out the door.',
-			'icon' => '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11.01"/><line x1="12" y1="11" x2="12" y2="11.01"/><line x1="16" y1="11" x2="16" y2="11.01"/><line x1="8" y1="15" x2="8" y2="15.01"/><line x1="12" y1="15" x2="12" y2="15.01"/><line x1="16" y1="15" x2="16" y2="18"/><line x1="8" y1="18" x2="12" y2="18"/>',
-			'url'  => '',
-		),
-		array(
-			'name' => 'Engagement & Retention Program Planner',
-			'line' => 'Build the program that keeps your best people, one step at a time.',
-			'icon' => '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/>',
-			'url'  => '',
-		),
-	);
-}
-
-/**
  * The heading or intro of a Resources page's library: as set in the page's "Resource
  * library" box (inc/resources-admin.php), or the section's own
  *

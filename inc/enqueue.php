@@ -26,8 +26,8 @@ function donphin_template_assets() {
 		'page-speaking-about.php'              => array( 'css' => array( 'about' ) ),
 		'page-speaking-contact.php'            => array( 'css' => array( 'contact' ) ),
 		'page-speaking-resources.php'          => array(
-			'css' => array( 'resource-library', 'speaking-resources' ),
-			'js'  => array( 'resource-library' ),
+			'css' => array( 'speaking-resources' ),
+			'js'  => array( 'video' ),
 		),
 		'page-counsel-resources.php'           => array(
 			'css' => array( 'resource-library', 'counsel-resources' ),

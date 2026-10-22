@@ -9,6 +9,30 @@ Every change to the theme bumps its version in `style.css` and gets an entry her
 Assets (CSS and JS) don't need a version bump to refresh in browsers: each file is
 versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php`).
 
+## 1.19.0 (2026-10-23)
+
+### Speaking Resources: Sales on Stage™ only
+- /speaking/resources/ is now given over to Sales on Stage™, to support paid speaking. The HR
+  material is gone from it: the hiring and retention guide, The Emotional Edge and the
+  Stories guide, the 40//40 feature, the two calculators/planners and the HR library (all of
+  it lives on HR Tools). `donphin_resource_tools()` went with them, and the page no longer has
+  a "Resource library" box in the admin.
+- A new hero, set as a stage: deep navy under a teal spotlight, the heading and intro in
+  Don's words on the left ("Except the outcome." as the punchline, in orange), Don on stage
+  on the right with the one-sheet, field guide and book fanned over the photo's corner, and
+  an index of the page's four sections along its foot (a two-by-two grid of tiles on tablets
+  and phones). On phones the call to action keeps to one line, and the book's drawn cover is
+  sized so its title stays inside its frame.
+- Under it, For Meeting Planners (Speaker One-Sheet, Speaker
+  Bio, Speaker Photos, Speaking Video, with the photos on navy below), the Sales on Stage™
+  book, Worksheets & Field Guide, and Articles, Interviews & Additional Resources.
+- "Discuss Your Sales Conference" (to the Speaking contact page) near the top, under the
+  meeting planners' cards, and on a navy band at the foot.
+- Nothing is made up: a resource that isn't approved yet shows "Coming soon", and becomes a
+  direct download (no form) once its file is added. The files it looks for are listed at the
+  top of `page-speaking-resources.php`; the video, the book's "Learn more" link and the
+  articles are set there too. Until the book's cover is added it's drawn, as the cards are.
+
 ## 1.18.5 (2026-10-10)
 
 ### Resources: a resource's page lines up with the header, and a new hero ground

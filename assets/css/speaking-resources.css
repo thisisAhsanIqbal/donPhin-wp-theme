@@ -1,10 +1,10 @@
 /*
 Theme: Don Phin, Esq.
 Page: Speaking — Resources (page-speaking-resources.php, at /speaking/resources/)
-Description: The ideas to take away, in the Speaking palette: the intro on paper, Don's line
-on a navy band, the downloads as gold-edged cards each with a drawn cover, press photos on deep navy, and
-the tools and programs (the book featured on navy, then the two web tools). The library
-(HR Tools) below them is styled in resource-library.css. Loads after speaking.css (inc/enqueue.php), whose colours and labels it uses.
+Description: Sales on Stage resources, in the Speaking palette: the intro on a spotlit navy stage
+with the speaker reel, the call to action and the page index, the story and the takeaways, about Don, the meeting planners' and the worksheets' downloads as gold-edged cards each with a
+drawn cover, speaker photos on deep navy, the book featured on navy, the articles, and the call to
+action again on a navy band. Loads after speaking.css (inc/enqueue.php), whose colours and labels it uses.
 */
 
 /* ==========================================================================
@@ -44,7 +44,7 @@ the tools and programs (the book featured on navy, then the two web tools). The 
   color: var(--dp-speaking-teal);
 }
 
-/* Gold button with navy type; orange on hover, as everywhere gold on this section */
+/* The orange button with dark type, in sentence case to be read at a glance; navy on hover */
 a.dp-res-button {
   font-family: var(--dp-font-family) !important;
   display: inline-flex;
@@ -55,10 +55,9 @@ a.dp-res-button {
   height: 48px;
   margin-top: auto;
   padding: 0 24px;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
   line-height: 1;
   white-space: nowrap;
   color: var(--dp-speaking-deep);
@@ -90,46 +89,399 @@ a.dp-res-button:focus-visible svg {
   transform: translateX(4px);
 }
 
+/* "Discuss Your Sales Conference" and "Book Don…": the same button, a size up */
+a.dp-res-button--cta {
+  align-self: center;
+  height: 58px;
+  margin-top: clamp(28px, 3vw, 40px);
+  padding: 0 30px;
+  font-size: 18px;
+}
+
+.dp-res-cta {
+  display: flex;
+  justify-content: center;
+}
+
+/* A resource not ready yet: where its button will be */
+.dp-res-soon {
+  font-family: var(--dp-font-family);
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  box-sizing: border-box;
+  height: 48px;
+  margin-top: auto;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: color-mix(in srgb, var(--dp-speaking-navy) 75%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--dp-speaking-navy) 35%, transparent);
+}
+
+.dp-res-soon--light {
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 85%, transparent);
+  border-color: color-mix(in srgb, var(--dp-white, #FFFFFF) 40%, transparent);
+}
+
+.dp-res-head .dp-res-head-line {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 34em;
+  margin: 14px auto 0;
+}
+
 /* ==========================================================================
-   1. INTRO (centred on paper)
+   1. INTRO (the stage: deep navy under a spotlight, the title and promise on the left, the
+      speaker reel on the right with the resources fanned over its corner, then the page's index)
    ========================================================================== */
 .dp-res-intro {
-  background-color: var(--dp-speaking-paper);
+  position: relative;
+  overflow: hidden;
+  color: var(--dp-white, #FFFFFF);
+  background:
+    radial-gradient(ellipse 38% 70% at 68% -8%, color-mix(in srgb, var(--dp-speaking-teal) 24%, transparent), color-mix(in srgb, var(--dp-speaking-teal) 0%, transparent) 70%),
+    radial-gradient(ellipse 60% 50% at 0% 100%, color-mix(in srgb, var(--dp-speaking-blue) 35%, transparent), color-mix(in srgb, var(--dp-speaking-blue) 0%, transparent) 70%),
+    linear-gradient(180deg, var(--dp-speaking-navy) 0%, var(--dp-speaking-deep) 100%);
 }
 
 .dp-res-intro-container {
   box-sizing: border-box;
-  max-width: calc(760px + 2 * var(--dp-header-gutter, 7vw));
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: center;
+  gap: clamp(40px, 5vw, 96px);
+  max-width: 1600px;
   margin: 0 auto;
-  padding: clamp(64px, 8vw, 120px) var(--dp-header-gutter, 7vw) clamp(56px, 6vw, 88px);
-  text-align: center;
+  /* Same gutter as the header, so the label lines up with the logo */
+  padding: clamp(56px, 6vw, 104px) var(--dp-header-gutter, 7vw) clamp(64px, 7vw, 120px);
 }
 
 .dp-res-intro .dp-speak-label {
+  color: var(--dp-speaking-teal);
   margin-bottom: 18px;
 }
 
 .dp-res-intro .dp-res-title {
   font-family: var(--dp-font-serif) !important;
-  font-size: clamp(38px, 4.4vw, 68px);
-  font-weight: 500;
-  line-height: 1.04;
+  font-size: clamp(40px, 4.6vw, 76px);
+  line-height: 1;
   letter-spacing: -0.025em;
-  color: var(--dp-speaking-navy);
-  margin: 0 0 22px 0;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0 0 clamp(18px, 1.6vw, 24px) 0;
 }
 
-.dp-res-intro .dp-res-lead {
+/* The book's subtitle on its own lines under the name, lighter, smaller and in teal */
+.dp-res-intro .dp-res-title-accent {
+  display: block;
+  margin-top: 0.3em;
+  font-size: 0.5em;
+  font-style: italic;
+  line-height: 1.15;
+  text-wrap: balance;
+  color: var(--dp-speaking-teal);
+}
+
+.dp-res-intro .dp-res-tagline {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(20px, 1.7vw, 26px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-wrap: balance;
+  color: var(--dp-white, #FFFFFF);
+  max-width: 24em;
+  margin: 0 0 clamp(24px, 2.4vw, 36px) 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--dp-speaking-orange);
+}
+
+.dp-res-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  margin-top: clamp(28px, 3vw, 40px);
+}
+
+.dp-res-intro-actions a.dp-res-button--cta {
+  margin-top: 0;
+}
+
+/* On navy, the button turns white on hover rather than navy */
+.dp-res-intro a.dp-res-button:hover,
+.dp-res-intro a.dp-res-button:focus-visible {
+  color: var(--dp-speaking-navy);
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+a.dp-res-intro-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--dp-font-family);
-  font-size: clamp(17px, 1.3vw, 19px);
-  line-height: 1.65;
-  color: var(--dp-text, #4A4A4A);
-  max-width: 32em;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--dp-white, #FFFFFF);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--dp-white, #FFFFFF) 35%, transparent);
+  text-underline-offset: 6px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a.dp-res-intro-link svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(90deg);
+}
+
+a.dp-res-intro-link:hover,
+a.dp-res-intro-link:focus-visible {
+  color: var(--dp-speaking-teal);
+  text-decoration-color: currentColor;
+}
+
+/* The reel: framed, with a teal outline set off behind it */
+.dp-res-intro-stage {
+  position: relative;
+  margin: 0 clamp(24px, 3vw, 48px) clamp(24px, 3vw, 48px) 0;
+}
+
+.dp-res-intro-stage::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * clamp(14px, 1.4vw, 22px)) calc(-1 * clamp(14px, 1.4vw, 22px)) clamp(14px, 1.4vw, 22px) clamp(14px, 1.4vw, 22px);
+  z-index: 0;
+  border: 1px solid color-mix(in srgb, var(--dp-speaking-teal) 55%, transparent);
+  pointer-events: none;
+}
+
+.dp-res-reel {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 40px 80px -30px color-mix(in srgb, black 60%, transparent);
+}
+
+/* The three covers, hanging off the reel's bottom-right corner: low enough to stay clear
+   of Don's face in the still, and of its play badge */
+.dp-res-intro-fan {
+  position: absolute;
+  z-index: 2;
+  right: calc(-1 * clamp(24px, 3vw, 48px));
+  bottom: calc(-1 * clamp(56px, 6vw, 96px));
+  pointer-events: none;
+  width: clamp(96px, 8vw, 128px);
+  aspect-ratio: 3 / 4.2;
+}
+
+.dp-res-intro-fan .dp-res-cover {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  padding: 12px 10px 10px 16px;
+  transform-origin: 50% 100%;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.dp-res-intro-fan .dp-res-cover-title {
+  font-size: clamp(10px, 0.85vw, 13px);
+}
+
+.dp-res-intro-fan .dp-res-cover-kind,
+.dp-res-intro-fan .dp-res-cover-by {
+  font-size: 8px;
+}
+
+.dp-res-intro-fan .dp-res-cover:nth-child(1) {
+  transform: translateX(-46%) rotate(-12deg);
+}
+
+.dp-res-intro-fan .dp-res-cover:nth-child(2) {
+  transform: translateX(-14%) rotate(-2deg);
+}
+
+.dp-res-intro-fan .dp-res-cover:nth-child(3) {
+  transform: translateX(16%) rotate(10deg);
+}
+
+.dp-res-intro-stage:hover .dp-res-intro-fan .dp-res-cover:nth-child(1) {
+  transform: translateX(-58%) rotate(-16deg);
+}
+
+.dp-res-intro-stage:hover .dp-res-intro-fan .dp-res-cover:nth-child(3) {
+  transform: translateX(26%) rotate(14deg);
+}
+
+/* The page's index: four numbered links along the foot of the stage */
+.dp-res-index {
+  position: relative;
+  border-top: 1px solid color-mix(in srgb, var(--dp-white, #FFFFFF) 12%, transparent);
+  background-color: color-mix(in srgb, var(--dp-speaking-deep) 70%, transparent);
+}
+
+.dp-res-index-list {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1600px;
   margin: 0 auto;
+  padding: 0 var(--dp-header-gutter, 7vw);
+  list-style: none;
+}
+
+.dp-res-index-list li {
+  margin: 0;
+}
+
+.dp-res-index-list li + li a {
+  border-left: 1px solid color-mix(in srgb, var(--dp-white, #FFFFFF) 12%, transparent);
+}
+
+.dp-res-index-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 22px clamp(14px, 1.6vw, 24px);
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 82%, transparent);
+  text-decoration: none;
+  box-shadow: inset 0 3px 0 transparent;
+  transition: color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dp-res-index-list li:first-child a {
+  padding-left: 0;
+}
+
+.dp-res-index-num {
+  font-family: var(--dp-font-serif);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--dp-speaking-teal);
+}
+
+.dp-res-index-list a:hover,
+.dp-res-index-list a:focus-visible {
+  color: var(--dp-white, #FFFFFF);
+  box-shadow: inset 0 3px 0 var(--dp-speaking-orange);
+}
+
+/* The sections the index leads to stop clear of the header */
+#dp-res-planners,
+#dp-res-photos,
+#dp-res-book,
+#dp-res-worksheets,
+#dp-res-about,
+#dp-res-articles {
+  scroll-margin-top: var(--dp-header-height, 68px);
+}
+
+@media (max-width: 991px) {
+  .dp-res-intro-container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-intro-stage {
+    max-width: 640px;
+    width: calc(100% - clamp(24px, 3vw, 48px));
+  }
+
+  /* Kept inside the screen: the fan ends at the reel's edge, not past it */
+  .dp-res-intro-fan {
+    right: 8px;
+  }
+
+}
+
+@media (max-width: 560px) {
+  .dp-res-intro-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dp-res-intro-actions a.dp-res-button--cta {
+    justify-content: center;
+  }
+
+  a.dp-res-intro-link {
+    justify-content: center;
+  }
+
+  .dp-res-intro-fan {
+    right: 4px;
+    bottom: -44px;
+    width: 76px;
+  }
+
+  .dp-res-intro-stage {
+    margin-bottom: 48px;
+  }
+}
+
+/* Tablets and phones: the index as a two-by-two grid of tiles, ruled between them */
+@media (max-width: 991px) {
+  .dp-res-index-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 0;
+  }
+
+  .dp-res-index-list li a,
+  .dp-res-index-list li + li a,
+  .dp-res-index-list li:first-child a {
+    padding: 18px 20px;
+    border: 0;
+  }
+
+  .dp-res-index-list li:nth-child(odd) a {
+    padding-left: var(--dp-header-gutter, 7vw);
+  }
+
+  .dp-res-index-list li:nth-child(even) a {
+    border-left: 1px solid color-mix(in srgb, var(--dp-white, #FFFFFF) 12%, transparent);
+  }
+
+  .dp-res-index-list li:nth-child(n + 3) a {
+    border-top: 1px solid color-mix(in srgb, var(--dp-white, #FFFFFF) 12%, transparent);
+  }
+}
+
+/* Phones: the number over its name, so a long name wraps under itself */
+@media (max-width: 560px) {
+  .dp-res-index-list a {
+    flex-direction: column;
+    gap: 4px;
+    font-size: 14px;
+  }
+
+  .dp-res-index-list li a,
+  .dp-res-index-list li + li a,
+  .dp-res-index-list li:first-child a {
+    padding: 16px 16px 16px 18px;
+  }
+
+  .dp-res-index-list li:nth-child(odd) a {
+    padding-left: var(--dp-header-gutter, 7vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dp-res-intro-fan .dp-res-cover,
+  .dp-res-index-list a,
+  a.dp-res-intro-link {
+    transition: none;
+  }
 }
 
 /* ==========================================================================
-   2. DON'S LINE (on the navy band, the punchline in gold)
+   2. THE CLOSING BAND (navy, the punchline in gold, the call to action under it)
    ========================================================================== */
 .dp-res-quote {
   background:
@@ -162,8 +514,25 @@ a.dp-res-button:focus-visible svg {
   color: var(--dp-speaking-teal);
 }
 
+.dp-res-closing .dp-res-quote-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* On navy, the button turns to white on hover rather than to navy */
+.dp-res-closing a.dp-res-button:hover,
+.dp-res-closing a.dp-res-button:focus-visible {
+  color: var(--dp-speaking-navy);
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-res-closing a.dp-res-button:focus-visible {
+  outline-color: var(--dp-speaking-teal);
+}
+
 /* ==========================================================================
-   3. DOWNLOADS AND TOOLS (gold-edged cards with drawn covers; the featured book, then the web tools)
+   3. DOWNLOADS, THE BOOK AND ARTICLES (gold-edged cards with drawn covers; the featured book)
    ========================================================================== */
 .dp-res-downloads,
 .dp-res-tools {
@@ -210,7 +579,7 @@ a.dp-res-button:focus-visible svg {
 .dp-res-card .dp-res-card-sub {
   font-family: var(--dp-font-serif);
   font-size: 16px;
-  font-style: italic;
+  font-weight: 600;
   line-height: 1.45;
   color: color-mix(in srgb, var(--dp-speaking-navy) 72%, transparent);
   margin: 0 0 16px 0;
@@ -326,7 +695,7 @@ a.dp-res-button:focus-visible svg {
   opacity: 1;
 }
 
-/* The 40//40 Solution, featured across the width on navy, the book breaking out of its top */
+/* The book, featured across the width on navy, its cover breaking out of the top */
 .dp-res-feature {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
@@ -379,7 +748,7 @@ a.dp-res-button:focus-visible svg {
 .dp-res-feature .dp-res-card-sub {
   font-family: var(--dp-font-serif);
   font-size: 17px;
-  font-style: italic;
+  font-weight: 600;
   line-height: 1.45;
   color: color-mix(in srgb, var(--dp-white, #FFFFFF) 78%, transparent);
   margin: 0 0 16px 0;
@@ -394,111 +763,132 @@ a.dp-res-button:focus-visible svg {
   margin: 0 0 26px 0;
 }
 
-/* The two interactive tools, side by side under the book */
-.dp-res-webtools {
+.dp-res-tools .dp-res-container {
+  padding-top: clamp(64px, 8vw, 104px);
+}
+
+/* The drawn cover, in the book's place until its cover is added */
+.dp-res-cover--feature {
+  width: 100%;
+  max-width: 240px;
+  margin: 0 auto;
+  padding: 24px 20px 20px 30px;
+}
+
+.dp-res-cover--feature .dp-res-cover-kind,
+.dp-res-cover--feature .dp-res-cover-by {
+  font-size: 11px;
+}
+
+.dp-res-cover--feature .dp-res-cover-title {
+  font-size: clamp(24px, 2.4vw, 32px);
+}
+
+.dp-res-feature:has(.dp-res-cover--feature) {
+  margin-top: 0;
+}
+
+.dp-res-feature:hover .dp-res-cover--feature {
+  transform: rotate(0deg) translateY(-4px);
+}
+
+.dp-res-feature .dp-res-soon {
+  margin-top: 4px;
+}
+
+/* The worksheets: three across, the card's words under its cover */
+.dp-res-worksheets {
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 8%, transparent);
+}
+
+.dp-res-cards--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dp-res-cards--three .dp-res-card--doc {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dp-res-cards--three .dp-res-cover {
+  width: clamp(108px, 11vw, 140px);
+}
+
+.dp-res-cards--three .dp-res-card-title {
+  margin-bottom: 20px;
+}
+
+/* Articles, interviews and podcasts: a plain list of links */
+.dp-res-articles .dp-res-container {
+  padding-top: 0;
+}
+
+.dp-res-articles-list {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 12%, transparent);
+}
+
+.dp-res-articles-list li {
+  margin: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 12%, transparent);
+}
+
+a.dp-res-article {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 28px);
-}
-
-a.dp-res-webtool {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  box-sizing: border-box;
-  padding: clamp(24px, 2.6vw, 34px);
+  grid-template-columns: 8em minmax(0, 1fr) 16px;
+  gap: 16px;
+  align-items: baseline;
+  padding: 20px 4px;
   color: var(--dp-speaking-navy);
-  background-color: var(--dp-white, #FFFFFF);
-  border: 1px solid color-mix(in srgb, var(--dp-speaking-navy) 10%, transparent);
-  border-left: 3px solid var(--dp-speaking-teal);
-  box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--dp-speaking-navy) 40%, transparent);
   text-decoration: none;
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
 }
 
-a.dp-res-webtool:hover,
-a.dp-res-webtool:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: 0 24px 44px -24px color-mix(in srgb, var(--dp-speaking-navy) 50%, transparent);
-}
-
-a.dp-res-webtool:focus-visible {
-  outline: 2px solid var(--dp-speaking-blue);
-  outline-offset: 3px;
-}
-
-.dp-res-webtool-icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 54px;
-  height: 54px;
-  color: var(--dp-speaking-teal);
-  background-color: var(--dp-speaking-navy);
-}
-
-.dp-res-webtool-icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.dp-res-webtool-body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.dp-res-webtool-kind {
-  font-family: var(--dp-font-family);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  line-height: 1.4;
-  color: var(--dp-speaking-blue);
-}
-
-.dp-res-webtool-name {
-  font-family: var(--dp-font-serif);
-  font-size: clamp(21px, 1.8vw, 25px);
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-.dp-res-webtool-line {
-  font-family: var(--dp-font-family);
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--dp-text, #4A4A4A);
-}
-
-.dp-res-webtool-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+.dp-res-article-kind {
   font-family: var(--dp-font-family);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  line-height: 1;
+  color: var(--dp-speaking-blue);
 }
 
-.dp-res-webtool-action svg {
+.dp-res-article-title {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(19px, 1.5vw, 22px);
+  line-height: 1.3;
+}
+
+a.dp-res-article svg {
   width: 16px;
   height: 16px;
   transition: transform 0.25s ease;
 }
 
-a.dp-res-webtool:hover .dp-res-webtool-action svg,
-a.dp-res-webtool:focus-visible .dp-res-webtool-action svg {
+a.dp-res-article:hover .dp-res-article-title,
+a.dp-res-article:focus-visible .dp-res-article-title {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+a.dp-res-article:hover svg,
+a.dp-res-article:focus-visible svg {
   transform: translateX(4px);
 }
 
-.dp-res-tools .dp-res-container {
-  padding-top: clamp(64px, 8vw, 104px);
+.dp-res-placeholder {
+  font-family: var(--dp-font-family);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  color: color-mix(in srgb, var(--dp-speaking-navy) 50%, transparent);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  border: 1px dashed color-mix(in srgb, var(--dp-speaking-navy) 25%, transparent);
 }
 
 /* ==========================================================================
@@ -589,6 +979,277 @@ a.dp-res-webtool:focus-visible .dp-res-webtool-action svg {
 }
 
 /* ==========================================================================
+   4b. THE STORY AND THE TAKEAWAYS (on white: the story told large, then what a sales
+       team walks away with, four numbered cards, and the button)
+   ========================================================================== */
+.dp-res-story {
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-res-story-lead {
+  max-width: 720px;
+  margin: 0 auto clamp(64px, 7vw, 104px);
+  text-align: center;
+}
+
+.dp-res-story-lead p {
+  font-family: var(--dp-font-family);
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.65;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0 0 14px 0;
+}
+
+.dp-res-story-lead p:last-child {
+  margin-bottom: 0;
+}
+
+.dp-res-story-lead .dp-res-story-tagline {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(26px, 2.6vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  color: var(--dp-speaking-navy);
+  margin-bottom: clamp(20px, 2vw, 28px);
+}
+
+/* The turn: the story's punchline, set large in orange */
+.dp-res-story-lead .dp-res-story-turn {
+  font-family: var(--dp-font-serif);
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--dp-speaking-orange-ink);
+  margin: 22px 0 8px;
+}
+
+.dp-res-story-lead .dp-res-story-welcome {
+  font-weight: 600;
+  color: var(--dp-speaking-navy);
+}
+
+.dp-res-takeaways {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 1.6vw, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dp-res-takeaway {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  padding: clamp(24px, 2.4vw, 32px);
+  background-color: var(--dp-speaking-paper);
+  border-top: 3px solid var(--dp-speaking-teal);
+}
+
+.dp-res-takeaway-num {
+  font-family: var(--dp-font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--dp-speaking-blue);
+  margin-bottom: 14px;
+}
+
+.dp-res-takeaway .dp-res-takeaway-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(19px, 1.5vw, 22px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--dp-speaking-navy);
+  margin: 0 0 10px 0;
+}
+
+.dp-res-takeaway .dp-res-takeaway-text {
+  font-family: var(--dp-font-family);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--dp-text, #4A4A4A);
+  margin: 0;
+}
+
+/* The 40//40 Solution's downloads, under the worksheets */
+.dp-res-subhead {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(22px, 1.9vw, 28px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--dp-speaking-navy);
+  margin: clamp(56px, 6vw, 88px) 0 clamp(24px, 2.6vw, 36px);
+}
+
+/* The book's subtitle on its drawn cover */
+.dp-res-cover-sub {
+  font-family: var(--dp-font-family);
+  font-size: 10px;
+  line-height: 1.3;
+  opacity: 0.85;
+  margin: -4px 0 auto;
+}
+
+.dp-res-cover--feature .dp-res-cover-title {
+  margin-bottom: 8px;
+}
+
+/* ==========================================================================
+   4c. ABOUT DON (on white: the portrait beside his story and his books)
+   ========================================================================== */
+.dp-res-about {
+  background-color: var(--dp-white, #FFFFFF);
+}
+
+.dp-res-about-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr);
+  gap: clamp(36px, 5vw, 88px);
+  align-items: center;
+}
+
+.dp-res-about-portrait {
+  position: relative;
+  margin: 0 clamp(14px, 1.4vw, 22px) clamp(14px, 1.4vw, 22px) 0;
+}
+
+/* A teal frame set off behind the portrait, as on the stage */
+.dp-res-about-portrait::before {
+  content: "";
+  position: absolute;
+  inset: clamp(14px, 1.4vw, 22px) calc(-1 * clamp(14px, 1.4vw, 22px)) calc(-1 * clamp(14px, 1.4vw, 22px)) clamp(14px, 1.4vw, 22px);
+  border: 1px solid var(--dp-speaking-teal);
+}
+
+.dp-res-about-portrait img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1000 / 1210;
+  object-fit: cover;
+}
+
+.dp-res-about-words .dp-res-heading {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(28px, 2.8vw, 42px);
+  line-height: 1.1;
+  color: var(--dp-speaking-navy);
+  margin: 0 0 clamp(20px, 2vw, 28px) 0;
+}
+
+.dp-res-about-words .dp-res-heading em {
+  color: var(--dp-speaking-blue);
+}
+
+.dp-res-about-text {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.7;
+  color: var(--dp-text, #4A4A4A);
+  max-width: 36em;
+  margin: 0 0 16px 0;
+}
+
+.dp-res-about-books {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: clamp(24px, 2.4vw, 32px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dp-res-about-books li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 18px 20px;
+  background-color: var(--dp-speaking-paper);
+  border-left: 3px solid var(--dp-speaking-orange);
+}
+
+.dp-res-about-book-kind {
+  font-family: var(--dp-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dp-speaking-blue);
+}
+
+.dp-res-about-book-title {
+  font-family: var(--dp-font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--dp-speaking-navy);
+}
+
+.dp-res-about-book-sub {
+  font-family: var(--dp-font-family);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--dp-text, #4A4A4A);
+}
+
+/* The closing: "Now you know where the ideas came from", then Don's line in large type */
+.dp-res-closing .dp-res-quote-text p.dp-res-closing-lead {
+  font-family: var(--dp-font-family);
+  font-size: clamp(16px, 1.3vw, 19px);
+  font-style: normal;
+  color: color-mix(in srgb, var(--dp-white, #FFFFFF) 78%, transparent);
+  margin: 0 0 14px 0;
+}
+
+.dp-res-closing .dp-res-closing-title {
+  font-family: var(--dp-font-serif) !important;
+  font-size: clamp(26px, 2.8vw, 42px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-wrap: balance;
+  color: var(--dp-white, #FFFFFF);
+  margin: 0;
+}
+
+.dp-res-closing .dp-res-closing-title strong {
+  font-weight: 700;
+  color: var(--dp-speaking-teal);
+}
+
+@media (max-width: 1199px) {
+  .dp-res-takeaways {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .dp-res-about-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-about-portrait {
+    max-width: 320px;
+  }
+
+  .dp-res-about-books {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-res-takeaways {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ==========================================================================
    5. SMALLER SCREENS
    ========================================================================== */
 @media (max-width: 767px) {
@@ -601,16 +1262,85 @@ a.dp-res-webtool:focus-visible .dp-res-webtool-action svg {
     gap: 14px;
   }
 
-  .dp-res-webtools {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .dp-res-feature {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .dp-res-feature-book {
     max-width: 190px;
+  }
+
+  .dp-res-cover--feature {
+    max-width: 180px;
+  }
+
+  a.dp-res-article {
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 6px 16px;
+  }
+
+  .dp-res-article-kind {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1023px) {
+  .dp-res-cards--three {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-cards--three .dp-res-card--doc {
+    grid-template-columns: clamp(108px, 11vw, 140px) minmax(0, 1fr);
+  }
+
+  .dp-res-cards--three .dp-res-cover {
+    width: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .dp-res-cards--three .dp-res-card--doc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dp-res-cards--three .dp-res-cover {
+    width: 120px;
+  }
+
+  /* On a phone: a touch smaller, and free to wrap if it must */
+  a.dp-res-button--cta {
+    height: auto;
+    min-height: 54px;
+    padding: 14px 18px;
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  /* The book's drawn cover: smaller, its type sized to stay inside its frame */
+  .dp-res-cover--feature {
+    max-width: 150px;
+    padding: 16px 14px 14px 22px;
+  }
+
+  .dp-res-cover--feature .dp-res-cover-title {
+    font-size: 19px;
+    line-height: 1.12;
+  }
+
+  .dp-res-cover--feature .dp-res-cover-kind,
+  .dp-res-cover--feature .dp-res-cover-by {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .dp-res-feature {
+    padding: 36px 24px 32px;
+    gap: 28px;
+  }
+
+  .dp-res-feature .dp-res-soon {
+    align-self: stretch;
+    justify-content: center;
   }
 }
 
@@ -630,8 +1360,7 @@ a.dp-res-webtool:focus-visible .dp-res-webtool-action svg {
   .dp-res-photo img,
   .dp-res-photo-download,
   .dp-res-cover,
-  a.dp-res-webtool,
-  .dp-res-webtool-action svg {
+  a.dp-res-article svg {
     transition: none;
   }
 
