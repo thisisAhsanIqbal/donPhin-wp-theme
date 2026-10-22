@@ -4,11 +4,12 @@
  *
  * Used automatically by the page with the slug "speaking".
  *
- * Written for meeting planners and sales leaders. The first screen holds the headline,
- * the button to book and the reel side by side; then the proof, high up: the client logos,
- * audience results and the numbers, and what clients say. After that, Don's Victim / Villain /
- * Hero framework, what changes after he speaks, the three programs, the room, and the
- * invitation to book.
+ * Sales on Stage™, for sales conferences and sales teams, written for meeting planners and
+ * sales leaders. The first screen holds the headline, the button to discuss a sales
+ * conference and the reel side by side; then the proof, high up: the client logos, audience
+ * results and the numbers, and what clients say. After that, Don's Victim / Villain / Hero
+ * framework, what a sales team walks away with, the keynote and its breakout, the room,
+ * and the invitation to book.
  *
  * The reel shows a still until it is clicked, so YouTube is only contacted for
  * people who actually watch (see assets/js/video.js). Without JavaScript the
@@ -61,22 +62,20 @@ $stories = array(
 	),
 );
 
-// What changes after Don speaks, as on his Sales on Stage one-sheet
+// What a sales team walks away with, in Don's words: the point, then what it means
 $changes = array(
-	'Awareness of the deep emotional dynamics beneath the sale',
-	'Recognize the stories and roles shaping the sale — how Victim, Villain, and Hero stories affect how both buyer and seller show up',
-	'Build trust faster through curiosity and deeper listening',
-	'Know how you can both be heroes in the sales story',
-	'Have a plan for how you’re going to show up emotionally',
-	'Use the Coax, Encourage, and Inspire formula to help everyone move forward with greater confidence and ownership',
+	array( 'Recognize the Six Stories', 'Understand the stories influencing every sales conversation, including the ones nobody says out loud.' ),
+	array( 'Master the Roles We Play', 'Recognize when you or your buyer slips into Victim, Villain, or Hero mode—and learn how to shift the dynamic.' ),
+	array( 'Connect Beyond Logic', 'Understand how feelings and emotions influence buying decisions, even when the facts make perfect sense.' ),
+	array( 'Change the Story. Change the Sale.', 'Walk away with practical tools to challenge assumptions, change perspectives, and create better sales conversations.' ),
 );
 
 // Each program is a format, a title, the promise under the title, then the description
 $programs = array(
 	array(
 		'format'   => 'Signature keynote',
-		'title'    => 'Sales on Stage',
-		'subtitle' => 'How Our Stories and Roles Direct the Sale',
+		'title'    => 'Sales on Stage™',
+		'subtitle' => 'The Emotional Side of Selling',
 		'text'     => array(
 			'A highly interactive keynote revealing the hidden roles and stories behind every sale — and how we can both be heroes in the sales process.',
 			'Don shows the room exactly which Victim, Villain, or Hero story is running underneath their own deals — and how to shift it.',
@@ -89,15 +88,6 @@ $programs = array(
 		'text'     => array(
 			'Goes deeper into the stories, assumptions and emotional dynamics that shape customers, teams, channel partners and other critical relationships.',
 			'Creates win-win partnerships where there’s an emotional desire to support each other.',
-		),
-	),
-	array(
-		'format'   => 'Executive session',
-		'title'    => 'Sales Commission Agreements That Keep You Out of Court',
-		'subtitle' => 'The legal traps hiding in sales compensation plans.',
-		'text'     => array(
-			'This is where Don whips out his legal expertise.',
-			'A practical executive briefing for leaders responsible for commission plans — covering clarity, disputes, changes, termination issues and costly drafting mistakes.',
 		),
 	),
 );
@@ -132,21 +122,12 @@ $stats = array(
 	),
 );
 
-// What clients say, each with a headshot in assets/images/speaking/: {photo}-240.webp and
-// -480.webp are the originals beside them, made small, with the background recoloured teal
+// What clients say about Don on stage, each with a headshot in assets/images/speaking/:
+// {photo}-240.webp and -480.webp are the originals beside them, made small, with the
+// background recoloured teal. Only Sales on Stage praise belongs here: Preston Diamond's and
+// Don Mader's (both about The 40//40 Solution) are off the page until there are Sales on
+// Stage quotes to go beside this one.
 $testimonials = array(
-	array(
-		'quote' => 'Don presented his program The 40//40 Solution for Leadership and Engagement for our Fall Summit. Wonderful feedback and survey results. Our membership always thanks us when we bring Don to speak and consistently asks us to have him come back.',
-		'name'  => 'Preston Diamond',
-		'role'  => 'Managing Director, Institute of WorkComp Professionals',
-		'photo' => 'preston-diamond-teal',
-	),
-	array(
-		'quote' => 'Don has a way of breaking down the complex emotional energy in relationships to basic, common-sense, matter-of-fact thinking. The best takeaway from the 40//40 is the space for co-creation. When living in the 40//40, teamwork and sales are fostered.',
-		'name'  => 'Don Mader',
-		'role'  => 'CEO, Southeastern Printing',
-		'photo' => 'don-mader-teal',
-	),
 	array(
 		'quote' => 'It is rare when a speaker can have such a powerful effect simultaneously on doctors, assistants, and office managers. His presentation is talked about almost continually and has allowed all of us to be more successful in creating team cohesion and strength.',
 		'name'  => 'Sanford M. Fisch',
@@ -166,11 +147,11 @@ $testimonials = array(
 	<div class="dp-speak-hero-container">
 
 		<header class="dp-speak-hero-head">
-			<p class="dp-speak-eyebrow">For meeting planners, sales leaders &amp; industry sales groups</p>
+			<p class="dp-speak-eyebrow">The keynote for sales conferences &amp; sales teams</p>
 
 			<h1 id="dp-speak-title" class="dp-speak-title">
-				<span class="dp-speak-title-main">Sales on Stage.</span>
-				<em class="dp-speak-title-accent">How our stories and roles direct the sale.</em>
+				<span class="dp-speak-title-main">Sales on Stage<sup class="dp-tm">™</sup></span>
+				<em class="dp-speak-title-accent">The Emotional Side of Selling</em>
 			</h1>
 		</header>
 
@@ -205,16 +186,16 @@ $testimonials = array(
 
 		<div class="dp-speak-hero-body">
 			<p class="dp-speak-hero-lead">
-				Buyer and seller walk onto the sales stage with stories already playing in their heads. Change the story, and you can change the sale.
+				Every sale has a story. Every buyer plays a role. <strong>So do you.</strong>
 			</p>
 
 			<div class="dp-speak-hero-actions">
 				<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-button">
-					Book Don
+					Discuss Your Sales Conference
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>
-				<a href="#dp-speak-programs-title" class="dp-arrow-link">
-					See the programs
+				<a href="#dp-speak-programs-title" class="dp-speak-button-alt">
+					See the keynote
 					<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 				</a>
 			</div>
@@ -293,7 +274,7 @@ $testimonials = array(
 
 		<h2 id="dp-speak-praise-title" class="dp-speak-praise-title">From the <em class="dp-speak-praise-accent">Room</em></h2>
 
-		<div class="dp-speak-praise-list">
+		<div class="dp-speak-praise-list<?php echo 1 === count( $testimonials ) ? ' dp-speak-praise-list--single' : ''; ?>">
 			<?php foreach ( $testimonials as $testimonial ) : ?>
 				<figure class="dp-speak-quote">
 					<span class="dp-speak-quote-mark" aria-hidden="true">&ldquo;</span>
@@ -387,19 +368,24 @@ $testimonials = array(
 
 		<!-- The heading on an orange panel, the list beside it -->
 		<header class="dp-speak-changes-head">
-			<h2 id="dp-speak-changes-title" class="dp-speak-changes-title">What Changes After Don Speaks</h2>
+			<h2 id="dp-speak-changes-title" class="dp-speak-changes-title">What Your Sales Team Will Walk Away With</h2>
 			<p class="dp-speak-changes-intro">
 				Remember… <em>facts tell, and stories sell!</em>
 			</p>
 			<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-changes-button">
-				Book Don
+				Book Don for Your Next Sales Conference
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
 		</header>
 
 		<ol class="dp-speak-changes-list">
 			<?php foreach ( $changes as $change ) : ?>
-				<li><?php echo esc_html( $change ); ?></li>
+				<li>
+					<div class="dp-speak-change">
+						<h3 class="dp-speak-change-title"><?php echo esc_html( $change[0] ); ?></h3>
+						<p class="dp-speak-change-text"><?php echo esc_html( $change[1] ); ?></p>
+					</div>
+				</li>
 			<?php endforeach; ?>
 		</ol>
 
@@ -410,11 +396,10 @@ $testimonials = array(
 	<div class="dp-speak-programs-container">
 
 		<header class="dp-speak-programs-head">
-			<p class="dp-speak-label dp-speak-programs-eyebrow">Build the experience your sales meeting needs</p>
+			<p class="dp-speak-label dp-speak-programs-eyebrow">Build the experience your sales conference needs</p>
 			<h2 id="dp-speak-programs-title" class="dp-speak-programs-title">
 				<span>Keynote.</span>
-				<span>Breakout.</span>
-				<em class="dp-speak-programs-accent">Executive Session.</em>
+				<em class="dp-speak-programs-accent">Breakout.</em>
 			</h2>
 			<p class="dp-speak-programs-sub">He’s already in front of your sales team — put the day to full use.</p>
 		</header>
@@ -424,7 +409,7 @@ $testimonials = array(
 				<li class="dp-speak-program">
 					<div class="dp-speak-program-content">
 						<p class="dp-speak-program-format"><?php echo esc_html( $program['format'] ); ?></p>
-						<h3 class="dp-speak-program-title"><?php echo esc_html( $program['title'] ); ?></h3>
+						<h3 class="dp-speak-program-title"><?php echo donphin_tm( $program['title'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?></h3>
 						<p class="dp-speak-program-subtitle"><?php echo esc_html( $program['subtitle'] ); ?></p>
 						<?php foreach ( $program['text'] as $paragraph ) : ?>
 							<p class="dp-speak-program-text"><?php echo esc_html( $paragraph ); ?></p>
@@ -467,10 +452,10 @@ $testimonials = array(
 
 		<h2 id="dp-speak-cta-title" class="dp-speak-cta-title">
 			<span class="dp-speak-cta-line">Book Don for Your</span>
-			<em class="dp-speak-cta-line dp-speak-cta-accent">Next Sales Meeting</em>
+			<em class="dp-speak-cta-line dp-speak-cta-accent">Next Sales Conference</em>
 		</h2>
 
-		<p class="dp-speak-cta-formats">Keynote<span aria-hidden="true"> | </span>Breakout<span aria-hidden="true"> | </span>Executive Session</p>
+		<p class="dp-speak-cta-formats">Keynote<span aria-hidden="true"> | </span>Breakout</p>
 
 		<p class="dp-speak-cta-text">
 			Tell me about your meeting, your audience, and what you want the room to walk away believing.
@@ -478,7 +463,7 @@ $testimonials = array(
 
 		<div class="dp-speak-cta-actions">
 			<a href="<?php echo esc_url( $contact_url ); ?>" class="dp-dark-button dp-speak-button dp-speak-cta-button">
-				Start a conversation
+				Discuss Your Sales Conference
 				<?php echo donphin_arrow_icon(); // phpcs:ignore WordPress.Security.EscapeOutput -- static SVG ?>
 			</a>
 

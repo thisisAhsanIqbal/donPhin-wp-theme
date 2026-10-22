@@ -11,6 +11,23 @@ versioned by when it last changed (`donphin_asset_version()` in `inc/helpers.php
 
 ## 1.19.0 (2026-10-23)
 
+### Speaking: Sales on Stage™, for sales conferences
+- The first screen carries Don's new positioning: "Sales on Stage™ — The Emotional Side of
+  Selling", with "Every sale has a story. Every buyer plays a role. So do you." under it, an
+  eyebrow naming sales conferences and sales teams, and "Discuss Your Sales Conference" as
+  the button.
+- "What Changes After Don Speaks" (six outcomes) is now "What Your Sales Team Will Walk Away
+  With": Don's four takeaways, each with a line on what it means, and "Book Don for Your Next
+  Sales Conference".
+- Off the page: the Sales Commission Agreements executive session (programs are now Keynote
+  and Breakout, at the foot too) and the two testimonials about The 40//40 Solution. The one
+  left (Sanford M. Fisch) is shown on its own, centred, until there are Sales on Stage quotes.
+- The closing invitation is for your next sales conference, with "Discuss Your Sales
+  Conference". Long button labels wrap on phones rather than running out of the button.
+- "See the keynote" is a button now: outlined in navy beside the orange one, the same height.
+- The ™ in headings is set small and raised (`donphin_tm()` in `inc/helpers.php`, styled by
+  `.dp-tm` in `speaking.css`), on Speaking and Speaking Resources alike.
+
 ### Speaking Resources: Sales on Stage™ only
 - /speaking/resources/ is now given over to Sales on Stage™, to support paid speaking. The HR
   material is gone from it: the hiring and retention guide, The Emotional Edge and the

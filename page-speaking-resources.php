@@ -213,7 +213,7 @@ $card = function ( $item ) {
 		</div>
 
 		<div class="dp-res-card-body">
-			<h3 class="dp-res-card-title"><?php echo esc_html( $item['title'] ); ?></h3>
+			<h3 class="dp-res-card-title"><?php echo donphin_tm( $item['title'] ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?></h3>
 			<?php if ( ! empty( $item['text'] ) ) : ?>
 				<p class="dp-res-card-text"><?php echo esc_html( $item['text'] ); ?></p>
 			<?php endif; ?>
@@ -239,7 +239,7 @@ $card = function ( $item ) {
 
 		<div class="dp-res-intro-words">
 			<p class="dp-speak-label">Resources</p>
-			<h1 id="dp-res-title" class="dp-res-title"><?php echo esc_html( $book_title ); ?> <em class="dp-res-title-accent"><?php echo esc_html( $book_subtitle ); ?></em></h1>
+			<h1 id="dp-res-title" class="dp-res-title"><?php echo donphin_tm( $book_title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?> <em class="dp-res-title-accent"><?php echo esc_html( $book_subtitle ); ?></em></h1>
 			<p class="dp-res-tagline">Every sale is a story. Every buyer and seller plays a role. Discover how changing the story can change the sale.</p>
 
 			<div class="dp-res-intro-actions">
@@ -282,9 +282,9 @@ $card = function ( $item ) {
 
 			<!-- The resources, fanned over the corner -->
 			<div class="dp-res-intro-fan" aria-hidden="true">
-				<span class="dp-res-cover dp-res-cover--paper"><span class="dp-res-cover-kind">One-sheet</span><span class="dp-res-cover-title">Sales on Stage™</span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
-				<span class="dp-res-cover dp-res-cover--gold"><span class="dp-res-cover-kind">Field guide</span><span class="dp-res-cover-title">Sales on Stage™</span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
-				<span class="dp-res-cover dp-res-cover--navy"><span class="dp-res-cover-kind">Book</span><span class="dp-res-cover-title">Sales on Stage™</span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
+				<span class="dp-res-cover dp-res-cover--paper"><span class="dp-res-cover-kind">One-sheet</span><span class="dp-res-cover-title">Sales on Stage<sup class="dp-tm">™</sup></span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
+				<span class="dp-res-cover dp-res-cover--gold"><span class="dp-res-cover-kind">Field guide</span><span class="dp-res-cover-title">Sales on Stage<sup class="dp-tm">™</sup></span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
+				<span class="dp-res-cover dp-res-cover--navy"><span class="dp-res-cover-kind">Book</span><span class="dp-res-cover-title">Sales on Stage<sup class="dp-tm">™</sup></span><span class="dp-res-cover-by">Don Phin, Esq.</span></span>
 			</div>
 		</div>
 
@@ -401,14 +401,14 @@ $card = function ( $item ) {
 			<?php else : ?>
 				<div class="dp-res-cover dp-res-cover--navy dp-res-cover--feature" aria-hidden="true">
 					<span class="dp-res-cover-kind">Book</span>
-					<span class="dp-res-cover-title"><?php echo esc_html( $book_title ); ?></span>
+					<span class="dp-res-cover-title"><?php echo donphin_tm( $book_title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?></span>
 					<span class="dp-res-cover-sub"><?php echo esc_html( $book_subtitle ); ?></span>
 					<span class="dp-res-cover-by">Don Phin, Esq.</span>
 				</div>
 			<?php endif; ?>
 			<div class="dp-res-feature-body">
 				<p class="dp-res-card-eyebrow">The book</p>
-				<h2 id="dp-res-book-title" class="dp-res-card-title"><?php echo esc_html( $book_title ); ?></h2>
+				<h2 id="dp-res-book-title" class="dp-res-card-title"><?php echo donphin_tm( $book_title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?></h2>
 				<p class="dp-res-card-sub"><?php echo esc_html( $book_subtitle ); ?></p>
 				<p class="dp-res-card-text">Sales on Stage™ explores how the stories we tell ourselves and the roles we play influence our relationships, conversations, and sales outcomes.</p>
 				<p class="dp-res-card-text">The book expands on the ideas behind the keynote and provides additional opportunities for reflection and application.</p>
@@ -475,7 +475,7 @@ $card = function ( $item ) {
 				<ul class="dp-res-about-books" aria-label="<?php esc_attr_e( 'Books by Don', 'don-phin-esq' ); ?>">
 					<li>
 						<span class="dp-res-about-book-kind">Author</span>
-						<span class="dp-res-about-book-title"><?php echo esc_html( $book_title ); ?></span>
+						<span class="dp-res-about-book-title"><?php echo donphin_tm( $book_title ); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped by donphin_tm() ?></span>
 						<span class="dp-res-about-book-sub"><?php echo esc_html( $book_subtitle ); ?></span>
 					</li>
 					<li>

@@ -101,6 +101,17 @@ function donphin_arrow_icon() {
 }
 
 /**
+ * Text, escaped, with each ™ set small and raised (.dp-tm in speaking.css), so a
+ * trademark in a large heading doesn't stand as tall as the words
+ *
+ * @param string $text Plain text.
+ * @return string HTML.
+ */
+function donphin_tm( $text ) {
+	return str_replace( '™', '<sup class="dp-tm">™</sup>', esc_html( $text ) );
+}
+
+/**
  * A small line icon for the footer (24x24 SVG insides)
  */
 function donphin_footer_icon( $name ) {
